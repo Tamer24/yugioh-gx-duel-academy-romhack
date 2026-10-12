@@ -48,7 +48,7 @@ def correr(rom, rival=((26, 1000), (27, 1600)), lado=0, elegibles=1, estado=0x80
 
     uc.hook_add(UC_HOOK_CODE, gancho)
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[4889] + 4)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[4889] + 4)
     uc.reg_write(UC_ARM_REG_R0, carta)
     uc.reg_write(UC_ARM_REG_SP, 0x03007E00)
     uc.reg_write(UC_ARM_REG_LR, 0x03007F00 | 1)

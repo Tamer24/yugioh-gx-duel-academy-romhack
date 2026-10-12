@@ -43,7 +43,7 @@ Estas definen el alcance y no están tomadas:
    historia y eventos de la academia.
 2. **Cartas restauradas vs. cartas nuevas:** **decidido por Oscar el 2026-10-11: también cartas
    que el juego nunca tuvo.** La primera es Elemental Hero Neos (monstruo Normal, solo datos).
-   Las nuevas con efecto necesitan antes una fila en la tabla de efectos (F6).
+   Las nuevas con efecto llevan una fila nueva en la tabla de efectos ampliada (§5.9.1).
 3. **Reemplazar o ampliar:** hoy cada carta restaurada pisa un monstruo Normal.
    Pasar de 1200 cartas exige agrandar varias tablas y el guardado: está hecho en un ROM
    experimental aparte, `(Ampliado)` (§9.1). Falta decidir si pasa a ser el ROM de trabajo.
@@ -318,6 +318,25 @@ referencias. Este proyecto lo usa así: textos (`0x1800000`), código de `parche
 (`0x1900000`), piezas de `efectos/` (`0x1A00000`), tablas del ROM ampliado
 (`0x1B00000` a `0x1CA7D3C` con 3 cartas) y datos de los sobres (`0x1E00000`).
 
+### 5.9.1 Tabla de efectos ampliada [PROBADO 2026-10-12]
+
+`scripts/ampliar_efectos.py` (o la clave `"filas_efecto"` de una receta) muda la tabla de efectos
+a `0x1F00000` (marca `DA-EFECTOS-1`, cantidad de filas y las filas) y la agranda. Cambia 13
+literales del código y el tope de la búsqueda binaria (`0x08061632`: `movs r4,#0xE1; lsls r4,#2`,
+que solo admite `a << k`; lo que sobra se rellena con filas de relleno de ID 20000 en adelante).
+**Las dos referencias a `0x097DFE78` no son el fin de la tabla:** son el inicio de la lista de 12
+entradas que le sigue; no se tocan. Los otros cuatro `900` del código no tienen que ver
+(un bono de ATK, una comparación de campo, banderas y un desplazamiento).
+Medido: la búsqueda del juego (`FUN_0806162C`, corrida en Unicorn) halla la misma fila que antes
+para las 765 cartas con efecto (`scripts/test_tabla_efectos.py`); las 52 sesiones grabadas dan lo
+mismo que sin mudar; funciona también en el ROM ampliado. Primera carta nueva con efecto:
+Neo-Spacian Air Hummingbird (`efectos/air_hummingbird.s`).
+**Límites que quedan para expandir el juego** (de menor a mayor): los huecos seguros de Normales
+(7 hoy); los 34 dibujos que entran en el ROM ampliado (hay que enganchar los 9 usos del arte para
+pasar de ahí); el tope absoluto de 2047 cartas (índices de 11 bits); el baúl aparte y la SRAM
+(`0x6200` en adelante, 12 bytes por carta); el espacio libre del ROM (unos 8 MB, a ~7,6 KB por
+carta). La tabla de efectos **ya no es un límite**.
+
 ### 5.10 Sin ubicar
 
 Lista de prohibidas y limitadas, motor de sonido, segundo mecanismo de
@@ -495,7 +514,7 @@ El veredicto de cada carta, qué se observó, qué falla y cómo reproducirlo es
 Electromagnetic Bagworm (la Máquina que la destruye pierde 500) y Dark Necrofear (posesión en la End
 Phase: queda equipada al monstruo elegido y el control dura mientras siga equipada). Ninguna quedó en
 "no funciona" ni aparcada. El ROM de trabajo es `build/…(Lote).gba`
-(`scripts/construir_lote.sh`, MD5 `d017f31b380fcb73fd85b639ac52781c` desde el 2026-10-12 con el pack 3 (Neo-Spacian); antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`: Elemental Hero Neos estrena su dibujo chico; antes `0ce9fa0e…` y, con las 30, `c1b1289a…`). Falta la confirmación a ojo de
+(`scripts/construir_lote.sh`, MD5 `c693b77264d2f53a8e0b0113c4ffa4fc` desde el 2026-10-12 con la tabla de efectos ampliada y Air Hummingbird con efecto; antes `d017f31b380fcb73fd85b639ac52781c` con el pack 3 (Neo-Spacian), y antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`: Elemental Hero Neos estrena su dibujo chico; antes `0ce9fa0e…` y, con las 30, `c1b1289a…`). Falta la confirmación a ojo de
 Oscar en 24 cartas; las que cambiaron el 2026-10-11 tienen partida por capturas en `evidencia/ronda6/`
 y `evidencia/ronda7/`.
 

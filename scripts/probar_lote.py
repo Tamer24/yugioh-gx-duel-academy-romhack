@@ -1346,6 +1346,39 @@ def _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, delta, turnos=1, des
     return res(EN_PARTE if vistos[0] == esperado[0] else NO_FUNCIONA, detalle, f"ATK {vistos}, esperado {esperado}", estado=estado)
 
 
+def caso_air_hummingbird(ruta_rom, desfase, fotos):
+    """Primera carta con efecto que el juego nunca tuvo (fila nueva de la tabla de efectos): en el
+    campo, el menu ofrece el efecto y gano 500 LP por cada carta de la mano del rival."""
+    carta = "Neo-Spacian Air Hummingbird"
+    estado = armar(ruta_rom, "air-hummingbird", yo={5: carta},
+                   rival={0: MUERTA, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA},
+                   mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+    lp0, n_mano = d.lp()[0], len(d.mano(1))
+    esperado = lp0 + 500 * n_mano
+    ofrecido = activar_desde_el_campo(d, carta, lambda: d.lp()[0] != lp0, fotos, "air-hummingbird_menu")
+    d.g.correr(200)
+    lp1 = d.lp()[0]
+    foto(d, fotos, "air-hummingbird_final")
+    detalle = (f"{carta} en el campo con {n_mano} cartas en la mano del rival: LP {lp0} -> {lp1} "
+               f"(esperado {esperado}).")
+    if not ofrecido:
+        return res(NO_FUNCIONA, detalle + " El menu no ofrece el efecto.", "el menu del campo no ofrece el efecto", estado=estado)
+    if lp1 != esperado:
+        return res(EN_PARTE, detalle, f"LP {lp1}, esperado {esperado}", estado=estado)
+    # Una vez por turno: la segunda vez no tiene que darle nada.
+    activar_desde_el_campo(d, carta, lambda: d.lp()[0] != lp1, None, "")
+    d.g.correr(200)
+    lp2 = d.lp()[0]
+    if lp2 != lp1:
+        return res(EN_PARTE, detalle + f" Una segunda vez en el mismo turno: LP {lp2}.", "se puede usar mas de una vez por turno", estado=estado)
+    return res(FUNCIONA, detalle + " Una segunda vez en el mismo turno no hace nada.", estado=estado)
+
+
 CASOS = {
     "Dark Necrofear": caso_necrofear,
     "Electromagnetic Bagworm": caso_bagworm,
@@ -1360,6 +1393,7 @@ CASOS = {
     "Lady Panther": caso_lady_panther,
     "Fairy Guardian": caso_fairy_guardian,
     "Reasoning": caso_reasoning,
+    "Neo-Spacian Air Hummingbird": caso_air_hummingbird,
     "Stim-Pack": lambda r, d, f: _caso_equipo(r, d, f, "Stim-Pack", "Blazing Inpachi", [700, 500], 2),
     "Butterfly Dagger - Elma": lambda r, d, f: _caso_equipo(r, d, f, "Butterfly Dagger - Elma", "Blazing Inpachi", 300),
     "Fusion Sword Murasame Blade": lambda r, d, f: _caso_equipo(r, d, f, "Fusion Sword Murasame Blade", "Axe Raider", 800),

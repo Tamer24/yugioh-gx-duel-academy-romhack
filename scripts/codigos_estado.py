@@ -44,8 +44,8 @@ def main():
     uc.hook_add(UC_HOOK_CODE, gancho)
     w = csv.writer(open(sys.argv[2], "w", newline="") if len(sys.argv) > 2 else sys.stdout)
     w.writerow(["id_konami", "nombre", "en_juego", "codigos_devueltos", "sin_atender"])
-    for k in range(EFECTOS_FILAS):
-        base = EFECTOS + EFECTOS_FILA * k
+    for k in range(rom.efectos_n):
+        base = rom.efectos_base + EFECTOS_FILA * k
         cid, fn4 = rom.u16(base), rom.u32(base + 4)
         if (fn4 & ~1) in (0, SIN_EFECTO & ~1):
             continue

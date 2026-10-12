@@ -85,7 +85,7 @@ def activar(rom, turno, tipo_objetivo="Mechanicalchaser", pos=0x10, objetivo=MAQ
 
     uc.hook_add(UC_HOOK_CODE, gancho)
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[ID_BAGWORM] + 4)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[ID_BAGWORM] + 4)
     uc.reg_write(UC_ARM_REG_R0, p)
     uc.reg_write(UC_ARM_REG_SP, 0x03007E00)
     uc.reg_write(UC_ARM_REG_LR, 0x03007F00 | 1)
@@ -125,7 +125,7 @@ def destruida(rom, zona_atacante=0, anulada=0):
 
     uc.hook_add(UC_HOOK_CODE, gancho)
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[ID_BAGWORM] + 4)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[ID_BAGWORM] + 4)
     uc.reg_write(UC_ARM_REG_R0, p)
     uc.reg_write(UC_ARM_REG_SP, 0x03007E00)
     uc.reg_write(UC_ARM_REG_LR, 0x03007F00 | 1)
@@ -150,7 +150,7 @@ def seleccion_destruida(rom):
 
     uc.hook_add(UC_HOOK_CODE, gancho)
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[ID_BAGWORM] + 0x18)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[ID_BAGWORM] + 0x18)
     uc.reg_write(UC_ARM_REG_R0, p)
     uc.reg_write(UC_ARM_REG_SP, 0x03007E00)
     uc.reg_write(UC_ARM_REG_LR, 0x03007F00 | 1)

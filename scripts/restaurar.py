@@ -47,6 +47,11 @@ su fila de efecto (por ejemplo ["fn_c", "fn_18"]).
 "arte" (opcional) es la ruta de un PNG, relativa a la carpeta del proyecto, con el
 dibujo de la carta; sin esa clave la carta muestra el dibujo del hueco. Ver arte.py.
 
+"filas_efecto" (opcional, fuera de "parches") es una lista de filas nuevas para la tabla de efectos,
+para cartas que el juego nunca tuvo y llevan efecto: {"id_konami": N, "copiar_de": ID} (toma las
+columnas de la fila de otra carta) o con las columnas dadas a mano. Muda y agranda la tabla; ver
+ampliar_efectos.py. La fn_04 propia se pone despues con una pieza "N:fn_04:efectos/x.s".
+
 "sobres" (opcional, fuera de "parches") es una lista de cambios a los sobres de la tienda: que
 cartas trae cada uno, el nombre, el precio. Se aplican despues de las cartas. Ver sobres.py.
 
@@ -120,6 +125,8 @@ def main(ruta_rom, ruta_receta, ruta_salida):
     parches_pedidos = receta.get("parches", {})
     libre_orden = bool(parches_pedidos.get("busqueda_ids"))
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
+    filas_nuevas_pedidas = receta.get("filas_efecto", [])
+    filas_nuevas = {n["id_konami"] for n in filas_nuevas_pedidas}
     cursor = LIBRE
     informe = []
 
@@ -141,7 +148,8 @@ def main(ruta_rom, ruta_receta, ruta_salida):
         huecos_usados.add(i)
         assert rom.nombre(i) == c["hueco_nombre"], f"el hueco {i} es {rom.nombre(i)!r}, no {c['hueco_nombre']!r}"
         assert s["tipo"] <= 20 and s["clase"] == 0, f"{rom.nombre(i)} no es un monstruo Normal"
-        assert nuevo in filas or c["clase"] == "Normal", f"el ID {nuevo} no tiene fila de efecto"
+        assert nuevo in filas or c["clase"] == "Normal" or nuevo in filas_nuevas, \
+            f"el ID {nuevo} no tiene fila de efecto (ni se pide una en \"filas_efecto\")"
         assert rom.indice_de(nuevo) == 0, f"el ID {nuevo} ya esta en el juego"
         assert len(c["nombre"]) <= 45, f"nombre demasiado largo: {c['nombre']}"
         if not libre_orden:
@@ -236,6 +244,13 @@ def main(ruta_rom, ruta_receta, ruta_salida):
             fuente = os.path.join(os.path.dirname(os.path.abspath(ruta_receta)), "..", e["fuente"])
             parches.efecto_nuevo(rom, esp, e["id_konami"], e["columna"], fuente)
         print(f"codigo nuevo en {parches.CODIGO:07X}-{esp.cur:07X}")
+
+    # Filas nuevas de la tabla de efectos (cartas que el juego nunca tuvo, con efecto): muda y
+    # agranda la tabla (scripts/ampliar_efectos.py). Va antes de las piezas, que escriben en ella.
+    if filas_nuevas_pedidas:
+        import ampliar_efectos
+        info = ampliar_efectos.ampliar(rom, filas_nuevas_pedidas)
+        print(f"tabla de efectos mudada: {info['filas']} filas (tope {info['tope']})")
 
     # Piezas de efectos/ (funciones de efecto, ganchos y entradas de tabla), en el orden dado.
     if receta.get("piezas"):

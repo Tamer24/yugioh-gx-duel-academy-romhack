@@ -105,7 +105,7 @@ def penguin(rom, cementerio, estado=0x80, anulada=0):
     movidas, eventos = [], []
     con_ganchos(uc, {MOVER: lambda r: movidas.append((r[0], r[1])), EVENTO1: lambda r: eventos.append(r[0])})
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[4205] + 4)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[4205] + 4)
     uc.reg_write(UC_ARM_REG_R0, p)
     uc.reg_write(UC_ARM_REG_SP, SP)
     uc.reg_write(UC_ARM_REG_LR, 0x03007F00 | 1)
@@ -127,7 +127,7 @@ def fairy(rom, estado, elegida=41):
                      PROCESAR: lambda r: orden.append("procesar"),
                      0x0805AEB0: lambda r: 1, 0x08009744: lambda r: 0, 0x0806BC00: lambda r: 0})
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[5202] + 4)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[5202] + 4)
     uc.reg_write(UC_ARM_REG_R0, p)
     uc.reg_write(UC_ARM_REG_SP, SP)
     uc.reg_write(UC_ARM_REG_LR, 0x03007F00 | 1)

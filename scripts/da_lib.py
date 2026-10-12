@@ -31,6 +31,9 @@ EFECTOS = 0x17D9BEC
 EFECTOS_FILAS = 901
 EFECTOS_FILA = 28          # u16 id, u16 0, fn +4, u32 flags +8, fn +0xC, +0x10, +0x14, +0x18
 SIN_EFECTO = 0x08061629    # card_effect_handler_no_effect
+# Tabla de efectos mudada (scripts/ampliar_efectos.py): marca, u32 cantidad de filas y las filas.
+EFECTOS_NUEVA = 0x1F00000
+EFECTOS_MARCA = b"DA-EFECTOS-1\0\0\0\0"
 
 # Mazos: tabla de 36 entradas de 12 bytes {puntero, cantidad de renglones, 0}.
 # Cada renglon del mazo es {u32 ID de Konami, u32 copias}.
@@ -138,14 +141,27 @@ class Rom:
                 (clase & 3) << 18 | ((atk // 10) & 0x1FF) << 9 | ((de // 10) & 0x1FF))
 
     # --- efectos ----------------------------------------------------------
+    @property
+    def efectos_mudada(self):
+        return bytes(self.d[EFECTOS_NUEVA:EFECTOS_NUEVA + len(EFECTOS_MARCA)]) == EFECTOS_MARCA
+
+    @property
+    def efectos_base(self):
+        """Offset de archivo de la fila 0 de la tabla de efectos (la original o la mudada)."""
+        return EFECTOS_NUEVA + 32 if self.efectos_mudada else EFECTOS
+
+    @property
+    def efectos_n(self):
+        return self.u32(EFECTOS_NUEVA + 16) if self.efectos_mudada else EFECTOS_FILAS
+
     def fila_efecto(self, k):
-        o = EFECTOS + EFECTOS_FILA * k
+        o = self.efectos_base + EFECTOS_FILA * k
         return {"id": self.u16(o), "fn_04": self.u32(o + 4), "flags": self.u32(o + 8),
                 "fn_c": self.u32(o + 0xC), "fn_10": self.u32(o + 0x10),
                 "fn_14": self.u32(o + 0x14), "fn_18": self.u32(o + 0x18)}
 
     def efectos(self):
-        return [self.fila_efecto(k) for k in range(EFECTOS_FILAS)]
+        return [self.fila_efecto(k) for k in range(self.efectos_n)]
 
     # --- mazos ------------------------------------------------------------
     def mazos(self):

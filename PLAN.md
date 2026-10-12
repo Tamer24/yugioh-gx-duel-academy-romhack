@@ -57,7 +57,7 @@ Dark-Eyes Illusionist, Windstorm of Etaqua, Magic Drain). **A las otras 24 les f
 solo la confirmación a ojo de Oscar**: la revisión por capturas no la reemplaza (Principio IV). Kunai
 with Chain la tenía y volvió a pendiente porque ahora hace algo más.
 
-ROM de trabajo: `build/…(Lote).gba` (MD5 `d017f31b380fcb73fd85b639ac52781c` desde el 2026-10-12, con el pack 3 (Neo-Spacian); antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`, con el dibujo chico de Elemental Hero Neos, y `0ce9fa0e…` y, con las 30, `c1b1289a…`), armado con
+ROM de trabajo: `build/…(Lote).gba` (MD5 `c693b77264d2f53a8e0b0113c4ffa4fc` desde el 2026-10-12, con la tabla de efectos ampliada y Air Hummingbird con efecto; antes `d017f31b380fcb73fd85b639ac52781c` con el pack 3 (Neo-Spacian), y antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`, con el dibujo chico de Elemental Hero Neos, y `0ce9fa0e…` y, con las 30, `c1b1289a…`), armado con
 `scripts/construir_lote.sh`. Después de rearmarlo: las pruebas `scripts/test_*.py`
 (`test_modificadores.py` pide además `datos/volcado_goddess`), `probar_lote.py`, `probar_trampas.py` y
 `scripts/repetir_sesion.py ROM evidencia/ronda*/*`, **de a un proceso por vez** (ver "Lo que NO
@@ -87,6 +87,17 @@ sobres: salen Neos y los seis Neo-Spacian, con su dibujo (`evidencia/neo-space/`
 y arreglado:** `restaurar.py` tomaba por un ID la mitad baja de un puntero de lista de sobre (el de
 Ryu-Ran, 4732 = `0x127C`) y rompía la lista del sobre 10; ahora salta los punteros. Regresión: 41
 `IGUAL` y 11 `DISTINTA`, tests en orden.
+
+**Tanda del 2026-10-12 (madrugada): la tabla de efectos se puede ampliar, y hay una carta nueva con
+efecto.** `scripts/ampliar_efectos.py` muda la tabla de efectos (901 filas, `0x17D9BEC`) a
+`0x1F00000`, la agranda y reemplaza sus 13 referencias y el tope de la búsqueda. Medido: el código
+del juego encuentra la misma fila que antes para las 765 cartas con efecto (`test_tabla_efectos.py`,
+corre `FUN_0806162C` en Unicorn), y las 52 sesiones grabadas dan lo mismo (41 `IGUAL`, 11 `DISTINTA`).
+En la receta, la clave `"filas_efecto"` pide filas nuevas (`copiar_de` otra carta) y una pieza
+`ID:fn_04:efectos/x.s` les pone su función. **Neo-Spacian Air Hummingbird** es la primera carta que el
+juego nunca tuvo con efecto: en el campo el menú ofrece el efecto, gana 500 LP por cada carta de la mano
+del rival y una vez por turno (3 corridas, también en el ROM ampliado). Detalle de los límites que
+quedan en `PROYECTO.md`, F6.
 
 **Tanda del 2026-10-12: la tienda y los sobres** (detalle en `NOTAS-REVERSE.md`, "La tienda y los
 sobres", y en `PROYECTO.md` §5.5):

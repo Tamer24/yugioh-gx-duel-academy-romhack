@@ -41,7 +41,7 @@ def correr(rom, elegidas=(0x05, 0x06, 0x9A), cantidad=3, lado=0, anulada=False):
 
     uc.hook_add(UC_HOOK_CODE, gancho)
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[4839] + 4)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[4839] + 4)
     uc.reg_write(UC_ARM_REG_R0, carta)
     uc.reg_write(UC_ARM_REG_SP, 0x03007E00)
     uc.reg_write(UC_ARM_REG_LR, 0x03007F00 | 1)

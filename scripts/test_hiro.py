@@ -62,7 +62,7 @@ def correr(rom, mazo, lado=0, anulada=0, r7=0x55):
 
     uc.hook_add(UC_HOOK_CODE, gancho)
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[4617] + 4)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[4617] + 4)
     siguiente, llamadas = 0x80, 0
     while siguiente and llamadas < 10:
         uc.mem_write(ESTADO, bytes([siguiente]))

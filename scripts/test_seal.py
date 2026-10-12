@@ -40,7 +40,7 @@ def costo(rom, indice, lado=0):
 
     uc.hook_add(UC_HOOK_CODE, gancho)
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[rom.id_de(indice)] + 0x14)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[rom.id_de(indice)] + 0x14)
     uc.reg_write(UC_ARM_REG_R0, CARTA)
     uc.reg_write(UC_ARM_REG_SP, 0x03007E00)
     uc.reg_write(UC_ARM_REG_LR, RETORNO | 1)

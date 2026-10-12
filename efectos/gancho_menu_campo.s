@@ -58,4 +58,5 @@ _start:
     .hword 4435                   @ Goddess of Whim
     .hword 5193                   @ Lady Panther
     .hword 5202                   @ Fairy Guardian
+    .hword 6769                   @ Neo-Spacian Air Hummingbird
     .hword 0

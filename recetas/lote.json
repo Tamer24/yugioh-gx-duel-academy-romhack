@@ -109,9 +109,9 @@
       "nivel": 3,
       "atributo": "WIND",
       "tipo": "Winged Beast",
-      "clase": "Normal",
+      "clase": "Effect",
       "contrasena": "54959865",
-      "descripcion": "A Neo-Spacian from the planet Air. Its tiny wings beat so fast that the winds of Neo-Space bend around it.",
+      "descripcion": "Once per turn: You can gain 500 Life Points for each card in your opponent's hand.",
       "arte": "arte/neo-spacian-air-hummingbird.png",
       "pack": "pack-3"
     },
@@ -208,6 +208,13 @@
     "5222:fn_04:efectos/necrofear_posesion.s",
     "G:08064920:efectos/gancho_fin_necrofear.s",
     "B:0801786E:2BD0:C046",
-    "G:080171B0:efectos/gancho_necrofear_equipo.s"
+    "G:080171B0:efectos/gancho_necrofear_equipo.s",
+    "6769:fn_04:efectos/air_hummingbird.s"
+  ],
+  "filas_efecto": [
+    {
+      "id_konami": 6769,
+      "copiar_de": 4435
+    }
   ]
 }
