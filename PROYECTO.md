@@ -495,7 +495,7 @@ El veredicto de cada carta, qué se observó, qué falla y cómo reproducirlo es
 Electromagnetic Bagworm (la Máquina que la destruye pierde 500) y Dark Necrofear (posesión en la End
 Phase: queda equipada al monstruo elegido y el control dura mientras siga equipada). Ninguna quedó en
 "no funciona" ni aparcada. El ROM de trabajo es `build/…(Lote).gba`
-(`scripts/construir_lote.sh`, MD5 `57e98b8c579ec74d84e49c9998b9d9a3` desde el 2026-10-12: Elemental Hero Neos estrena su dibujo chico; antes `0ce9fa0e…` y, con las 30, `c1b1289a…`). Falta la confirmación a ojo de
+(`scripts/construir_lote.sh`, MD5 `d017f31b380fcb73fd85b639ac52781c` desde el 2026-10-12 con el pack 3 (Neo-Spacian); antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`: Elemental Hero Neos estrena su dibujo chico; antes `0ce9fa0e…` y, con las 30, `c1b1289a…`). Falta la confirmación a ojo de
 Oscar en 24 cartas; las que cambiaron el 2026-10-11 tienen partida por capturas en `evidencia/ronda6/`
 y `evidencia/ronda7/`.
 
@@ -609,7 +609,7 @@ investigación de cómo se escribe un efecto. F9 depende de F8.
   van en mazos de rivales.
 - **Partidas guardadas entre versiones.** Cambiar qué carta ocupa un índice
   cambia el baúl de una partida vieja. Conviene fijar los huecos pronto.
-- **Huecos que se agotan.** 20 seguros para 142 recortadas pendientes (`scripts/huecos.py`).
+- **Huecos que se agotan.** 7 seguros para 136 recortadas pendientes (tras los packs 2 y 3) (`scripts/huecos.py`).
 - **Hardware real.** Todo se probó en emulador (mGBA); la Retroid también
   emula, así que el riesgo es bajo.
 

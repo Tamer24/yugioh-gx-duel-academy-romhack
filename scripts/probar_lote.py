@@ -1298,6 +1298,54 @@ def caso_necrofear(ruta_rom, desfase, fotos):
     return res(EN_PARTE if fallas else FUNCIONA, " ".join(vistos + [nota]), "; ".join(fallas), estado=estado)
 
 
+def _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, delta, turnos=1, descarta=False):
+    """Equipo jugado desde la mano sobre mi monstruo: el ATK tiene que subir (o bajar) 'delta' y
+    mantenerse cuando vuelve mi turno ('turnos' veces; si delta es una lista, el de cada turno)."""
+    estado = armar(ruta_rom, "equipo-" + carta.split()[0].lower().strip("-"), yo={5: carta, 4: monstruo},
+                   rival={0: MUERTA, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA},
+                   mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, monstruo)
+    faltas = escenario.comprobar(d, {"campo_yo": [monstruo]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+
+    def atk():
+        s = escenario.instantanea(d)
+        return next((m[2] for m in s["campo_yo"] if m[0] == monstruo), None), s
+    base, _ = atk()
+    d.ir_mano(carta)
+    d.menu(0)
+    d.g.correr(120)
+    foto(d, fotos, "equipo_aviso")
+    if descarta:                          # "Discard hand.": elegir la carta que se descarta
+        elegir_en_lista(d)
+        d.g.correr(150)
+    d.tecla("A", 80)                      # cierra "Select your monster to equip."
+    d.tecla("A", 120)
+    d.g.correr(150)
+    a1, s1 = atk()
+    foto(d, fotos, "equipo_equipada")
+    if carta not in s1["magias_yo"]:
+        return res(NO_FUNCIONA, f"{carta} no quedo en el campo (ATK {base} -> {a1})", "no se equipa", estado=estado)
+    vistos = [a1]
+    esperado = [base + (delta if not isinstance(delta, list) else delta[0])]
+    for k in range(turnos):
+        d.fin_turno(primero=(k == 0))
+        if not hasta_mi_turno(d):
+            return res(SIN_DISPARO, "no volvio mi turno", estado=estado)
+        a, s = atk()
+        vistos.append(a)
+        if isinstance(delta, list):
+            esperado.append(base + delta[min(k + 1, len(delta) - 1)])
+        else:
+            esperado.append(base + delta)
+    detalle = f"{monstruo} ({base} de ATK) equipado con {carta}: ATK por turno {vistos}; esperado {esperado}."
+    if vistos == esperado:
+        return res(FUNCIONA, detalle, estado=estado)
+    return res(EN_PARTE if vistos[0] == esperado[0] else NO_FUNCIONA, detalle, f"ATK {vistos}, esperado {esperado}", estado=estado)
+
+
 CASOS = {
     "Dark Necrofear": caso_necrofear,
     "Electromagnetic Bagworm": caso_bagworm,
@@ -1312,6 +1360,12 @@ CASOS = {
     "Lady Panther": caso_lady_panther,
     "Fairy Guardian": caso_fairy_guardian,
     "Reasoning": caso_reasoning,
+    "Stim-Pack": lambda r, d, f: _caso_equipo(r, d, f, "Stim-Pack", "Blazing Inpachi", [700, 500], 2),
+    "Butterfly Dagger - Elma": lambda r, d, f: _caso_equipo(r, d, f, "Butterfly Dagger - Elma", "Blazing Inpachi", 300),
+    "Fusion Sword Murasame Blade": lambda r, d, f: _caso_equipo(r, d, f, "Fusion Sword Murasame Blade", "Axe Raider", 800),
+    "Shooting Star Bow - Ceal": lambda r, d, f: _caso_equipo(r, d, f, "Shooting Star Bow - Ceal", "Blazing Inpachi", -1000),
+    "Wicked-Breaking Flamberge - Baou": lambda r, d, f: _caso_equipo(r, d, f, "Wicked-Breaking Flamberge - Baou", "Blazing Inpachi", 500, descarta=True),
+    "Twin Swords of Flashing Light - Tryce": lambda r, d, f: _caso_equipo(r, d, f, "Twin Swords of Flashing Light - Tryce", "Blazing Inpachi", -500, descarta=True),
 }
 
 

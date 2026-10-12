@@ -1,0 +1,158 @@
+{
+  "pack": "pack-3",
+  "estado": "aplicado el 2026-10-12",
+  "creado": "2026-10-12",
+  "nota": "Aplicado: las cartas estan en recetas/lote.json, datos/huecos.csv y datos/pruebas.csv. Este archivo queda como constancia del alta.",
+  "cartas": [
+    {
+      "carta": {
+        "hueco": 328,
+        "hueco_nombre": "Ryu-Ran",
+        "id_konami": 6768,
+        "nombre": "Neo-Spacian Aqua Dolphin",
+        "atk": 600,
+        "def": 800,
+        "nivel": 3,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "17955766",
+        "descripcion": "A dolphin-like Neo-Spacian from the planet Aqua. It glides through the sea of Neo-Space and sings to its allies.",
+        "arte": "arte/neo-spacian-aqua-dolphin.png"
+      },
+      "triage": {
+        "diagnostico": "N",
+        "por_que": "carta nueva, monstruo Normal: solo datos",
+        "fn_04": "sin fila de efecto: no la necesita",
+        "otras_columnas": "",
+        "motor": "ninguna",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 335,
+        "hueco_nombre": "Steel Ogre Grotto #2",
+        "id_konami": 6769,
+        "nombre": "Neo-Spacian Air Hummingbird",
+        "atk": 800,
+        "def": 600,
+        "nivel": 3,
+        "atributo": "WIND",
+        "tipo": "Winged Beast",
+        "clase": "Normal",
+        "contrasena": "54959865",
+        "descripcion": "A Neo-Spacian from the planet Air. Its tiny wings beat so fast that the winds of Neo-Space bend around it.",
+        "arte": "arte/neo-spacian-air-hummingbird.png"
+      },
+      "triage": {
+        "diagnostico": "N",
+        "por_que": "carta nueva, monstruo Normal: solo datos",
+        "fn_04": "sin fila de efecto: no la necesita",
+        "otras_columnas": "",
+        "motor": "ninguna",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 484,
+        "hueco_nombre": "Mr. Volcano",
+        "id_konami": 6770,
+        "nombre": "Neo-Spacian Grand Mole",
+        "atk": 900,
+        "def": 300,
+        "nivel": 3,
+        "atributo": "EARTH",
+        "tipo": "Rock",
+        "clase": "Normal",
+        "contrasena": "80344569",
+        "descripcion": "A Neo-Spacian from the planet Ground. It tunnels through the rock of Neo-Space with unstoppable strength.",
+        "arte": "arte/neo-spacian-grand-mole.png"
+      },
+      "triage": {
+        "diagnostico": "N",
+        "por_que": "carta nueva, monstruo Normal: solo datos",
+        "fn_04": "sin fila de efecto: no la necesita",
+        "otras_columnas": "",
+        "motor": "ninguna",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 515,
+        "hueco_nombre": "Molten Behemoth",
+        "id_konami": 6771,
+        "nombre": "Neo-Spacian Glow Moss",
+        "atk": 300,
+        "def": 900,
+        "nivel": 3,
+        "atributo": "LIGHT",
+        "tipo": "Plant",
+        "clase": "Normal",
+        "contrasena": "17732278",
+        "descripcion": "A Neo-Spacian from the planet Glow. Its soft light calms those around it, yet it is stronger than it looks.",
+        "arte": "arte/neo-spacian-glow-moss.png"
+      },
+      "triage": {
+        "diagnostico": "N",
+        "por_que": "carta nueva, monstruo Normal: solo datos",
+        "fn_04": "sin fila de efecto: no la necesita",
+        "otras_columnas": "",
+        "motor": "ninguna",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 535,
+        "hueco_nombre": "Gadget Soldier",
+        "id_konami": 6772,
+        "nombre": "Neo-Spacian Dark Panther",
+        "atk": 1000,
+        "def": 500,
+        "nivel": 3,
+        "atributo": "DARK",
+        "tipo": "Beast",
+        "clase": "Normal",
+        "contrasena": "43237273",
+        "descripcion": "A Neo-Spacian from the planet Dark. It stalks its prey in the shadows of Neo-Space and strikes without a sound.",
+        "arte": "arte/neo-spacian-dark-panther.png"
+      },
+      "triage": {
+        "diagnostico": "N",
+        "por_que": "carta nueva, monstruo Normal: solo datos",
+        "fn_04": "sin fila de efecto: no la necesita",
+        "otras_columnas": "",
+        "motor": "ninguna",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 568,
+        "hueco_nombre": "Wingweaver",
+        "id_konami": 6773,
+        "nombre": "Neo-Spacian Flare Scarab",
+        "atk": 500,
+        "def": 500,
+        "nivel": 3,
+        "atributo": "FIRE",
+        "tipo": "Insect",
+        "clase": "Normal",
+        "contrasena": "89621922",
+        "descripcion": "A Neo-Spacian from the planet Flare. Its burning shell glows brighter with every threat that surrounds it.",
+        "arte": "arte/neo-spacian-flare-scarab.png"
+      },
+      "triage": {
+        "diagnostico": "N",
+        "por_que": "carta nueva, monstruo Normal: solo datos",
+        "fn_04": "sin fila de efecto: no la necesita",
+        "otras_columnas": "",
+        "motor": "ninguna",
+        "avisos": ""
+      }
+    }
+  ]
+}

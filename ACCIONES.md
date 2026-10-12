@@ -194,6 +194,9 @@ tipo 1 en su lista. Si el monstruo deja el campo, el motor manda sus equipos al 
 |---|---|---|---|
 | Equipar una Mágica o Trampa que ya está boca arriba en el campo | `EQUIPAR(lado, id del equipo, id del monstruo)` | `kunai_cadena.s` (molde: Metalmorph `0x0803991C`) | [PROBADO] |
 | Que una Trampa equipada no se vaya al cementerio al resolverse | Agregar su ID a `gancho_queda_campo.s` | Kunai with Chain | [PROBADO] |
+| **Equipo con bono fijo de ATK** (recortada del grupo A, p. ej. Stim-Pack, Butterfly Dagger - Elma, Shooting Star Bow - Ceal) | Solo darla de alta: su caso sigue en el calculador (`0x08012BD8`, un `case` por ID en el árbol de `0x08012F00` a `0x08013090`; `scripts/buscar_id.py ROM ID` lo muestra). Los bonos medidos: Stim-Pack +700, Elma +300, Murasame +800 (solo Warrior), Baou +500, Ceal −1000, Tryce −500 | `recetas/packs/pack-2.json`, `_caso_equipo` en `scripts/probar_lote.py` | [PROBADO] el bono; los efectos extra (devolver a la mano, ataque directo, atacar dos veces), sin probar |
+| Equipo que pide **descartar una carta** al activarlo (Baou, Tryce) | Lo hace la función del motor, sin pieza propia: aparece "Discard hand." y la lista de selección (`elegir_en_lista` en `probar_lote.py`) | Wicked-Breaking Flamberge - Baou | [PROBADO] |
+| Bono de un equipo que **baja con los turnos** (Stim-Pack: 700 − 200 × contador en `ranura + 0x3A` del equipo) | El calculador ya resta; falta quien suba el contador cada turno (no ubicado). Hoy el bono queda en +700 | Stim-Pack | [ROM] |
 | Que un monstruo pase a ser equipo | `CASILLA_MAGIAS(lado)` (−1 = sin lugar); `MOVER_CARTA(id, lado << 15 \| 0x1408 \| casilla << 4)`; `EQUIPAR`. Funciona también desde el cementerio | `necrofear_posesion.s` (molde: monstruos Unión, `0x08061A74`) | [PROBADO] |
 
 ### Disparadores: cuándo se activa sola

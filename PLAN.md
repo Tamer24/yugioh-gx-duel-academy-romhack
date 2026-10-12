@@ -57,7 +57,7 @@ Dark-Eyes Illusionist, Windstorm of Etaqua, Magic Drain). **A las otras 24 les f
 solo la confirmación a ojo de Oscar**: la revisión por capturas no la reemplaza (Principio IV). Kunai
 with Chain la tenía y volvió a pendiente porque ahora hace algo más.
 
-ROM de trabajo: `build/…(Lote).gba` (MD5 `57e98b8c579ec74d84e49c9998b9d9a3` desde el 2026-10-12, con el dibujo chico de Elemental Hero Neos; antes `0ce9fa0e…` y, con las 30, `c1b1289a…`), armado con
+ROM de trabajo: `build/…(Lote).gba` (MD5 `d017f31b380fcb73fd85b639ac52781c` desde el 2026-10-12, con el pack 3 (Neo-Spacian); antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`, con el dibujo chico de Elemental Hero Neos, y `0ce9fa0e…` y, con las 30, `c1b1289a…`), armado con
 `scripts/construir_lote.sh`. Después de rearmarlo: las pruebas `scripts/test_*.py`
 (`test_modificadores.py` pide además `datos/volcado_goddess`), `probar_lote.py`, `probar_trampas.py` y
 `scripts/repetir_sesion.py ROM evidencia/ronda*/*`, **de a un proceso por vez** (ver "Lo que NO
@@ -65,6 +65,28 @@ funciona"). Sobre el ROM del 2026-10-12 se corrieron las 17 `test_*.py` (todas b
 (41 `IGUAL` y las 11 `DISTINTA` de siempre) y `probar_sobres.py`. `probar_lote.py` y
 `probar_trampas.py` **no** se repitieron: respecto del ROM anterior, donde sí se corrieron, solo
 cambian 1059 bytes, todos del dibujo chico de la carta 7.
+
+**Tanda del 2026-10-12 (noche): pack 2, seis equipos del grupo A.** Stim-Pack, Butterfly Dagger - Elma,
+Fusion Sword Murasame Blade, Shooting Star Bow - Ceal, Wicked-Breaking Flamberge - Baou y Twin Swords of
+Flashing Light - Tryce entraron **sin pieza nueva**: conservaban su caso en el calculador de bonos.
+Prueba en duelo (`probar_lote.py`, 3 corridas, jugándolas desde la mano): el bono de ATK coincide en las
+seis. **Stim-Pack: en parte** (+700 pero no pierde 200 por turno: falta quien suba el contador).
+Baou y Tryce piden descartar una carta (lo hace el motor). Sin probar: Elma volviendo a la mano, el ataque
+directo de Ceal, el doble ataque de Tryce. Regresión: las `test_*.py` bien, 41 `IGUAL` y las 11 `DISTINTA`
+de siempre; `probar_lote.py` y `probar_trampas.py` de las 30 anteriores no se repitieron.
+
+**Tanda del 2026-10-12 (noche): pack 3, los Neo-Spacian, y el sobre "Neo Space".** Seis monstruos
+nuevos (Aqua Dolphin, Air Hummingbird, Grand Mole, Glow Moss, Dark Panther, Flare Scarab), **sin efecto**
+(los originales lo tienen; una carta nueva con efecto no entra todavía), con dibujo propio
+(`arte/neo-spacian-*.png`) y datos de la base de Konami. `recetas/sobres-neo-space.json` los junta con
+Neos (súper), Shining Flare Wingman (ultra), cinco Elemental Hero y cuatro cartas de apoyo en un sobre
+**"Neo Space"**, 300 DP, en el lugar de Basic 2-B: `python3 scripts/ampliar.py ORIGINAL LOTE SALIDA
+--cuantas 3 --sobres recetas/sobres-neo-space.json` (ROM `build/…(Neo Space).gba`; va sobre el
+ampliado porque los sobres originales traen cartas de más de 1200). Comprado en pantalla 2 veces x 5
+sobres: salen Neos y los seis Neo-Spacian, con su dibujo (`evidencia/neo-space/`). **Defecto encontrado
+y arreglado:** `restaurar.py` tomaba por un ID la mitad baja de un puntero de lista de sobre (el de
+Ryu-Ran, 4732 = `0x127C`) y rompía la lista del sobre 10; ahora salta los punteros. Regresión: 41
+`IGUAL` y 11 `DISTINTA`, tests en orden.
 
 **Tanda del 2026-10-12: la tienda y los sobres** (detalle en `NOTAS-REVERSE.md`, "La tienda y los
 sobres", y en `PROYECTO.md` §5.5):
@@ -173,7 +195,7 @@ sobres", y en `PROYECTO.md` §5.5):
    Probado en seco el 2026-10-11 con Stim-Pack, Night Assailant y Double Snare sobre una copia del
    proyecto: el ROM armó, las 30 anteriores siguieron andando y Stim-Pack funcionó sin tocar nada
    (+700 ATK, equipada). Las 142 recortadas ya están clasificadas en `datos/triage_recortadas.csv`.
-   **Quedan 20 huecos seguros** para esas 142: es el límite real de cuántas cartas más entran sin
+   **Quedan 7 huecos seguros** (eran 20; el pack 2 usó 6, el pack 3 otros 6 y Neos 1) para esas 142: es el límite real de cuántas cartas más entran sin
    decidir qué monstruos Normales se sacrifican o ampliar las 1200. Después, por cada carta,
    descomponer el texto de la carta en acciones y buscarlas en **`ACCIONES.md`** (el recetario: qué se
    llama para ver la mano del rival, sumar o restar ATK, mover una carta, tomar el control, equipar,

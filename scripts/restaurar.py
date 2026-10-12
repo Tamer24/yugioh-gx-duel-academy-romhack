@@ -181,6 +181,11 @@ def main(ruta_rom, ruta_receta, ruta_salida):
         for o in range(LISTAS_INI, FIN_DATOS - 1, 2):
             if rom.u16(o) != viejo or o in en_mazos:
                 continue
+            # la mitad baja de un puntero a una lista de IDs (los pares de los sobres) no es un ID
+            if o % 4 == 0 and 0x0800 <= rom.u16(o + 2) < 0x0A00:
+                destino = rom.u32(o) - BASE
+                if 0 < destino < len(rom.d) - 2 and rom.indice_de(rom.u16(destino)):
+                    continue
             # solo si esta dentro de una lista de cartas: algun vecino tambien es un ID valido
             if rom.indice_de(rom.u16(o - 2)) or rom.indice_de(rom.u16(o + 2)):
                 rom.w16(o, nuevo)

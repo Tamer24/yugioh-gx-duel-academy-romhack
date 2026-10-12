@@ -1,0 +1,41 @@
+{
+  "nota": "Sobre propio de la tienda con Elemental Hero Neos y los Neo-Spacian (pack 3), en el lugar de Basic 2-B (la tienda tiene 48 sobres fijos; ver PROYECTO.md 5.5). No es parte del Lote: se aplica sobre el ROM ampliado, porque los sobres originales traen cartas de mas de 1200. python3 scripts/ampliar.py ORIGINAL LOTE SALIDA --cuantas 3 --sobres recetas/sobres-neo-space.json",
+  "sobres": [
+    {
+      "sobre": "Basic 2-B",
+      "nombre": "Neo Space",
+      "comentario": "This one just arrived from Neo-Space!",
+      "consejo": "Neos and the Neo-Spacians are in here!",
+      "precio": 300,
+      "cartas_por_sobre": 5,
+      "cartas": {
+        "comunes": [
+          "Neo-Spacian Aqua Dolphin",
+          "Neo-Spacian Air Hummingbird",
+          "Neo-Spacian Grand Mole",
+          "Neo-Spacian Glow Moss",
+          "Neo-Spacian Dark Panther",
+          "Neo-Spacian Flare Scarab",
+          "Elemental Hero Avian",
+          "Elemental Hero Burstinatrix",
+          "Elemental Hero Clayman",
+          "Elemental Hero Sparkman",
+          "Elemental Hero Bubbleman"
+        ],
+        "raras": [
+          "Elemental Hero Flame Wingman",
+          "Elemental Hero Thunder Giant",
+          "Fusion Recovery",
+          "Hero Signal"
+        ],
+        "super": [
+          "Elemental Hero Neos",
+          "Miracle Fusion"
+        ],
+        "ultra": [
+          "Elemental Hero Shining Flare Wingman"
+        ]
+      }
+    }
+  ]
+}

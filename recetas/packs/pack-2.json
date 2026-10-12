@@ -1,0 +1,122 @@
+{
+  "pack": "pack-2",
+  "estado": "aplicado el 2026-10-12",
+  "creado": "2026-10-12",
+  "nota": "Aplicado: las cartas estan en recetas/lote.json, datos/huecos.csv y datos/pruebas.csv. Este archivo queda como constancia del alta.",
+  "cartas": [
+    {
+      "carta": {
+        "hueco": 171,
+        "hueco_nombre": "Launcher Spider",
+        "id_konami": 4890,
+        "nombre": "Stim-Pack",
+        "clase": "Spell Equip",
+        "contrasena": "83225447",
+        "descripcion": "Equip only to a monster. It gains 700 ATK, but loses 200 ATK during each of your Standby Phases."
+      },
+      "triage": {
+        "diagnostico": "A",
+        "por_que": "efecto compartido con cartas en juego",
+        "fn_04": "0803991C compartida con 43 en juego (p. ej. Legendary Sword); por ID, con su caso",
+        "otras_columnas": "fn_0C compartida; fn_18 compartida, por ID, sin su caso",
+        "motor": "3 funciones: 08012BD8, 08032640, 080981B4",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 246,
+        "hueco_nombre": "Tyhone #2",
+        "id_konami": 5724,
+        "nombre": "Butterfly Dagger - Elma",
+        "clase": "Spell Equip",
+        "contrasena": "69243953",
+        "descripcion": "Equip only to a monster. It gains 300 ATK. When this card is sent from the field to the Graveyard, return it to your hand."
+      },
+      "triage": {
+        "diagnostico": "A",
+        "por_que": "efecto compartido con cartas en juego",
+        "fn_04": "0803991C compartida con 43 en juego (p. ej. Legendary Sword); nombra otros IDs, no el suyo",
+        "otras_columnas": "fn_0C compartida; fn_18 compartida, por ID, sin su caso",
+        "motor": "1 funciones: 08012BD8",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 309,
+        "hueco_nombre": "Sengenjin",
+        "id_konami": 5388,
+        "nombre": "Fusion Sword Murasame Blade",
+        "clase": "Spell Equip",
+        "contrasena": "37684215",
+        "descripcion": "Equip only to a Warrior-Type monster. It gains 800 ATK."
+      },
+      "triage": {
+        "diagnostico": "A",
+        "por_que": "efecto compartido con cartas en juego",
+        "fn_04": "0803991C compartida con 43 en juego (p. ej. Legendary Sword); nombra otros IDs, no el suyo",
+        "otras_columnas": "fn_0C compartida; fn_18 compartida, por ID, sin su caso",
+        "motor": "1 funciones: 08012BD8",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 311,
+        "hueco_nombre": "Tri-Horned Dragon",
+        "id_konami": 5725,
+        "nombre": "Shooting Star Bow - Ceal",
+        "clase": "Spell Equip",
+        "contrasena": "95638658",
+        "descripcion": "Equip only to a monster. It loses 1000 ATK and can attack your opponent's Life Points directly."
+      },
+      "triage": {
+        "diagnostico": "A",
+        "por_que": "efecto compartido con cartas en juego",
+        "fn_04": "0803991C compartida con 43 en juego (p. ej. Legendary Sword); nombra otros IDs, no el suyo",
+        "otras_columnas": "fn_0C compartida, por ID, sin su caso; fn_18 compartida, por ID, sin su caso",
+        "motor": "2 funciones: 08012BD8, 0801F980",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 317,
+        "hueco_nombre": "Mikazukinoyaiba",
+        "id_konami": 5727,
+        "nombre": "Wicked-Breaking Flamberge - Baou",
+        "clase": "Spell Equip",
+        "contrasena": "68427465",
+        "descripcion": "Equip only to a monster. It gains 500 ATK. Discard 1 card from your hand to equip."
+      },
+      "triage": {
+        "diagnostico": "A",
+        "por_que": "efecto compartido con cartas en juego",
+        "fn_04": "0803991C compartida con 43 en juego (p. ej. Legendary Sword); nombra otros IDs, no el suyo",
+        "otras_columnas": "fn_0C compartida, por ID, sin su caso; fn_14 compartida; fn_18 compartida, por ID, sin su caso",
+        "motor": "1 funciones: 08012BD8",
+        "avisos": ""
+      }
+    },
+    {
+      "carta": {
+        "hueco": 320,
+        "hueco_nombre": "Firewing Pegasus",
+        "id_konami": 5729,
+        "nombre": "Twin Swords of Flashing Light - Tryce",
+        "clase": "Spell Equip",
+        "contrasena": "21900719",
+        "descripcion": "Equip only to a monster. It loses 500 ATK and can attack twice during each Battle Phase. Discard 1 card from your hand to equip."
+      },
+      "triage": {
+        "diagnostico": "A",
+        "por_que": "efecto compartido con cartas en juego",
+        "fn_04": "0803991C compartida con 43 en juego (p. ej. Legendary Sword); nombra otros IDs, no el suyo",
+        "otras_columnas": "fn_0C compartida; fn_10 compartida; fn_14 compartida; fn_18 compartida, por ID, sin su caso",
+        "motor": "2 funciones: 08012BD8, 080666B8",
+        "avisos": ""
+      }
+    }
+  ]
+}
