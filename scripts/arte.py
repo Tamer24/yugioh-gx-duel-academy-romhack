@@ -127,7 +127,7 @@ def convertir(imagen):
 def escribir(rom, indice, imagen):
     """Pone 'imagen' como dibujo de la carta 'indice' del ROM (da_lib.Rom, se modifica): el grande
     y, sacado de el, el chico."""
-    if not 1 <= indice <= rom.n:
+    if not 1 <= indice <= rom.CAPACIDAD:
         raise ErrorArte(f"indice de carta fuera de rango: {indice}")
     paleta, tiles = convertir(imagen)
     rom.d[rom.PALETAS + BYTES_PALETA * indice:rom.PALETAS + BYTES_PALETA * (indice + 1)] = paleta

@@ -99,6 +99,13 @@ juego nunca tuvo con efecto: en el campo el menú ofrece el efecto, gana 500 LP 
 del rival y una vez por turno (3 corridas, también en el ROM ampliado). Detalle de los límites que
 quedan en `PROYECTO.md`, F6.
 
+**Tanda del 2026-10-12 (mañana): el ROM ampliado pasa de 1234 a 1443 cartas.** Detrás del arte
+quedaban libres, además de las tablas mudadas, las dos tablas de nombres en japonés y el dibujo chico
+original: el arte de las cartas nuevas llega hasta `0x10A01C4`. El bloque del baúl aparte se mudó a
+`0x0203A000` y crece con la cantidad. `ampliar.py --cartas` agrega cartas nuevas directo en la
+ampliación. Probado con 200 cartas de prueba (compra, duelo, lógica del baúl) y las 52 sesiones.
+Detalle y límites en `PROYECTO.md` §9.1.
+
 **Tanda del 2026-10-12: la tienda y los sobres** (detalle en `NOTAS-REVERSE.md`, "La tienda y los
 sobres", y en `PROYECTO.md` §5.5):
 

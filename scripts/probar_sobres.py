@@ -25,7 +25,8 @@ from gba import GBA
 
 RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 ESTADO = os.path.join(RAIZ, "estados", "tienda.ss1")
-BAUL, BAUL_APARTE = 0x02000000, 0x0203AE04      # el segundo es ampliar.EXT
+import ampliar
+BAUL, BAUL_APARTE = 0x02000000, ampliar.EXT
 DP = 0x02003848
 EN_VENTA = 0x02004C08                           # 4 bytes por sobre; la cantidad son los bits 1 a 7
 OFRECIDOS = 0x0203B5A8                          # 64 bits: que sobres muestra la tienda

@@ -10,7 +10,8 @@ Que hace sobre una copia del ROM de trabajo (Lote):
      las usa por su direccion exacta: se reemplaza ese literal en todos lados y se comprueba que
      la cuenta sea la medida (706 la de IDs, 303 la de estadisticas, ...).
   2. El arte no se muda (son 7,7 MB): las tablas que estaban pegadas atras del arte ya no se usan
-     y ese lugar pasa a ser el dibujo de las cartas 1201 a 1234. De ahi sale la CAPACIDAD.
+     (y tampoco las dos de nombres en japones ni el dibujo chico original, que se mudo) y ese
+     lugar pasa a ser el dibujo de las cartas 1201 a 1443. De ahi sale la CAPACIDAD (EXTRA = 243).
   3. Rehace la busqueda ID -> indice (parches.busqueda_ids) con la cantidad nueva.
   4. Agrega las cartas: datos, textos, contrasena y dibujo, copiados del ROM original.
   5. El baul. En la memoria el baul son 12 bytes por carta desde 0x02000000 y termina pegado a la
@@ -27,8 +28,11 @@ Que hace sobre una copia del ROM de trabajo (Lote):
      (sobres.py): ahi quedo, desde restaurar.py, la carta restaurada que ocupo su lugar.
 
 Uso (desde la raiz del proyecto):
-  python3 scripts/ampliar.py ROM_ORIGINAL ROM_LOTE SALIDA [--cuantas N] [--sobres cambios.json]
-N = 1 si no se dice. cambios.json = {"sobres": [...]} son mas cambios a los sobres de la tienda
+  python3 scripts/ampliar.py ROM_ORIGINAL ROM_LOTE SALIDA [--cuantas N] [--cartas cartas.json] [--sobres cambios.json]
+N = 1 si no se dice (0 si hay --cartas). cartas.json = lista de cartas nuevas con el formato de las de
+recetas/packs/*.json ("carta": {id_konami, nombre, atk, def, nivel, atributo, tipo, clase, contrasena,
+descripcion, arte}); entran a continuacion de las que vuelven, hasta EXTRA en total. Una nueva con
+efecto necesita su fila en la receta del Lote ("filas_efecto") y su pieza. cambios.json = {"sobres": [...]} son mas cambios a los sobres de la tienda
 (formato en scripts/sobres.py), que se aplican al final.
 """
 import csv
@@ -41,9 +45,14 @@ import parches
 import sobres
 from da_lib import *
 
-EXTRA = 34                          # dibujos que entran entre el final del arte y la tabla 0xF59EBC
+# El arte de las cartas nuevas sigue al de las 1200, en el mismo lugar que el codigo del juego
+# espera (ARTE + 6400 * indice). Detras del arte hay, pegadas una a otra, las tablas por carta que
+# este script muda (estadisticas, nombres, descripciones, orden alfabetico, dibujos chicos) y dos
+# tablas de nombres en japones (0xF59EBC y 0xF5B180, 36 referencias cada una) que el ROM USA no
+# lee: todo eso queda libre y el arte puede correr hasta el final del dibujo chico original.
+FIN_LUGAR_ARTE = MINI_ARTE + 1024 * (N_CARTAS + 1)          # 0x10A01C4
+EXTRA = (FIN_LUGAR_ARTE - ARTE) // 6400 - 1 - N_CARTAS        # 243 cartas mas (antes 34)
 CAPACIDAD_NUEVA = N_CARTAS + EXTRA
-FIN_LUGAR_ARTE = 0xF59EBC           # tabla sin identificar (36 referencias): no se pisa
 ZONA_CODIGO = (0, 0x100000)         # codigo del juego y sus literales
 ZONA_PROPIA = (LIBRE, AMPLIADO)     # textos y codigo que agrega este proyecto
 REFERENCIAS = {"CANTIDAD": 41, "IDS": 706, "CLAVES": 1, "STATS": 303, "NOMBRES": 43, "NOMBRES_OFF": 43,
@@ -91,8 +100,9 @@ fin:
 # --- el baul de las cartas 1201 en adelante ---------------------------------------------------
 BAUL = 0x02000000
 FIN_BAUL = BAUL + 12 * N_CARTAS             # 0x02003840: donde caeria la carta 1201
-BLOQUE = 0x0203AE00                         # RAM libre (en cero en 52 estados; ver PROYECTO.md 9.1)
-BLOQUE_BYTES = 0x1A0                        # marca + 34 cartas de 12 bytes + 4 del ultimo campo
+BLOQUE = 0x0203A000                         # RAM libre: 0x02030664 a 0x0203B108 en cero en 52 estados
+BLOQUE_BYTES = 4 + 12 * EXTRA + 4           # marca + EXTRA cartas de 12 bytes + 4 del ultimo campo
+assert BLOQUE + BLOQUE_BYTES <= 0x0203B108
 EXT = BLOQUE + 4                            # donde va la carta 1201
 DELTA = EXT - FIN_BAUL
 MARCA_BAUL = 0x31584144                     # "DAX1"
@@ -305,15 +315,15 @@ def reemplazar_literal(rom, viejo, nuevo):
     return en_juego
 
 
-def ampliar(original, rom, cuantas):
+def ampliar(original, rom, cuantas, nuevas=(), raiz="."):
     assert original.md5 == MD5_USA, "el primer ROM tiene que ser el original USA"
     assert not rom.ampliado, "ese ROM ya esta ampliado"
     assert rom.n == N_CARTAS
     assert rom.d[AMPLIADO:sobres.ZONA] == original.d[AMPLIADO:sobres.ZONA], "la zona de las tablas nuevas no esta libre"
     assert ARTE + 6400 * (CAPACIDAD_NUEVA + 1) <= FIN_LUGAR_ARTE
     volver = pisados()
-    if not 1 <= cuantas <= min(EXTRA, len(volver)):
-        error(f"se pueden agregar de 1 a {min(EXTRA, len(volver))} cartas")
+    if not 0 <= cuantas <= len(volver) or cuantas + len(nuevas) > EXTRA or cuantas + len(nuevas) < 1:
+        error(f"entran {EXTRA} cartas en total: de las que volvieron (hasta {len(volver)}) mas las nuevas")
     volver = volver[:cuantas]
     entradas = CAPACIDAD_NUEVA + 1                      # la entrada 0 es una carta vacia
     esp = parches.Espacio(rom, AMPLIADO)
@@ -379,6 +389,33 @@ def ampliar(original, rom, cuantas):
         for tabla, vieja, ancho in ((rom.MINI_PALETAS, MINI_PALETAS, 64), (rom.MINI_ARTE, MINI_ARTE, 1024)):
             rom.d[tabla + ancho * i:tabla + ancho * (i + 1)] = original.d[vieja + ancho * i_viejo:vieja + ancho * (i_viejo + 1)]
         informe.append((i, nombre, cid))
+    # Cartas que el juego nunca tuvo, directo en la ampliacion (mismo formato que una carta de un
+    # pack de recetas/packs/): ocupan los indices que siguen a los de las que volvieron.
+    from restaurar import SUBTIPOS
+    import arte as modulo_arte
+    for k, c in enumerate(nuevas):
+        i = N_CARTAS + 1 + len(volver) + k
+        cid = c["id_konami"]
+        assert rom.indice_de(cid) == 0, f"{c['nombre']} ({cid}) ya esta en el juego"
+        assert len(c["nombre"]) <= 45, f"nombre demasiado largo: {c['nombre']}"
+        if c["clase"] in SUBTIPOS:
+            stats = SUBTIPOS[c["clase"]]
+        else:
+            stats = Rom.empaquetar_monstruo(c["atk"], c["def"], c["nivel"], ATRIBUTOS.index(c["atributo"]),
+                                            TIPOS.index(c["tipo"]), CLASES.index(c["clase"]))
+        if c["clase"] == "Effect":
+            assert any(f["id"] == cid for f in rom.efectos()), \
+                f"{c['nombre']} ({cid}) lleva efecto y no tiene fila en la tabla de efectos (receta, \"filas_efecto\")"
+        rom.w16(rom.IDS + 2 * i, cid)
+        rom.w32(rom.STATS + 4 * i, stats)
+        rom.w32(rom.NOMBRES_OFF + 4 * i, texto(c["nombre"]))
+        rom.w32(rom.DESCS_OFF + 4 * i, texto(c["descripcion"]))
+        rom.fijar_contrasena(i, c["contrasena"])
+        ruta = os.path.join(raiz, c["arte"]) if c.get("arte") else None
+        assert ruta and os.path.exists(ruta), f"{c['nombre']}: hace falta un dibujo ('arte') para una carta nueva"
+        modulo_arte.escribir(rom, i, ruta)
+        informe.append((i, c["nombre"], cid))
+    volver = list(volver) + [None] * len(nuevas)
     total = N_CARTAS + len(volver)
     rom.w16(rom.CANTIDAD, total)
     # orden alfabetico de todas, con la misma clave que restaurar.py
@@ -418,10 +455,15 @@ def ampliar(original, rom, cuantas):
 
 
 def main(argv):
-    cuantas = 1
+    cuantas = None
     if "--cuantas" in argv:
         k = argv.index("--cuantas")
         cuantas = int(argv[k + 1])
+        argv = argv[:k] + argv[k + 2:]
+    ruta_cartas = None
+    if "--cartas" in argv:
+        k = argv.index("--cartas")
+        ruta_cartas = argv[k + 1]
         argv = argv[:k] + argv[k + 2:]
     ruta_sobres = None
     if "--sobres" in argv:
@@ -431,7 +473,15 @@ def main(argv):
     if len(argv) != 3:
         raise SystemExit(__doc__)
     original, rom = Rom(argv[0]), Rom(argv[1])
-    informe, fin = ampliar(original, rom, cuantas)
+    if cuantas is None:
+        cuantas = 0 if ruta_cartas else 1
+    nuevas = []
+    if ruta_cartas:
+        import json
+        d = json.load(open(ruta_cartas, encoding="utf-8"))
+        nuevas = d["cartas"] if isinstance(d, dict) else d
+        nuevas = [c.get("carta", c) for c in nuevas]
+    informe, fin = ampliar(original, rom, cuantas, nuevas, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
     if ruta_sobres:
         import json
         for hecho in sobres.aplicar(rom, json.load(open(ruta_sobres, encoding="utf-8"))["sobres"]):

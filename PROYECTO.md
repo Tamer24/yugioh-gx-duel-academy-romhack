@@ -332,8 +332,8 @@ para las 765 cartas con efecto (`scripts/test_tabla_efectos.py`); las 52 sesione
 mismo que sin mudar; funciona también en el ROM ampliado. Primera carta nueva con efecto:
 Neo-Spacian Air Hummingbird (`efectos/air_hummingbird.s`).
 **Límites que quedan para expandir el juego** (de menor a mayor): los huecos seguros de Normales
-(7 hoy); los 34 dibujos que entran en el ROM ampliado (hay que enganchar los 9 usos del arte para
-pasar de ahí); el tope absoluto de 2047 cartas (índices de 11 bits); el baúl aparte y la SRAM
+(7 hoy); las 243 cartas que entran en el ROM ampliado, hasta la 1443 (hay que enganchar los 9 usos
+del arte para pasar de ahí); el tope absoluto de 2047 cartas (índices de 11 bits); el baúl aparte y la SRAM
 (`0x6200` en adelante, 12 bytes por carta); el espacio libre del ROM (unos 8 MB, a ~7,6 KB por
 carta). La tabla de efectos **ya no es un límite**.
 
@@ -601,6 +601,22 @@ Son cuatro límites distintos, de más barato a más caro:
    sola a los sobres donde estaba en el juego original.
    Sin probar: la máquina de contraseñas en pantalla, el examen, y que el bloque de memoria esté
    libre en torneos y otras pantallas.
+   **[PROBADO] el 2026-10-12: de 34 a 243 cartas más (hasta la 1443).** El arte de las cartas nuevas
+   sigue al de las 1200 en el lugar que el código espera (`ARTE + 6400 × índice`); detrás hay,
+   contiguas, las tablas que `ampliar.py` ya muda, las dos de nombres en japonés (`0xF59EBC` y
+   `0xF5B180`) y el dibujo chico original, hasta `0x10A01C4`. Todo eso queda libre. El bloque del
+   baúl aparte pasó a `0x0203A000` y mide `4 + 12 × EXTRA + 4` bytes (`0x0203AE00` chocaba con
+   `0x0203B5A8`, la lista de sobres de la tienda); el guardado copia ese bloque a la SRAM `0x6200`
+   (queda en `0x6D6C` de `0x8000`). `ampliar.py --cartas cartas.json` mete cartas que el juego nunca
+   tuvo directo en la ampliación (mismo formato que un pack; llevan arte propio obligatorio).
+   Medido con un ROM de 200 cartas de prueba (`(Stress)`): `test_ampliado.py` bien (suma copias en
+   la 1443), el sobre con las 10 últimas se compra en pantalla y cada una muestra su dibujo, y en
+   duelo la 1443 se invoca con su ATK/DEF. Con el ROM `(Neo Space)` las 52 sesiones dan lo mismo que
+   en el Lote. **Sin probar:** guardar y reiniciar en el emulador con el bloque nuevo (solo Unicorn)
+   y que ninguna pantalla lea los nombres en japonés. **Para pasar de la 1443** (hasta 2047) hay que
+   enganchar los 9 usos del arte (cada uno calcula `ARTE + 6400 × índice` en línea) y mandar el
+   arte a otro lugar del ROM.
+
    La tabla `0xF59EBC` resultó ser la de nombres en japonés (solo la usa el ROM con código `J`):
    ese lugar, muerto en la versión USA, sirve para más dibujos cuando hagan falta más de 34.
 
