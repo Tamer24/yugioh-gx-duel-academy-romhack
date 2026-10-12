@@ -1,6 +1,6 @@
 # Duel Academy romhack: plan de trabajo
 
-Estado al **2026-10-11** (noche). Complementa a `PROYECTO.md` (mapa del ROM y backlog),
+Estado al **2026-10-12**. Complementa a `PROYECTO.md` (mapa del ROM y backlog),
 `NOTAS-REVERSE.md` (detalle técnico), `PRUEBAS.md` (cómo probar y resultados) y `ACCIONES.md` (el
 recetario: cómo se implementa cada acción de una carta).
 
@@ -57,11 +57,29 @@ Dark-Eyes Illusionist, Windstorm of Etaqua, Magic Drain). **A las otras 24 les f
 solo la confirmación a ojo de Oscar**: la revisión por capturas no la reemplaza (Principio IV). Kunai
 with Chain la tenía y volvió a pendiente porque ahora hace algo más.
 
-ROM de trabajo: `build/…(Lote).gba` (MD5 `c1b1289a1e0a3ca4c725272073c791db`), armado con
+ROM de trabajo: `build/…(Lote).gba` (MD5 `57e98b8c579ec74d84e49c9998b9d9a3` desde el 2026-10-12, con el dibujo chico de Elemental Hero Neos; antes `0ce9fa0e…` y, con las 30, `c1b1289a…`), armado con
 `scripts/construir_lote.sh`. Después de rearmarlo: las pruebas `scripts/test_*.py`
 (`test_modificadores.py` pide además `datos/volcado_goddess`), `probar_lote.py`, `probar_trampas.py` y
 `scripts/repetir_sesion.py ROM evidencia/ronda*/*`, **de a un proceso por vez** (ver "Lo que NO
-funciona"). Las cuatro se corrieron sobre este ROM: todo igual que antes salvo las dos cartas nuevas.
+funciona"). Sobre el ROM del 2026-10-12 se corrieron las 17 `test_*.py` (todas bien), la regresión
+(41 `IGUAL` y las 11 `DISTINTA` de siempre) y `probar_sobres.py`. `probar_lote.py` y
+`probar_trampas.py` **no** se repitieron: respecto del ROM anterior, donde sí se corrieron, solo
+cambian 1059 bytes, todos del dibujo chico de la carta 7.
+
+**Tanda del 2026-10-12: la tienda y los sobres** (detalle en `NOTAS-REVERSE.md`, "La tienda y los
+sobres", y en `PROYECTO.md` §5.5):
+
+- Con un estado de Oscar parado en la tienda (`estados/tienda.ss1`) se compraron sobres por script:
+  **las restauradas salen de los sobres** del monstruo que reemplazaron, y en el ROM ampliado salen
+  también las cartas 1201 en adelante. Capturas en `evidencia/sobres/`.
+- `scripts/sobres.py` lista los 48 sobres y les cambia cartas, rareza, nombre, textos y precio (clave
+  `"sobres"` de una receta). `scripts/probar_sobres.py` repite la compra en pantalla y la comprueba.
+- Aparecieron y se arreglaron: el dibujo chico de las cartas (dos tablas por carta que nadie tenía
+  ubicadas; `arte.py` ahora lo genera y `ampliar.py` lo muda), y la última carta del ROM, que el
+  sorteo de sobres descarta (corregido solo en el ROM ampliado).
+- `build/…(Sobres demo).gba` muestra un sobre "Neo Space" en el lugar de Basic 2-B
+  (`recetas/sobres-demo.json`). Es una demostración, no parte del juego.
+- **Pendiente, a decidir por Oscar:** cómo se suman sobres propios (ver §4, punto 4).
 
 ## 2. Lo aprendido (lo que no hay que redescubrir)
 
@@ -251,8 +269,16 @@ Hecho el 2026-10-11 (tarde):
    las partidas grabadas de esas 6 cartas se repiten iguales en ese ROM. El nombre "Hack vN" es
    provisorio. [DECIDIR]
 
-Queda: los dibujos, y decidir nombre y cómo se consiguen las cartas (hoy heredan el lugar del hueco en
-los sobres y se compran con su contraseña).
+5. **Sobres de la tienda (2026-10-12).** `scripts/sobres.py` lista los 48 sobres y les cambia las
+   cartas, el nombre, el precio y los textos; en una receta va en la clave `"sobres"`. Probado en
+   pantalla con el estado de Oscar en la tienda (`evidencia/sobres/`): las restauradas salen de los
+   sobres del hueco que ocupan, las cartas 1201 en adelante del ROM ampliado también, y un sobre
+   renombrado con cartas propias se compra y se abre bien (`recetas/sobres-demo.json`). Lo medido
+   está en `PROYECTO.md` §5.5.
+
+Queda: los dibujos, y decidir nombre y cómo se reparten las cartas en los sobres. **[DECIDIR] sobres
+nuevos:** la tienda tiene 48 lugares fijos. O se reusa un lugar (por ejemplo juntar dos Basic y
+liberar uno), que es solo datos, o se agrega el lugar 49, que es tocar unos 30 puntos del código.
 
 ### Fase 3: mazos e IA (objetivos 3 y 4)
 
@@ -281,6 +307,18 @@ los sobres y se compran con su contraseña).
    juego con todas las que queden aptas (Fase 1, punto 4).
 3. Después, a elección: un lote nuevo de cartas (con `ACCIONES.md` como punto de partida), los dibujos
    de las cartas (Fase 2) o la Fase 3 (mazos e IA).
+4. **Pendiente desde el 2026-10-12 [DECIDIR]: sobres propios en la tienda.** Oscar lo dejó sin decidir.
+   La tienda tiene 48 lugares fijos y hay dos caminos:
+   - **Reusar un lugar** (por ejemplo juntar dos Basic en uno): solo datos, ya funciona con
+     `scripts/sobres.py`. El sobre nuevo se desbloquea cuando se desbloqueaba el viejo y conserva su
+     dibujo de sobre.
+   - **Agregar el lugar 49:** tocar código. Lo que se sabe y los puntos a revisar están en
+     `NOTAS-REVERSE.md`, "La tienda y los sobres". Tope: 64 sobres.
+
+   Sin probar de la tienda: la máquina de contraseñas en pantalla, el texto de la vendedora de un
+   sobre cambiado (está escrito, no se vio), y los sobres que no están en venta en el estado de
+   prueba (solo lo están el 0, 1, 2 y 3). Sin investigar: de dónde sale el dibujo de cada sobre y
+   qué pide cada sobre para desbloquearse.
 
 ROM de trabajo `build/…(Lote).gba` + `build/lote.bps` (el del 2026-10-10 quedó en
 `build/lote-2026-10-10.bps`). Estados para revisar en `estados/revisar/`.

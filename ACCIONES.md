@@ -225,6 +225,16 @@ carta en uno, de menos a más código:
 | Que trate a una carta **como a otra** en un árbol | Gancho que, antes del árbol, cambia el ID leído por el de la otra | `gancho_necrofear_equipo.s` |
 | **Agregar** una carta a un árbol o lista | Gancho que resuelve la rama antes y vuelve | `gancho_destruida_batalla_a.s`, `gancho_lista_campo.s` |
 
+### Cartas que el juego nunca tuvo
+
+| Quiero | Cómo | Ejemplo | Certeza |
+|---|---|---|---|
+| Un **monstruo Normal** nuevo | Cargar sus datos en `scripts/cartas_nuevas.csv` (mismas columnas que `nombres_konami.csv`; el ID es el `cid` de la base oficial de Konami, que es la numeración que usa el juego) y darlo de alta con `scripts/alta.py`. No lleva fila de efecto: el motor busca el ID, no lo encuentra y lo trata como Normal. Un ID mayor que 6467 (el último del juego) no rompe nada | Elemental Hero Neos (ID 6653, hueco 7) | [PROBADO] |
+| Su **dibujo** | PNG de cualquier tamaño en `arte/` y la clave `"arte": "arte/x.png"` en el borrador del pack. Sale también el dibujo chico (32×32), el que se ve al abrir un sobre | `arte/elemental-hero-neos.png` | [PROBADO] |
+| Que **salga en un sobre** de la tienda | Clave `"sobres"` de la receta: `{"sobre": "Basic 1-A", "agregar": {"comunes": ["Carta"]}}`. Una restaurada ya sale en los sobres del monstruo que reemplazó. `scripts/sobres.py ver ROM SOBRE` muestra cómo queda | `recetas/sobres-demo.json` | [PROBADO] en pantalla |
+| Que cuente como **"Elemental Hero"** para otras cartas | No hay una lista: cada carta que pide un "Elemental Hero" compara contra los IDs uno por uno en su propio árbol (6310 a 6313, 6344, 6345, 6393 y 6467). Hace falta un gancho "como a otra" por árbol: `0x08015200` (la cuenta de Shining Flare Wingman), `0x08010060`, `0x080205E0`, `0x08050B52`, `0x08060770` (dos sitios), `0x08060AA0`, `0x08060D04`, `0x08060FF0`. Falta identificar cuál es de cada carta | Sin hacer: Neos hoy **no** cuenta como Elemental Hero | [ROM] |
+| Una carta nueva **con efecto** | No entra todavía: no tiene fila en la tabla de efectos (901 filas, tope fijo). Ver `PROYECTO.md`, F6 | Los Neo-Spacian | Sin hacer |
+
 ## 3. Cómo encontrar lo que falta
 
 0. **Dar de alta y clasificar antes de empezar.** Un pack entra con `scripts/alta.py` (`preparar` y

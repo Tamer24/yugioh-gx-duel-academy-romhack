@@ -105,7 +105,7 @@ class Duelo:
             for s in range(100):
                 a = base + s * 0x50
                 o = self.g.r16(a + 0x24) & 0x7FFF
-                if 0 < o <= 1200:
+                if 0 < o <= self.rom.n:
                     z = "%x" % (self.g.r8(a + 0x31) >> 4)
                     out.append((p, s, o, self.rom.nombre(o), z, self.g.r8(a + 0x33)))
         return out

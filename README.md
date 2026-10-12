@@ -45,6 +45,20 @@ python3 scripts/alta.py ROM_ORIGINAL aplicar pack-2
 sh scripts/construir_lote.sh ROM_ORIGINAL
 ```
 
+`scripts/ampliar.py` (experimental) arma un ROM aparte, `(Ampliado)`, que pasa de las 1200 cartas:
+ver `PROYECTO.md`, §9.1.
+
+## Cómo se cambian los sobres de la tienda
+
+```sh
+python3 scripts/sobres.py listar ROM              # los 48 sobres
+python3 scripts/sobres.py ver ROM "Basic 1-A"     # sus cartas, por rareza
+```
+
+Los cambios (cartas, nombre, precio, textos) van en la clave `"sobres"` de la receta del ROM; el
+formato está en `scripts/sobres.py` y hay un ejemplo en `recetas/sobres-demo.json`. La tienda tiene
+48 sobres fijos: se cambian, no se agregan (`PROYECTO.md`, §5.5).
+
 `scripts/triage.py` clasifica cartas sin darlas de alta, `scripts/huecos.py` lista los lugares libres
 y `scripts/buscar_id.py` muestra dónde trata el motor a una carta.
 

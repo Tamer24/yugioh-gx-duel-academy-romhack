@@ -33,7 +33,8 @@ COLUMNAS = ["carta", "indice", "id_konami", "clase", "usa_piezas_nuevas", "vered
 VEREDICTOS = ("funciona", "funciona en parte", "no funciona")
 HUECOS = os.path.join(RAIZ, "datos", "huecos.csv")     # que cartas hay: una fila del registro por cada una
 EN_CURSO = False            # --en-curso: se conserva por compatibilidad; ya no cambia ninguna regla
-ROMS = {"c1b1289a1e0a3ca4c725272073c791db": "Lote",
+ROMS = {"0ce9fa0eed946507f44a919ab6ba02a1": "Lote",
+        "c1b1289a1e0a3ca4c725272073c791db": "Lote (2026-10-11, antes de Elemental Hero Neos)",
         "6c667223c062b6a3aa6f602e55a904dc": "Lote (2026-10-11, Necrofear en version simplificada)",
         "d15bb70918d2d2e2ae218ea553f807f4": "Lote (2026-10-11, con el aviso de Necrofear al ser destruida en batalla)",
         "990aefb8bc7ff1cf159f52caeda97999": "Lote (2026-10-11, antes del -500 de Bagworm y la posesion de Necrofear)",

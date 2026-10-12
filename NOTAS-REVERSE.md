@@ -762,6 +762,8 @@ Pruebas: `scripts/test_exchange.py` (Unicorn), y el juego con `probar_magicas.py
 
 ## Qué sigue
 
+Esta lista es la del 2026-10-09; el plan vigente está en `PLAN.md`, §4.
+
 1. Probar las 18 candidatas que faltan (`PRUEBAS.md`).
 2. ~~Escribir la posesión de Dark Necrofear~~ Hecha el 2026-10-11; ver
    "Bagworm −500 y la posesión de Dark Necrofear".
@@ -1162,3 +1164,86 @@ pasos, de 3,1 GB a 0,9 GB; la regresión entera, 1,7 GB. Las 49 sesiones dan el 
 - **Arte:** índices de 0 a 63; la paleta puede traer el bit 15 puesto (se ignora). Las cartas del
   juego que no usan el índice 0 tienen ahí `0x83E0`. Un dibujo convertido con el índice 0 sin usar se
   ve bien en el duelo (probado con Reasoning en un ROM aparte). [PROBADO]
+
+## La tienda y los sobres (2026-10-12) [ROM] / [PROBADO jugando]
+
+Punto de partida: `estados/tienda.ss1`, estado de mGBA de Oscar sobre el ROM `(Lote)`, parado en la
+tienda con 3000 DP y los sobres 0 a 3 en venta. Carga igual en el ROM `(Ampliado)`.
+
+**Manejo de la pantalla** (para scripts): arriba y abajo cambian de sobre (esperar unos 55 cuadros
+entre uno y otro), derecha suma uno al pedido, `A` pregunta "Are you sure?" con el cursor en Yes,
+`A` confirma, cada `A` siguiente abre un sobre, y al final queda la lista de cartas. `B` saltea lo
+que falte de la apertura y sale; **el baúl se actualiza recién al salir de la lista**. Con esperas
+10 cuadros más cortas que las de `scripts/probar_sobres.py`, que hace todo eso, se perdieron teclas.
+
+**Datos** (resumen en `PROYECTO.md` §5.5):
+
+- Tabla de sobres `0x097F2844`, 48 × 16 bytes. Literales que la nombran (20): `0xBD7C8, 0xBD8FC,
+  0xBDB18, 0xBDB84, 0xBDBD4, 0xBDBF8, 0xBDC2C, 0xBDD44, 0xBE3A4, 0xD2660, 0xD7550, 0xD7688, 0xD77C8,
+  0xD89AC, 0xD8A44, 0xD8B18, 0xD8CC8, 0xD8D74, 0xD8F0C, 0xD9044`.
+- Textos `0x097F2B44`, 48 × 3 offsets relativos a `0x094EDD78`. Literales (3): `0xBDC50, 0xBDC78,
+  0xBDC90`.
+- Las direcciones son `0x09…` porque el ROM pasa de 16 MB: offset de archivo + `0x08000000`.
+
+**Funciones:**
+
+| Dirección | Qué hace |
+|---|---|
+| `FUN_080BD89C(sobre, salida)` | Arma un sobre: baja en uno lo que hay en venta, tira 0 a 17999, elige la primera carta por rareza y completa con comunes. Guarda la rareza en los 3 bits altos de cada u16 |
+| `FUN_080BD700` | Si una carta ya está en el sobre que se arma (por eso no se repiten) |
+| `FUN_080BD72C` | El sobre 47: cartas de todo el juego; una parte la busca entre las que no se tienen |
+| `FUN_080BDA90` | Reposición y merma de lo que hay en venta |
+| `FUN_080BDC30`, `shop_show_packs` (`0x080BDC58`) | Los tres textos de un sobre |
+| `FUN_080BDC9C` | El porcentaje "Comp." del sobre |
+| `FUN_080BDD4C` | Grupo de un sobre por su número: 0 a 11 → 0, 12 a 21 → 1, 22 a 32 → 2, 33 a 46 → 3, 47 → 4, más → 5 |
+| `FUN_080BE260` | Si el sobre está disponible: salta por grupo y, adentro, por sobre (`FUN_080BDD80`, `FUN_080BDE88`, `FUN_080BE090`, `FUN_080BE144`) |
+| `FUN_080BE2F4` | Disponible y con alguno en venta |
+| `FUN_080BE32C` | Lista de índices de las cartas de un sobre |
+| `FUN_080D2574` | Compra: llama a `FUN_080BD89C` por cada sobre pedido y anota las cartas (el sobre va en 6 bits) |
+| `FUN_080D84D0(actual, sentido)` | Sobre siguiente o anterior entre los ofrecidos |
+| `FUN_080D1AD4(índice, lugar)` | Carga el dibujo chico de una carta al abrir el sobre |
+
+El C de Ghidra de las primeras está en `ghidra/salida/sobres.c` y `sobres2.c`. La zona
+`0x080D7000`–`0x080D9A00` (la pantalla de la tienda) no tiene funciones definidas en el proyecto de
+Ghidra: hay que leerla desensamblada.
+
+**El dibujo chico** [PROBADO]. `FUN_080D1AD4` carga 64 bytes de `0x08F61184 + índice × 64` (32
+colores) y 1024 de `0x08F73DC4 + índice × 1024` (32×32, 4×4 tiles de 8×8, valores 0 a 31, con el
+índice 0 como un color más). Cada tabla tiene 5 literales: `0x8C5E4/0x8C5E8`, `0x91878/0x9187C`,
+`0xAD9A8/0xAD9A4`, `0xC79F0/0xC79F4`, `0xD1B8C/0xD1B94`. Cómo se encontró: las cartas 1201 en
+adelante salían con ruido al abrir un sobre, y el ruido usaba pocos colores, o sea que el dibujo no
+era el grande. `arte.py` lo arma reduciendo el grande a 32×32 y 32 colores (sale parecido al del
+juego, no igual: diferencia media de 18 sobre 255 con Sangan).
+
+**La última carta no sale.** En `0x080BD980` (`blo`) y `0x080BD9D4` (`bhs`) el sorteo pide índice
+menor que la cantidad. En el juego original deja afuera a la 1200. `ampliar.py` los cambia a `bls`
+y `bhi`; el ROM `(Lote)` queda como el original.
+
+**Un sobre que cuelga el juego.** Con menos comunes que cartas por sobre, el bucle que completa el
+sobre no termina (pasó con una lista de 3 para un sobre de 5: los DP se descuentan y la pantalla
+queda en la apertura). `sobres.py` lo rechaza.
+
+**Lo medido para un sobre número 49 (no se intentó).** Tres cosas atan la tienda a 48:
+
+1. *La constante.* Lugares de las zonas `0x080BD600`–`0x080BE500` y `0x080D2000`–`0x080DA000` con un
+   `cmp` o `movs` de `0x2F` o `0x30`, hallados por búsqueda y **sin revisar uno por uno**: `BD8F0`
+   (este es el caso especial del sobre 47, no un tope), `BDB28, BDBC4, BDBE0, BDC06, BDC34, BDC62,
+   BDCB0, BDD72, BE340, D204C, D2114, D2522, D2544, D2548, D2556, D2948, D2A46, D2C62, D2CC6, D2EAC,
+   D2EC6, D2F6C, D2F86, D4284, D4CD0, D4CE4, D5E92, D711E, D75A4, D7D4C, D7D7E, D84E6, D84EA, D851A,
+   D8528, D8560, D85B4, D86DC, D9842, D9A6C, D9A76, D9D54`. En `FUN_080BDD4C` el `0x2F` separa
+   grupos. Todas caben en un byte: cambiar la cantidad sería reescribir constantes, sin ganchos.
+2. *Lo que hay en venta, en la partida.* 4 bytes por sobre desde `0x02004C08`; en `0x02004CC8`
+   empiezan otros datos. El juego solo lee y escribe el primer byte de cada uno (visto en los
+   accesos de `0xBD8D8`, `0xBDAA6`, `0xBDB0E`–`0xBDB22`, `0xBDB9A`–`0xBDBBA`, `0xBE310` y `0xD85A6`;
+   el literal `0x4C08` aparece en 12 lugares: `0xBD908, 0xBDAD4, 0xBDB80, 0xBE320, 0xD7558, 0xD77C4,
+   0xD85C0, 0xD8A40, 0xD8B14, 0xD8D70, 0xD8F08, 0xD9110`; los seis de `0xD7…`–`0xD9…` no se
+   leyeron). [HIP] Si los otros tres bytes están libres, el sobre `k ≥ 48` podría vivir en el
+   segundo byte del sobre `k − 48`: la dirección que calcula el juego menos 191. No haría falta
+   tocar el guardado. En el estado de la tienda esos bytes están en cero.
+3. *La memoria de la tienda.* En `0x0203B546` hay un u16 por sobre (el pedido) y pegada atrás, en
+   `0x0203B5A8`, la máscara de 64 bits de sobres ofrecidos: entra un sobre más en los 2 bytes de
+   relleno, no dos. En `0x0203CD70` hay otro u16 × 48 (el bucle de `0x080D2928` escribe uno por
+   sobre pedido); no se miró qué tiene atrás.
+
+Además, cada sobre nuevo necesita su rama en `FUN_080BE260` (hoy un número mayor que 47 da "no
+disponible") y un dibujo de sobre, que no se buscó.

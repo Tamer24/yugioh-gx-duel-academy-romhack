@@ -6,6 +6,22 @@
       "hueco": 968,
       "descripcion": "This card cannot be Normal Summoned or Set. It can only be Special Summoned by removing 3 Fiend-Type monsters in your Graveyard from play. When this card is destroyed in battle or by your opponent's card effect, during the End Phase of that turn it is treated as an Equip Spell Card and equipped to 1 face-up monster on your opponent's side of the field. As long as it is equipped, you control that monster.",
       "anular_columnas": []
+    },
+    {
+      "hueco": 7,
+      "hueco_nombre": "Shadow Specter",
+      "id_konami": 6653,
+      "nombre": "Elemental Hero Neos",
+      "atk": 2500,
+      "def": 2000,
+      "nivel": 7,
+      "atributo": "LIGHT",
+      "tipo": "Warrior",
+      "clase": "Normal",
+      "contrasena": "89943723",
+      "descripcion": "A new Elemental Hero has arrived from Neo-Space! When he initiates a Contact Fusion with a Neo-Spacian his unknown powers are unleashed.",
+      "arte": "arte/elemental-hero-neos.png",
+      "pack": "neo-espacio"
     }
   ],
   "piezas": [

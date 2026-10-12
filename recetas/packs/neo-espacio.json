@@ -1,0 +1,33 @@
+{
+  "pack": "neo-espacio",
+  "estado": "aplicado el 2026-10-11",
+  "creado": "2026-10-11",
+  "nota": "Aplicado: las cartas estan en recetas/lote.json, datos/huecos.csv y datos/pruebas.csv. Este archivo queda como constancia del alta.",
+  "cartas": [
+    {
+      "carta": {
+        "hueco": 7,
+        "hueco_nombre": "Shadow Specter",
+        "id_konami": 6653,
+        "nombre": "Elemental Hero Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "89943723",
+        "descripcion": "A new Elemental Hero has arrived from Neo-Space! When he initiates a Contact Fusion with a Neo-Spacian his unknown powers are unleashed.",
+        "arte": "arte/elemental-hero-neos.png"
+      },
+      "triage": {
+        "diagnostico": "N",
+        "por_que": "carta nueva, monstruo Normal: solo datos",
+        "fn_04": "sin fila de efecto: no la necesita",
+        "otras_columnas": "",
+        "motor": "ninguna",
+        "avisos": ""
+      }
+    }
+  ]
+}

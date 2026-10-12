@@ -4,6 +4,9 @@ El motor busca el efecto de una carta por su ID de Konami. Si a un indice del
 juego le cambiamos el ID por el de una carta que tiene fila en la tabla de
 efectos, ese hueco pasa a ser esa carta, con su efecto.
 
+Una carta que el juego nunca tuvo (sin fila de efecto) entra igual si es un
+monstruo Normal ("clase": "Normal"): no necesita efecto, solo los datos.
+
 La receta (JSON) puede pedir parches de codigo en "parches":
 
   "busqueda_ids": true        cualquier hueco sirve para cualquier carta. Sin
@@ -43,6 +46,9 @@ de SUBTIPOS para magicas y trampas. "anular_columnas" pone en cero columnas de
 su fila de efecto (por ejemplo ["fn_c", "fn_18"]).
 "arte" (opcional) es la ruta de un PNG, relativa a la carpeta del proyecto, con el
 dibujo de la carta; sin esa clave la carta muestra el dibujo del hueco. Ver arte.py.
+
+"sobres" (opcional, fuera de "parches") es una lista de cambios a los sobres de la tienda: que
+cartas trae cada uno, el nombre, el precio. Se aplican despues de las cartas. Ver sobres.py.
 
 Uso: python3 restaurar.py original.gba receta.json salida.gba
 """
@@ -135,7 +141,7 @@ def main(ruta_rom, ruta_receta, ruta_salida):
         huecos_usados.add(i)
         assert rom.nombre(i) == c["hueco_nombre"], f"el hueco {i} es {rom.nombre(i)!r}, no {c['hueco_nombre']!r}"
         assert s["tipo"] <= 20 and s["clase"] == 0, f"{rom.nombre(i)} no es un monstruo Normal"
-        assert nuevo in filas, f"el ID {nuevo} no tiene fila de efecto"
+        assert nuevo in filas or c["clase"] == "Normal", f"el ID {nuevo} no tiene fila de efecto"
         assert rom.indice_de(nuevo) == 0, f"el ID {nuevo} ya esta en el juego"
         assert len(c["nombre"]) <= 45, f"nombre demasiado largo: {c['nombre']}"
         if not libre_orden:
@@ -231,6 +237,13 @@ def main(ruta_rom, ruta_receta, ruta_salida):
         import parche_efecto
         raiz = os.path.join(os.path.dirname(os.path.abspath(ruta_receta)), "..")
         parche_efecto.aplicar(Rom(ruta_rom), rom, receta["piezas"], raiz)
+
+    # Sobres de la tienda: despues de las cartas, para poder nombrar a las restauradas.
+    if receta.get("sobres"):
+        import sobres
+        for hecho in sobres.aplicar(rom, receta["sobres"]):
+            print(f"sobre {hecho['sobre']} ({hecho['nombre']}): "
+                  + ", ".join(f"{len(v)} {r}" for r, v in hecho["listas"].items() if v))
 
     # Comprobaciones finales sobre el resultado.
     ids = [rom.id_de(i) for i in range(1, N_CARTAS + 1)]
