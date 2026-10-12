@@ -627,8 +627,14 @@ Son cuatro límites distintos, de más barato a más caro:
    del juego en Unicorn: el bloque vuelve igual con la memoria sucia y sin marca carga en cero), el
    dibujo correcto en la pantalla de detalle de las cartas 1443, 1444, 1700, 1800, 1839 y 2047, y la
    compra en pantalla de un sobre con las últimas. Con `(Neo Space)` las 52 sesiones dan lo mismo.
-   **Sin probar:** que los otros 8 sitios del arte (editor de mazos, tienda, apertura de sobres...) se
-   vean bien con una carta de trozo aparte: se probó la pantalla de detalle del duelo, que es uno.
+   **Los 9 sitios, uno por uno** (`scripts/test_arte_sitios.py`, Unicorn): cada ventana se corre en
+   el ROM original y en el ampliado con 10 índices (1, 600, 1200, 1201, 1443, 1444, 1445, 1700, 1843,
+   2047) y se comprueba que el registro con la dirección del dibujo trae la de `Rom.arte_dir`, que la
+   pila y los demás registros quedan como en el original y que los índices viejos no cambian. Pasan
+   los 9 (en `0x080B65F6` el registro del salto, r2, queda pisado, pero 4 instrucciones después se
+   vuelve a cargar sin leerlo). Se confirmó además que no hay otro literal que apunte al arte en el
+   código. **Sin probar:** en pantalla, cuáles de esos sitios dibuja el editor de mazos, la tienda o
+   las listas (solo se vio el detalle de duelo); el arte con una carta de trozo aparte allí.
 
    La tabla `0xF59EBC` resultó ser la de nombres en japonés (solo la usa el ROM con código `J`):
    ese lugar, muerto en la versión USA, sirve para más dibujos cuando hagan falta más de 34.
