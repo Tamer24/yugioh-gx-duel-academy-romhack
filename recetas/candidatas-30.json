@@ -1,0 +1,355 @@
+{
+ "nota": "Lote de 30 candidatas para PROBAR, con contrasenas gratis. Varias no funcionan: ver PRUEBAS.md.",
+ "parches": {
+  "busqueda_ids": true,
+  "invocacion_tipo": [
+   {
+    "id_konami": 5222,
+    "tipo": "Fiend",
+    "cantidad": 3
+   }
+  ],
+  "contrasenas_gratis": true
+ },
+ "cartas": [
+  {
+   "hueco": 524,
+   "hueco_nombre": "Boneheimer",
+   "id_konami": 5044,
+   "nombre": "Rigorous Reaver",
+   "atk": 1600,
+   "def": 100,
+   "nivel": 3,
+   "atributo": "FIRE",
+   "tipo": "Plant",
+   "clase": "Effect",
+   "contrasena": "39180960",
+   "descripcion": "FLIP: Both players discard 1 card from their hands. A monster that destroys this card in battle loses 500 ATK and DEF."
+  },
+  {
+   "hueco": 520,
+   "hueco_nombre": "Souleater",
+   "id_konami": 5035,
+   "nombre": "Jowls of Dark Demise",
+   "atk": 200,
+   "def": 100,
+   "nivel": 2,
+   "atributo": "WATER",
+   "tipo": "Fiend",
+   "clase": "Effect",
+   "contrasena": "05257687",
+   "descripcion": "FLIP: Take control of 1 face-up monster on your opponent's side of the field until the end of this turn. That monster cannot attack your opponent's Life Points directly."
+  },
+  {
+   "hueco": 522,
+   "hueco_nombre": "Shapesnatch",
+   "id_konami": 5040,
+   "nombre": "Electromagnetic Bagworm",
+   "atk": 200,
+   "def": 1400,
+   "nivel": 3,
+   "atributo": "LIGHT",
+   "tipo": "Insect",
+   "clase": "Effect",
+   "contrasena": "07914843",
+   "descripcion": "FLIP: Take control of 1 face-up Machine-Type monster on your opponent's side of the field until the end of your next turn. A Machine-Type monster that destroys this card in battle loses 500 ATK and DEF."
+  },
+  {
+   "hueco": 968,
+   "hueco_nombre": "Gigobyte",
+   "id_konami": 5222,
+   "nombre": "Dark Necrofear",
+   "atk": 2200,
+   "def": 2800,
+   "nivel": 8,
+   "atributo": "DARK",
+   "tipo": "Fiend",
+   "clase": "Effect",
+   "contrasena": "31829185",
+   "descripcion": "This card cannot be Normal Summoned or Set. It can only be Special Summoned by removing 3 Fiend-Type monsters in your Graveyard from play.",
+   "anular_columnas": [
+    "fn_c",
+    "fn_18"
+   ]
+  },
+  {
+   "hueco": 971,
+   "hueco_nombre": "Pharaoh's Servant",
+   "id_konami": 4090,
+   "nombre": "Reaper of the Cards",
+   "atk": 1380,
+   "def": 1930,
+   "nivel": 5,
+   "atributo": "DARK",
+   "tipo": "Fiend",
+   "clase": "Effect",
+   "contrasena": "33066139",
+   "descripcion": "FLIP: Select 1 Trap Card on the field and destroy it. If the selected card is face-down, look at it: if it is a Trap Card it is destroyed, otherwise it returns to its position."
+  },
+  {
+   "hueco": 972,
+   "hueco_nombre": "Pharaonic Protector",
+   "id_konami": 4205,
+   "nombre": "Penguin Knight",
+   "atk": 900,
+   "def": 800,
+   "nivel": 3,
+   "atributo": "WATER",
+   "tipo": "Aqua",
+   "clase": "Effect",
+   "contrasena": "36039163",
+   "descripcion": "When this card is sent directly from your Deck to the Graveyard by your opponent's card effect, combine your Graveyard with your Deck and shuffle them to form a new Deck."
+  },
+  {
+   "hueco": 525,
+   "hueco_nombre": "Flame Dancer",
+   "id_konami": 4435,
+   "nombre": "Goddess of Whim",
+   "atk": 950,
+   "def": 700,
+   "nivel": 3,
+   "atributo": "LIGHT",
+   "tipo": "Fairy",
+   "clase": "Effect",
+   "contrasena": "67959180",
+   "descripcion": "Once per turn you can toss a coin and call it. If you call it right, the ATK of this card is doubled until the end of the turn. If you call it wrong, its ATK is halved until the end of the turn."
+  },
+  {
+   "hueco": 936,
+   "hueco_nombre": "Mystical Shine Ball",
+   "id_konami": 4469,
+   "nombre": "Electric Snake",
+   "atk": 800,
+   "def": 900,
+   "nivel": 3,
+   "atributo": "LIGHT",
+   "tipo": "Thunder",
+   "clase": "Effect",
+   "contrasena": "11324436",
+   "descripcion": "When this card is discarded from your hand to the Graveyard by your opponent's card effect, draw 2 cards from your Deck."
+  },
+  {
+   "hueco": 970,
+   "hueco_nombre": "Fiend Scorpion",
+   "id_konami": 4540,
+   "nombre": "Minar",
+   "atk": 850,
+   "def": 750,
+   "nivel": 3,
+   "atributo": "EARTH",
+   "tipo": "Insect",
+   "clase": "Effect",
+   "contrasena": "32539892",
+   "descripcion": "When this card is discarded from your hand to the Graveyard by your opponent's card effect, inflict 1000 points of damage to your opponent's Life Points."
+  },
+  {
+   "hueco": 532,
+   "hueco_nombre": "Lightning Conger",
+   "id_konami": 4617,
+   "nombre": "Hiro's Shadow Scout",
+   "atk": 650,
+   "def": 500,
+   "nivel": 2,
+   "atributo": "DARK",
+   "tipo": "Fiend",
+   "clase": "Effect",
+   "contrasena": "81863068",
+   "descripcion": "FLIP: Your opponent draws 3 cards and shows them to you. Any Spell Cards among them are discarded to the Graveyard."
+  },
+  {
+   "hueco": 57,
+   "hueco_nombre": "Fiend's Hand",
+   "id_konami": 4736,
+   "nombre": "Dark-Eyes Illusionist",
+   "atk": 0,
+   "def": 1400,
+   "nivel": 2,
+   "atributo": "DARK",
+   "tipo": "Spellcaster",
+   "clase": "Effect",
+   "contrasena": "38247752",
+   "descripcion": "FLIP: Select 1 monster on the field. It cannot attack while this card remains face-up on the field."
+  },
+  {
+   "hueco": 63,
+   "hueco_nombre": "Fire Reaper",
+   "id_konami": 5193,
+   "nombre": "Lady Panther",
+   "atk": 1400,
+   "def": 1300,
+   "nivel": 4,
+   "atributo": "EARTH",
+   "tipo": "Beast-Warrior",
+   "clase": "Effect",
+   "contrasena": "38480590",
+   "descripcion": "Offer this face-up card as a Tribute to return 1 of your monsters destroyed in battle during this turn to the top of your Deck."
+  },
+  {
+   "hueco": 530,
+   "hueco_nombre": "Flying Fish",
+   "id_konami": 5202,
+   "nombre": "Fairy Guardian",
+   "atk": 1000,
+   "def": 1000,
+   "nivel": 3,
+   "atributo": "WIND",
+   "tipo": "Fairy",
+   "clase": "Effect",
+   "contrasena": "22419772",
+   "descripcion": "Offer this face-up card as a Tribute to return 1 Spell Card sent to your Graveyard during this turn by your opponent's card effect to the bottom of your Deck."
+  },
+  {
+   "hueco": 569,
+   "hueco_nombre": "Science Soldier",
+   "id_konami": 4657,
+   "nombre": "Kunai with Chain",
+   "clase": "Trap",
+   "contrasena": "37390589",
+   "descripcion": "Select 1 or both of these effects: Change 1 attacking monster of your opponent to Defense Position. Equip this card to 1 face-up monster on your side of the field to increase its ATK by 500 points."
+  },
+  {
+   "hueco": 533,
+   "hueco_nombre": "Spherous Lady",
+   "id_konami": 4691,
+   "nombre": "Acid Trap Hole",
+   "clase": "Trap",
+   "contrasena": "41356845",
+   "descripcion": "Flip 1 face-down Defense Position monster on the field face-up. If its DEF is 2000 or less, destroy it. If its DEF is higher than 2000, return it face-down."
+  },
+  {
+   "hueco": 657,
+   "hueco_nombre": "Lizard Soldier",
+   "id_konami": 4826,
+   "nombre": "Mystical Refpanel",
+   "clase": "Trap",
+   "contrasena": "35563539",
+   "descripcion": "You can activate this card when a Spell Card that targets 1 player is activated. The effect of that Spell Card is applied to the other player instead."
+  },
+  {
+   "hueco": 488,
+   "hueco_nombre": "Dark Bat",
+   "id_konami": 4839,
+   "nombre": "Two-Pronged Attack",
+   "clase": "Trap",
+   "contrasena": "83887306",
+   "descripcion": "Select and destroy 2 monsters on your side of the field and 1 monster on your opponent's side of the field."
+  },
+  {
+   "hueco": 489,
+   "hueco_nombre": "Flying Kamakiri #2",
+   "id_konami": 5001,
+   "nombre": "Windstorm of Etaqua",
+   "clase": "Trap",
+   "contrasena": "59744639",
+   "descripcion": "Change the battle positions of all face-up monsters on your opponent's side of the field."
+  },
+  {
+   "hueco": 536,
+   "hueco_nombre": "Grand Tiki Elder",
+   "id_konami": 5133,
+   "nombre": "Magic Drain",
+   "clase": "Trap Counter",
+   "contrasena": "59344077",
+   "descripcion": "Activate when your opponent activates a Spell Card. Your opponent can discard 1 Spell Card from the hand to negate this card. If not, negate the activation of the Spell Card and destroy it."
+  },
+  {
+   "hueco": 417,
+   "hueco_nombre": "Baron of the Fiend Sword",
+   "id_konami": 5263,
+   "nombre": "Riryoku Field",
+   "clase": "Trap Counter",
+   "contrasena": "70344351",
+   "descripcion": "Negate the activation of a Spell Card that targets 1 monster on the field and destroy it."
+  },
+  {
+   "hueco": 534,
+   "hueco_nombre": "Shining Abyss",
+   "id_konami": 5331,
+   "nombre": "Ready for Intercepting",
+   "clase": "Trap",
+   "contrasena": "31785398",
+   "descripcion": "Change 1 face-up Warrior-Type or Spellcaster-Type monster on the field to face-down Defense Position."
+  },
+  {
+   "hueco": 564,
+   "hueco_nombre": "Skull Mariner",
+   "id_konami": 5851,
+   "nombre": "Big Burn",
+   "clase": "Trap",
+   "contrasena": "95472621",
+   "descripcion": "You can activate this card when your opponent activates a card that targets a monster in the Graveyard. Remove all monsters in both players' Graveyards from play."
+  },
+  {
+   "hueco": 84,
+   "hueco_nombre": "Doriado",
+   "id_konami": 4848,
+   "nombre": "The Inexperienced Spy",
+   "clase": "Spell",
+   "contrasena": "81820689",
+   "descripcion": "Select and look at 1 card in your opponent's hand."
+  },
+  {
+   "hueco": 418,
+   "hueco_nombre": "Man-Eating Treasure Chest",
+   "id_konami": 4889,
+   "nombre": "Share the Pain",
+   "clase": "Spell",
+   "contrasena": "56830749",
+   "descripcion": "Offer 1 monster on your side of the field as a Tribute. Your opponent must also offer 1 monster as a Tribute."
+  },
+  {
+   "hueco": 487,
+   "hueco_nombre": "Cyber Falcon",
+   "id_konami": 5009,
+   "nombre": "Riryoku",
+   "clase": "Spell",
+   "contrasena": "34016756",
+   "descripcion": "Select 2 face-up monsters on the field. Halve the ATK of 1 of them and add the lost points to the ATK of the other until the end of this turn."
+  },
+  {
+   "hueco": 538,
+   "hueco_nombre": "Melchid the Four-Face Beast",
+   "id_konami": 5011,
+   "nombre": "Seal of the Ancients",
+   "clase": "Spell",
+   "contrasena": "97809599",
+   "descripcion": "Pay 1000 Life Points to look at all face-down cards on your opponent's side of the field. The cards are returned to their original positions and their effects are not activated."
+  },
+  {
+   "hueco": 70,
+   "hueco_nombre": "Spirit of the Harp",
+   "id_konami": 5101,
+   "nombre": "Chosen One",
+   "clase": "Spell",
+   "contrasena": "21888494",
+   "descripcion": "Select 1 Monster Card and 2 other cards from your hand. Your opponent picks 1 of them at random. If it is the Monster Card, Special Summon it and send the other 2 to the Graveyard. If not, send all 3 cards to the Graveyard."
+  },
+  {
+   "hueco": 227,
+   "hueco_nombre": "Fire Kraken",
+   "id_konami": 5152,
+   "nombre": "Monster Recovery",
+   "clase": "Spell Quick-Play",
+   "contrasena": "93108433",
+   "descripcion": "Return 1 monster on your side of the field and all cards in your hand to your Deck and shuffle it. Then draw the same number of cards that you returned from your hand."
+  },
+  {
+   "hueco": 492,
+   "hueco_nombre": "Overdrive",
+   "id_konami": 5218,
+   "nombre": "Exchange",
+   "clase": "Spell",
+   "contrasena": "05556668",
+   "descripcion": "Both players show each other their hands. Each player selects 1 card from the opponent's hand and adds it to his or her own hand."
+  },
+  {
+   "hueco": 508,
+   "hueco_nombre": "The Illusory Gentleman",
+   "id_konami": 5530,
+   "nombre": "Reasoning",
+   "clase": "Spell",
+   "contrasena": "58577036",
+   "descripcion": "Your opponent declares a monster Level. Reveal cards from the top of your Deck until you reveal a monster that can be Normal Summoned. If its Level is the declared one, send all revealed cards to the Graveyard. If not, Special Summon it and send the rest to the Graveyard."
+  }
+ ]
+}

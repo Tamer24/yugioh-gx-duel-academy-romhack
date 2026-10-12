@@ -1,0 +1,150 @@
+paso 0 (desde estado estados/revisar/07-kunai-with-chain.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Kunai with Chain', 'Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Kunai with Chain | A w50 UP A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Kunai with Chain | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): B w50 DOWN f A w120
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Kunai with Chain | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Kunai with Chain | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 4 (desde paso 3): B w50 f DOWN w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Kunai with Chain | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 5 (desde paso 4): UP w30 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Kunai with Chain | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 6 (desde paso 5): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 7 (desde paso 6): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Mechanicalchaser | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 8 (desde paso 7): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Mechanicalchaser | evento 0x10
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 9 (desde paso 8): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Mechanicalchaser | evento 0x10
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 10 (desde paso 9): A w60 f | cursor:2,1 | w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Mechanicalchaser | evento 0x10
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 11 (desde paso 10): w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Mechanicalchaser | evento 0x10
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 12 (desde paso 11): A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Mechanicalchaser | evento 0x10
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Kunai with Chain']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 13 (desde paso 12): UP w30 f | A w40 f w40 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Kunai with Chain | evento 0xb
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Kunai with Chain'] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (defensa, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 14 (desde paso 13): w120 f | A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos [] | magias y trampas []
+    cementerio ['Kunai with Chain'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (defensa, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+

@@ -1,0 +1,80 @@
+paso 0 (desde estado estados/revisar/16-exchange.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Exchange', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Exchange | A w50 UP UP f A w150 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Exchange | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Exchange']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Exchange | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Exchange']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Exchange | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Exchange']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 4 (desde paso 3): A w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Exchange | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Exchange']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 5 (desde paso 4): A w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Exchange | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Exchange']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 6 (desde paso 5): RIGHT*3 w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Exchange | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Exchange']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 7 (desde paso 6): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Exchange | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Darkfire Soldier #2', 'Penguin Soldier', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Exchange'] | retiradas [] | mazo 34
+rival: mano ['The Thing in the Crater', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+

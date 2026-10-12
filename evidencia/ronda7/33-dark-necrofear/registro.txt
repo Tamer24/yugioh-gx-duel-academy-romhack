@@ -1,0 +1,260 @@
+paso 0 (desde estado estados/revisar/33-dark-necrofear.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Feral Imp', 'Card Destruction', 'Lord of the Lamp', 'La Jinn the Mystical Genie of the Lamp', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Card Destruction | A w50 f UP*2 f A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 2 | carta bajo el cursor: Card Destruction | evento 0x0
+yo: mano ['Trap Hole', 'Feral Imp', 'Lord of the Lamp', 'La Jinn the Mystical Genie of the Lamp', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Card Destruction']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): w240 f w240 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 0 (mi mano), indice en la mano 4 | carta bajo el cursor: Card Destruction | evento 0xe
+yo: mano ['Dark Necrofear', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas [] | mazo 29
+rival: mano ['Goblin Attack Force', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 37
+
+paso 3 (desde paso 2): mano:Dark Necrofear | A w50 f UP f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Card Destruction | evento 0x0
+yo: mano ['Dark Necrofear', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas [] | mazo 29
+rival: mano ['Goblin Attack Force', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 37
+
+paso 4 (desde paso 3): A w80 A w60 A w40 f A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Card Destruction | evento 0x0
+yo: mano ['Dark Necrofear', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas [] | mazo 29
+rival: mano ['Goblin Attack Force', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 37
+
+paso 5 (desde paso 4): DOWN w20 A w40 f A w60 f DOWN w20 A w40 A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Card Destruction | evento 0x0
+yo: mano ['Dark Necrofear', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas [] | mazo 29
+rival: mano ['Goblin Attack Force', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 37
+
+paso 6 (desde paso 5): A w40 f RIGHT*4 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Card Destruction | evento 0x0
+yo: mano ['Dark Necrofear', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas [] | mazo 29
+rival: mano ['Goblin Attack Force', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 37
+
+paso 7 (desde paso 6): A w90 f w90 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: La Jinn the Mystical Genie of the Lamp | evento 0x0
+yo: mano ['Dark Necrofear', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Goblin Attack Force', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 37
+
+paso 8 (desde paso 7): A w120 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Dark Necrofear | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos ['Dark Necrofear (ataque, ATK 2200, DEF 2800)'] | magias y trampas []
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Goblin Attack Force', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 37
+
+paso 9 (desde paso 8): B w50 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Dark Necrofear | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos ['Dark Necrofear (ataque, ATK 2200, DEF 2800)'] | magias y trampas []
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Goblin Attack Force', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 37
+
+paso 10 (desde paso 9): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos ['Dark Necrofear (ataque, ATK 2200, DEF 2800)'] | magias y trampas []
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Goblin Attack Force', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 11 (desde paso 10): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Goblin Attack Force | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos ['Dark Necrofear (ataque, ATK 2200, DEF 2800)'] | magias y trampas []
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Goblin Attack Force (ataque, ATK 2300, DEF 0)'] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 12 (desde paso 11): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Goblin Attack Force | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos ['Dark Necrofear (ataque, ATK 2200, DEF 2800)'] | magias y trampas []
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Goblin Attack Force (ataque, ATK 2300, DEF 0)'] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 13 (desde paso 12): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Goblin Attack Force | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos ['Dark Necrofear (ataque, ATK 2200, DEF 2800)'] | magias y trampas []
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Goblin Attack Force (ataque, ATK 2300, DEF 0)'] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 14 (desde paso 13): w120 f A w90 f A w90 f
+LP: yo 7900 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Goblin Attack Force | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Dark Necrofear', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 15 (desde paso 14): w60 f A w60 f w60 f w60 f
+LP: yo 7900 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Goblin Attack Force | evento 0x5
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Dark Necrofear', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 16 (desde paso 15): A w90 f w120 f
+LP: yo 7900 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Goblin Attack Force | evento 0x5
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Dark Necrofear', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 17 (desde paso 16): A w90 f w120 f
+LP: yo 7900 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 4 | carta bajo el cursor: Heavy Storm | evento 0x2
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord', 'Heavy Storm']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas ['Dark Necrofear']
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 28
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 18 (desde paso 17): w120 f w120 f
+LP: yo 7900 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 4 | carta bajo el cursor: Heavy Storm | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord', 'Heavy Storm']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas ['Dark Necrofear']
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 28
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 19 (desde paso 18): B w50 f DOWN w20 f A w120 f
+LP: yo 7900 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 4 | carta bajo el cursor: Heavy Storm | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord', 'Heavy Storm']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas ['Dark Necrofear']
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 28
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 36
+
+paso 20 (desde paso 19): w120 f A w90 f
+LP: yo 7900 | rival 8000
+cursor: columna 7, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord', 'Heavy Storm']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas ['Dark Necrofear']
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 28
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 35
+
+paso 21 (desde paso 20): w120 f A w90 f
+LP: yo 7900 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Sparks | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord', 'Heavy Storm', 'Sparks']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas ['Dark Necrofear']
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 27
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 35
+
+paso 22 (desde paso 21): w180 f
+LP: yo 7900 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Sparks | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord', 'Heavy Storm', 'Sparks']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas ['Dark Necrofear']
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 27
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 35
+
+paso 23 (desde paso 22): B w40 f
+LP: yo 7900 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Sparks | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord', 'Heavy Storm', 'Sparks']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas ['Dark Necrofear']
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 27
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 35
+
+paso 24 (desde paso 23): mano:Heavy Storm | A w60 f UP*2 f A w120 f
+LP: yo 7900 | rival 8000
+cursor: columna 3, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Heavy Storm | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord', 'Sparks']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas ['Dark Necrofear', 'Heavy Storm']
+    cementerio ['Card Destruction', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 27
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 35
+
+paso 25 (desde paso 24): A w90 f A w90 f A w90 f w120 f
+LP: yo 7900 | rival 8000
+cursor: columna 3, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Heavy Storm | evento 0x0
+yo: mano ['Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord', 'Sparks']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Dark Necrofear', 'Heavy Storm', 'Trap Hole', 'Twin-Headed Fire Dragon'] | retiradas ['Feral Imp', 'La Jinn the Mystical Genie of the Lamp', 'Lord of the Lamp'] | mazo 27
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Goblin Attack Force (defensa, ATK 2300, DEF 0)'] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 35
+

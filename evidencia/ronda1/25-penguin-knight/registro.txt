@@ -1,0 +1,170 @@
+paso 0 (desde estado estados/revisar/25-penguin-knight.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Needle Worm', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Darkfire Soldier #2 | A w50 f DOWN A w240 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 3 | carta bajo el cursor: Darkfire Soldier #2 | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Needle Worm', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): B w50 f A w120
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 3 | carta bajo el cursor: Darkfire Soldier #2 | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Needle Worm', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 3 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Needle Worm', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 4 (desde paso 3): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 3 | carta bajo el cursor: Needle Worm | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Needle Worm (boca abajo, ATK 750, DEF 600)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 5 (desde paso 4): w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Needle Worm (boca abajo, ATK 750, DEF 600)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 6 (desde paso 5): w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Needle Worm (boca abajo, ATK 750, DEF 600)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 7 (desde paso 6): B w80 f A w170 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Needle Worm (boca abajo, ATK 750, DEF 600)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 8 (desde paso 7): A w50 f UP f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Needle Worm (boca abajo, ATK 750, DEF 600)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 9 (desde paso 8): A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Needle Worm (boca abajo, ATK 750, DEF 600)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 10 (desde paso 9): A w60 f w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 5 | carta bajo el cursor: Needle Worm | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Needle Worm (defensa, ATK 750, DEF 600)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 11 (desde paso 10): w120 f w120 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 5 | carta bajo el cursor: Needle Worm | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 12 (desde paso 11): w120 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 5 | carta bajo el cursor: Needle Worm | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio ['Darkfire Soldier #1', 'Legendary Flame Lord', 'Monster Reincarnation', 'Needle Worm', 'Penguin Knight'] | retiradas [] | mazo 28
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Needle Worm'] | retiradas [] | mazo 41
+
+paso 13 (desde paso 12): w120 f w120 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 5 | carta bajo el cursor: Needle Worm | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio ['Darkfire Soldier #1', 'Legendary Flame Lord', 'Monster Reincarnation', 'Needle Worm', 'Penguin Knight'] | retiradas [] | mazo 28
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Needle Worm'] | retiradas [] | mazo 41
+
+paso 14 (desde paso 13): w240 f w240 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 5 | carta bajo el cursor: Needle Worm | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio ['Darkfire Soldier #1', 'Legendary Flame Lord', 'Monster Reincarnation', 'Needle Worm', 'Penguin Knight'] | retiradas [] | mazo 28
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Needle Worm'] | retiradas [] | mazo 41
+
+paso 15 (desde paso 14): B w50 DOWN f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 5 | carta bajo el cursor: Needle Worm | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio ['Darkfire Soldier #1', 'Legendary Flame Lord', 'Monster Reincarnation', 'Needle Worm', 'Penguin Knight'] | retiradas [] | mazo 28
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Needle Worm'] | retiradas [] | mazo 41
+
+paso 16 (desde paso 15): w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 5 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio ['Darkfire Soldier #1', 'Legendary Flame Lord', 'Monster Reincarnation', 'Needle Worm', 'Penguin Knight'] | retiradas [] | mazo 28
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Needle Worm'] | retiradas [] | mazo 40
+

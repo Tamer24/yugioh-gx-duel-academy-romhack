@@ -1,0 +1,231 @@
+paso 0 (desde estado estados/revisar/10-riryoku-field.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Riryoku Field', 'Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Black Pendant', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Riryoku Field | A w60 UP A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Riryoku Field | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Black Pendant', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): B w50 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Riryoku Field | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Black Pendant', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Black Pendant', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 4 (desde paso 3): w60 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Black Pendant', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 5 (desde paso 4): A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Mechanicalchaser | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Black Pendant', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 6 (desde paso 5): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 7 (desde paso 6): w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 8 (desde paso 7): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 9 (desde paso 8): A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 10 (desde paso 9): A w40 | cursor:2,1 | w60 f
+ERROR: el cursor no llego a 2,1; quedo en (6, 3)
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 11 (desde paso 10): B w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 12 (desde paso 11): w60 f | DOWN w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 13 (desde paso 12): DOWN w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 14 (desde paso 13): A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 15 (desde paso 14): LEFT w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 5, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 16 (desde paso 15): LEFT*3 w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 17 (desde paso 16): A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 18 (desde paso 17): UP w30 f | A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Riryoku Field | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 19 (desde paso 18): w120 f | w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Riryoku Field | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas ['Black Pendant']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 20 (desde paso 19): w120 f | w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Black Pendant | evento 0xe
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Riryoku Field']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio ['Black Pendant'] | retiradas [] | mazo 41
+
+paso 21 (desde paso 20): w90 f | w120 f
+LP: yo 7500 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 0 | carta bajo el cursor: Riryoku Field | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Riryoku Field'] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio ['Black Pendant'] | retiradas [] | mazo 41
+
+paso 22 (desde paso 21): cursor:6,3 | w60 f
+LP: yo 7500 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Riryoku Field | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Riryoku Field'] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio ['Black Pendant'] | retiradas [] | mazo 41
+

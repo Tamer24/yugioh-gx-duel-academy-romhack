@@ -1,0 +1,100 @@
+paso 0 (desde estado estados/revisar/04-dark-eyes-illusionist.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Dark-Eyes Illusionist', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Tongyo', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Dark-Eyes Illusionist | A w50 UP A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 1 | carta bajo el cursor: Dark-Eyes Illusionist | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Dark-Eyes Illusionist (boca abajo, ATK 0, DEF 1400)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Tongyo', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): B w50 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Dark-Eyes Illusionist | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Dark-Eyes Illusionist (boca abajo, ATK 0, DEF 1400)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Tongyo', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Dark-Eyes Illusionist (boca abajo, ATK 0, DEF 1400)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Tongyo', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 4 (desde paso 3): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Tongyo | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Dark-Eyes Illusionist (boca abajo, ATK 0, DEF 1400)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 5 (desde paso 4): w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Dark-Eyes Illusionist (boca abajo, ATK 0, DEF 1400)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 6 (desde paso 5): w60 B w50 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Dark-Eyes Illusionist (boca abajo, ATK 0, DEF 1400)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 7 (desde paso 6): DOWN f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Dark-Eyes Illusionist (boca abajo, ATK 0, DEF 1400)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 8 (desde paso 7): w120 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 5 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Dark-Eyes Illusionist (boca abajo, ATK 0, DEF 1400)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 40
+
+paso 9 (desde paso 8): w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 5 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Dark-Eyes Illusionist (boca abajo, ATK 0, DEF 1400)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 40
+

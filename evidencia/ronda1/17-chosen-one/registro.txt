@@ -1,0 +1,350 @@
+paso 0 (desde estado estados/revisar/17-chosen-one.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Chosen One', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Chosen One | A w40 f w60
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 2 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Chosen One', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): UP*2 f w30
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 2 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Chosen One', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): A w60 f w60
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 4 (desde paso 3): w120 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 5 (desde paso 4): A w90 f w60
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 6 (desde paso 5): DOWN w40 f A w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 7 (desde paso 6): A w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 8 (desde paso 7): DOWN w40 A w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 9 (desde paso 8): A w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 10 (desde paso 9): DOWN w40 A w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 11 (desde paso 10): A w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 12 (desde paso 11): START w60 f w60
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 13 (desde paso 12): B w60 f w60
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 14 (desde paso 13): UP*3 f w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 15 (desde paso 14): RIGHT*10 f w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 16 (desde paso 15): RIGHT w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 17 (desde paso 16): RIGHT w30 RIGHT w30 RIGHT w30 RIGHT w30 f w30
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 18 (desde paso 17): RIGHT w30 RIGHT w30 RIGHT w30 RIGHT w30 RIGHT w30 f w30
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 19 (desde paso 18): LEFT w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 20 (desde paso 19): RIGHT w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 21 (desde paso 20): DOWN*2 w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 22 (desde paso 21): B w90 f w90
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 23 (desde paso 22): UP w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 24 (desde paso 23): DOWN w40 f R w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 25 (desde paso 24): A w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 26 (desde paso 25): A w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 27 (desde paso 26): w60 f B w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 28 (desde paso 27): DOWN w40 RIGHT w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 29 (desde paso 28): SELECT w90 f w60
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 30 (desde paso 29): DOWN w40 DOWN w40 DOWN w40 DOWN w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 31 (desde paso 30): DOWN w40 f w40
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 32 (desde paso 31): L w60 f w60
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 33 (desde paso 32): UP*4 w40 f w40 A w60 f w60
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 34 (desde paso 33): B w60 f w60
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Chosen One | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Chosen One']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Penguin Soldier', 'Dekoichi the Battlechanted Locomotive', 'Fusion Sage', 'Snatch Steal', 'Hane-Hane']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+

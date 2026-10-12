@@ -1,0 +1,26 @@
+# El ROM y todo lo que lo contiene NO se publica: cada uno usa su propia copia.
+*.gba
+*.sav
+*.sav.*
+*.srm
+saves/
+build/*.ss[0-9]
+ghidra/codigo.bin
+ghidra/proyecto/
+
+# Binarios de terceros: el nucleo de mGBA para libretro se baja aparte (ver README).
+nucleos/*.dylib
+nucleos/*.so
+nucleos/*.dll
+
+# Generados: se rehacen con los scripts.
+__pycache__/
+*.pyc
+.DS_Store
+estados/lote/
+evidencia/**/*.st.gz
+ghidra/salida/*.log
+
+# Entorno local de trabajo.
+.claude/
+.specify/

@@ -1,0 +1,41 @@
+{
+  "nota": "ROM de TRABAJO (Lote): el ROM de prueba (test.json: las 30 cartas, 3 copias en el baul y contrasenas gratis) mas todas las piezas propias de efectos/. El orden de las piezas fija sus direcciones: las nuevas se agregan al final. Las cartas declaradas aca corrigen a las heredadas de test.json (mismo hueco).",
+  "hereda": "test.json",
+  "cartas": [
+    {
+      "hueco": 968,
+      "descripcion": "This card cannot be Normal Summoned or Set. It can only be Special Summoned by removing 3 Fiend-Type monsters in your Graveyard from play. When this card is destroyed in battle or by your opponent's card effect, during the End Phase of that turn it is treated as an Equip Spell Card and equipped to 1 face-up monster on your opponent's side of the field. As long as it is equipped, you control that monster.",
+      "anular_columnas": []
+    }
+  ],
+  "piezas": [
+    "4848:fn_04:efectos/spy_mano.s",
+    "5218:fn_04:efectos/exchange.s",
+    "5101:fn_04:efectos/chosen_one.s",
+    "4889:fn_04:efectos/share_the_pain.s",
+    "4435:fn_04:efectos/goddess_whim.s",
+    "5009:fn_04:efectos/riryoku.s",
+    "4657:fn_04:efectos/kunai_cadena.s",
+    "4657:fn_10:efectos/kunai_condicion.s",
+    "4839:fn_04:efectos/two_pronged_attack.s",
+    "G:08015C78:efectos/gancho_lista_campo.s",
+    "G:08079200:efectos/gancho_menu_campo.s",
+    "T:08012C64:08013B4C:efectos/modificador_atk.s",
+    "5040:fn_18:efectos/bagworm_seleccion.s",
+    "5040:fn_04:efectos/bagworm_control.s",
+    "4617:fn_04:efectos/hiro_scout.s",
+    "G:080236C4:efectos/gancho_queda_campo.s",
+    "G:08065D20:efectos/gancho_fin_control.s",
+    "G:0801706C:efectos/gancho_enviada_por_rival.s",
+    "4205:fn_04:efectos/penguin_knight.s",
+    "5202:fn_04:efectos/fairy_guardian.s",
+    "5530:fn_04:efectos/reasoning.s",
+    "G:08068D00:efectos/gancho_destruida_batalla_a.s",
+    "G:08068FD0:efectos/gancho_destruida_batalla_b.s",
+    "5222:fn_18:efectos/necrofear_seleccion.s",
+    "5222:fn_04:efectos/necrofear_posesion.s",
+    "G:08064920:efectos/gancho_fin_necrofear.s",
+    "B:0801786E:2BD0:C046",
+    "G:080171B0:efectos/gancho_necrofear_equipo.s"
+  ]
+}

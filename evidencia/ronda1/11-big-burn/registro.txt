@@ -1,0 +1,190 @@
+paso 0 (desde estado estados/revisar/11-big-burn.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Big Burn', 'Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Card Destruction', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Big Burn | A w50 f UP A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Big Burn | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Card Destruction', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): B w50 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Big Burn | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Card Destruction', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Card Destruction', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 4 (desde paso 3): A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Card Destruction | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Card Destruction']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 5 (desde paso 4): A w90 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0xe
+yo: mano []
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 34
+rival: mano ['Monster Reborn', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Card Destruction']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | retiradas [] | mazo 37
+
+paso 6 (desde paso 5): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 0 (mi mano), indice en la mano 4 | carta bajo el cursor: Card Destruction | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Monster Reborn', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 7 (desde paso 6): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 0 (mi mano), indice en la mano 4 | carta bajo el cursor: Card Destruction | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Monster Reborn', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 8 (desde paso 7): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 0 (mi mano), indice en la mano 4 | carta bajo el cursor: Monster Reborn | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 9 (desde paso 8): w60 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 0 (mi mano), indice en la mano 4 | carta bajo el cursor: Monster Reborn | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 10 (desde paso 9): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 0 (mi mano), indice en la mano 4 | carta bajo el cursor: Monster Reborn | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 11 (desde paso 10): A w60 f | cursor:3,1 | w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 3, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Monster Reborn | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 12 (desde paso 11): cursor:2,1 | w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Monster Reborn | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 13 (desde paso 12): A w50 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Monster Reborn | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 14 (desde paso 13): UP f | A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Big Burn | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 15 (desde paso 14): B w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Big Burn | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas [] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 16 (desde paso 15): w120 f | w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Darkfire Soldier #2 | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Upstart Goblin'] | retiradas ['Darkfire Soldier #2', 'Inferno'] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Card Destruction'] | retiradas [] | mazo 36
+
+paso 17 (desde paso 16): w60 f | w60 f | w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 4 (magias y trampas del rival), indice en la mano 4 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas ['Big Burn']
+    cementerio ['Upstart Goblin'] | retiradas ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon'] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Monster Reborn']
+    cementerio ['Card Destruction'] | retiradas ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | mazo 36
+
+paso 18 (desde paso 17): w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 1 (mis magias y trampas), indice en la mano 4 | carta bajo el cursor: Big Burn | evento 0x0
+yo: mano ['Spiritual Fire Art - Kurenai', 'Darkfire Soldier #1', 'Burning Spear', 'Needle Worm', 'Legendary Flame Lord']
+    monstruos [] | magias y trampas []
+    cementerio ['Big Burn', 'Upstart Goblin'] | retiradas ['Darkfire Soldier #2', 'Inferno', 'The Thing in the Crater', 'Twin-Headed Fire Dragon'] | mazo 29
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Card Destruction', 'Monster Reborn'] | retiradas ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon'] | mazo 36
+

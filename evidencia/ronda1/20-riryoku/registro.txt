@@ -1,0 +1,211 @@
+paso 0 (desde estado estados/revisar/20-riryoku.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Riryoku', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Darkfire Soldier #2 | A w50 DOWN A w240 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 3 | carta bajo el cursor: Darkfire Soldier #2 | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Riryoku', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): B w50 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 3 | carta bajo el cursor: Darkfire Soldier #2 | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Riryoku', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 3 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Riryoku', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 4 (desde paso 3): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Riryoku', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 5 (desde paso 4): mano:The Thing in the Crater | A w50 DOWN A w240 f
+LP: yo 8000 | rival 8000
+cursor: columna 3, fila 2 (mis monstruos), indice en la mano 3 | carta bajo el cursor: The Thing in the Crater | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Riryoku', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 6 (desde paso 5): mano:Riryoku | A w50 f DOWN f
+LP: yo 8000 | rival 8000
+cursor: columna 3, fila 0 (mi mano), indice en la mano 2 | carta bajo el cursor: The Thing in the Crater | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Riryoku', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 7 (desde paso 6): A w40 f w40 f w40 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 3, fila 0 (mi mano), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas ['Riryoku']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 8 (desde paso 7): cursor:2,2 | w40 f
+ERROR: el cursor no llego a 2,2; quedo en (3, 0)
+LP: yo 8000 | rival 8000
+cursor: columna 3, fila 0 (mi mano), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas ['Riryoku']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 9 (desde paso 8): A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 3, fila 2 (mis monstruos), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas ['Riryoku']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 10 (desde paso 9): LEFT w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas ['Riryoku']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 11 (desde paso 10): A w60 f w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas ['Riryoku']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 12 (desde paso 11): A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas ['Riryoku']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 13 (desde paso 12): RIGHT w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 3, fila 2 (mis monstruos), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas ['Riryoku']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 14 (desde paso 13): A w60 f w60 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 850, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1850, DEF 1200)'] | magias y trampas []
+    cementerio ['Riryoku'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 15 (desde paso 14): w180 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 850, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1850, DEF 1200)'] | magias y trampas []
+    cementerio ['Riryoku'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 16 (desde paso 15): cursor:2,2 | w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 850, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1850, DEF 1200)'] | magias y trampas []
+    cementerio ['Riryoku'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 17 (desde paso 16): RIGHT w40 f
+LP: yo 8000 | rival 8000
+cursor: columna 3, fila 2 (mis monstruos), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 850, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1850, DEF 1200)'] | magias y trampas []
+    cementerio ['Riryoku'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 18 (desde paso 17): B w50 f
+LP: yo 8000 | rival 8000
+cursor: columna 3, fila 2 (mis monstruos), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 850, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1850, DEF 1200)'] | magias y trampas []
+    cementerio ['Riryoku'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 19 (desde paso 18): DOWN w30 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 2 | carta bajo el cursor: Riryoku | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 850, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1850, DEF 1200)'] | magias y trampas []
+    cementerio ['Riryoku'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 20 (desde paso 19): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 1 (mis magias y trampas), indice en la mano 2 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Inferno', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)', 'The Thing in the Crater (ataque, ATK 1000, DEF 1200)'] | magias y trampas []
+    cementerio ['Riryoku'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon'] | retiradas [] | mazo 40
+

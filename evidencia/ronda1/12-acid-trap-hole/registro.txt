@@ -1,0 +1,130 @@
+paso 0 (desde estado estados/revisar/12-acid-trap-hole.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Acid Trap Hole', 'Inferno', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Tongyo', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Darkfire Soldier #2 | A w50 DOWN A w240 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 3 | carta bajo el cursor: Darkfire Soldier #2 | evento 0x0
+yo: mano ['Acid Trap Hole', 'Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Tongyo', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): mano:Acid Trap Hole | A w50 UP A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Acid Trap Hole | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Tongyo', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): B w50 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Acid Trap Hole | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Tongyo', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 4 (desde paso 3): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Tongyo', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 5 (desde paso 4): A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Tongyo | evento 0x9
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 6 (desde paso 5): w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Tongyo | evento 0x9
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 7 (desde paso 6): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Tongyo | evento 0x9
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 8 (desde paso 7): w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Tongyo | evento 0x9
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 9 (desde paso 8): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Tongyo | evento 0x9
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 10 (desde paso 9): w300 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Tongyo | evento 0x9
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 11 (desde paso 10): A w120 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Tongyo | evento 0x9
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 12 (desde paso 11): B w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 0 | carta bajo el cursor: Tongyo | evento 0x9
+yo: mano ['Inferno', 'Upstart Goblin', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Darkfire Soldier #2 (ataque, ATK 1700, DEF 1100)'] | magias y trampas ['Acid Trap Hole']
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (boca abajo, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+

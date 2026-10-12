@@ -1,0 +1,607 @@
+mazo,offset_renglon,id_konami,nombre,copias
+1,17DFFA4,4790,Cyber-Tech Alligator,1
+1,17DFFAC,5349,Luster Dragon,1
+1,17DFFB4,5644,Luster Dragon,3
+1,17DFFBC,6310,Elemental Hero Avian,2
+1,17DFFC4,6311,Elemental Hero Burstinatrix,2
+1,17DFFCC,6312,Elemental Hero Clayman,2
+1,17DFFD4,6313,Elemental Hero Sparkman,2
+1,17DFFDC,4913,Cyber Jar,1
+1,17DFFE4,5334,Spear Dragon,3
+1,17DFFEC,5353,Kaiser Glider,1
+1,17DFFF4,6314,Winged Kuriboh,1
+1,17DFFFC,6393,Elemental Hero Bubbleman,1
+1,17E0004,6406,Winged Kuriboh LV10,1
+1,17E000C,5502,F.G.D.,2
+1,17E0014,6344,Elemental Hero Flame Wingman,2
+1,17E001C,6345,Elemental Hero Thunder Giant,2
+1,17E0024,6467,Elemental Hero Shining Flare Wingman,1
+1,17E002C,4837,Polymerization,1
+1,17E0034,5212,United We Stand,1
+1,17E003C,5213,Mage Power,1
+1,17E0044,6138,Fusion Weapon,2
+1,17E004C,6213,Monster Reincarnation,1
+1,17E0054,6399,Skyscraper,1
+1,17E005C,6407,Transcendent Wings,1
+1,17E0064,6432,Miracle Fusion,1
+1,17E006C,6433,Dragon's Mirror,1
+1,17E0074,4804,Negate Attack,1
+1,17E007C,5915,A Hero Emerges,1
+1,17E0084,6356,Hero Signal,1
+2,17E008C,6174,Bokoichi the Freightening Car,3
+2,17E0094,6175,Harpie Girl,1
+2,17E009C,6383,Cycroid,1
+2,17E00A4,6199,Big Core,1
+2,17E00AC,6201,Dekoichi the Battlechanted Locomotive,3
+2,17E00B4,6202,A-Team: Trap Disposal Unit,1
+2,17E00BC,6384,Patroid,1
+2,17E00C4,6385,Gyroid,2
+2,17E00CC,6386,Steamroid,2
+2,17E00D4,6387,Drillroid,1
+2,17E00DC,6388,UFOroid,2
+2,17E00E4,6345,Elemental Hero Thunder Giant,1
+2,17E00EC,6394,Steam Gyroid,1
+2,17E00F4,4317,Black Pendant,3
+2,17E00FC,4837,Polymerization,1
+2,17E0104,4872,Fusion Sage,1
+2,17E010C,4909,Mystical Space Typhoon,1
+2,17E0114,5129,Limiter Removal,2
+2,17E011C,5276,Fusion Gate,1
+2,17E0124,6003,Shield Crash,1
+2,17E012C,6138,Fusion Weapon,1
+2,17E0134,4804,Negate Attack,1
+3,17E013C,4207,Frenzied Panda,2
+3,17E0144,5814,Big Koala,3
+3,17E014C,4922,Nimble Momonga,3
+3,17E0154,5661,Des Koala,3
+3,17E015C,5713,Gyaku-Gire Panda,2
+3,17E0164,5815,Des Kangaroo,3
+3,17E016C,6242,Maji-Gire Panda,2
+3,17E0174,6246,Kangaroo Champ,3
+3,17E017C,6247,Hyena,3
+3,17E0184,6340,Des Wombat,3
+3,17E018C,6127,Master of Oz,2
+3,17E0194,4314,Beast Fangs,2
+3,17E019C,4348,Dian Keto the Cure Master,1
+3,17E01A4,4837,Polymerization,1
+3,17E01AC,4872,Fusion Sage,1
+3,17E01B4,4932,Gaia Power,1
+3,17E01BC,5276,Fusion Gate,1
+3,17E01C4,6267,Poison Fangs,2
+4,17E01CC,4743,Hyozanryu,2
+4,17E01D4,4744,Alpha The Magnet Warrior,3
+4,17E01DC,4763,Beta The Magnet Warrior,3
+4,17E01E4,4792,Gamma The Magnet Warrior,3
+4,17E01EC,5004,Vorse Raider,3
+4,17E01F4,5349,Luster Dragon,2
+4,17E01FC,4054,Sangan,1
+4,17E0204,4568,Needle Worm,2
+4,17E020C,4580,Witch of the Black Forest,1
+4,17E0214,4608,Penguin Soldier,2
+4,17E021C,5002,Valkyrion the Magna Warrior,1
+4,17E0224,5975,White Magician Pikeru,1
+4,17E022C,4354,Swords of Revealing Light,1
+4,17E0234,6129,Dark Factory of Mass Production,1
+4,17E023C,4804,Negate Attack,1
+4,17E0244,4836,Trap Hole,3
+4,17E024C,4953,Backup Soldier,1
+4,17E0254,5005,Ring of Destruction,1
+5,17E025C,4786,Dunames Dark Witch,3
+5,17E0264,5947,Warrior of Zera,1
+5,17E026C,5205,Hysteric Fairy,3
+5,17E0274,5207,The Forgiving Maiden,1
+5,17E027C,5209,Marie the Fallen One,1
+5,17E0284,5251,Soul of Purity and Light,3
+5,17E028C,5356,Mudora,1
+5,17E0294,5361,Kelbek,1
+5,17E029C,5363,Zolga,1
+5,17E02A4,5366,Agido,1
+5,17E02AC,5767,Outstanding Dog Marron,1
+5,17E02B4,5899,Guardian Angel Joan,1
+5,17E02BC,5900,Manju of the Ten Thousand Hands,1
+5,17E02C4,5976,Archlord Zerato,1
+5,17E02CC,6034,Absorbing Kid from the Sky,1
+5,17E02D4,5697,"Shinato, King of a Higher Plane",1
+5,17E02DC,5208,St. Joan,1
+5,17E02E4,4837,Polymerization,1
+5,17E02EC,5212,United We Stand,1
+5,17E02F4,5213,Mage Power,1
+5,17E02FC,5357,Cestus of Dagla,1
+5,17E0304,5669,Big Bang Shot,1
+5,17E030C,5721,Shinato's Ark,1
+5,17E0314,5982,The Sanctuary in the Sky,2
+5,17E031C,4946,Numinous Healer,3
+5,17E0324,4992,Enchanted Javelin,1
+5,17E032C,5991,Solar Ray,1
+6,17E0334,4104,Clown Zombie,2
+6,17E033C,5506,Master Kyonshee,3
+6,17E0344,5871,Giga Gagagigo,2
+6,17E034C,5771,Mefist the Infernal General,2
+6,17E0354,5584,Decayed Commander,1
+6,17E035C,5585,Zombie Tiger,1
+6,17E0364,5484,Newdoria,2
+6,17E036C,4374,Shadow Ghoul,2
+6,17E0374,6289,Blood Sucker,1
+6,17E037C,5453,Legendary Fiend,1
+6,17E0384,4342,Dark Hole,1
+6,17E038C,4343,Raigeki,1
+6,17E0394,4354,Swords of Revealing Light,1
+6,17E039C,4860,Change of Heart,1
+6,17E03A4,4898,Snatch Steal,1
+6,17E03AC,4842,Monster Reborn,1
+6,17E03B4,6129,Dark Factory of Mass Production,2
+6,17E03BC,4937,Mystic Plasma Zone,2
+6,17E03C4,5920,Robbin' Zombie,3
+6,17E03CC,4836,Trap Hole,1
+6,17E03D4,4862,Magic Jammer,1
+6,17E03DC,4863,Seven Tools of the Bandit,1
+6,17E03E4,5490,Hidden Soldier,2
+7,17E03EC,4421,Mechanicalchaser,3
+7,17E03F4,5702,Battle Footballer,3
+7,17E03FC,4413,Machine King,1
+7,17E0404,4426,Cyber-Stein,1
+7,17E040C,4749,Barrel Dragon,1
+7,17E0414,4762,Reflect Bounder,1
+7,17E041C,4913,Cyber Jar,1
+7,17E0424,5245,Zombyra the Dark,1
+7,17E042C,5835,Black Luster Soldier - Envoy of the Beginning,1
+7,17E0434,5898,Mataza the Zapper,2
+7,17E043C,5964,Blowback Dragon,1
+7,17E0444,6385,Gyroid,1
+7,17E044C,6386,Steamroid,1
+7,17E0454,6388,UFOroid,1
+7,17E045C,6390,Cyber Dragon,3
+7,17E0464,4370,Black Luster Soldier,1
+7,17E046C,6264,Gatling Dragon,1
+7,17E0474,6395,UFOroid Fighter,1
+7,17E047C,6396,Cyber Twin Dragon,2
+7,17E0484,6397,Cyber End Dragon,1
+7,17E048C,4354,Swords of Revealing Light,1
+7,17E0494,4676,Black Luster Ritual,1
+7,17E049C,4837,Polymerization,1
+7,17E04A4,5129,Limiter Removal,2
+7,17E04AC,5276,Fusion Gate,1
+7,17E04B4,6433,Dragon's Mirror,2
+7,17E04BC,6398,Power Bond,2
+7,17E04C4,5005,Ring of Destruction,1
+7,17E04CC,5113,Fairy Box,1
+8,17E04D4,5027,Robotic Knight,1
+8,17E04DC,6173,Mighty Guard,1
+8,17E04E4,6235,Insect Knight,3
+8,17E04EC,4413,Machine King,2
+8,17E04F4,6151,Green Gadget,1
+8,17E04FC,6155,Red Gadget,1
+8,17E0504,6156,Yellow Gadget,1
+8,17E050C,6199,Big Core,1
+8,17E0514,6315,Ancient Gear Golem,1
+8,17E051C,6316,Ancient Gear Beast,1
+8,17E0524,6317,Ancient Gear Soldier,3
+8,17E052C,6385,Gyroid,1
+8,17E0534,6386,Steamroid,1
+8,17E053C,6418,Goblin Elite Attack Force,3
+8,17E0544,6394,Steam Gyroid,1
+8,17E054C,5129,Limiter Removal,2
+8,17E0554,6398,Power Bond,3
+8,17E055C,4862,Magic Jammer,1
+8,17E0564,4863,Seven Tools of the Bandit,1
+8,17E056C,5113,Fairy Box,1
+8,17E0574,5440,Bottomless Shifting Sand,3
+8,17E057C,6153,Red Gadget - Stronghold,2
+9,17E0584,4013,"Winged Dragon,Guardian of the Fortress #1",1
+9,17E058C,4016,Blackland Fire Dragon,1
+9,17E0594,4032,Battle Ox,1
+9,17E059C,4044,Gaia The Fierce Knight,1
+9,17E05A4,4045,Curse of Dragon,1
+9,17E05AC,4219,Aqua Madoor,1
+9,17E05B4,4609,Fairy Dragon,1
+9,17E05BC,5872,Mad Dog of Darkness,1
+9,17E05C4,4434,Magician of Faith,2
+9,17E05CC,4507,Man-Eater Bug,2
+9,17E05D4,4547,Hane-Hane,2
+9,17E05DC,4608,Penguin Soldier,2
+9,17E05E4,4043,Gaia the Dragon Champion,2
+9,17E05EC,4433,Kaiser Dragon,2
+9,17E05F4,4310,Axe of Despair,1
+9,17E05FC,4317,Black Pendant,2
+9,17E0604,4837,Polymerization,3
+9,17E060C,4804,Negate Attack,3
+9,17E0614,4836,Trap Hole,3
+9,17E061C,4862,Magic Jammer,3
+9,17E0624,4863,Seven Tools of the Bandit,3
+10,17E062C,4587,Takuhee,3
+10,17E0634,5643,Sonic Duck,2
+10,17E063C,6175,Harpie Girl,3
+10,17E0644,4069,Harpie Lady Sisters,3
+10,17E064C,4392,Harpie's Pet Dragon,2
+10,17E0654,5021,Birdface,2
+10,17E065C,5255,Garuda the Wind Spirit,1
+10,17E0664,6184,Roc from the Valley of Haze,1
+10,17E066C,6186,Harpie Lady 1,1
+10,17E0674,6187,Harpie Lady 2,1
+10,17E067C,6188,Harpie Lady 3,1
+10,17E0684,6191,Eagle Eye,2
+10,17E068C,4323,Cyber Shield,2
+10,17E0694,4324,Elegant Egotist,3
+10,17E069C,6207,Harpies' Hunting Ground,3
+10,17E06A4,4804,Negate Attack,2
+11,17E06AC,5140,Gradius,3
+11,17E06B4,6232,Space Mambo,3
+11,17E06BC,5642,Aitsu,3
+11,17E06C4,6411,Soitsu,3
+11,17E06CC,6323,Moai Interceptor Cannons,2
+11,17E06D4,5372,Gradius' Option,3
+11,17E06DC,6202,A-Team: Trap Disposal Unit,2
+11,17E06E4,4608,Penguin Soldier,3
+11,17E06EC,5901,Getsu Fuhma,2
+11,17E06F4,4168,Tainted Wisdom,2
+11,17E06FC,5270,Cyclon Laser,3
+12,17E0704,4240,Beautiful Headhuntress,2
+12,17E070C,4655,Hibikime,2
+12,17E0714,5503,Queen's Knight,3
+12,17E071C,4272,Princess of Tsurugi,1
+12,17E0724,4641,Queen's Double,1
+12,17E072C,5194,The Unfriendly Amazon,2
+12,17E0734,5195,Amazon Archer,2
+12,17E073C,5284,Amazoness Swords Woman,3
+12,17E0744,5295,Amazoness Fighter,2
+12,17E074C,5318,Marauding Captain,1
+12,17E0754,5645,Amazoness Paladin,2
+12,17E075C,5972,Lady Ninja Yae,1
+12,17E0764,6125,Penumbral Soldier Lady,2
+12,17E076C,6457,Wasteland Amazon,3
+12,17E0774,4307,Legendary Sword,2
+12,17E077C,4339,Sogen,3
+12,17E0784,5110,Lightning Blade,3
+12,17E078C,5328,Reinforcement of the Army,2
+12,17E0794,5330,The Warrior Returning Alive,2
+12,17E079C,5538,Banner of Courage,2
+12,17E07A4,4836,Trap Hole,2
+12,17E07AC,5616,Thunder of Ruler,1
+12,17E07B4,6223,Chain Burst,3
+13,17E07BC,4041,Dark Magician,1
+13,17E07C4,4881,Neo the Magic Swordsman,1
+13,17E07CC,4980,Harpie's Brother,1
+13,17E07D4,5948,Sealmaster Meisei,1
+13,17E07DC,4262,Dimensional Warrior,1
+13,17E07E4,5024,Fairy King Truesdale,1
+13,17E07EC,5244,Obnoxious Celtic Guard,1
+13,17E07F4,5756,Dark Magician Knight,1
+13,17E07FC,5901,Getsu Fuhma,1
+13,17E0804,6031,Sand Gambler,1
+13,17E080C,6192,Tactical Espionage Expert,1
+13,17E0814,4830,Dark Magic Curtain,1
+13,17E081C,5757,Knight's Title,1
+14,17E0824,5641,Great Angus,3
+14,17E082C,5760,D. D. Trainer,3
+14,17E0834,6096,Goblin Calligrapher,3
+14,17E083C,4568,Needle Worm,2
+14,17E0844,4580,Witch of the Black Forest,1
+14,17E084C,5142,Mad Sword Beast,2
+14,17E0854,5145,Goblin Attack Force,3
+14,17E085C,5586,Giant Orc,3
+14,17E0864,5771,Mefist the Infernal General,2
+14,17E086C,6125,Penumbral Soldier Lady,1
+14,17E0874,6418,Goblin Elite Attack Force,3
+14,17E087C,4804,Negate Attack,1
+14,17E0884,4876,Robbin' Goblin,3
+14,17E088C,4949,Minor Goblin Official,1
+14,17E0894,5492,Coffin Seller,2
+14,17E089C,5920,Robbin' Zombie,2
+15,17E08A4,4032,Battle Ox,3
+15,17E08AC,5760,D. D. Trainer,3
+15,17E08B4,6096,Goblin Calligrapher,3
+15,17E08BC,4580,Witch of the Black Forest,2
+15,17E08C4,5142,Mad Sword Beast,2
+15,17E08CC,5145,Goblin Attack Force,3
+15,17E08D4,5201,Dancing Fairy,1
+15,17E08DC,5586,Giant Orc,3
+15,17E08E4,6043,Man-Thro' Tro',2
+15,17E08EC,6239,Granmarg the Rock Monarch,1
+15,17E08F4,6418,Goblin Elite Attack Force,3
+15,17E08FC,4346,Goblin's Secret Remedy,1
+15,17E0904,4895,Upstart Goblin,2
+15,17E090C,4932,Gaia Power,2
+15,17E0914,5128,Fairy Meteor Crush,2
+15,17E091C,5538,Banner of Courage,2
+15,17E0924,5669,Big Bang Shot,2
+15,17E092C,5985,Goblin Thief,2
+15,17E0934,4836,Trap Hole,1
+15,17E093C,4862,Magic Jammer,2
+15,17E0944,4863,Seven Tools of the Bandit,2
+16,17E094C,4044,Gaia The Fierce Knight,1
+16,17E0954,4008,Mystical Elf,1
+16,17E095C,4028,Summoned Skull,2
+16,17E0964,4032,Battle Ox,1
+16,17E096C,4088,Red-Eyes B. Dragon,2
+16,17E0974,4084,Axe Raider,1
+16,17E097C,4106,Battle Warrior,1
+16,17E0984,4010,Baby Dragon,3
+16,17E098C,5004,Vorse Raider,1
+16,17E0994,4767,Alligator's Sword,2
+16,17E099C,5244,Obnoxious Celtic Guard,2
+16,17E09A4,5059,Gearfried the Iron Knight,2
+16,17E09AC,4795,Copycat,2
+16,17E09B4,6109,Red-Eyes B. Chick,2
+16,17E09BC,5972,Lady Ninja Yae,1
+16,17E09C4,6292,Red-Eyes Darkness Dragon,1
+16,17E09CC,5003,Alligator's Sword Dragon,2
+16,17E09D4,4223,B. Skull Dragon,2
+16,17E09DC,4815,Graceful Dice,2
+16,17E09E4,4818,Scapegoat,2
+16,17E09EC,4837,Polymerization,3
+16,17E09F4,4816,Skull Dice,3
+16,17E09FC,5005,Ring of Destruction,2
+16,17E0A04,5113,Fairy Box,2
+17,17E0A0C,4731,Red Archery Girl,3
+17,17E0A14,4042,The Snake Hair,1
+17,17E0A1C,5309,Opticlops,2
+17,17E0A24,5320,Warrior Dai Grepher,2
+17,17E0A2C,6096,Goblin Calligrapher,3
+17,17E0A34,4120,White Magical Hat,1
+17,17E0A3C,6426,Poison Draw Frog,3
+17,17E0A44,4546,Skelengel,2
+17,17E0A4C,4522,Muka Muka,3
+17,17E0A54,6123,Enraged Muka Muka,2
+17,17E0A5C,5023,Airknight Parshath,2
+17,17E0A64,4054,Sangan,2
+17,17E0A6C,4580,Witch of the Black Forest,2
+17,17E0A74,6128,Sanwitch,2
+17,17E0A7C,4895,Upstart Goblin,2
+17,17E0A84,4837,Polymerization,2
+17,17E0A8C,5125,Solemn Wishes,2
+17,17E0A94,5210,Jar of Greed,3
+17,17E0A9C,5448,Reckless Greed,2
+18,17E0AA4,5226,Earthbound Spirit,2
+18,17E0AAC,5229,The Earl of Demise,2
+18,17E0AB4,5219,The Portrait's Secret,1
+18,17E0ABC,5220,The Gross Ghost of Fled Dreams,2
+18,17E0AC4,5221,Headless Knight,2
+18,17E0ACC,5149,Souls of the Forgotten,2
+18,17E0AD4,5150,Dokuroyaiba,1
+18,17E0ADC,5506,Master Kyonshee,3
+18,17E0AE4,4562,The Wandering Doomed,2
+18,17E0AEC,4209,Phantom Ghost,1
+18,17E0AF4,4008,Mystical Elf,1
+18,17E0AFC,6037,Spirit Caller,1
+18,17E0B04,4758,Jinzo,2
+18,17E0B0C,6025,Theban Nightmare,2
+18,17E0B14,6026,Aswan Apparition,2
+18,17E0B1C,5653,Magical Marionette,2
+18,17E0B24,5225,The Dark Door,1
+18,17E0B2C,4965,The Shallow Grave,2
+18,17E0B34,4836,Trap Hole,2
+18,17E0B3C,4862,Magic Jammer,1
+18,17E0B44,4863,Seven Tools of the Bandit,1
+19,17E0B4C,4436,Water Magician,1
+19,17E0B54,4439,Ancient Elf,1
+19,17E0B5C,4538,Gemini Elf,2
+19,17E0B64,4714,Cosmo Queen,1
+19,17E0B6C,4786,Dunames Dark Witch,2
+19,17E0B74,6175,Harpie Girl,2
+19,17E0B7C,4557,Dark Elf,1
+19,17E0B84,4734,Toon Mermaid,1
+19,17E0B8C,4766,Dark Magician Girl,1
+19,17E0B94,4875,The Unhappy Maiden,1
+19,17E0B9C,5026,Maiden of the Aqua,1
+19,17E0BA4,5201,Dancing Fairy,1
+19,17E0BAC,5450,Toon Dark Magician Girl,1
+19,17E0BB4,5476,Toon Gemini Elf,2
+19,17E0BBC,5975,White Magician Pikeru,1
+19,17E0BC4,6390,Cyber Dragon,1
+19,17E0BCC,6429,Ebon Magician Curran,1
+19,17E0BD4,4327,Malevolent Nuzzler,1
+19,17E0BDC,4798,Toon World,1
+19,17E0BE4,5904,Stray Lambs,2
+19,17E0BEC,4816,Skull Dice,2
+19,17E0BF4,5135,Shadow of Eyes,1
+20,17E0BFC,4436,Water Magician,1
+20,17E0C04,4439,Ancient Elf,1
+20,17E0C0C,4538,Gemini Elf,2
+20,17E0C14,4714,Cosmo Queen,1
+20,17E0C1C,4786,Dunames Dark Witch,2
+20,17E0C24,6175,Harpie Girl,2
+20,17E0C2C,4557,Dark Elf,1
+20,17E0C34,4734,Toon Mermaid,1
+20,17E0C3C,4766,Dark Magician Girl,1
+20,17E0C44,4875,The Unhappy Maiden,1
+20,17E0C4C,5026,Maiden of the Aqua,1
+20,17E0C54,5201,Dancing Fairy,1
+20,17E0C5C,5450,Toon Dark Magician Girl,1
+20,17E0C64,5476,Toon Gemini Elf,2
+20,17E0C6C,5975,White Magician Pikeru,1
+20,17E0C74,6390,Cyber Dragon,1
+20,17E0C7C,6429,Ebon Magician Curran,1
+20,17E0C84,4327,Malevolent Nuzzler,1
+20,17E0C8C,4798,Toon World,1
+20,17E0C94,5904,Stray Lambs,2
+20,17E0C9C,4816,Skull Dice,2
+20,17E0CA4,5135,Shadow of Eyes,1
+21,17E0CAC,4019,Tyhone,1
+21,17E0CB4,4074,Garoozis,1
+21,17E0CBC,4107,Wings of Wicked Flame,1
+21,17E0CC4,4157,Rhaimundos of the Red Sword,1
+21,17E0CCC,4166,M-Warrior #1,1
+21,17E0CD4,4167,M-Warrior #2,1
+21,17E0CDC,4178,Armaill,1
+21,17E0CE4,4181,Ancient Brain,1
+21,17E0CEC,4203,Mech Mole Zombie,1
+21,17E0CF4,4402,Ocubeam,1
+21,17E0CFC,4445,Bottom Dweller,1
+21,17E0D04,4480,Sea Kamen,1
+21,17E0D0C,4544,Niwatori,1
+21,17E0D14,4549,Tongyo,1
+21,17E0D1C,4556,Behegon,1
+21,17E0D24,4652,Gruesome Goo,1
+21,17E0D2C,6457,Wasteland Amazon,1
+21,17E0D34,4018,Swamp Battleguard,1
+21,17E0D3C,4560,Lava Battleguard,1
+21,17E0D44,4049,Karbonala Warrior,1
+21,17E0D4C,4443,Deepsea Shark,1
+21,17E0D54,4344,Mooyan Curry,1
+21,17E0D5C,4700,Resurrection of Chakra,1
+21,17E0D64,4683,Hamburger Recipe,1
+21,17E0D6C,5784,Contract with the Abyss,1
+21,17E0D74,4837,Polymerization,2
+21,17E0D7C,4687,House of Adhesive Tape,1
+21,17E0D84,4688,Eatgaboon,1
+21,17E0D8C,4692,Widespread Ruin,1
+21,17E0D94,4708,Hungry Burger,1
+21,17E0D9C,4715,Chakra,1
+22,17E0DA4,5226,Earthbound Spirit,2
+22,17E0DAC,5229,The Earl of Demise,2
+22,17E0DB4,5219,The Portrait's Secret,1
+22,17E0DBC,5220,The Gross Ghost of Fled Dreams,2
+22,17E0DC4,5221,Headless Knight,2
+22,17E0DCC,5149,Souls of the Forgotten,2
+22,17E0DD4,5150,Dokuroyaiba,1
+22,17E0DDC,5506,Master Kyonshee,3
+22,17E0DE4,4562,The Wandering Doomed,2
+22,17E0DEC,4209,Phantom Ghost,1
+22,17E0DF4,4008,Mystical Elf,1
+22,17E0DFC,6037,Spirit Caller,1
+22,17E0E04,4758,Jinzo,2
+22,17E0E0C,6025,Theban Nightmare,2
+22,17E0E14,6026,Aswan Apparition,2
+22,17E0E1C,5653,Magical Marionette,2
+22,17E0E24,5225,The Dark Door,1
+22,17E0E2C,4965,The Shallow Grave,2
+22,17E0E34,4836,Trap Hole,2
+22,17E0E3C,4862,Magic Jammer,1
+22,17E0E44,4863,Seven Tools of the Bandit,1
+23,17E0E4C,5579,Oppressed People,2
+23,17E0E54,5702,Battle Footballer,3
+23,17E0E5C,5146,Island Turtle,2
+23,17E0E64,5031,Injection Fairy Lily,2
+23,17E0E6C,4754,Stone Statue of the Aztecs,2
+23,17E0E74,4742,Blast Sphere,2
+23,17E0E7C,5886,Balloon Lizard,2
+23,17E0E84,5966,Atomic Firefly,2
+23,17E0E8C,5525,Cobra Jar,1
+23,17E0E94,6000,Marshmallon,1
+23,17E0E9C,4921,Giant Germ,3
+23,17E0EA4,6327,Mine Golem,3
+23,17E0EAC,5126,Burning Land,3
+23,17E0EB4,5161,Yellow Luster Shield,1
+23,17E0EBC,5531,Dark Room of Nightmare,2
+23,17E0EC4,5536,Dark Snake Syndrome,1
+23,17E0ECC,4954,Attack and Receive,2
+23,17E0ED4,5994,Draining Shield,3
+23,17E0EDC,6358,Minefield Eruption,1
+24,17E0EE4,5508,Inpachi,3
+24,17E0EEC,5876,Blazing Inpachi,3
+24,17E0EF4,6093,Charcoal Inpachi,3
+24,17E0EFC,6172,Woodborg Inpachi,3
+24,17E0F04,6020,Kozaky,3
+24,17E0F0C,5641,Great Angus,2
+24,17E0F14,5027,Robotic Knight,2
+24,17E0F1C,6420,Giant Kozaky,3
+24,17E0F24,6111,Ninja Grandmaster Sasuke,2
+24,17E0F2C,5594,Spell Canceller,1
+24,17E0F34,5361,Kelbek,2
+24,17E0F3C,5031,Injection Fairy Lily,1
+24,17E0F44,4934,Molten Destruction,2
+24,17E0F4C,4317,Black Pendant,2
+24,17E0F54,4310,Axe of Despair,1
+24,17E0F5C,6359,Kozaky's Self-Destruct Button,2
+24,17E0F64,5986,Backfire,2
+24,17E0F6C,5549,Non Aggression Area,2
+25,17E0F74,4030,Skull Servant,3
+25,17E0F7C,4028,Summoned Skull,1
+25,17E0F84,4789,Beast of Talwar,1
+25,17E0F8C,5762,Archfiend Soldier,2
+25,17E0F94,4884,Sorcerer of the Doomed,2
+25,17E0F9C,5581,Dark Blade,2
+25,17E0FA4,6341,King of the Skull Servants,3
+25,17E0FAC,5303,Lesser Fiend,1
+25,17E0FB4,4529,The Bistro Butcher,2
+25,17E0FBC,6253,Shadowslayer,1
+25,17E0FC4,4108,Mask of Darkness,1
+25,17E0FCC,4294,Dark Artist,1
+25,17E0FD4,6085,Peten the Dark Clown,1
+25,17E0FDC,5582,Pitch-Dark Dragon,2
+25,17E0FE4,6204,Dark Blade the Dragon Knight,1
+25,17E0FEC,4310,Axe of Despair,1
+25,17E0FF4,4327,Malevolent Nuzzler,1
+25,17E0FFC,4341,Yami,1
+25,17E1004,4309,Dark Energy,1
+25,17E100C,6129,Dark Factory of Mass Production,2
+25,17E1014,4937,Mystic Plasma Zone,1
+25,17E101C,4816,Skull Dice,2
+25,17E1024,5490,Hidden Soldier,1
+25,17E102C,5858,Dark Mirror Force,2
+26,17E1034,5760,D. D. Trainer,3
+26,17E103C,6096,Goblin Calligrapher,3
+26,17E1044,4032,Battle Ox,3
+26,17E104C,5145,Goblin Attack Force,3
+26,17E1054,6418,Goblin Elite Attack Force,3
+26,17E105C,5586,Giant Orc,3
+26,17E1064,4580,Witch of the Black Forest,2
+26,17E106C,5142,Mad Sword Beast,2
+26,17E1074,6043,Man-Thro' Tro',2
+26,17E107C,6239,Granmarg the Rock Monarch,1
+26,17E1084,5201,Dancing Fairy,1
+26,17E108C,4346,Goblin's Secret Remedy,1
+26,17E1094,4895,Upstart Goblin,2
+26,17E109C,5985,Goblin Thief,2
+26,17E10A4,5538,Banner of Courage,2
+26,17E10AC,5128,Fairy Meteor Crush,2
+26,17E10B4,5669,Big Bang Shot,2
+26,17E10BC,4932,Gaia Power,2
+26,17E10C4,4836,Trap Hole,1
+26,17E10CC,4862,Magic Jammer,2
+26,17E10D4,4863,Seven Tools of the Bandit,2
+31,17E10DC,4007,Blue-Eyes White Dragon,3
+31,17E10E4,4385,La Jinn the Mystical Genie of the Lamp,3
+31,17E10EC,5004,Vorse Raider,3
+31,17E10F4,5336,The Dragon dwelling in the Cave,3
+31,17E10FC,5349,Luster Dragon,2
+31,17E1104,4426,Cyber-Stein,3
+31,17E110C,5334,Spear Dragon,2
+31,17E1114,4386,Blue-Eyes Ultimate Dragon,3
+31,17E111C,5502,F.G.D.,3
+31,17E1124,4321,Dragon Treasure,2
+31,17E112C,4663,Megamorph,2
+31,17E1134,5007,Sebek's Blessing,3
+31,17E113C,5979,Burst Stream of Destruction,2
+31,17E1144,6433,Dragon's Mirror,2
+31,17E114C,5005,Ring of Destruction,2
+31,17E1154,5347,Dragon's Rage,1
+31,17E115C,5348,Burst Breath,1
+34,17E1164,5018,Wolf Axwielder,1
+34,17E116C,5872,Mad Dog of Darkness,1
+34,17E1174,6234,Chu-Ske the Mouse Fighter,1
+34,17E117C,6095,Skull Dog Marron,1
+34,17E1184,5144,The All-Seeing White Tiger,1
+34,17E118C,5813,Soul Tiger,1
+34,17E1194,4554,Bone Mouse,1
+34,17E119C,4071,Silver Fang,1
+34,17E11A4,4418,Giga-Tech Wolf,1
+34,17E11AC,4751,Panther Warrior,1
+34,17E11B4,5900,Manju of the Ten Thousand Hands,1
+34,17E11BC,6195,Pitch-Black Warwolf,1
+34,17E11C4,6249,Mecha-Dog Marron,1
+34,17E11CC,5767,Outstanding Dog Marron,1
+34,17E11D4,5769,Iron Blacksmith Kotetsu,1
+34,17E11DC,6416,Mechanical Hound,1
+34,17E11E4,5585,Zombie Tiger,1
+34,17E11EC,4915,Giant Rat,1
+34,17E11F4,6316,Ancient Gear Beast,1
+34,17E11FC,6267,Poison Fangs,1
+34,17E1204,6274,The Big March of Animals,1
+34,17E120C,4314,Beast Fangs,1
+34,17E1214,4818,Scapegoat,1
+34,17E121C,4320,Horn of the Unicorn,1
+35,17E1224,4922,Nimble Momonga,3
+35,17E122C,4946,Numinous Healer,3
+35,17E1234,4976,Kiseitai,3
+35,17E123C,5695,Granadora,3
+35,17E1244,4992,Enchanted Javelin,3
+35,17E124C,5197,Fire Princess,3
+35,17E1254,5207,The Forgiving Maiden,3
+35,17E125C,5209,Marie the Fallen One,3
+35,17E1264,5899,Guardian Angel Joan,3
+35,17E126C,4873,Sword of Deep-Seated,1
+35,17E1274,5669,Big Bang Shot,3
+35,17E127C,5357,Cestus of Dagla,2
+35,17E1284,5697,"Shinato, King of a Higher Plane",2
+35,17E128C,5721,Shinato's Ark,2

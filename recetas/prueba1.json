@@ -1,0 +1,62 @@
+{
+  "historica": true,
+  "nota": "Primera prueba: cuatro monstruos recortados, restaurados sobre monstruos Normales vecinos. Receta historica: usa huecos anteriores al registro (datos/huecos.csv) y no se comprueba contra el.",
+  "cartas": [
+    {
+      "hueco": 524,
+      "hueco_nombre": "Boneheimer",
+      "id_konami": 5044,
+      "nombre": "Rigorous Reaver",
+      "atk": 1600,
+      "def": 100,
+      "nivel": 3,
+      "atributo": "FIRE",
+      "tipo": "Plant",
+      "clase": "Effect",
+      "contrasena": "39180960",
+      "descripcion": "FLIP: Both players discard 1 card from their hands. A monster that destroys this card in battle loses 500 ATK and DEF."
+    },
+    {
+      "hueco": 520,
+      "hueco_nombre": "Souleater",
+      "id_konami": 5035,
+      "nombre": "Jowls of Dark Demise",
+      "atk": 200,
+      "def": 100,
+      "nivel": 2,
+      "atributo": "WATER",
+      "tipo": "Fiend",
+      "clase": "Effect",
+      "contrasena": "05257687",
+      "descripcion": "FLIP: Take control of 1 face-up monster on your opponent's side of the field until the end of this turn. That monster cannot attack your opponent's Life Points directly."
+    },
+    {
+      "hueco": 522,
+      "hueco_nombre": "Shapesnatch",
+      "id_konami": 5040,
+      "nombre": "Electromagnetic Bagworm",
+      "atk": 200,
+      "def": 1400,
+      "nivel": 3,
+      "atributo": "LIGHT",
+      "tipo": "Insect",
+      "clase": "Effect",
+      "contrasena": "07914843",
+      "descripcion": "FLIP: Take control of 1 face-up Machine-Type monster on your opponent's side of the field until the end of your next turn. A Machine-Type monster that destroys this card in battle loses 500 ATK and DEF."
+    },
+    {
+      "hueco": 600,
+      "hueco_nombre": "Headless Knight",
+      "id_konami": 5222,
+      "nombre": "Dark Necrofear",
+      "atk": 2200,
+      "def": 2800,
+      "nivel": 8,
+      "atributo": "DARK",
+      "tipo": "Fiend",
+      "clase": "Effect",
+      "contrasena": "31829185",
+      "descripcion": "This card cannot be Normal Summoned or Set. It can only be Special Summoned by removing 3 Fiend-Type monsters in your Graveyard from play. When this card is destroyed in battle or by your opponent's card effect, at the end of that turn equip it to 1 of your opponent's monsters and take control of that monster."
+    }
+  ]
+}

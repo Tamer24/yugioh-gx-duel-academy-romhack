@@ -1,0 +1,20 @@
+paso 1 (desde paso 0): A w60 f UP*2 f A w60 f w180 f
+LP: yo 7400 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Lady Panther | evento 0x0
+yo: mano ['Meteor Dragon', 'Salamandra', 'Twin-Headed Fire Dragon', 'Monster Reincarnation', 'Charcoal Inpachi']
+    monstruos [] | magias y trampas []
+    cementerio ['Lady Panther', 'Needle Worm'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (ataque, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 47
+
+paso 2 (desde paso 1): A w90 f A w60 f A w60 f RIGHT*3 f A w90 f w240
+LP: yo 7400 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Needle Worm | evento 0x0
+yo: mano ['Meteor Dragon', 'Salamandra', 'Twin-Headed Fire Dragon', 'Monster Reincarnation', 'Charcoal Inpachi']
+    monstruos [] | magias y trampas []
+    cementerio ['Lady Panther'] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Tongyo (ataque, ATK 1350, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 47
+

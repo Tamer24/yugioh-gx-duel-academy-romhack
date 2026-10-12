@@ -1,0 +1,79 @@
+{
+ "nota": "Prueba 3: solo cartas comprobadas en duelo, mas los dos parches de codigo.",
+ "parches": {
+  "busqueda_ids": true,
+  "invocacion_tipo": [
+   {
+    "id_konami": 5222,
+    "tipo": "Fiend",
+    "cantidad": 3
+   }
+  ]
+ },
+ "cartas": [
+  {
+   "hueco": 524,
+   "hueco_nombre": "Boneheimer",
+   "id_konami": 5044,
+   "nombre": "Rigorous Reaver",
+   "atk": 1600,
+   "def": 100,
+   "nivel": 3,
+   "atributo": "FIRE",
+   "tipo": "Plant",
+   "clase": "Effect",
+   "contrasena": "39180960",
+   "descripcion": "FLIP: Both players discard 1 card from their hands. A monster that destroys this card in battle loses 500 ATK and DEF."
+  },
+  {
+   "hueco": 520,
+   "hueco_nombre": "Souleater",
+   "id_konami": 5035,
+   "nombre": "Jowls of Dark Demise",
+   "atk": 200,
+   "def": 100,
+   "nivel": 2,
+   "atributo": "WATER",
+   "tipo": "Fiend",
+   "clase": "Effect",
+   "contrasena": "05257687",
+   "descripcion": "FLIP: Take control of 1 face-up monster on your opponent's side of the field until the end of this turn. That monster cannot attack your opponent's Life Points directly."
+  },
+  {
+   "hueco": 968,
+   "hueco_nombre": "Gigobyte",
+   "id_konami": 5222,
+   "nombre": "Dark Necrofear",
+   "atk": 2200,
+   "def": 2800,
+   "nivel": 8,
+   "atributo": "DARK",
+   "tipo": "Fiend",
+   "clase": "Effect",
+   "contrasena": "31829185",
+   "descripcion": "This card cannot be Normal Summoned or Set. It can only be Special Summoned by removing 3 Fiend-Type monsters in your Graveyard from play.",
+   "anular_columnas": [
+    "fn_c",
+    "fn_18"
+   ]
+  },
+  {
+   "hueco": 489,
+   "hueco_nombre": "Flying Kamakiri #2",
+   "id_konami": 5001,
+   "nombre": "Windstorm of Etaqua",
+   "clase": "Trap",
+   "contrasena": "59744639",
+   "descripcion": "Change the battle positions of all face-up monsters on your opponent's side of the field."
+  },
+  {
+   "hueco": 534,
+   "hueco_nombre": "Shining Abyss",
+   "id_konami": 5331,
+   "nombre": "Ready for Intercepting",
+   "clase": "Trap",
+   "contrasena": "31785398",
+   "descripcion": "Change 1 face-up Warrior-Type or Spellcaster-Type monster on the field to face-down Defense Position."
+  }
+ ]
+}

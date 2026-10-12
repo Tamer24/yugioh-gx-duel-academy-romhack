@@ -1,0 +1,15 @@
+carta: Monster Recovery (fila 21)
+resultado: COINCIDE (el subagente informó NO COINCIDE; corregido, ver "verificado")
+esperado: Darkfire Soldier #2 y tu mano vuelven al mazo y robás la misma cantidad.
+visto: Estado inicial: mano 6 (Trap Hole, Inferno, Monster Recovery, Darkfire Soldier #2, The Thing in the Crater, Twin-Headed Fire Dragon), campo vacío, mazo 34, LP 8000 / 8000. Invocás Darkfire Soldier #2 (ATK 1700, DEF 1100): mano 5, mazo 34. Activás Monster Recovery desde la mano: pasa a magias y trampas, mano 4 (Trap Hole, Inferno, The Thing in the Crater, Twin-Headed Fire Dragon). Aviso "Select 1 of your monsters to recover." y elegís Darkfire Soldier #2. Resultado: Darkfire Soldier #2 y las 4 cartas de la mano vuelven al mazo (5 cartas en total): mano 0, campo 0, mazo 39. Luego roba 4 cartas (mano UFO Turtle, Ultimate Baseball Kid, Darkfire Soldier #1, Blazing Inpachi): mano 4, mazo 35. Monster Recovery queda en el cementerio. LP sin cambios (8000 / 8000). Diferencia: volvieron 5 cartas y robó 4. Si "la misma cantidad" se refiere a las 4 cartas de la mano, coincide; si se refiere a las 5 que volvieron al mazo, no coincide. Por el texto de la guía (la misma cantidad que vuelve) tomo NO COINCIDE, pero es ambiguo. Además, al invocar Darkfire aparece "You Summoned a monster. Activate the effect of Spell/Trap/Effect Monster?": con Sí aparece "Select Spell/Trap Card to activate." sin efecto visible (mano y campo no cambian). El efecto que se vio fue el de Monster Recovery activado desde la mano, no una activación de Darkfire.
+antes: 008.png — paso 8: mano 5 (incluye Monster Recovery), campo Darkfire Soldier #2, mazo 34. Menú de Monster Recovery con Activate Effect y Detail Screen.
+despues: 014.png — paso 14: mano 4 (UFO Turtle, Ultimate Baseball Kid, Darkfire Soldier #1, Blazing Inpachi), campo vacío, cementerio Monster Recovery, mazo 35.
+capturas clave:
+- 000.png: estado inicial, mano 6, mazo 34, sin campo.
+- 004-a.png: prompt "You Summoned a monster. Activate the effect..." tras invocar Darkfire.
+- 010-a.png: "Select 1 of your monsters to recover." (Monster Recovery resolviéndose).
+- 012.png: paso 12, mano vacía y mazo 39 (Darkfire y las 4 cartas de la mano volvieron al mazo, todavía sin robar).
+- 014.png: estado final, mano 4, mazo 35.
+diferencias con la guía: la fila dice "invocá a Darkfire Soldier #2 y activala", pero la activación que resolvió el efecto fue la de Monster Recovery desde la mano (Activate Effect, sin monstruo seleccionado previo). La activación de Darkfire que ofrece el juego (Sí al prompt) no mostró efecto. La cantidad robada (4) es una menos que las cartas que volvieron al mazo (5). En el panel de nombre aparecen nombres de otras cartas (The Thing in the Crater, Blazing Inpachi) mientras el cursor estaba en otras zonas, como advierte la guía.
+pasos usados: 14 órdenes (pasos 1 a 14) más el paso inicial 0.
+verificado: es COINCIDE: el subagente marcó NO COINCIDE por una frase ambigua de la guía. Vuelven 5 cartas (el monstruo y las 4 de la mano) y se roban 4, las que había en la mano, como dice el texto de la carta. Mazo 34 a 39 a 35, comprobado en el registro.

@@ -1,0 +1,170 @@
+paso 0 (desde estado estados/revisar/02-jowls-of-dark-demise.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Jowls of Dark Demise', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Jowls of Dark Demise | A w50 f UP A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (boca abajo, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): B w50 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (boca abajo, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (boca abajo, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Mechanicalchaser', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 4 (desde paso 3): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Mechanicalchaser | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (boca abajo, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 5 (desde paso 4): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (defensa, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 6 (desde paso 5): A w40 f w40 f w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (defensa, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 7 (desde paso 6): A w60 f w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0xd
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 8 (desde paso 4): w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 1 | carta bajo el cursor: Mechanicalchaser | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (boca abajo, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 9 (desde paso 8): w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Mechanicalchaser | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (boca abajo, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 10 (desde paso 9): A w30 f w30 f w30 f w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (defensa, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 11 (desde paso 10): w60 f w60 f w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Jowls of Dark Demise (defensa, ATK 200, DEF 100)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 12 (desde paso 11): w60 f w60 f w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 13 (desde paso 12): w60 f A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0xb
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 14 (desde paso 13): w40 f A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio ['Jowls of Dark Demise'] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 15 (desde paso 14): w90 f w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 3 (monstruos del rival), indice en la mano 1 | carta bajo el cursor: Jowls of Dark Demise | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio ['Jowls of Dark Demise'] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 16 (desde paso 15): A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 1 (mis magias y trampas), indice en la mano 1 | carta bajo el cursor: Mechanicalchaser | evento 0x0
+yo: mano ['Trap Hole', 'Upstart Goblin', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Jowls of Dark Demise'] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos ['Mechanicalchaser (ataque, ATK 1850, DEF 800)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+

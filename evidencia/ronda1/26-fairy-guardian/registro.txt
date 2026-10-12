@@ -1,0 +1,130 @@
+paso 0 (desde estado estados/revisar/26-fairy-guardian.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Twin-Headed Fire Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Fairy Guardian', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Magic Jammer', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 1 (desde paso 0): mano:Fairy Guardian | A w50 DOWN A w240 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Fairy Guardian | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Magic Jammer', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 2 (desde paso 1): B w50 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Fairy Guardian | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Magic Jammer', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 42
+
+paso 3 (desde paso 2): w120 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Magic Jammer', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 41
+
+paso 4 (desde paso 3): A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 1 (mis magias y trampas), indice en la mano 1 | carta bajo el cursor: Magic Jammer | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Magic Jammer']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 5 (desde paso 4): w120 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Magic Jammer']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 6 (desde paso 5): mano:Dian Keto the Cure Master | A w50 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 1 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Trap Hole', 'Dian Keto the Cure Master', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Magic Jammer']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 7 (desde paso 6): UP UP f A w120 f w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 1 | carta bajo el cursor: Magic Jammer | evento 0x0
+yo: mano ['Trap Hole', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas ['Dian Keto the Cure Master']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Magic Jammer']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 8 (desde paso 7): w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 1 | carta bajo el cursor: Magic Jammer | evento 0x0
+yo: mano ['Trap Hole', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas ['Dian Keto the Cure Master']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Magic Jammer']
+    cementerio [] | retiradas [] | mazo 41
+
+paso 9 (desde paso 8): A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 1 | carta bajo el cursor: Blue-Eyes White Dragon | evento 0x0
+yo: mano ['Trap Hole', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas ['Dian Keto the Cure Master']
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Magic Jammer']
+    cementerio ['Blue-Eyes White Dragon'] | retiradas [] | mazo 41
+
+paso 10 (desde paso 9): w60 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Dian Keto the Cure Master | evento 0xe
+yo: mano ['Trap Hole', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas []
+    cementerio ['Dian Keto the Cure Master'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas ['Magic Jammer']
+    cementerio ['Blue-Eyes White Dragon'] | retiradas [] | mazo 41
+
+paso 11 (desde paso 10): cursor:2,2 | w30 f A w60 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Magic Jammer | evento 0x0
+yo: mano ['Trap Hole', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas []
+    cementerio ['Dian Keto the Cure Master'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Magic Jammer'] | retiradas [] | mazo 41
+
+paso 12 (desde paso 11): UP w30 f DOWN w30 f DOWN w30 f
+LP: yo 8000 | rival 8000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Magic Jammer | evento 0x0
+yo: mano ['Trap Hole', 'Darkfire Soldier #2', 'The Thing in the Crater', 'Twin-Headed Fire Dragon', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Fairy Guardian (ataque, ATK 1000, DEF 1000)'] | magias y trampas []
+    cementerio ['Dian Keto the Cure Master'] | retiradas [] | mazo 33
+rival: mano ['Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon', 'Blue-Eyes White Dragon']
+    monstruos [] | magias y trampas []
+    cementerio ['Blue-Eyes White Dragon', 'Magic Jammer'] | retiradas [] | mazo 41
+

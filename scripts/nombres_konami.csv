@@ -1,0 +1,173 @@
+id,nombre,tipo,atributo,nivel,atk,def,contrasena
+4078,Cocoon of Evolution,Insect / Effect,EARTH,3,0,2000,40240595
+4089,Castle of Dark Illusions,Fiend / Flip / Effect,DARK,4,920,1930,00062121
+4090,Reaper of the Cards,Fiend / Flip / Effect,DARK,5,1380,1930,33066139
+4205,Penguin Knight,Aqua / Effect,WATER,3,900,800,36039163
+4226,Masked Sorcerer,Spellcaster / Effect,DARK,4,900,1400,10189126
+4268,The Little Swordsman of Aile,Warrior / Effect,WATER,3,800,1300,25109950
+4435,Goddess of Whim,Fairy / Effect,LIGHT,3,950,700,67959180
+4468,The Immortal of Thunder,Thunder / Flip / Effect,LIGHT,4,1500,1300,84926738
+4469,Electric Snake,Thunder / Effect,LIGHT,3,800,900,11324436
+4503,Yado Karu,Aqua / Effect,WATER,4,900,1700,29380133
+4540,Minar,Insect / Effect,EARTH,3,850,750,32539892
+4589,Weather Report,Aqua / Flip / Effect,WATER,4,950,1500,72053645
+4592,Greenkappa,Warrior / Effect,DARK,3,650,900,61831093
+4617,Hiro's Shadow Scout,Fiend / Flip / Effect,DARK,2,650,500,81863068
+4647,Invader of the Throne,Warrior / Flip / Effect,EARTH,4,1350,1700,03056267
+4657,Kunai with Chain,Trap Normal,,,,,37390589
+4658,Magical Labyrinth,Spell Equip,,,,,64389297
+4667,Crush Card Virus,Trap Normal,,,,,57728570
+4691,Acid Trap Hole,Trap Normal,,,,,41356845
+4695,Reverse Trap,Trap Normal,,,,,77622396
+4736,Dark-Eyes Illusionist,Spellcaster / Flip / Effect,DARK,2,0,1400,38247752
+4746,Invitation to a Dark Sleep,Spellcaster / Effect,DARK,5,1500,1800,52675689
+4769,Parasite Paracide,Insect / Flip / Effect,EARTH,2,500,300,27911549
+4775,Drill Bug,Insect / Effect,EARTH,2,1100,200,88733579
+4777,Bite Shoes,Fiend / Flip / Effect,DARK,2,500,300,50122883
+4814,Mesmeric Control,Spell Normal,,,,,48642904
+4826,Mystical Refpanel,Trap Normal,,,,,35563539
+4839,Two-Pronged Attack,Trap Normal,,,,,83887306
+4848,The Inexperienced Spy,Spell Normal,,,,,81820689
+4851,Ultimate Offering,Trap Continuous,,,,,80604091
+4867,<4867>,,,,,,
+4877,Germ Infection,Spell Equip,,,,,24668830
+4878,Paralyzing Potion,Spell Equip,,,,,50152549
+4879,The Stern Mystic,Spellcaster / Flip / Effect,LIGHT,4,1500,1200,87557188
+4888,Ring of Magnetism,Spell Equip,,,,,20436034
+4889,Share the Pain,Spell Normal,,,,,56830749
+4890,Stim-Pack,Spell Equip,,,,,83225447
+4894,Curse of Fiend,Spell Normal,,,,,12470447
+4902,Darkness Approaches,Spell Normal,,,,,80168720
+4923,Spear Cretin,Fiend / Flip / Effect,DARK,2,500,500,58551308
+4952,The Regulation of Tribe,Trap Continuous,,,,,00296499
+4985,Graverobber,Trap Normal,,,,,61705417
+4987,The Eye of Truth,Trap Continuous,,,,,34694160
+4991,Earthshaker,Trap Normal,,,,,60866277
+4993,Mirror Wall,Trap Continuous,,,,,22359980
+5001,Windstorm of Etaqua,Trap Normal,,,,,59744639
+5008,Anti-Spell Fragrance,Trap Continuous,,,,,58921041
+5009,Riryoku,Spell Normal,,,,,34016756
+5010,Sword of Dragon's Soul,Spell Equip,,,,,61405855
+5011,Seal of the Ancients,Spell Normal,,,,,97809599
+5017,Command Knight,Warrior / Effect,FIRE,4,1200,1900,10375182
+5020,Patrician of Darkness,Zombie / Effect,DARK,5,2000,1400,19153634
+5035,Jowls of Dark Demise,Fiend / Effect,WATER,2,200,100,05257687
+5040,Electromagnetic Bagworm,Insect / Flip / Effect,LIGHT,3,200,1400,07914843
+5044,Rigorous Reaver,Plant / Flip / Effect,FIRE,3,1600,100,39180960
+5097,Masked Beast Des Gardius,Fiend / Effect,DARK,8,3300,2500,48948935
+5098,The Mask of Remnants,Spell Normal,,,,,22610082
+5099,Soul Exchange,Spell Normal,,,,,68005187
+5101,Chosen One,Spell Normal,,,,,21888494
+5109,Return of the Doomed,Spell Normal,,,,,19827717
+5111,Tornado Wall,Trap Continuous,,,,,18605135
+5118,De-Fusion,Spell Quick-Play,,,,,95286165
+5119,Jam Breeding Machine,Spell Continuous,,,,,21770260
+5133,Magic Drain,Trap Counter,,,,,59344077
+5141,Vampire Baby,Zombie / Effect,DARK,3,700,1000,56387350
+5152,Monster Recovery,Spell Quick-Play,,,,,93108433
+5153,Type Zero Magic Crusher,Trap Continuous,,,,,21237481
+5162,Creature Swap,Spell Normal,,,,,31036355
+5193,Lady Panther,Beast-Warrior / Effect,EARTH,4,1400,1300,38480590
+5196,Crimson Sentry,Warrior / Effect,FIRE,4,1500,1200,28358902
+5202,Fairy Guardian,Fairy / Effect,WIND,3,1000,1000,22419772
+5218,Exchange,Spell Normal,,,,,05556668
+5222,Dark Necrofear,Fiend / Effect,DARK,8,2200,2800,31829185
+5238,Ancient Lamp,Spellcaster / Effect,WIND,3,900,1400,54912977
+5246,Spiritualism,Spell Normal,,,,,15866454
+5261,Collected Power,Trap Normal,,,,,07565547
+5263,Riryoku Field,Trap Counter,,,,,70344351
+5264,Skull Lair,Trap Continuous,,,,,06733059
+5267,Destruction Punch,Trap Normal,,,,,05616412
+5269,The Emperor's Holiday,Trap Continuous,,,,,68400115
+5277,Ekibyo Drakmord,Spell Equip,,,,,69954399
+5279,Dragonic Attack,Spell Equip,,,,,32437102
+5281,Vengeful Bog Spirit,Spell Continuous,,,,,95220856
+5285,Makyura the Destructor,Warrior / Effect,DARK,4,1600,1200,21593977
+5304,Possessed Dark Soul,Fiend / Effect,DARK,3,1200,800,52860176
+5305,Winged Minion,Fiend / Effect,DARK,2,700,700,89258225
+5306,Skull Knight #2,Fiend / Effect,DARK,3,1000,1200,15653824
+5310,Bark of Dark Ruler,Trap Normal,,,,,41925941
+5312,Life Absorbing Machine,Trap Continuous,,,,,14318794
+5313,The Puppet Magic of Dark Ruler,Spell Normal,,,,,40703393
+5314,Soul Demolition,Trap Continuous,,,,,76297408
+5315,Double Snare,Spell Normal,,,,,03682106
+5316,Freed the Matchless General,Warrior / Effect,EARTH,5,2300,1700,49681811
+5319,Ryu Senshi,Warrior / Fusion / Effect,EARTH,6,2000,1200,49868263
+5321,Mysterious Guard,Spellcaster / Flip / Effect,EARTH,3,800,1200,01347977
+5322,Frontier Wiseman,Spellcaster / Effect,EARTH,3,1600,800,38742075
+5325,Shadow Tamer,Warrior / Effect,EARTH,3,800,700,37620434
+5326,Dragon Manipulator,Warrior / Effect,EARTH,3,700,800,63018132
+5327,The A. Forces,Spell Continuous,,,,,00403847
+5329,Array of Revealing Light,Spell Field,,,,,69296555
+5331,Ready for Intercepting,Trap Normal,,,,,31785398
+5332,A Feint Plan,Trap Normal,,,,,68170903
+5333,Tyrant Dragon,Dragon / Effect,FIRE,8,2900,2500,94568601
+5335,Spirit Ryu,Dragon / Effect,WIND,4,1000,1000,67957315
+5338,Fiend Skull Dragon,Dragon / Fusion / Effect,WIND,5,2000,1200,66235877
+5342,The Dragon's Bead,Trap Continuous,,,,,92408984
+5346,Super Rejuvenation,Spell Quick-Play,,,,,27770341
+5383,Super Robolady,Machine / Fusion / Effect,EARTH,6,1200,500,75923050
+5384,Super Roboyarou,Machine / Fusion / Effect,EARTH,6,1200,500,01412158
+5385,Fengsheng Mirror,Spell Normal,,,,,37406863
+5386,Heart of Clear Water,Spell Equip,,,,,64801562
+5388,Fusion Sword Murasame Blade,Spell Equip,,,,,37684215
+5389,Smoke Grenade of the Thief,Spell Equip,,,,,63789924
+5390,Spiritual Energy Settle Machine,Spell Continuous,,,,,99173029
+5391,Second Coin Toss,Spell Continuous,,,,,36562627
+5392,Convulsion of Nature,Spell Continuous,,,,,62966332
+5393,The Secret of the Bandit,Spell Normal,,,,,99351431
+5394,After the Struggle,Spell Normal,,,,,25345186
+5395,Magic Reflector,Spell Normal,,,,,61844784
+5396,Blast with Chain,Trap Normal,,,,,98239899
+5398,Bubble Crash,Trap Normal,,,,,61622107
+5399,Royal Oppression,Trap Continuous,,,,,93016201
+5401,Ominous Fortunetelling,Trap Continuous,,,,,56995655
+5402,Spirit's Invitation,Trap Continuous,,,,,92394653
+5403,Nutrient Z,Trap Normal,,,,,29389368
+5404,Drop Off,Trap Normal,,,,,55773067
+5409,Kaiser Sea Horse,Sea Serpent / Effect,LIGHT,4,1700,1650,17444133
+5410,Vampire Lord,Zombie / Effect,DARK,5,2000,1500,53839837
+5425,Dark Scorpion Burglars,Warrior / Effect,DARK,4,1000,1000,40933924
+5428,Fushioh Richie,Zombie / Effect,DARK,7,2600,2900,39711336
+5429,Cobraman Sakuzy,Reptile / Effect,EARTH,3,800,1400,75109441
+5430,Book of Life,Spell Normal,,,,,02204140
+5433,Mirage of Nightmare,Spell Continuous,,,,,41482598
+5434,Secret Pass to the Treasures,Spell Normal,,,,,77876207
+5435,Call of the Mummy,Spell Continuous,,,,,04861205
+5436,Timidity,Spell Normal,,,,,40350910
+5438,Tutan Mask,Trap Counter,,,,,03149764
+5439,Ordeal of a Traveler,Trap Continuous,,,,,39537362
+5441,Curse of Royal,Trap Counter,,,,,02926176
+5446,Trap Dustshoot,Trap Normal,,,,,64697231
+5447,Pyro Clock of Destiny,Trap Normal,,,,,01082946
+5449,Pharaoh's Treasure,Trap Normal,,,,,63571750
+5473,Toon Defense,Trap Continuous,,,,,43509019
+5488,Blade Knight,Warrior / Effect,LIGHT,4,1600,1000,39507162
+5518,A Man with Wdjat,Spellcaster / Effect,DARK,4,1600,1600,51351302
+5530,Reasoning,Spell Normal,,,,,58577036
+5534,Buster Rancher,Spell Equip,,,,,84740193
+5535,Hieroglyph Lithograph,Spell Normal,,,,,10248192
+5541,Reversal Quiz,Spell Normal,,,,,05990062
+5545,Narrow Pass,Trap Continuous,,,,,40172183
+5546,Disturbance Strategy,Trap Normal,,,,,77561728
+5550,D. Tribe,Trap Normal,,,,,02833249
+5583,Kiryu,Dragon / Union,DARK,5,2000,1500,84814897
+5587,Second Goblin,Fiend / Union,DARK,1,100,100,19086954
+5590,Burning Beast,Pyro / Union,FIRE,4,1500,1000,59364406
+5591,Freezing Beast,Aqua / Union,WATER,4,1500,1000,85359414
+5724,Butterfly Dagger - Elma,Spell Equip,,,,,69243953
+5725,Shooting Star Bow - Ceal,Spell Equip,,,,,95638658
+5726,Gravity Axe - Grarl,Spell Equip,,,,,32022366
+5727,Wicked-Breaking Flamberge - Baou,Spell Equip,,,,,68427465
+5728,Rod of Silence - Kay'est,Spell Equip,,,,,95515060
+5729,Twin Swords of Flashing Light - Tryce,Spell Equip,,,,,21900719
+5838,Wild Nature's Release,Spell Normal,,,,,61166988
+5840,Stumbling,Spell Continuous,,,,,34646691
+5851,Big Burn,Trap Normal,,,,,95472621
+5859,Energy Drain,Trap Normal,,,,,56916805
+5935,Zoma the Spirit,Trap Continuous,,,,,79852326
+6042,Night Assailant,Fiend / Flip / Effect,DARK,3,200,500,16226786
+6101,Dark Mimic LV1,Fiend / Flip / Effect,DARK,1,100,1000,74713516
+6102,Dark Mimic LV3,Fiend / Effect,DARK,3,1000,1000,01102515
+6135,The Graveyard in the Fourth Dimension,Spell Normal,,,,,88089103
+6284,Deck Devastation Virus,Trap Normal,,,,,35027493

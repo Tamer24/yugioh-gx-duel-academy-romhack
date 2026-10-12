@@ -1,0 +1,10 @@
+carta: The Inexperienced Spy (fila 15)
+resultado: COINCIDE
+esperado: Se muestran las cartas de la mano del rival: Penguin Soldier, Dekoichi, Fusion Sage, Snatch Steal y Hane-Hane.
+visto: Activada desde el menú de la carta (Activate Effect). Se abrió la lista "Hand" del rival con exactamente Penguin Soldier, Dekoichi the Battlechanted Locomotive, Fusion Sage, Snatch Steal y Hane-Hane (capturas 003-a, 003-b, 003). LP 8000 / 8000 sin cambios. Tras activarla, la salida muestra The Inexperienced Spy en "magias y trampas" propias y cementerio vacío en ese momento. No pude cerrar la lista: B (varias veces), START, SELECT y A seguido de B no la cerraron; la pantalla quedó en la misma lista hasta el final (capturas 004 a 013). Por eso NO vi a qué zona fue la carta ni que el duelo siguiera normal después de la lista.
+antes: 001-a.png — "mano:The Inexperienced Spy" ya seleccionada, menú abierto con Detail Screen resaltado; cementerio [] y mano del rival con las 5 cartas esperadas (la lista se ve recién en 003).
+despues: 003.png — "A w40 f ..." paso 3: magias y trampas ['The Inexperienced Spy'], cementerio [], mazo 34; el rival sigue con las 5 cartas en mano. La lista de la mano del rival se ve en 003-a, 003-b y 003-c (y 003 muestra la lista ya abierta).
+capturas clave: 001-a.png (menú de la carta con Activate Effect disponible); 002.png (Activate Effect resaltado antes de activar); 003-b.png (carta de la mano del rival en vista grande, "The Inexperienced Spy" en la lista); 003.png (lista Hand con las 5 cartas); 013.png (última captura, la lista sigue abierta).
+diferencias con la guía: ninguna en los nombres de las cartas. Diferencia de procedimiento: la guía dice que B cierra la lista, pero aquí B no la cerró (solo volvió a la vista con "ALL" resaltado) y hizo falta A para entrar a la lista de cartas; no encontré cómo salir. Hay que mirar este punto en mGBA a mano.
+pasos usados: 14
+verificado: la lista se mostraba bien, pero NO se podía cerrar: era un defecto real (la función devolvía 0x80 fuera del estado de entrada y el motor reabría la lista). Arreglado; ver la ronda 2.
