@@ -332,8 +332,7 @@ para las 765 cartas con efecto (`scripts/test_tabla_efectos.py`); las 52 sesione
 mismo que sin mudar; funciona también en el ROM ampliado. Primera carta nueva con efecto:
 Neo-Spacian Air Hummingbird (`efectos/air_hummingbird.s`).
 **Límites que quedan para expandir el juego** (de menor a mayor): los huecos seguros de Normales
-(7 hoy); las 243 cartas que entran en el ROM ampliado, hasta la 1443 (hay que enganchar los 9 usos
-del arte para pasar de ahí); el tope absoluto de 2047 cartas (índices de 11 bits); el baúl aparte y la SRAM
+(7 hoy); el tope absoluto de 2047 cartas (índices de 11 bits), que el ROM ampliado ya alcanza; el baúl aparte y la SRAM
 (`0x6200` en adelante, 12 bytes por carta); el espacio libre del ROM (unos 8 MB, a ~7,6 KB por
 carta). La tabla de efectos **ya no es un límite**.
 
@@ -613,9 +612,23 @@ Son cuatro límites distintos, de más barato a más caro:
    la 1443), el sobre con las 10 últimas se compra en pantalla y cada una muestra su dibujo, y en
    duelo la 1443 se invoca con su ATK/DEF. Con el ROM `(Neo Space)` las 52 sesiones dan lo mismo que
    en el Lote. **Sin probar:** guardar y reiniciar en el emulador con el bloque nuevo (solo Unicorn)
-   y que ninguna pantalla lea los nombres en japonés. **Para pasar de la 1443** (hasta 2047) hay que
-   enganchar los 9 usos del arte (cada uno calcula `ARTE + 6400 × índice` en línea) y mandar el
-   arte a otro lugar del ROM.
+   y que ninguna pantalla lea los nombres en japonés.
+   **[PROBADO] el 2026-10-12: hasta la 2047, el tope absoluto (índices de 11 bits).** Las cartas
+   1444 a 2047 llevan su dibujo en trozos del espacio libre (`SEGMENTOS`: índice desde el que el
+   arte va aparte y, por trozo, `{cuántas, dirección}`; `Rom.arte_dir(i)` lo resuelve). Los 9 sitios
+   que calculan `((i·2+i)·8+i) << 8` y le suman `ARTE` se enganchan (`SITIOS_ARTE`): cada copia
+   trae, antes de sumar la base, la cuenta inline `i = (desplazamiento >> 8) · 5243 >> 17` y la
+   búsqueda del trozo, y deja el desplazamiento apuntando a él. Uno de los 9 (`0x080B65F4`) tiene
+   dos caminos y el otro lo cubre `0x08085888` (la función que llama). El bloque del baúl, que a 12
+   bytes por carta ya no entraba en los 32 KB de la SRAM, se guarda **compacto**: marca + 8 bytes por
+   carta (`+0`, `+4` y `+8` del registro: en los 52 estados de prueba el resto es siempre 0); el
+   RAM pasa a `0x02032000` (bloque) y `0x02035000` (copia compacta); SRAM `0x6200` a `0x7C7C`.
+   Medido con 804 cartas de prueba (2047 en total): `test_ampliado.py` (con el guardado y la carga
+   del juego en Unicorn: el bloque vuelve igual con la memoria sucia y sin marca carga en cero), el
+   dibujo correcto en la pantalla de detalle de las cartas 1443, 1444, 1700, 1800, 1839 y 2047, y la
+   compra en pantalla de un sobre con las últimas. Con `(Neo Space)` las 52 sesiones dan lo mismo.
+   **Sin probar:** que los otros 8 sitios del arte (editor de mazos, tienda, apertura de sobres...) se
+   vean bien con una carta de trozo aparte: se probó la pantalla de detalle del duelo, que es uno.
 
    La tabla `0xF59EBC` resultó ser la de nombres en japonés (solo la usa el ROM con código `J`):
    ese lugar, muerto en la versión USA, sirve para más dibujos cuando hagan falta más de 34.

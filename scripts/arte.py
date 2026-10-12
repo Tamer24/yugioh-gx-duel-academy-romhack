@@ -62,7 +62,7 @@ def decodificar(paleta, tiles, lado=LADO, n_colores=COLORES):
 def leer(rom, indice):
     """Imagen de la carta 'indice' del ROM."""
     return decodificar(bytes(rom.d[rom.PALETAS + BYTES_PALETA * indice:rom.PALETAS + BYTES_PALETA * (indice + 1)]),
-                       bytes(rom.d[rom.ARTE + BYTES_ARTE * indice:rom.ARTE + BYTES_ARTE * (indice + 1)]))
+                       bytes(rom.d[rom.arte_dir(indice):rom.arte_dir(indice) + BYTES_ARTE]))
 
 
 def leer_mini(rom, indice):
@@ -131,7 +131,7 @@ def escribir(rom, indice, imagen):
         raise ErrorArte(f"indice de carta fuera de rango: {indice}")
     paleta, tiles = convertir(imagen)
     rom.d[rom.PALETAS + BYTES_PALETA * indice:rom.PALETAS + BYTES_PALETA * (indice + 1)] = paleta
-    rom.d[rom.ARTE + BYTES_ARTE * indice:rom.ARTE + BYTES_ARTE * (indice + 1)] = tiles
+    rom.d[rom.arte_dir(indice):rom.arte_dir(indice) + BYTES_ARTE] = tiles
     paleta, tiles = convertir_mini(decodificar(paleta, tiles))
     rom.d[rom.MINI_PALETAS + BYTES_MINI_PALETA * indice:rom.MINI_PALETAS + BYTES_MINI_PALETA * (indice + 1)] = paleta
     rom.d[rom.MINI_ARTE + BYTES_MINI * indice:rom.MINI_ARTE + BYTES_MINI * (indice + 1)] = tiles

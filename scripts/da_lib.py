@@ -48,9 +48,12 @@ LIBRE = 0x1800000          # donde este proyecto empieza a escribir datos nuevos
 # para pasar de 1200. Empieza con MARCA y sigue con un u32 por cada nombre de TABLAS: la capacidad
 # y el offset de archivo de cada tabla. Rom lo lee solo: sus metodos sirven para los dos ROMs.
 AMPLIADO = 0x1B00000
-MARCA = b"DA-AMPLIADO-2\0\0\0"      # la 1 no mudaba los dibujos chicos (MINI_*)
+SEGMENTOS = 0              # solo existe en un ROM ampliado (ver TABLAS)
+MARCA = b"DA-AMPLIADO-3\0\0\0"      # la 1 no mudaba los dibujos chicos (MINI_*); la 2 no tenia SEGMENTOS
 TABLAS = ("CAPACIDAD", "CANTIDAD", "IDS", "CLAVES", "STATS", "NOMBRES", "NOMBRES_OFF", "DESCS",
-          "DESCS_OFF", "ORDEN_ALFA", "PALETAS", "ARTE", "MINI_PALETAS", "MINI_ARTE")
+          "DESCS_OFF", "ORDEN_ALFA", "PALETAS", "ARTE", "MINI_PALETAS", "MINI_ARTE", "SEGMENTOS")
+# SEGMENTOS: u32 indice desde el que el arte ya no esta junto (a ARTE + 6400 * indice), u32 cantidad
+# de segmentos y, por cada uno, {u32 cuantas cartas caben, u32 direccion GBA donde empieza}.
 
 # Menus de seleccion del duelo: FUN_08026614 despacha por modo (1..29) con esta
 # tabla de direcciones GBA. Las entradas vacias apuntan a MENU_VACIO (movs r0,#0).
@@ -88,6 +91,21 @@ class Rom:
         if self.ampliado:
             for k, nombre in enumerate(TABLAS):
                 setattr(self, nombre, self.u32(AMPLIADO + len(MARCA) + 4 * k))
+
+    def arte_dir(self, i):
+        """Offset de archivo del dibujo grande (6400 bytes) de la carta de indice i."""
+        if not self.ampliado:
+            return self.ARTE + 6400 * i
+        limite = self.u32(self.SEGMENTOS)
+        if i < limite:
+            return self.ARTE + 6400 * i
+        k = i - limite
+        for j in range(self.u32(self.SEGMENTOS + 4)):
+            cuantas, base = self.u32(self.SEGMENTOS + 8 + 8 * j), self.u32(self.SEGMENTOS + 12 + 8 * j)
+            if k < cuantas:
+                return base - BASE + 6400 * k
+            k -= cuantas
+        raise IndexError(f"la carta {i} no tiene lugar de arte")
 
     @property
     def n(self):

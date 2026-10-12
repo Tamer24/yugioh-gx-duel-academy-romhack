@@ -11,7 +11,9 @@ Que hace sobre una copia del ROM de trabajo (Lote):
      la cuenta sea la medida (706 la de IDs, 303 la de estadisticas, ...).
   2. El arte no se muda (son 7,7 MB): las tablas que estaban pegadas atras del arte ya no se usan
      (y tampoco las dos de nombres en japones ni el dibujo chico original, que se mudo) y ese
-     lugar pasa a ser el dibujo de las cartas 1201 a 1443. De ahi sale la CAPACIDAD (EXTRA = 243).
+     lugar pasa a ser el dibujo de las cartas 1201 a 1443. Las que siguen (hasta la 2047, EXTRA =
+     847) llevan su dibujo en trozos del espacio libre del ROM: la tabla SEGMENTOS dice donde y 9
+     sitios del codigo se enganchan (SITIOS_ARTE) para encontrarlo.
   3. Rehace la busqueda ID -> indice (parches.busqueda_ids) con la cantidad nueva.
   4. Agrega las cartas: datos, textos, contrasena y dibujo, copiados del ROM original.
   5. El baul. En la memoria el baul son 12 bytes por carta desde 0x02000000 y termina pegado a la
@@ -51,8 +53,51 @@ from da_lib import *
 # tablas de nombres en japones (0xF59EBC y 0xF5B180, 36 referencias cada una) que el ROM USA no
 # lee: todo eso queda libre y el arte puede correr hasta el final del dibujo chico original.
 FIN_LUGAR_ARTE = MINI_ARTE + 1024 * (N_CARTAS + 1)          # 0x10A01C4
-EXTRA = (FIN_LUGAR_ARTE - ARTE) // 6400 - 1 - N_CARTAS        # 243 cartas mas (antes 34)
+LIMITE_IDX = (FIN_LUGAR_ARTE - ARTE) // 6400                  # 1444: desde este indice el arte va aparte
+# Mas alla va en trozos del espacio libre del ROM, y 9 sitios del codigo (los que calculan
+# ARTE + 6400 * indice) se enganchan para encontrarlo (SITIOS_ARTE). 2047 es el tope absoluto:
+# los indices de carta son de 11 bits en todo el juego. El guardado lo cumple porque el bloque del
+# baul se guarda compacto (8 bytes por carta en vez de 12, ver COMPACTO).
+EXTRA = 2047 - N_CARTAS
 CAPACIDAD_NUEVA = N_CARTAS + EXTRA
+# Trozos libres para el arte (offsets de archivo): entre lo que este proyecto usa (textos desde
+# 0x1800000, codigo desde 0x1900000, piezas desde 0x1A00000, sobres desde 0x1E00000, efectos desde
+# 0x1F00000) y sin pasar de AMPLIADO.
+SEGMENTOS_LIBRES = ((0x1810000, 0x1900000), (0x1910000, 0x1A00000), (0x1A20000, 0x1B00000),
+                    (0x1E10000, 0x1F00000), (0x1F20000, 0x2000000))
+# Los 9 sitios: (donde empieza la ventana, despues de que instruccion va el arreglo (0 = antes de
+# la primera), registro con el desplazamiento 6400 * indice, registro libre para el salto).
+# Todos hacen ((i * 2 + i) * 8 + i) << 8 y le suman el literal ARTE.
+SITIOS_ARTE = ((0x080022DC, 0, 1, 0), (0x08085888, 1, 0, 1), (0x08097A08, 0, 1, 2), (0x0809D5AC, 0, 0, 2),
+               (0x080A5EE6, 0, 2, 3), (0x080A60D0, 1, 1, 0), (0x080A62A0, 0, 1, 0), (0x080B65F6, 3, 1, 2),
+               (0x080D669C, 1, 1, 2))
+ARREGLO_ARTE = """
+    push {{{a}, {b}, {c}}}
+    ldr {a}, ={lim_off}
+    cmp {d}, {a}
+    blo 8f
+    lsrs {b}, {d}, #8
+    ldr {a}, =5243
+    muls {b}, {a}, {b}
+    lsrs {b}, {b}, #17
+    ldr {a}, ={lim_idx}
+    subs {b}, {b}, {a}
+    ldr {c}, ={segs:#x}
+6:  ldr {a}, [{c}]
+    cmp {b}, {a}
+    blo 7f
+    subs {b}, {b}, {a}
+    adds {c}, {c}, #8
+    b 6b
+7:  ldr {a}, [{c}, #4]
+    movs {c}, #25
+    muls {b}, {c}, {b}
+    lsls {b}, {b}, #8
+    adds {a}, {a}, {b}
+    ldr {b}, ={arte:#x}
+    subs {d}, {a}, {b}
+8:  pop {{{a}, {b}, {c}}}
+"""
 ZONA_CODIGO = (0, 0x100000)         # codigo del juego y sus literales
 ZONA_PROPIA = (LIBRE, AMPLIADO)     # textos y codigo que agrega este proyecto
 REFERENCIAS = {"CANTIDAD": 41, "IDS": 706, "CLAVES": 1, "STATS": 303, "NOMBRES": 43, "NOMBRES_OFF": 43,
@@ -100,13 +145,16 @@ fin:
 # --- el baul de las cartas 1201 en adelante ---------------------------------------------------
 BAUL = 0x02000000
 FIN_BAUL = BAUL + 12 * N_CARTAS             # 0x02003840: donde caeria la carta 1201
-BLOQUE = 0x0203A000                         # RAM libre: 0x02030664 a 0x0203B108 en cero en 52 estados
+BLOQUE = 0x02032000                         # RAM libre: 0x02030664 a 0x0203B108 en cero en 52 estados
 BLOQUE_BYTES = 4 + 12 * EXTRA + 4           # marca + EXTRA cartas de 12 bytes + 4 del ultimo campo
-assert BLOQUE + BLOQUE_BYTES <= 0x0203B108
+COMPACTO = 0x02035000                       # el bloque como se guarda en la SRAM: marca + 8 bytes por carta
+COMPACTO_BYTES = 4 + 8 * EXTRA              # {u16 +0, u16 +4, u32 +8} de cada registro; el resto es siempre 0
+assert BLOQUE + BLOQUE_BYTES <= COMPACTO and COMPACTO + COMPACTO_BYTES <= 0x0203B108
 EXT = BLOQUE + 4                            # donde va la carta 1201
 DELTA = EXT - FIN_BAUL
 MARCA_BAUL = 0x31584144                     # "DAX1"
 SRAM_BLOQUE = 0x0E006200                    # el guardado del juego usa 0x0E000000-0x0E006188
+assert SRAM_BLOQUE - 0x0E000000 + COMPACTO_BYTES <= 0x8000, "el bloque compacto no entra en la SRAM"
 # (indice - 1) * 12: direccion del `lsls rA, rB, #1` de cada sitio
 SITIOS_X12 = (0x08010308, 0x080782AA, 0x0808CF96, 0x080B5972, 0x080B706C, 0x080BDCF0, 0x080C1670,
               0x080C7F96, 0x080D26E2, 0x080D4406, 0x080D5338, 0x080D5C08, 0x080D5F88, 0x080E1590,
@@ -143,6 +191,52 @@ ARREGLO_PASO = """
     adds r4, r4, r5
     {llevar}
 1:  pop {{r4, r5}}
+"""
+
+
+# El bloque del baul en la SRAM ocupa 8 bytes por carta (los registros de 12 bytes solo usan +0, +4 y
+# +8 en todos los estados de prueba): con 12 no entran las 847 de la 1201 a la 2047 en los 32 KB.
+COMPACTAR = f"""
+    ldr r4, ={BLOQUE + 4:#x}
+    ldr r5, ={COMPACTO:#x}
+    ldr r0, ={MARCA_BAUL:#x}
+    str r0, [r5]
+    adds r5, #4
+    ldr r6, ={EXTRA}
+4:  ldrh r0, [r4]
+    strh r0, [r5]
+    ldrh r0, [r4, #4]
+    strh r0, [r5, #2]
+    ldr r0, [r4, #8]
+    str r0, [r5, #4]
+    adds r4, #12
+    adds r5, #8
+    subs r6, #1
+    bne 4b
+"""
+EXPANDIR = f"""
+    push {{r4, r5, r6}}
+    ldr r4, ={BLOQUE:#x}
+    ldr r0, ={MARCA_BAUL:#x}
+    str r0, [r4]
+    adds r4, #4
+    ldr r5, ={COMPACTO + 4:#x}
+    ldr r6, ={EXTRA}
+4:  movs r0, #0
+    str r0, [r4]
+    str r0, [r4, #4]
+    str r0, [r4, #8]
+    ldrh r0, [r5]
+    strh r0, [r4]
+    ldrh r0, [r5, #2]
+    strh r0, [r4, #4]
+    ldr r0, [r5, #4]
+    str r0, [r4, #8]
+    adds r4, #12
+    adds r5, #8
+    subs r6, #1
+    bne 4b
+    pop {{r4, r5, r6}}
 """
 
 
@@ -188,10 +282,15 @@ def enganchar(rom, original, esp, inicio, libre, arreglo, despues_de):
     adentro = saltos_adentro(rom, inicio, largo)
     assert not adentro, f"{inicio:08X}: saltan adentro de la ventana desde {[hex(a) for a in adentro]}"
     cuerpo, fin = [], inicio + largo
+    if despues_de == 0:
+        cuerpo.append(arreglo)
     for k, (a, crudo, mnem, ops) in enumerate(instrucciones(rom, inicio, largo), 1):
         if mnem == "ldr" and "[pc" in ops:
             valor = rom.u32(((a + 4) & ~3) + int(ops.split("#")[-1].rstrip("]"), 0) - BASE)
             cuerpo.append(f"    ldr {ops.split(',')[0]}, ={valor:#x}")
+        elif mnem == "b" and a + len(crudo) == fin:        # salto incondicional que cierra la ventana
+            cuerpo.append(VOLVER.format(destino=int(ops.lstrip("#"), 0) | 1))
+            fin = None
         elif mnem.startswith("b") and mnem not in ("bics", "bic"):
             assert a + len(crudo) == fin and len(crudo) == 2 and mnem not in ("b", "bx", "bl", "blx"), \
                 f"{a:08X}: no se mudar '{mnem} {ops}'"
@@ -254,16 +353,19 @@ def baul(rom, original, esp):
     assert bytes(rom.d[0xE6F38:0xE6F42]) == bytes.fromhex("00b5fff7b5fffff7ebff")    # push {lr} ; bl ; bl
     ventana(0x080E6F38, None, CABEZA + f"""
     push {{lr}}
+    push {{r4, r5, r6}}
 """ + llamar.format(fn=0x080E6EA8 | 1) + llamar.format(fn=0x080E6F18 | 1) + f"""
     ldr r0, ={BAUL:#x}
     movs r1, #0xE0
     lsls r1, r1, #20
     ldr r2, =0x6188
 """ + llamar.format(fn=FN_ESCRIBIR_SRAM | 1) + f"""
-    ldr r0, ={BLOQUE:#x}
+""" + COMPACTAR + f"""
+    ldr r0, ={COMPACTO:#x}
     ldr r1, ={SRAM_BLOQUE:#x}
-    ldr r2, ={BLOQUE_BYTES}
+    ldr r2, ={COMPACTO_BYTES}
 """ + llamar.format(fn=FN_ESCRIBIR_SRAM | 1) + """
+    pop {r4, r5, r6}
     pop {r0}
     bx r0
 por_r3:
@@ -274,19 +376,34 @@ por_r3:
     # cargar (en FUN_080E1B9C): la copia de siempre, el bloque desde la SRAM y, si no trae la marca
     # (partida de otro ROM o SRAM vacia), el bloque en cero
     ventana(0x080E1BD0, ["bl", "bl"], extra.format(
-        antes=llamar.format(fn=FN_LEER_SRAM | 1), a=SRAM_BLOQUE, b=BLOQUE, n=BLOQUE_BYTES, fn=FN_LEER_SRAM | 1,
+        antes=llamar.format(fn=FN_LEER_SRAM | 1), a=SRAM_BLOQUE, b=COMPACTO, n=COMPACTO_BYTES, fn=FN_LEER_SRAM | 1,
         despues=f"""
-    ldr r0, ={BLOQUE:#x}
+    ldr r0, ={COMPACTO:#x}
     ldr r0, [r0]
     ldr r1, ={MARCA_BAUL:#x}
     cmp r0, r1
-    beq 1f
-{limpiar}1:
+    beq 2f
+{limpiar}    b 1f
+2:
+{EXPANDIR}1:
 """ + llamar.format(fn=0x080E6ED0 | 1), destino=0x080E1BD8 | 1))
     # partida nueva (en FUN_080E14CC): limpiar tambien el bloque
     ventana(0x080E14D4, ["bl", "bl"], CABEZA + llamar.format(fn=FN_LIMPIAR | 1) + limpiar
             + llamar.format(fn=0x080E14A8 | 1) + VOLVER.format(destino=0x080E14DC | 1)
             + "por_r3:\n    bx r3\n    .balign 4\n    .pool\n")
+    return hechos
+
+
+def arte_ganchos(rom, original, esp):
+    """Los 9 sitios que calculan ARTE + 6400 * indice: para un indice desde LIMITE_IDX el
+    desplazamiento se cambia por el que lleva al trozo donde esta su dibujo."""
+    segs = BASE + rom.SEGMENTOS + 8
+    hechos = []
+    for a, despues, rd, libre in SITIOS_ARTE:
+        a_, b_, c_ = [f"r{r}" for r in range(8) if r != rd][:3]
+        arreglo = ARREGLO_ARTE.format(a=a_, b=b_, c=c_, d=f"r{rd}", lim_off=LIMITE_IDX * 6400,
+                                      lim_idx=LIMITE_IDX, segs=segs, arte=BASE + ARTE)
+        hechos.append(enganchar(rom, original, esp, a, libre, arreglo, despues))
     return hechos
 
 
@@ -320,7 +437,7 @@ def ampliar(original, rom, cuantas, nuevas=(), raiz="."):
     assert not rom.ampliado, "ese ROM ya esta ampliado"
     assert rom.n == N_CARTAS
     assert rom.d[AMPLIADO:sobres.ZONA] == original.d[AMPLIADO:sobres.ZONA], "la zona de las tablas nuevas no esta libre"
-    assert ARTE + 6400 * (CAPACIDAD_NUEVA + 1) <= FIN_LUGAR_ARTE
+    assert ARTE + 6400 * LIMITE_IDX <= FIN_LUGAR_ARTE
     volver = pisados()
     if not 0 <= cuantas <= len(volver) or cuantas + len(nuevas) > EXTRA or cuantas + len(nuevas) < 1:
         error(f"entran {EXTRA} cartas en total: de las que volvieron (hasta {len(volver)}) mas las nuevas")
@@ -338,6 +455,17 @@ def ampliar(original, rom, cuantas, nuevas=(), raiz="."):
 
     viejas = N_CARTAS + 1
     nuevo = {"CAPACIDAD": CAPACIDAD_NUEVA, "ARTE": ARTE}
+    # arte de las cartas que ya no caben junto al de las 1200: trozos del espacio libre
+    falta, trozos = CAPACIDAD_NUEVA - LIMITE_IDX + 1, []
+    for ini, fin in SEGMENTOS_LIBRES:
+        if falta:
+            assert rom.d[ini:fin] == original.d[ini:fin], f"{ini:07X}-{fin:07X} no esta libre"
+            usar = min((fin - ini) // 6400, falta)
+            trozos.append((usar, BASE + ini))
+            falta -= usar
+    assert falta == 0, "no alcanza el espacio libre para el arte"
+    nuevo["SEGMENTOS"] = esp.poner(struct.pack("<II", LIMITE_IDX, len(trozos))
+                                   + b"".join(struct.pack("<II", c, d) for c, d in trozos))
     nuevo["CANTIDAD"] = copia(CANTIDAD, 4 + 2 * viejas, 4 + 2 * entradas)      # la cantidad va pegada a los IDs
     nuevo["IDS"] = nuevo["CANTIDAD"] + 4
     for nombre, ancho in (("CLAVES", 4), ("STATS", 4), ("ORDEN_ALFA", 2), ("PALETAS", 128),
@@ -385,7 +513,7 @@ def ampliar(original, rom, cuantas, nuevas=(), raiz="."):
         rom.w32(rom.DESCS_OFF + 4 * i, texto(original.desc(i_viejo)))
         rom.fijar_contrasena(i, original.contrasena(i_viejo))
         rom.d[rom.PALETAS + 128 * i:rom.PALETAS + 128 * (i + 1)] = original.d[PALETAS + 128 * i_viejo:PALETAS + 128 * (i_viejo + 1)]
-        rom.d[ARTE + 6400 * i:ARTE + 6400 * (i + 1)] = original.d[ARTE + 6400 * i_viejo:ARTE + 6400 * (i_viejo + 1)]
+        rom.d[rom.arte_dir(i):rom.arte_dir(i) + 6400] = original.d[ARTE + 6400 * i_viejo:ARTE + 6400 * (i_viejo + 1)]
         for tabla, vieja, ancho in ((rom.MINI_PALETAS, MINI_PALETAS, 64), (rom.MINI_ARTE, MINI_ARTE, 1024)):
             rom.d[tabla + ancho * i:tabla + ancho * (i + 1)] = original.d[vieja + ancho * i_viejo:vieja + ancho * (i_viejo + 1)]
         informe.append((i, nombre, cid))
@@ -438,6 +566,7 @@ def ampliar(original, rom, cuantas, nuevas=(), raiz="."):
     for i, nombre, cid in informe:
         assert rom.indice_de(cid) == i and rom.nombre(i) == nombre
     baul(rom, original, esp)
+    arte_ganchos(rom, original, esp)
     # --- 7. los sobres: la ultima carta tambien sale, y cada carta vuelve a los suyos ---------
     for o, juego, nuevo_ in SORTEO_ULTIMA:
         assert bytes(rom.d[o:o + 2]) == bytes.fromhex(juego), f"{o:06X}: el sorteo de sobres no es el esperado"

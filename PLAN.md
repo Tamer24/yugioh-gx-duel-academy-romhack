@@ -106,6 +106,12 @@ original: el arte de las cartas nuevas llega hasta `0x10A01C4`. El bloque del ba
 ampliación. Probado con 200 cartas de prueba (compra, duelo, lógica del baúl) y las 52 sesiones.
 Detalle y límites en `PROYECTO.md` §9.1.
 
+**Tanda del 2026-10-12 (tarde): el ROM ampliado llega al tope, 2047 cartas.** Los dibujos de las cartas
+desde la 1444 van en trozos del espacio libre y 9 sitios del código se enganchan para encontrarlos; el
+bloque del baúl se guarda compacto (8 bytes por carta) para que entre en la SRAM. Probado con 804
+cartas de prueba (detalle en duelo, compra en pantalla, guardar/cargar en Unicorn) y las 52 sesiones.
+Detalle en `PROYECTO.md` §9.1.
+
 **Tanda del 2026-10-12: la tienda y los sobres** (detalle en `NOTAS-REVERSE.md`, "La tienda y los
 sobres", y en `PROYECTO.md` §5.5):
 
