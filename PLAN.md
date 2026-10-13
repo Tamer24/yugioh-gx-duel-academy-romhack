@@ -112,6 +112,15 @@ bloque del baúl se guarda compacto (8 bytes por carta) para que entre en la SRA
 cartas de prueba (detalle en duelo, compra en pantalla, guardar/cargar en Unicorn) y las 52 sesiones.
 Detalle en `PROYECTO.md` §9.1.
 
+**Investigación del 2026-10-12 (noche 3): lo que falta para los Neo-Spacian con efecto.** Sin pieza
+nueva: se ubicó en el ROM original el molde de cada efecto pendiente (Dimensional Warrior, Reflect
+Bounder, The Unhappy Maiden, Ceal, Chaos Necromancer…) y se leyó la máquina de estados de la batalla
+(`0x02020C20`, 6 estados). Resultados en `NOTAS-REVERSE.md` ("La batalla y los Neo-Spacian") y
+`ACCIONES.md` ("Batalla"). Hallazgos: el evento `0x64` termina la Battle Phase; un ataque directo
+sale de la lista de modificadores (Ceal, Overpowering Eye); un ATK por cuenta es un caso más del
+calculador; los efectos de batalla están en árboles de IDs, no en la tabla de efectos. Sin molde en
+el juego: copiar el efecto de otro monstruo (Dark Panther).
+
 **Tanda del 2026-10-12 (noche 2): pack 4, todos los Elemental Hero y Neo-Spacian que faltaban.** 69
 cartas nuevas (`recetas/packs/pack-4.json`, armado por `scripts/hacer_pack4.py` desde la base de
 ygoprodeck, con su dibujo en `arte/`): 46 de fusión y 23 normales (algunos con efecto en el juego real, que

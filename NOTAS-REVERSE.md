@@ -1247,3 +1247,81 @@ queda en la apertura). `sobres.py` lo rechaza.
 
 Además, cada sobre nuevo necesita su rama en `FUN_080BE260` (hoy un número mayor que 47 da "no
 disponible") y un dibujo de sobre, que no se buscó.
+
+## La batalla y los Neo-Spacian: qué hay que saber para hacerlos [ROM] (investigación del 2026-10-12)
+
+Se buscó, para cada efecto que falta, qué carta **original** hace algo parecido y dónde la trata el
+motor. Herramientas: `scripts/buscar_id.py`, `scripts/decompilar.py`, `scripts/desensamblar.py`. Nada de
+esto se probó en duelo todavía: todo es lectura del ROM.
+
+### Moldes (cartas originales con efecto parecido)
+
+| Efecto que falta | Molde en el juego | Dónde lo trata el motor |
+|---|---|---|
+| Al atacar **o ser atacado** (Glow Moss, Grand Mole) | Dimensional Warrior (4262), D. D. Warrior Lady (5719) | **`FUN_08068C8C`** (después del cálculo de daño), ramas `0x08068CDE`/`0x08068FA6` y `0x08068D14`/`0x08069012`. Su `fn_04` (`FUN_08039460`) solo muestra el aviso |
+| Efecto del que es atacado **antes** de calcular el daño | Reflect Bounder (4762), Marshmallon (6000), Kiseitai (4976), Sasuke Samurai #4 (6185) | **`FUN_08066B24`**: la máquina de estados de la batalla (ver abajo) |
+| Terminar la Battle Phase | The Unhappy Maiden (4875) | Su `fn_04` (`0x0803CC10`) solo hace `EVENTO(0x64 \| lado << 15, 0, 0)` y devuelve 0 |
+| Ataque directo | Shooting Star Bow - Ceal (5725), Overpowering Eye (6291), Toon Dark Magician Girl (5450) | `FUN_0801F980(lado, ranura)` |
+| ATK que depende de una cuenta | Chaos Necromancer (5827), Gren Maju Da Eiza (5834) | `FUN_08012460`, el calculador de ATK, árbol por ID propio en `0x08012746` |
+| Copiar nombre y efecto de otro monstruo (Dark Panther) | **Ninguno** en el juego | — |
+
+### El registro de la batalla en curso (`0x02020C20`)
+
+| Campo | Qué es |
+|---|---|
+| `+0`, bit 0 | **Ataque directo** (el rival no tiene objetivo). Si está en 1, el estado 0 llama a `FUN_08059478` con `0xFF` como objetivo y salta al estado 4 |
+| `+0` (u32), bits 13–20 | Ranura del **atacante** (`(v << 11) >> 24`) |
+| `+2` (u16), bits 5–12 | Ranura del **defensor** (`(v << 19) >> 24`) |
+| `+0xA` | Fase de la batalla. `6` = terminada (la deja el evento `0x64`) |
+| `+0xB` | **Estado** de la batalla, 0 a 5; salto en `0x08066B54` |
+
+Estados (`FUN_08066B24` despacha por `+0xB`). Los IDs son los literales que se comparan en cada uno:
+
+| Estado | Dirección | Qué se ve ahí |
+|---|---|---|
+| 0 | `0x08066B6C` | Efectos del atacante antes de elegir objetivo: Ninja Grandmaster Sasuke (6111, `0x17DF`), `0x1823` |
+| 1 | `0x08066E1C` | Drillroid (6387, `0x18F3`) y similares: destruir un monstruo en defensa sin calcular |
+| 2 | `0x08066F48` | Efectos del que es atacado boca abajo: Kiseitai (4976), Marshmallon (6000), `0x148E`, `0x1503`, `0x14FD`, `0x1694`, `0x1526` (sin identificar) |
+| 3 | `0x08067248` | **Reflect Bounder (4762, `0x129A`)** en `0x08067298`: si el defensor es él y está en ataque, `DANIO(lado del atacante, ATK del atacante)` |
+| 4 | `0x08067374` | Disc Fighter (5970, `0x1752`), Sasuke Samurai #4 (moneda, `FUN_08067586`) |
+| 5 | `0x08067474` | Cierre: llama a `FUN_08067DAC` |
+
+Cómo se **cancela** una batalla sin calcular daño: `+0xA = 0` y `+0xB = 0`, y volver con 0
+(`0x08067256`; es lo que hacen Kiseitai y los de "damage calculations are canceled").
+
+### Resultados
+
+- **EVENTO `0x64` = terminar la Battle Phase** (`FUN_0801B8E0`: pone `+1 |= 0x10`, `+0xA = 6`,
+  `+0xB = 0` y reescribe la fase en `0x02022250 + 0x5630`). El consumidor de eventos
+  (`FUN_08022124`) tiene la tabla corrida en uno; los códigos `0x62`–`0x66` no eran "vacíos":
+  cada uno tiene su función (`0x0801B610`, `0x0801B650`, `0x0801B8E0`, `0x0801B9A0`, `0x0801B944`).
+- **Ataque directo:** `FUN_0801F980(lado, ranura)` decide si un monstruo puede atacar directo: sin
+  monstruos rivales siempre; con ellos, una lista de IDs que sí (Jinzo #7, Drillago, Amphibious
+  Bugroth MK-3, Raging Flame Sprite…) y la **lista de modificadores** de la ranura: un modificador de
+  tipo 1 cuyo origen es Ceal (5725), o de tipo 4 cuyo origen es Overpowering Eye (6291). Eso resuelve
+  "puede atacar directo este turno" **antes de declarar**; convertir un ataque ya declarado en
+  directo es otra cosa (bit 0 del registro de batalla, **[HIP]**: no se probó).
+- **ATK por cuenta:** el calculador `FUN_08012460` tiene un árbol por ID de la propia carta (el ID
+  sale de `+0x24` de la ranura). Chaos Necromancer (`0x08012934`) pone el ATK base en 0 y suma 300
+  por cada monstruo del cementerio propio (lista en `+0x2924`, tipo `<= 0x14`). Flare Scarab
+  (+400 por Mágica/Trampa del rival) es un caso más de ese árbol: contar las cartas de tipo `0x15`
+  y `0x16` en las zonas 5 a 9 del campo rival (`0x02022250 + 0x5610 + lado * 11`).
+- **Cambiar la identidad de una carta (Dark Panther):** el motor decide todo por el ID que sale de
+  `+0x24` (índice) de la ranura. Ya hay un precedente: en la prueba de Necrofear un
+  Mechanicalchaser "pasa a ser ella en memoria" cambiando ese campo y el motor la trata como ella.
+  Queda por ver el aspecto (dibujo y nombre salen del mismo índice), restaurarlo en la End Phase
+  (gancho que ya existe) y qué pasa con un efecto en cadena. **[HIP]**
+- **Robar y mostrar (Glow Moss):** `ROBAR` y `REVELAR` ya están en el recetario; falta leer el tipo
+  de la carta robada (`+0x30` bits 0–4 de su ranura: `< 0x15` monstruo, `0x15` Mágica, `0x16`
+  Trampa).
+
+### Lo que sigue sin saberse
+
+1. Dónde, en la secuencia, se avisa "ataca" y "es atacado" para un efecto de monstruo con opción
+   ("You can…") antes del cálculo: los casos que hay son todos obligatorios.
+2. Cómo se detiene la batalla en curso con lo que ya se declaró (`+0xA`/`+0xB`) para que sea
+   seguro desde un efecto encolado y no desde dentro del propio estado.
+3. Que el ID de Grand Mole entre a los árboles de los estados 2 y 3 con un gancho (la ventana de
+   8 bytes alineada) sin pisar el literal que hoy compara Reflect Bounder.
+4. Los efectos de las Neo-Spacian sobre cartas que no estén en el árbol de los menús (lista de
+   `gancho_lista_campo.s` y `gancho_menu_campo.s`).

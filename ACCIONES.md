@@ -209,6 +209,23 @@ tipo 1 en su lista. Si el monstruo deja el campo, el motor manda sus equipos al 
 | En la End Phase del turno en que pasó algo | Un gancho en la End Phase busca la carta con su bandera y encola el efecto con un momento propio | `gancho_fin_necrofear.s` | [PROBADO] |
 | Encolar un efecto a mano | `ENCOLAR_EFECTO(lado << 31 \| (momento << 4 \| tipo) << 21 \| id, d \| d << 16)` con `d = (zona y controlador) << 8 \| id` | `gancho_fin_necrofear.s` | [PROBADO] |
 
+### Batalla (investigado, sin pieza todavía) [ROM]
+
+Los efectos que ocurren **durante** una batalla no pasan por la tabla de efectos: están en árboles de
+IDs de la máquina de estados de la batalla (`FUN_08066B24`, registro en `0x02020C20`) y de la
+rutina posterior al cálculo (`FUN_08068C8C`). Detalle en `NOTAS-REVERSE.md`, "La batalla y los
+Neo-Spacian".
+
+| Quiero | Cómo (según el ROM) | Molde | Certeza |
+|---|---|---|---|
+| Terminar la Battle Phase | `EVENTO(0x64 \| lado << 15, 0, 0)` | The Unhappy Maiden (`0x0803CC10`) | [ORIGINAL] |
+| Cancelar una batalla sin calcular daño | Poner `+0xA` y `+0xB` del registro `0x02020C20` en 0 y volver con 0 | Kiseitai, Reflect Bounder (`0x08067248`) | [ORIGINAL] |
+| Saber atacante y defensor | Registro `0x02020C20`: atacante en `+0` bits 13–20, defensor en `+2` bits 5–12; bit 0 de `+0` = ataque directo | `0x08066B6C` | [ORIGINAL] |
+| Que un monstruo pueda atacar directo este turno | Modificador de tipo 4 con origen Overpowering Eye (6291), o de tipo 1 con origen Ceal (5725), en la lista de la ranura (`FUN_0801F980`) | Overpowering Eye, Ceal | [ORIGINAL] |
+| ATK que depende de una cuenta | Agregar el ID al árbol de `FUN_08012460` (`0x08012746`): poner `[r7 + 4]` y recorrer la lista | Chaos Necromancer (`0x08012934`) | [ORIGINAL] |
+| Efecto al atacar o ser atacado | Un caso por ID en `FUN_08066B24` (estados 0 a 4) o en `FUN_08068C8C` | Dimensional Warrior, Reflect Bounder | [ORIGINAL] |
+| Que una carta se comporte como otra | Cambiar `+0x24` de su ranura (el motor decide por ese ID) | Necrofear en manos del rival (prueba) | [HIP] |
+
 ### Activación y permanencia
 
 | Acción | Cómo | Ejemplo | Certeza |
