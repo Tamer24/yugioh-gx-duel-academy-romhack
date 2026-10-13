@@ -112,6 +112,17 @@ bloque del baúl se guarda compacto (8 bytes por carta) para que entre en la SRA
 cartas de prueba (detalle en duelo, compra en pantalla, guardar/cargar en Unicorn) y las 52 sesiones.
 Detalle en `PROYECTO.md` §9.1.
 
+**Tanda del 2026-10-12 (noche 2): pack 4, todos los Elemental Hero y Neo-Spacian que faltaban.** 69
+cartas nuevas (`recetas/packs/pack-4.json`, armado por `scripts/hacer_pack4.py` desde la base de
+ygoprodeck, con su dibujo en `arte/`): 46 de fusión y 23 normales (algunos con efecto en el juego real, que
+aquí entran **sin el efecto**, como Normal con un texto que lo dice). El sobre "Neo Space" (400 DP) pasó
+a traer las 87 cartas del tema. `python3 scripts/ampliar.py ORIGINAL LOTE SALIDA --cuantas 3 --cartas
+recetas/packs/pack-4.json --sobres recetas/sobres-neo-space.json`. **Límite encontrado:** el sorteo de
+sobres guarda el ID en 13 bits (`0x1FFF` en `FUN_080BD89C`): una carta con ID de Konami desde 8192
+sale en blanco del sobre. Las 23 cartas con ID mayor llevan un ID propio de 8191 para abajo
+(`id_real` guarda el de Konami; la contraseña es la real). Comprado 2 veces x 5 sobres: salen con
+su dibujo (`evidencia/neo-space/pack4-*`). Las de fusión no se pueden invocar: faltan sus recetas.
+
 **Tanda del 2026-10-12: la tienda y los sobres** (detalle en `NOTAS-REVERSE.md`, "La tienda y los
 sobres", y en `PROYECTO.md` §5.5):
 

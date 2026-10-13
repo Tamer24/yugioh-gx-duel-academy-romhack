@@ -67,13 +67,15 @@ def probar(ruta_rom, sobre=0, cuantos=5, espera=0, capturas=None):
         g.captura(capturas + "-tienda.png")
     tecla("A", 50)                              # "Are you sure?", con el cursor en Yes
     tecla("A", 100)
-    for _ in range(s["cartas_por_sobre"] + 3):  # la apertura; lo que falte lo saltea B
+    for n_a in range(s["cartas_por_sobre"] + 3):  # la apertura; lo que falte lo saltea B
         tecla("A", 50)
+        if capturas:
+            g.captura(f"{capturas}-a{n_a}.png")
     g.correr(120)
     if capturas:
         g.captura(capturas + "-lista.png")
-    tecla("B", 100)
-    tecla("B", 100)
+    for _ in range(4):                          # con un sobre grande la lista abre el filtro: otra B lo cierra
+        tecla("B", 100)
 
     gano = {i: copias(g, i) - antes[i] for i in antes if copias(g, i) != antes[i]}
     en_listas = {c for v in s["listas"].values() for c in v}
