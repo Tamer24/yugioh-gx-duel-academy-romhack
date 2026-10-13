@@ -112,6 +112,27 @@ bloque del baúl se guarda compacto (8 bytes por carta) para que entre en la SRA
 cartas de prueba (detalle en duelo, compra en pantalla, guardar/cargar en Unicorn) y las 52 sesiones.
 Detalle en `PROYECTO.md` §9.1.
 
+**Tanda del 2026-10-12 (noche 4): los seis Neo-Spacian con su efecto, y las Fusiones del pack 4 se
+pueden invocar.** Después de la investigación (siguiente entrada) se implementó todo lo que faltaba:
+- **Flare Scarab**: +400 ATK por Mágica/Trampa del rival. Gancho en el calculador de ATK
+  (`efectos/gancho_atk_cuenta.s`, `0x0801273C`); `scripts/test_atk_cuenta.py` compara 600 casos contra
+  el ROM sin el gancho.
+- **Aqua Dolphin**: descarta 1, mira la mano rival, elige un monstruo, compara ATK, destruye y daña
+  500 (o recibo 500). `efectos/aqua_dolphin.s`.
+- **Grand Mole** y **Glow Moss**: gancho en la fase de daño de la batalla (`FUN_08067E60`,
+  `efectos/gancho_batalla.s`). Mole vuelve a la mano con el monstruo contra el que pelea (se activa
+  sola cuando perdería: el juego no deja escribir una pregunta propia). Glow Moss: el rival roba y
+  muestra; Monstruo = termina la Battle Phase, Magica = ataque directo (300 de dano), Trampa = a
+  defensa; también al atacar directo.
+- **Dark Panther**: copia nombre y efecto de un monstruo rival cambiando el índice de su ranura
+  (`efectos/dark_panther.s`); `gancho_fin_control.s` lo devuelve en la End Phase; ATK y DEF propios.
+- **Fusiones**: la tabla de recetas (80 filas) se muda y se agranda (`scripts/ampliar_fusiones.py`,
+  clave `"fusiones"` del JSON de `--cartas`): 25 recetas nuevas, las de materiales con nombre propio.
+  Probado en duelo: Air Neos (Neos + Air Hummingbird), Steam Healer, Tempest (3 materiales).
+Pruebas: `probar_lote.py` en el ROM `(Lote)` y en `(Neo Space)`, 3 corridas cada una, todas
+FUNCIONA; regresión 41 `IGUAL` y 11 `DISTINTA`; las `test_*.py` bien. Quedan sin receta de Fusión
+las de materiales genéricos ("1 monstruo EARTH") y Divine/Cosmo Neos (21 cartas).
+
 **Investigación del 2026-10-12 (noche 3): lo que falta para los Neo-Spacian con efecto.** Sin pieza
 nueva: se ubicó en el ROM original el molde de cada efecto pendiente (Dimensional Warrior, Reflect
 Bounder, The Unhappy Maiden, Ceal, Chaos Necromancer…) y se leyó la máquina de estados de la batalla

@@ -236,3 +236,21 @@ la vio funcionar. Una carta puede ir a un ROM de juego cuando funciona y tiene l
 `build/... (Prueba3).gba`, la versión para jugar (sin cartas ni contraseñas de regalo), trae solo
 Rigorous Reaver, Jowls of Dark Demise, Windstorm of Etaqua, Ready for Intercepting y Dark Necrofear.
 Las piezas nuevas están en `build/... (Lote).gba`.
+
+## Listas de selección ("Select card"): las teclas
+
+Medido el 2026-10-12 con Aqua Dolphin, Dark Panther y Polymerization (`probar_lote.py`,
+`probar_fusion.py`). Con el aviso abierto y el cursor en la pestaña ALL:
+
+| Para | Teclas (70 cuadros entre una y otra) |
+|---|---|
+| Cerrar el aviso | `A` |
+| Elegir **1** carta de una lista | `A` (ALL) `A` (la carta) `RIGHT` × 3 (DECIDE) `A` |
+| Marcar **varias** (Fusion-Material) | `A` (ALL), y por cada carta: `A` (iconos, queda en CHECK) `A` (marca) `DOWN`; después `A` y `RIGHT` × 4 (DECIDE) `A` |
+| Orden de los iconos de la lista | CHECK (solo si se marca), FILTER, SORT, CHANGE VIEW, DECIDE, SEE FIELD |
+| Menú de una Mágica en la mano | arranca en Detail Screen: `UP` × 2 = Activate Effect, `UP` × 1 = Set |
+
+Lo que **no** hay que hacer: pulsar `RIGHT` antes de abrir los iconos (cambia de pestaña de filtro y la
+lista queda vacía). Las funciones: `elegir_en_lista_hasta` (`probar_lote.py`) repite la secuencia hasta
+que el estado de la resolución (`0x020204C6`) llega al que se espera.
+

@@ -1325,3 +1325,28 @@ Cómo se **cancela** una batalla sin calcular daño: `+0xA = 0` y `+0xB = 0`, y 
    8 bytes alineada) sin pisar el literal que hoy compara Reflect Bounder.
 4. Los efectos de las Neo-Spacian sobre cartas que no estén en el árbol de los menús (lista de
    `gancho_lista_campo.s` y `gancho_menu_campo.s`).
+
+### Resultado de implementarlos [PROBADO 2026-10-12]
+
+- **Fases de la batalla (la máquina de `+0xA`)** [PROBADO con un registro cuadro a cuadro de un
+  ataque de la IA]: 0 declaración (6 subestados), 1 ventana de respuesta (6), 2 **cálculo del daño**
+  (5: el LP baja en el subestado 3 o 4), 3 destrucción, 4 envío al cementerio, 5 efectos "después de
+  la batalla" (`FUN_08069E50`) y 6 terminada. La tabla de funciones por fase está en `0x097DFF00`.
+- **El hook en `0x08067E60` ve un cuadro con `+0xB = 0`** (el primero de la fase 2) antes de que
+  nada se calcule. Para dar la batalla por terminada hay que **salir de la función** (no seguir con la
+  original) después de poner `+0xA = 6` y `+0xB = 0`; si no, el daño igual se calcula (se midió: 900 de
+  daño con Mole ya en la mano).
+- **Evento `0x64`** (`FUN_0801B8E0`) termina la Battle Phase de verdad (la fase del turno), no solo
+  la batalla: con Glow Moss la IA deja de atacar ese turno.
+- **Tipos de carta de la ranura** (`+0x30` bits 0–4): `< 0x15` monstruo, **`0x15` Trampa, `0x16`
+  Mágica** (al revés de lo que decía la tabla de ranuras).
+- **`show_confirmation_prompt` toma un ID de mensaje**, no un puntero a texto: no se puede preguntar
+  con un texto propio (por eso Grand Mole se activa sola). Hay que buscar un ID de mensaje del juego
+  que sirva.
+- **Descartar** de la mano: `FUN_08019598(lado, id)` = `A_CEMENTERIO(lado, id, 0xFF)`.
+- **Lista de selección de fusión**: tres pasos (`0x7E` Fusion Deck, `0x7D` aviso, `0x7C` lista de la
+  mano con CHECK), ver `PRUEBAS.md`.
+- **Tabla de fusiones**: `card_type_classifier` hace una bisección por ID de la Fusión sobre filas de
+  16 bytes con tope `movs r4,#0x4F`; 15 literales de la tabla en el código. La zona libre del ROM es
+  **relleno aleatorio**, no ceros: no se puede comprobar que esté vacía, solo que no la use otro.
+

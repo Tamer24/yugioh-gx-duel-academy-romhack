@@ -121,6 +121,7 @@ se escribe `ldr r3, =NOMBRE` y `bl .Lllamar` (con `.Lllamar: bx r3`). Molde list
 | Restringir la selección a un caso | Envolver la `fn_18`: dejarla correr solo para el pedido que corresponde y devolver 1 en los demás | `necrofear_seleccion.s` | [PROBADO] |
 | Selección propia en el campo | Paso 0 = la original (avisa); después B cancela y A graba el id bajo el cursor (`0x02022250 + 0x5668`) con `FUN_08051680(p, id)` | `bagworm_seleccion.s` | [PROBADO] |
 | Elegir de una lista (mano, cementerio) | `0x80`: `CANDIDATAS(lado, ID de una carta original que liste eso, 0)` + `ASK_QUESTION` → `0x7F`: `DIALOGO` abre la lista → `0x7E`: leer lo elegido en `0x02019F24` (y `…28`, `…2C`): `(v & 0x7FFFF) >> 11` = id de ranura | `exchange.s`, `chosen_one.s` | [PROBADO] |
+| Elegir **solo entre algunas cartas** de una mano (p. ej. los monstruos de la mano rival) | En vez de `CANDIDATAS`: `CLEAR_ZONE(6, 0)`, `REGISTRAR(id)` por cada carta que vale y `DIALOGO(0, 1, 0x02019F24, 1)` con los ajustes de `exchange.s`. Dos selecciones seguidas: 0x80 → 0x7F → 0x7E (primera) → 0x7D → 0x7C (segunda) | `aqua_dolphin.s`, `dark_panther.s` | [PROBADO] |
 | Que elija la IA | Si `p[0] & 1` es el rival, no abrir menú: elegir en el código (al azar, el de menor ATK…) | `exchange.s`, `share_the_pain.s` | [PROBADO] |
 | Validar un objetivo | `fn_0C(p, id)`: devuelve 1 si sirve. Ej.: en el campo, del rival y boca arriba | original `0x0802A750` | [ORIGINAL] |
 
@@ -157,6 +158,7 @@ que ya comparte la función suele traer su caso (Minar funcionó sin tocar su `f
 | Cambiar de zona directamente | `MOVER_CARTA(id, lado << 15 \| zona << 10 \| casilla << 4 \| 8 si boca arriba)`. `0x3008` = al mazo | `penguin_knight.s`, `necrofear_posesion.s` | [PROBADO] |
 | Robar | `ROBAR(lado, cantidad)` (`FUN_0801B28C`) | Pot of Greed (`0x0803DFE4`); familia Electric Snake (`0x08039320`) | [ORIGINAL] |
 | Robar del mazo del rival revisando cada carta | Una carta por llamada: devolver `0x7F` mientras queden, con el contador en `0x020204C7` | `hiro_scout.s` | [PROBADO] |
+| **Descartar** una carta de mi mano (coste) | `A_CEMENTERIO(lado, id de ranura, 0xFF)` (es `FUN_08019598`: no anota causante) | `aqua_dolphin.s` | [PROBADO] |
 | Intercambiar dos cartas de mano entre jugadores | Intercambiar los `0x50` bytes de las dos ranuras e invertir el bit de dueño (`+0x32` bit 3). Las listas de mano no se tocan | `exchange.s` | [PROBADO] |
 | Cementerio al mazo | Copiar la lista del cementerio y mover cada carta con `MOVER_CARTA(…, 0x3008)`; después barajar (evento `0x24`) | `penguin_knight.s` (molde: Fiber Jar `0x0804587C`) | [PROBADO] |
 | Tributar un monstruo del rival | `FUN_08010FA4(rival, 0xFF, 3, ranura)` dice cuántos se pueden tributar; después `A_CEMENTERIO` | `share_the_pain.s` | [PROBADO] |
@@ -209,22 +211,40 @@ tipo 1 en su lista. Si el monstruo deja el campo, el motor manda sus equipos al 
 | En la End Phase del turno en que pasó algo | Un gancho en la End Phase busca la carta con su bandera y encola el efecto con un momento propio | `gancho_fin_necrofear.s` | [PROBADO] |
 | Encolar un efecto a mano | `ENCOLAR_EFECTO(lado << 31 \| (momento << 4 \| tipo) << 21 \| id, d \| d << 16)` con `d = (zona y controlador) << 8 \| id` | `gancho_fin_necrofear.s` | [PROBADO] |
 
-### Batalla (investigado, sin pieza todavía) [ROM]
+### Batalla [PROBADO]
 
 Los efectos que ocurren **durante** una batalla no pasan por la tabla de efectos: están en árboles de
-IDs de la máquina de estados de la batalla (`FUN_08066B24`, registro en `0x02020C20`) y de la
-rutina posterior al cálculo (`FUN_08068C8C`). Detalle en `NOTAS-REVERSE.md`, "La batalla y los
-Neo-Spacian".
+IDs de la máquina de estados de la batalla (registro en `0x02020C20`, ver `NOTAS-REVERSE.md`, "La
+batalla y los Neo-Spacian"). La fase en que se calcula el daño es `FUN_08067E60`, y un gancho en su
+entrada (`efectos/gancho_batalla.s`) ve el primer cuadro: atacante y defensor ya están decididos y
+nada se calculó (el "inicio del Damage Step").
 
-| Quiero | Cómo (según el ROM) | Molde | Certeza |
+| Quiero | Cómo | Ejemplo | Certeza |
 |---|---|---|---|
-| Terminar la Battle Phase | `EVENTO(0x64 \| lado << 15, 0, 0)` | The Unhappy Maiden (`0x0803CC10`) | [ORIGINAL] |
-| Cancelar una batalla sin calcular daño | Poner `+0xA` y `+0xB` del registro `0x02020C20` en 0 y volver con 0 | Kiseitai, Reflect Bounder (`0x08067248`) | [ORIGINAL] |
-| Saber atacante y defensor | Registro `0x02020C20`: atacante en `+0` bits 13–20, defensor en `+2` bits 5–12; bit 0 de `+0` = ataque directo | `0x08066B6C` | [ORIGINAL] |
-| Que un monstruo pueda atacar directo este turno | Modificador de tipo 4 con origen Overpowering Eye (6291), o de tipo 1 con origen Ceal (5725), en la lista de la ranura (`FUN_0801F980`) | Overpowering Eye, Ceal | [ORIGINAL] |
-| ATK que depende de una cuenta | Agregar el ID al árbol de `FUN_08012460` (`0x08012746`): poner `[r7 + 4]` y recorrer la lista | Chaos Necromancer (`0x08012934`) | [ORIGINAL] |
-| Efecto al atacar o ser atacado | Un caso por ID en `FUN_08066B24` (estados 0 a 4) o en `FUN_08068C8C` | Dimensional Warrior, Reflect Bounder | [ORIGINAL] |
-| Que una carta se comporte como otra | Cambiar `+0x24` de su ranura (el motor decide por ese ID) | Necrofear en manos del rival (prueba) | [HIP] |
+| Efecto al **atacar o ser atacado**, antes del daño | `efectos/gancho_batalla.s` (gancho en `0x08067E60`): leer atacante `(u32 << 11) >> 24` y defensor `(u16 en +2 << 19) >> 24` del registro y actuar si son la carta. Para dar la batalla por terminada sin calcular: `+0xA = 6`, `+0xB = 0` y salir de la función sin seguir con la original | Glow Moss, Grand Mole | [PROBADO] |
+| **Terminar la Battle Phase** | Llamar `FUN_0801B8E0` (el evento `0x64`: `+1 \|= 0x10`, `+0xA = 6`, `+0xB = 0`) | Glow Moss (rama Monstruo); The Unhappy Maiden | [PROBADO] |
+| **Daño de ataque directo** sin calcular la batalla | `DANIO(lado, ATK)` y dar la batalla por terminada | Glow Moss (rama Magica) | [PROBADO] |
+| **Devolver a la mano** dos monstruos en batalla | `LIMPIAR_ACCIONES`, `ENVIAR(id, lado << 15 \| 4, causante)` por cada uno, `PROCESAR_ACCIONES` | Grand Mole | [PROBADO] |
+| Saber si es un **ataque directo** | Bit 0 del primer byte del registro | Glow Moss | [PROBADO] |
+| Que un monstruo **pueda** atacar directo | Modificador de tipo 4 con origen Overpowering Eye (6291), o de tipo 1 con origen Ceal (5725), en la lista de la ranura (`FUN_0801F980`) | Overpowering Eye, Ceal | [ORIGINAL] |
+| **ATK que depende de una cuenta** | Gancho en `0x0801273C` (`efectos/gancho_atk_cuenta.s`): en ese punto `[r7]` = índice, `[r7+4]` = ATK con su base, `[sp+0x2c]` = ranura y `[sp+0x30]` = máscara. Sumar o poner `[r7+4]` y `[r7+8]` | Flare Scarab (+400 por Mágica/Trampa del rival), Dark Panther (ATK/DEF propios) | [PROBADO] |
+| Que una carta se **comporte y se llame como otra** hasta la End Phase | Cambiar el índice (`+0x24`) de su ranura por el de la otra, poner la bandera 25 de `+0x60` y devolverlo en la End Phase (`gancho_fin_control.s`). El motor decide nombre y efectos por ese índice; ATK y DEF salen del índice, así que hay que corregirlos en el calculador | Dark Panther | [PROBADO] |
+
+El motor recalcula el ATK **en cada cambio de fase y evento**, no en cada cuadro: una prueba que cambia
+la memoria a mano tiene que provocar uno (terminar el turno) antes de leer.
+
+### Cartas de Fusión
+
+La receta de cada Fusión está en una tabla de 16 bytes por fila (`0x17D9678`, ordenada por ID): ID de
+la Fusión, cantidad de materiales (2 o 3) y los IDs. La busca `card_type_classifier` (`0x0804FB3C`)
+por bisección. `scripts/ampliar_fusiones.py` (o la clave `"fusiones"` del JSON de `--cartas`) la muda
+a `0x1F1F000`, cambia sus 15 literales y el tope de la bisección, y agrega recetas
+`{"resultado", "materiales"}`.
+
+| Quiero | Cómo | Ejemplo | Certeza |
+|---|---|---|---|
+| Que una Fusión nueva **se pueda invocar** | Clase `Fusion` en la carta y su receta en `"fusiones"` con materiales por nombre (2 o 3) | `recetas/packs/pack-4.json`: 25 recetas | [PROBADO] en duelo (`scripts/probar_fusion.py`: Air Neos, Steam Healer, Tempest) |
+| Una Fusión con materiales **genéricos** ("1 monstruo EARTH") o de 4 o más | No cabe en el formato: la regla va en código por ID (UFOroid Fighter, Divine Neos) | — | sin hacer |
 
 ### Activación y permanencia
 
