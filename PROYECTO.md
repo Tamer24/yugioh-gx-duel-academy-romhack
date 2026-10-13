@@ -318,6 +318,25 @@ referencias. Este proyecto lo usa así: textos (`0x1800000`), código de `parche
 (`0x1900000`), piezas de `efectos/` (`0x1A00000`), tablas del ROM ampliado
 (`0x1B00000` a `0x1CA7D3C` con 3 cartas) y datos de los sobres (`0x1E00000`).
 
+### 5.9.2 Cartas con efecto de batalla y Fusiones nuevas [PROBADO 2026-10-12]
+
+- **Batalla:** los efectos "al atacar o ser atacado" van en un gancho en `FUN_08067E60`
+  (`efectos/gancho_batalla.s`), que ve el primer cuadro de la fase de daño. Detalle en
+  `NOTAS-REVERSE.md` ("La batalla y los Neo-Spacian") y `ACCIONES.md` ("Batalla").
+- **Calculador de ATK:** un gancho en `0x0801273C` (`efectos/gancho_atk_cuenta.s`) agrega casos de ATK
+  por cuenta; `scripts/test_atk_cuenta.py` lo compara con el ROM sin el gancho (600 casos).
+- **Fusiones:** `scripts/ampliar_fusiones.py` muda la tabla de recetas (`0x17D9678`, 80 filas) a
+  `0x1F1F000`, cambia sus 15 literales y el tope de la bisección; `scripts/test_fusiones.py` la corre
+  en Unicorn y `scripts/probar_fusion.py` la juega en duelo.
+- **Resultado:** los seis Neo-Spacian tienen su efecto (3 corridas en el `(Lote)` y 2 en el
+  `(Neo Space)`, todas FUNCIONA) y 25 Fusiones del pack 4 se invocan.
+- **MD5 de hoy:** `(Lote)` `8a8f09c1855a004f7db126f2b5fd5a68`, `(Neo Space)`
+  `0cca48f004d5776f74f19dcc49a47464` (parche `build/neo-space.bps`).
+- **Límites que quedan:** Grand Mole se activa sola cuando perdería (el juego pregunta solo desde su
+  motor de cadenas); Fusiones con materiales genéricos o de 4 o más; los efectos de los 69 monstruos
+  del pack 4 que los tenían; la IA no usa ninguna de estas cartas; guardar y cargar el baúl ampliado
+  solo se probó en Unicorn.
+
 ### 5.9.1 Tabla de efectos ampliada [PROBADO 2026-10-12]
 
 `scripts/ampliar_efectos.py` (o la clave `"filas_efecto"` de una receta) muda la tabla de efectos
