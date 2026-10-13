@@ -1379,6 +1379,114 @@ def caso_air_hummingbird(ruta_rom, desfase, fotos):
     return res(FUNCIONA, detalle + " Una segunda vez en el mismo turno no hace nada.", estado=estado)
 
 
+def caso_flare_scarab(ruta_rom, desfase, fotos):
+    """ATK por cuenta: +400 por cada Magica o Trampa que controla el rival (caso nuevo en el
+    calculador de ATK, efectos/gancho_atk_cuenta.s). El rival no tiene ninguna en el campo: se
+    escriben a mano entradas en su lista de zonas de Magicas y Trampas (ayuda de prueba) y se
+    mira el ATK que calcula el motor, en mi turno y despues de un turno completo."""
+    carta = "Neo-Spacian Flare Scarab"
+    estado = armar(ruta_rom, "flare-scarab", yo={5: carta},
+                   rival={0: MUERTA, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA},
+                   mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+    a = ranura_de(d, 0, carta)
+    rival_st = LISTA_ZONAS + 11 + 5
+
+    def poner(cuantas):
+        for z in range(5):
+            d.g.w8(rival_st + z, (0x80 | z) if z < cuantas else 0xFF)
+    # El motor recalcula el ATK en cada cambio de fase (no en cada cuadro): 3 cartas del rival,
+    # un cambio de fase y se mira; despues 1 carta y otro cambio.
+    base = d.g.r32(a + 0x28)
+    vistos = [base]
+    poner(3)
+    d.fin_turno(primero=True)
+    d.g.correr(240)
+    vistos.append(d.g.r32(a + 0x28))
+    poner(1)
+    hasta_mi_turno(d)                    # el turno del rival pasa y vuelve el mio: varios cambios de fase
+    d.g.correr(240)
+    vistos.append(d.g.r32(a + 0x28))
+    esperado = [500, 500 + 1200, 500 + 400]
+    foto(d, fotos, "flare-scarab_final")
+    detalle = f"{carta} con 0, 3 y 1 Magicas/Trampas del rival: ATK {vistos}; esperado {esperado}."
+    if vistos == esperado:
+        return res(FUNCIONA, detalle, estado=estado)
+    return res(EN_PARTE if vistos[1] == esperado[1] else NO_FUNCIONA, detalle, f"ATK {vistos}, esperado {esperado}", estado=estado)
+
+
+def elegir_en_lista_hasta(d, hasta):
+    """Lista "Select card" de una carta propia con varios estados: repite A (aviso), A (ALL),
+    A (la carta), RIGHT x 3 (DECIDE) y A hasta que el estado de la resolucion (0x020204C6) llegue
+    a 'hasta'. Devuelve True si llego."""
+    for _ in range(4):
+        for tecla in "A A A RIGHT RIGHT RIGHT A".split():
+            d.tecla(tecla, 70)
+            if d.g.r8(0x020204C6) == hasta:
+                return True
+        d.g.correr(100)
+        if d.g.r8(0x020204C6) == hasta:
+            return True
+    return False
+
+
+def _aqua_dolphin(ruta_rom, desfase, fotos, gana):
+    """Descarta 1 carta de mi mano, mira la mano del rival y elige 1 monstruo. Si controlo un
+    monstruo con ATK igual o mayor lo destruye y le hace 500 de dano; si no, recibo 500."""
+    carta = "Neo-Spacian Aqua Dolphin"
+    del_rival = "Kuriboh" if gana else MUERTA            # 300 de ATK contra los 3000 de Blue-Eyes
+    nombre = "aqua-dolphin-" + ("gana" if gana else "pierde")
+    estado = armar(ruta_rom, nombre, yo={5: carta},
+                   rival={i: del_rival for i in range(5)}, mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+    lp0, mano0, gy0 = d.lp(), len(d.mano()), len(d.zona(0, "d"))
+    rmano0, rgy0 = len(d.mano(1)), len(d.zona(1, "d"))
+    d.mover(y=2)
+    d.mover(x=2 + zona_monstruo(d, 0, carta))
+    d.g.correr(20)
+    d.tecla("A", 60)
+    d.tecla("UP", 30)                     # Activate Effect
+    foto(d, fotos, nombre + "_menu")
+    d.tecla("A", 120)
+    if not elegir_en_lista_hasta(d, 0x7D):
+        return res(NO_FUNCIONA, "no llego a la segunda lista (la del monstruo del rival)",
+                   "no se pudo elegir la carta que se descarta", estado=estado)
+    gy1 = len(d.zona(0, "d"))
+    foto(d, fotos, nombre + "_monstruo")
+    elegir_en_lista_hasta(d, 0x64)
+    d.g.correr(300)
+    foto(d, fotos, nombre + "_final")
+    lp1, mano1, gy2 = d.lp(), len(d.mano()), len(d.zona(0, "d"))
+    rmano1, rgy1 = len(d.mano(1)), len(d.zona(1, "d"))
+    if gana:
+        esperado = (lp0[0], lp0[1] - 500, mano0 - 1, gy0 + 1, rmano0 - 1, rgy0 + 1)
+    else:
+        esperado = (lp0[0] - 500, lp0[1], mano0 - 1, gy0 + 1, rmano0, rgy0)
+    visto = (lp1[0], lp1[1], mano1, gy2, rmano1, rgy1)
+    detalle = (f"{'monstruo debil' if gana else 'monstruo fuerte'} en la mano del rival: "
+               f"(mis LP, LP rival, mi mano, mi cementerio, mano rival, cementerio rival) {visto}; esperado {esperado}.")
+    if visto == esperado:
+        return res(FUNCIONA, detalle, estado=estado)
+    return res(NO_FUNCIONA, detalle, f"{visto}, esperado {esperado}", estado=estado)
+
+
+def caso_aqua_dolphin(ruta_rom, desfase, fotos):
+    a = _aqua_dolphin(ruta_rom, desfase, fotos, gana=False)
+    b = _aqua_dolphin(ruta_rom, desfase, fotos, gana=True)
+    if a["resultado"] == FUNCIONA == b["resultado"]:
+        return res(FUNCIONA, a["detalle"] + " | " + b["detalle"], estado=a.get("estado", ""))
+    malo = a if a["resultado"] != FUNCIONA else b
+    return res(malo["resultado"], a["detalle"] + " | " + b["detalle"], malo["falla"], estado=malo.get("estado", ""))
+
+
 CASOS = {
     "Dark Necrofear": caso_necrofear,
     "Electromagnetic Bagworm": caso_bagworm,
@@ -1394,6 +1502,8 @@ CASOS = {
     "Fairy Guardian": caso_fairy_guardian,
     "Reasoning": caso_reasoning,
     "Neo-Spacian Air Hummingbird": caso_air_hummingbird,
+    "Neo-Spacian Flare Scarab": caso_flare_scarab,
+    "Neo-Spacian Aqua Dolphin": caso_aqua_dolphin,
     "Stim-Pack": lambda r, d, f: _caso_equipo(r, d, f, "Stim-Pack", "Blazing Inpachi", [700, 500], 2),
     "Butterfly Dagger - Elma": lambda r, d, f: _caso_equipo(r, d, f, "Butterfly Dagger - Elma", "Blazing Inpachi", 300),
     "Fusion Sword Murasame Blade": lambda r, d, f: _caso_equipo(r, d, f, "Fusion Sword Murasame Blade", "Axe Raider", 800),

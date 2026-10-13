@@ -93,9 +93,9 @@
       "nivel": 3,
       "atributo": "WATER",
       "tipo": "Warrior",
-      "clase": "Normal",
+      "clase": "Effect",
       "contrasena": "17955766",
-      "descripcion": "A dolphin-like Neo-Spacian from the planet Aqua. It glides through the sea of Neo-Space and sings to its allies.",
+      "descripcion": "Once per turn: You can discard 1 card; look at your opponent's hand and choose 1 monster. If you control a monster with ATK greater than or equal to the ATK of the chosen card, destroy the chosen card, and if you do, inflict 500 damage to your opponent. Otherwise, take 500 damage.",
       "arte": "arte/neo-spacian-aqua-dolphin.png",
       "pack": "pack-3"
     },
@@ -173,9 +173,9 @@
       "nivel": 3,
       "atributo": "FIRE",
       "tipo": "Insect",
-      "clase": "Normal",
+      "clase": "Effect",
       "contrasena": "89621922",
-      "descripcion": "A Neo-Spacian from the planet Flare. Its burning shell glows brighter with every threat that surrounds it.",
+      "descripcion": "Gains 400 ATK for each Spell/Trap Card your opponent controls.",
       "arte": "arte/neo-spacian-flare-scarab.png",
       "pack": "pack-3"
     }
@@ -209,11 +209,20 @@
     "G:08064920:efectos/gancho_fin_necrofear.s",
     "B:0801786E:2BD0:C046",
     "G:080171B0:efectos/gancho_necrofear_equipo.s",
-    "6769:fn_04:efectos/air_hummingbird.s"
+    "6769:fn_04:efectos/air_hummingbird.s",
+    "G:0801273C:efectos/gancho_atk_cuenta.s",
+    "6768:fn_04:efectos/aqua_dolphin.s"
   ],
   "filas_efecto": [
     {
       "id_konami": 6769,
+      "copiar_de": 4435
+    },
+    {
+      "id_konami": 6773
+    },
+    {
+      "id_konami": 6768,
       "copiar_de": 4435
     }
   ]
