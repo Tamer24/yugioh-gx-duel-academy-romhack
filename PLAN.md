@@ -112,6 +112,11 @@ bloque del baúl se guarda compacto (8 bytes por carta) para que entre en la SRA
 cartas de prueba (detalle en duelo, compra en pantalla, guardar/cargar en Unicorn) y las 52 sesiones.
 Detalle en `PROYECTO.md` §9.1.
 
+**Confirmado por Oscar en el ROM Neo Space (2026-10-12):** compró sobres "Neo Space", guardó y volvió a
+cargar sin problema (cierra el pendiente de guardar/cargar el baúl ampliado en emulador real), y metió
+todas las cartas en un mazo y se juega normal. Hallazgo: The Inexperienced Spy muestra la mano entera
+del rival aunque el texto dice mirar 1 carta (ya anotado en PRUEBAS.md; falta elegir una y mostrar solo esa).
+
 **Tanda del 2026-10-12 (noche 4): los seis Neo-Spacian con su efecto, y las Fusiones del pack 4 se
 pueden invocar.** Después de la investigación (siguiente entrada) se implementó todo lo que faltaba:
 - **Flare Scarab**: +400 ATK por Mágica/Trampa del rival. Gancho en el calculador de ATK
