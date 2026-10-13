@@ -30,13 +30,26 @@ _start:
     ldrb  r0, [r4, #0xb]
     cmp   r0, #0
     bne   .Lorig                  @ solo el primer cuadro de la fase
-    ldrb  r0, [r4]
-    movs  r1, #1
-    tst   r0, r1
-    bne   .Lorig                  @ ataque directo: no hay defensor
     ldr   r0, [r4]
     lsls  r0, r0, #11
     lsrs  r5, r0, #24             @ r5 = ranura del atacante
+    ldrb  r0, [r4]
+    movs  r1, #1
+    tst   r0, r1
+    beq   .Lbatalla               @ contra un monstruo
+    @ ataque directo: solo Glow Moss (el efecto dice "si ataca"), y la rama de la Magica no hace nada
+    adds  r0, r5, #0
+    bl    .Lid
+    ldr   r1, =6771
+    cmp   r0, r1
+    bne   .Lorig
+    adds  r0, r5, #0
+    movs  r1, #2                  @ 2 = ataca, y ya es directo
+    bl    .Lmoss
+    cmp   r0, #1
+    beq   .Lsalir
+    b     .Lorig
+.Lbatalla:
     ldrh  r0, [r4, #2]
     lsls  r0, r0, #19
     lsrs  r6, r0, #24             @ r6 = ranura del defensor
@@ -133,7 +146,7 @@ _start:
     pop   {r1}
     bx    r1
 
-@ Glow Moss. r0 = ranura de Glow Moss, r1 = 1 si ataca. Devuelve r0 = 1 si la batalla termino.
+@ Glow Moss. r0 = ranura de Glow Moss, r1 = 1 si ataca a un monstruo, 2 si ataca directo, 0 si la atacan. Devuelve r0 = 1 si la batalla termino.
 .Lmoss:
     push  {r4, r5, r6, r7, lr}
     adds  r4, r0, #0              @ r4 = ranura de Glow Moss
@@ -176,8 +189,8 @@ _start:
     blo   .Lm_monstruo
     beq   .Lm_trampa
     @ Magica
-    cmp   r5, #0
-    beq   .Lm_nada                @ Glow Moss no ataca: no hace nada
+    cmp   r5, #1
+    bne   .Lm_nada                @ Glow Moss no ataca, o ya ataca directo: no hay que cambiar nada
     adds  r0, r4, #0
     bl    .Lslot
     ldr   r1, [r0, #0x28]         @ ATK de Glow Moss
