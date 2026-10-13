@@ -1340,9 +1340,12 @@ Cómo se **cancela** una batalla sin calcular daño: `+0xA = 0` y `+0xB = 0`, y 
   la batalla: con Glow Moss la IA deja de atacar ese turno.
 - **Tipos de carta de la ranura** (`+0x30` bits 0–4): `< 0x15` monstruo, **`0x15` Trampa, `0x16`
   Mágica** (al revés de lo que decía la tabla de ranuras).
-- **`show_confirmation_prompt` toma un ID de mensaje**, no un puntero a texto: no se puede preguntar
-  con un texto propio (por eso Grand Mole se activa sola). Hay que buscar un ID de mensaje del juego
-  que sirva.
+- **`show_confirmation_prompt` (`FUN_08010BBC`) no es una pregunta**: es un contador de cartas por
+  zonas y condiciones (llama a `FUN_08010A30`, que recorre las zonas del campo). El nombre es de
+  Ghidra y esta mal. Probado: llamarla "para preguntar" devuelve > 0 sin mostrar nada. Las preguntas
+  "Activate the effect of ...?" salen del motor de cadenas (ventanas de respuesta), no de una llamada
+  suelta; por eso Grand Mole se activa sola cuando perdería. Sin resolver: cómo encolar un efecto
+  opcional de monstruo para que el juego pregunte.
 - **Descartar** de la mano: `FUN_08019598(lado, id)` = `A_CEMENTERIO(lado, id, 0xFF)`.
 - **Lista de selección de fusión**: tres pasos (`0x7E` Fusion Deck, `0x7D` aviso, `0x7C` lista de la
   mano con CHECK), ver `PRUEBAS.md`.
