@@ -125,9 +125,9 @@
       "nivel": 3,
       "atributo": "EARTH",
       "tipo": "Rock",
-      "clase": "Normal",
+      "clase": "Effect",
       "contrasena": "80344569",
-      "descripcion": "A Neo-Spacian from the planet Ground. It tunnels through the rock of Neo-Space with unstoppable strength.",
+      "descripcion": "At the start of the Damage Step, if this card battles an opponent's monster: You can return both the opponent's monster and this card to the hand.",
       "arte": "arte/neo-spacian-grand-mole.png",
       "pack": "pack-3"
     },
@@ -141,9 +141,9 @@
       "nivel": 3,
       "atributo": "LIGHT",
       "tipo": "Plant",
-      "clase": "Normal",
+      "clase": "Effect",
       "contrasena": "17732278",
-      "descripcion": "A Neo-Spacian from the planet Glow. Its soft light calms those around it, yet it is stronger than it looks.",
+      "descripcion": "If this card attacks or is attacked: Your opponent draws 1 card and shows it, then, based on its type apply this effect. Monster: End the Battle Phase of this turn. Spell: If this card is attacking, you can change it to a direct attack instead. Trap: Change this card to Defense Position.",
       "arte": "arte/neo-spacian-glow-moss.png",
       "pack": "pack-3"
     },
@@ -211,7 +211,8 @@
     "G:080171B0:efectos/gancho_necrofear_equipo.s",
     "6769:fn_04:efectos/air_hummingbird.s",
     "G:0801273C:efectos/gancho_atk_cuenta.s",
-    "6768:fn_04:efectos/aqua_dolphin.s"
+    "6768:fn_04:efectos/aqua_dolphin.s",
+    "G:08067E60:efectos/gancho_batalla.s"
   ],
   "filas_efecto": [
     {
@@ -224,6 +225,12 @@
     {
       "id_konami": 6768,
       "copiar_de": 4435
+    },
+    {
+      "id_konami": 6770
+    },
+    {
+      "id_konami": 6771
     }
   ]
 }

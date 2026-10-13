@@ -1487,6 +1487,129 @@ def caso_aqua_dolphin(ruta_rom, desfase, fotos):
     return res(malo["resultado"], a["detalle"] + " | " + b["detalle"], malo["falla"], estado=malo.get("estado", ""))
 
 
+def poner_en_campo(d, lado, nombre, posicion=0x10, zona=0):
+    """Ayuda de prueba: pasa una carta de la mano de 'lado' a su zona de monstruos (la saca de la
+    lista de la mano, baja el contador de la mano y la anota en la lista de zonas)."""
+    import struct
+    base = J1 if lado else J0
+    s = next(s for s, n in d.mano(lado) if n == nombre)
+    ident = s | (0x80 if lado else 0)
+    lista = base + 0x2824
+    n = (d.g.r8(base + 0x1c) & 0x3F) << 1 | d.g.r8(base + 0x1b) >> 7
+    ids = [d.g.r8(lista + k) for k in range(n)]
+    ids.remove(ident)
+    for k in range(n):
+        d.g.w8(lista + k, ids[k] if k < n - 1 else 0xFF)
+    v = struct.unpack("<Q", bytes(d.g.leer(base + 0x1b, 8)))[0]
+    v = (v & ~(0x7F << 7)) | (((v >> 7) & 0x7F) - 1) << 7
+    for k, b in enumerate(struct.pack("<Q", v)):
+        d.g.w8(base + 0x1b + k, b)
+    a = base + s * 0x50
+    d.g.w8(a + 0x31, d.g.r8(a + 0x31) & 0x0F)         # zona 0: monstruos
+    d.g.w8(a + 0x33, posicion)
+    d.g.w8(LISTA_ZONAS + 11 * lado + zona, ident)
+    return a
+
+
+def _batalla_mia(ruta_rom, desfase, fotos, carta, nombre_estado, top_del_mazo=MUERTA, monstruo="Meteor Dragon"):
+    """Mi segundo turno: 'carta' en mi campo ataca a 'monstruo' (nivel 6, ATK 1800), que el rival
+    no pudo invocar y se pone en su campo a mano (ayuda de prueba). 'top_del_mazo' es la carta que
+    el rival roba cuando se la pide el efecto. Devuelve (None, d), o (res, None) si el escenario no quedo armado."""
+    estado = armar(ruta_rom, nombre_estado, yo={5: carta},
+                   rival={0: monstruo, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA},
+                   mazo_rival={0: MUERTA, 1: top_del_mazo, 2: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado), None
+    d.fin_turno(primero=True)
+    if not hasta_mi_turno(d):
+        return res(SIN_DISPARO, "no volvio mi turno", estado=estado), None
+    if carta not in controla(d, 0):
+        return res(INVALIDA, f"{carta} ya no esta en mi campo ({controla(d, 0)})", estado=estado), None
+    if monstruo not in [n for _, n in d.mano(1)]:
+        return res(INVALIDA, f"el rival jugo {monstruo}", estado=estado), None
+    poner_en_campo(d, 1, monstruo)
+    d.g.correr(60)
+    return None, d
+
+
+def _observar(d, carta, cuadros=1500):
+    """Ataca con 'carta' y anota, cuadro a cuadro, lo que cambia: posicion de la carta, LP, y a
+    donde fueron las cartas. Termina cuando pasan 'cuadros' o vuelve el cursor a la mano."""
+    atacar(d, carta)
+    a = ranura_de(d, 0, carta)
+    vistos = {"pos": set(), "lp": set()}
+    for _ in range(cuadros // 10):
+        d.g.correr(10)
+        if a is not None:
+            vistos["pos"].add(d.g.r8(a + 0x33))
+        vistos["lp"].add(d.lp())
+    d.g.correr(200)
+    return vistos
+
+
+def caso_grand_mole(ruta_rom, desfase, fotos):
+    """Mole ataca a un monstruo de ATK mayor (1800 contra 900): vuelve a la mano con el, sin dano.
+    Despues, atacada por Battle Ox en el turno del rival, lo mismo (la IA ataca sola)."""
+    carta = "Neo-Spacian Grand Mole"
+    err, d = _batalla_mia(ruta_rom, desfase, fotos, carta, "grand-mole")
+    if err:
+        return err
+    lp0 = d.lp()
+    _observar(d, carta)
+    foto(d, fotos, "grand-mole_final")
+    en_mi_mano = carta in [n for _, n in d.mano(0)]
+    en_su_mano = "Meteor Dragon" in [n for _, n in d.mano(1)]
+    campo = (controla(d, 0), controla(d, 1))
+    detalle = (f"{carta} ataca a Meteor Dragon (1800): Mole en mi mano {en_mi_mano}, Meteor Dragon en la mano "
+               f"del rival {en_su_mano}, campos {campo}, LP {lp0} -> {d.lp()}.")
+    if en_mi_mano and en_su_mano and d.lp() == lp0 and campo == ([], []):
+        return res(FUNCIONA, detalle)
+    return res(NO_FUNCIONA, detalle, "no volvieron los dos a la mano sin dano")
+
+
+def _glow_moss(ruta_rom, desfase, fotos, top, esperado_texto):
+    carta = "Neo-Spacian Glow Moss"
+    err, d = _batalla_mia(ruta_rom, desfase, fotos, carta, "glow-moss-" + esperado_texto, top_del_mazo=top)
+    if err:
+        return err, None
+    n_mano = len(d.mano(1))
+    lp0 = d.lp()
+    vistos = _observar(d, carta)
+    foto(d, fotos, "glow-moss_" + esperado_texto)
+    return None, dict(d=d, vistos=vistos, lp0=lp0, mano_antes=n_mano, mano_despues=len(d.mano(1)),
+                      campo=(controla(d, 0), controla(d, 1)), carta=carta)
+
+
+def caso_glow_moss(ruta_rom, desfase, fotos):
+    """Glow Moss ataca a Meteor Dragon (1800): el rival roba 1 carta y la muestra; segun su tipo:
+    Monstruo = termina la Battle Phase (no hay dano ni destruccion); Magica = ataque directo (el
+    rival pierde 300 y la batalla no se calcula); Trampa = Glow Moss pasa a defensa."""
+    detalles, fallas = [], []
+    for top, texto in ((MUERTA, "monstruo"), ("Pot of Greed", "magica"), ("Mirror Force", "trampa")):
+        err, o = _glow_moss(ruta_rom, desfase, fotos, top, texto)
+        if err:
+            return err
+        lp0, lp1 = o["lp0"], o["d"].lp()
+        robo = o["mano_despues"] - o["mano_antes"]
+        pos = o["vistos"]["pos"]
+        detalle = f"{texto}: rival robo {robo} carta(s), LP {lp0} -> {lp1}, posiciones de Glow Moss vistas {sorted(hex(p) for p in pos)}, campos {o['campo']}"
+        detalles.append(detalle)
+        if robo < 1:
+            fallas.append(f"{texto}: el rival no robo")
+        if texto == "monstruo" and not (lp1 == lp0 and o["carta"] in o["campo"][0]):
+            fallas.append("monstruo: tendria que terminar la Battle Phase sin dano")
+        if texto == "magica" and not (lp1[1] == lp0[1] - 300 and lp1[0] == lp0[0] and o["carta"] in o["campo"][0]):
+            fallas.append("magica: tendria que ser un ataque directo de 300")
+        if texto == "trampa" and 0x30 not in pos:
+            fallas.append("trampa: Glow Moss no paso a defensa")
+    if not fallas:
+        return res(FUNCIONA, " | ".join(detalles))
+    return res(EN_PARTE, " | ".join(detalles), "; ".join(fallas))
+
+
 CASOS = {
     "Dark Necrofear": caso_necrofear,
     "Electromagnetic Bagworm": caso_bagworm,
@@ -1504,6 +1627,8 @@ CASOS = {
     "Neo-Spacian Air Hummingbird": caso_air_hummingbird,
     "Neo-Spacian Flare Scarab": caso_flare_scarab,
     "Neo-Spacian Aqua Dolphin": caso_aqua_dolphin,
+    "Neo-Spacian Grand Mole": caso_grand_mole,
+    "Neo-Spacian Glow Moss": caso_glow_moss,
     "Stim-Pack": lambda r, d, f: _caso_equipo(r, d, f, "Stim-Pack", "Blazing Inpachi", [700, 500], 2),
     "Butterfly Dagger - Elma": lambda r, d, f: _caso_equipo(r, d, f, "Butterfly Dagger - Elma", "Blazing Inpachi", 300),
     "Fusion Sword Murasame Blade": lambda r, d, f: _caso_equipo(r, d, f, "Fusion Sword Murasame Blade", "Axe Raider", 800),
