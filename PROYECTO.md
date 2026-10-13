@@ -330,8 +330,8 @@ referencias. Este proyecto lo usa así: textos (`0x1800000`), código de `parche
   en Unicorn y `scripts/probar_fusion.py` la juega en duelo.
 - **Resultado:** los seis Neo-Spacian tienen su efecto (3 corridas en el `(Lote)` y 2 en el
   `(Neo Space)`, todas FUNCIONA) y 25 Fusiones del pack 4 se invocan.
-- **MD5 de hoy:** `(Lote)` `8a8f09c1855a004f7db126f2b5fd5a68`, `(Neo Space)`
-  `0cca48f004d5776f74f19dcc49a47464` (parche `build/neo-space.bps`).
+- **MD5 de hoy:** `(Lote)` `f5ea439aec4ce28e25a03a05e66d55a5`, `(Neo Space)`
+  `7945e895487f51296bda8e690d35c61b` (parche `build/neo-space.bps`; 2026-10-13: Spy al azar y bloque del baul ampliado en `0x02028264`).
 - **Límites que quedan:** Grand Mole se activa sola cuando perdería (el juego pregunta solo desde su
   motor de cadenas); Fusiones con materiales genéricos o de 4 o más; los efectos de los 69 monstruos
   del pack 4 que los tenían; la IA no usa ninguna de estas cartas; guardar y cargar el baúl ampliado
@@ -642,6 +642,13 @@ Son cuatro límites distintos, de más barato a más caro:
    bytes por carta ya no entraba en los 32 KB de la SRAM, se guarda **compacto**: marca + 8 bytes por
    carta (`+0`, `+4` y `+8` del registro: en los 52 estados de prueba el resto es siempre 0); el
    RAM pasa a `0x02032000` (bloque) y `0x02035000` (copia compacta); SRAM `0x6200` a `0x7C7C`.
+   **[CORREGIDO el 2026-10-13]** `0x02032000` estaba en una zona que el juego pone en cero solo
+   (`0x0202B0C0-0x020350BF` al arrancar, hasta `0x0203A8BF` al elegir Continue): las cartas ampliadas
+   se perdian en cada sesion y el guardado siguiente las pisaba. El bloque vive ahora en `0x02028264`
+   (11676 bytes que no cambian en ningun flujo probado); la copia compacta sigue en `0x02035000`,
+   que solo se usa dentro de guardar/cargar. Lo que fallo en la verificacion: "en cero en 52 estados"
+   no distingue una zona libre de una que el juego borra; hay que sembrar un valor (0xA7) y jugar.
+   `scripts/test_baul_ram.py` lo prueba en el emulador.
    Medido con 804 cartas de prueba (2047 en total): `test_ampliado.py` (con el guardado y la carga
    del juego en Unicorn: el bloque vuelve igual con la memoria sucia y sin marca carga en cero), el
    dibujo correcto en la pantalla de detalle de las cartas 1443, 1444, 1700, 1800, 1839 y 2047, y la

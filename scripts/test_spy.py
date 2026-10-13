@@ -17,11 +17,12 @@ ID_SPY = 4848
 BASE_DUELO, LADO = 0x02022250, 0x2B08
 ESTADO = 0x020204C6
 CARTA = 0x02010000
-ESPIAS = {0x0800B89C: "clear_zone", 0x0800B640: "registrar", 0x080875F4: "dialogo", 0x08009094: "bloqueo"}
+AZAR = 0x080E5740
+ESPIAS = {0x080E5740: "azar", 0x0800B89C: "clear_zone", 0x0800B640: "registrar", 0x080875F4: "dialogo", 0x08009094: "bloqueo"}
 RETORNO = 0x03007F00
 
 
-def correr(rom, estado=0x80, mano=(), propio=0, flags=0, bloqueo=0):
+def correr(rom, estado=0x80, mano=(), propio=0, flags=0, bloqueo=0, azar=0):
     uc = Uc(UC_ARCH_ARM, UC_MODE_THUMB)
     uc.mem_map(BASE, 0x2000000)
     uc.mem_write(BASE, bytes(rom.d))
@@ -43,7 +44,7 @@ def correr(rom, estado=0x80, mano=(), propio=0, flags=0, bloqueo=0):
         if dir_ in ESPIAS:
             llamadas.append((ESPIAS[dir_], u.reg_read(UC_ARM_REG_R0), u.reg_read(UC_ARM_REG_R1),
                              u.reg_read(UC_ARM_REG_R2), u.reg_read(UC_ARM_REG_R3)))
-            u.reg_write(UC_ARM_REG_R0, bloqueo if ESPIAS[dir_] == "bloqueo" else 0)
+            u.reg_write(UC_ARM_REG_R0, bloqueo if ESPIAS[dir_] == "bloqueo" else (azar if ESPIAS[dir_] == "azar" else 0))
             u.reg_write(UC_ARM_REG_PC, u.reg_read(UC_ARM_REG_LR))
 
     uc.hook_add(UC_HOOK_CODE, gancho)
@@ -67,14 +68,15 @@ def main():
         fallos += 0 if cond else 1
 
     mano = (0x11, 0x22, 0x33, 0x44, 0x55)
-    print("1. estado 0x80, rival con 5 cartas en mano")
-    r, ll, post = correr(rom, 0x80, mano)
-    reg = [x for x in ll if x[0] == "registrar"]
-    dia = [x for x in ll if x[0] == "dialogo"]
-    comprobar("devuelve 10", r == 10, f"(r0={r})")
-    comprobar("registra las 5 cartas de la mano, en orden", [x[1] for x in reg] == list(mano))
-    comprobar("vacia la zona 6 antes", ll[1] == ("clear_zone", 6, 0, ll[1][3], ll[1][4]) if len(ll) > 1 else False)
-    comprobar("abre el dialogo con (0, 5, 0x02019F24, 0)", dia and dia[0][1:] == (0, 5, 0x02019F24, 0), str(dia))
+    print("1. estado 0x80, rival con 5 cartas en mano: muestra 1 al azar")
+    for az, esperada in ((0, 0x11), (7, 0x33), (0x104, 0x55)):   # 7 % 5 = 2 ; 260 & 0xFF = 4
+        r, ll, post = correr(rom, 0x80, mano, azar=az)
+        reg = [x for x in ll if x[0] == "registrar"]
+        dia = [x for x in ll if x[0] == "dialogo"]
+        comprobar(f"azar {az:#x}: devuelve 10 y registra solo {esperada:#x}",
+                  r == 10 and [x[1] for x in reg] == [esperada], f"(r0={r}, {[hex(x[1]) for x in reg]})")
+    comprobar("vacia la zona 6 antes", ll[1][:3] == ("clear_zone", 6, 0) or ll[0][:3] == ("clear_zone", 6, 0), str(ll[:2]))
+    comprobar("abre el dialogo con (0, 1, 0x02019F24, 0)", dia and dia[0][1:] == (0, 1, 0x02019F24, 0), str(dia))
     comprobar("ajusta los tres bytes como Telescope", post == (0x3F, 0xFC, 0xF2), str(tuple(hex(x) for x in post)))
 
     print("2. estado 0x80, mano vacia")
@@ -94,7 +96,7 @@ def main():
     print("5. el otro lado (el jugador es el rival)")
     r, ll, post = correr(rom, 0x80, (0xA1, 0xA2), propio=1)
     reg = [x[1] for x in ll if x[0] == "registrar"]
-    comprobar("lee la mano del lado contrario", r == 10 and reg == [0xA1, 0xA2], str([hex(x) for x in reg]))
+    comprobar("lee la mano del lado contrario", r == 10 and len(reg) == 1 and reg[0] in (0xA1, 0xA2), str([hex(x) for x in reg]))
 
     print("6. bloqueo del motor (FUN_08009094 distinto de 0)")
     r, ll, post = correr(rom, 0x80, mano, bloqueo=1)

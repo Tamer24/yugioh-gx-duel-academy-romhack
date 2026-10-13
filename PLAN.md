@@ -112,10 +112,17 @@ bloque del baúl se guarda compacto (8 bytes por carta) para que entre en la SRA
 cartas de prueba (detalle en duelo, compra en pantalla, guardar/cargar en Unicorn) y las 52 sesiones.
 Detalle en `PROYECTO.md` §9.1.
 
-**Confirmado por Oscar en el ROM Neo Space (2026-10-12):** compró sobres "Neo Space", guardó y volvió a
-cargar sin problema (cierra el pendiente de guardar/cargar el baúl ampliado en emulador real), y metió
-todas las cartas en un mazo y se juega normal. Hallazgo: The Inexperienced Spy muestra la mano entera
-del rival aunque el texto dice mirar 1 carta (ya anotado en PRUEBAS.md; falta elegir una y mostrar solo esa).
+**CORREGIDO 2026-10-13: el bloque del baul ampliado se perdia en RAM.** El juego pone en cero
+`0x0202B0C0-0x020350BF` al arrancar (cuadros 13-15 despues del reinicio) y `0x0202B0C0-0x0203A8BF` al
+elegir Continue y en los menus; el bloque estaba en `0x02032000`: las cartas 1201 en adelante se
+cargaban de la SRAM y se borraban antes de llegar al menu, y el siguiente guardado las pisaba con ceros.
+Los chequeos anteriores ("en cero en 52 estados") no lo veian: poner en cero lo que ya es cero no se
+nota. Nuevo lugar `0x02028264` (11676 bytes) elegido sembrando 0xA7 y jugando (arranque, Continue, los
+iconos del menu, guardar, ~190 estados con teclas): no cambia nunca. `scripts/test_baul_ram.py` lo
+prueba en el emulador (arrancar, Continue, guardar, reiniciar, menus). Las partidas guardadas con el
+ROM anterior perdieron las cartas ampliadas que hubieran comprado; las demas estan bien.
+La Inexperienced Spy ahora muestra 1 carta al azar de la mano rival (el texto dice elegir 1, pero la
+lista del motor muestra el nombre de todas las candidatas; funciona como Inspection).
 
 **Tanda del 2026-10-12 (noche 4): los seis Neo-Spacian con su efecto, y las Fusiones del pack 4 se
 pueden invocar.** Después de la investigación (siguiente entrada) se implementó todo lo que faltaba:

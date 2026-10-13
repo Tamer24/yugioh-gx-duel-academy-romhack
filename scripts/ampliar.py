@@ -145,7 +145,12 @@ fin:
 # --- el baul de las cartas 1201 en adelante ---------------------------------------------------
 BAUL = 0x02000000
 FIN_BAUL = BAUL + 12 * N_CARTAS             # 0x02003840: donde caeria la carta 1201
-BLOQUE = 0x02032000                         # RAM libre: 0x02030664 a 0x0203B108 en cero en 52 estados
+# OJO: 0x02032000 (el primer lugar) se borraba solo: el juego pone en cero 0x0202B0C0-0x020350BF al
+# arrancar y 0x0202B0C0-0x0203A8BF al elegir Continue y en los menus. Que valga cero en 52 estados no
+# prueba nada (borrar lo que ya es cero no se ve). Este lugar se eligio sembrando 0xA7 y jugando:
+# arranque, Continue, todos los iconos del menu, guardar y ~190 estados de duelo/tienda con teclas
+# (scripts/test_baul_ram.py). 0x02028264-0x0202B000 son 11676 bytes que no cambian nunca.
+BLOQUE = 0x02028264
 BLOQUE_BYTES = 4 + 12 * EXTRA + 4           # marca + EXTRA cartas de 12 bytes + 4 del ultimo campo
 COMPACTO = 0x02035000                       # el bloque como se guarda en la SRAM: marca + 8 bytes por carta
 COMPACTO_BYTES = 4 + 8 * EXTRA              # {u16 +0, u16 +4, u32 +8} de cada registro; el resto es siempre 0
