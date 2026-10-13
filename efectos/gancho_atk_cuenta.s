@@ -1,7 +1,10 @@
 @ Gancho en FUN_08012460 (0x0801273C), el calculador de ATK/DEF: casos de ATK que dependen de una
 @ cuenta y que el motor resuelve por el ID de la propia carta (como Chaos Necromancer, 5827).
 @
-@ Hoy atiende una carta:
+@ Hoy atiende dos cartas:
+@  - Neo-Spacian Dark Panther (6772) mientras copia a otro monstruo (bandera 25 de +0x60, la pone
+@    efectos/dark_panther.s): el motor le calcularia el ATK y la DEF del copiado porque su indice
+@    cambio; el texto solo copia el nombre y el efecto, asi que se le dejan 1000 y 500.
 @  - Neo-Spacian Flare Scarab (6773): +400 ATK por cada Magica o Trampa que controla el rival
 @    (zonas 5 a 10 del campo del rival, boca arriba o boca abajo; 0xFF = vacia).
 @
@@ -18,6 +21,28 @@
     .global _start
 _start:
     push  {r3, r4, r5, r6}        @ el salto del gancho pisa r3; el resto es de trabajo
+    ldr   r0, [sp, #0x2c + 16]    @ ranura de la carta
+    movs  r1, #0x7f
+    ands  r1, r0
+    movs  r2, #0x50
+    muls  r1, r2, r1
+    lsrs  r0, r0, #7
+    ldr   r2, =0x00002B08
+    muls  r0, r2, r0
+    adds  r0, r0, r1
+    ldr   r2, =0x02022250
+    adds  r0, r0, r2              @ direccion de la ranura
+    movs  r1, #0x60
+    ldr   r1, [r0, r1]            @ banderas
+    lsls  r1, r1, #6              @ bit 25 al bit 31
+    bpl   .Lsin_copia
+    movs  r1, #0xfa
+    lsls  r1, r1, #2              @ 1000
+    str   r1, [r7, #4]
+    movs  r1, #0xfa
+    lsls  r1, r1, #1              @ 500
+    str   r1, [r7, #8]
+.Lsin_copia:
     ldr   r1, =0x087A8624         @ indice -> ID de Konami
     ldrh  r2, [r7]
     lsls  r0, r2, #1

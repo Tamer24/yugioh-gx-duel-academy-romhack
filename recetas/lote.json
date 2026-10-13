@@ -157,9 +157,9 @@
       "nivel": 3,
       "atributo": "DARK",
       "tipo": "Beast",
-      "clase": "Normal",
+      "clase": "Effect",
       "contrasena": "43237273",
-      "descripcion": "A Neo-Spacian from the planet Dark. It stalks its prey in the shadows of Neo-Space and strikes without a sound.",
+      "descripcion": "Once per turn: You can target 1 face-up monster your opponent controls; until the End Phase, this card's name becomes that monster's original name, also replace this effect with that monster's original effects (if any).",
       "arte": "arte/neo-spacian-dark-panther.png",
       "pack": "pack-3"
     },
@@ -212,7 +212,8 @@
     "6769:fn_04:efectos/air_hummingbird.s",
     "G:0801273C:efectos/gancho_atk_cuenta.s",
     "6768:fn_04:efectos/aqua_dolphin.s",
-    "G:08067E60:efectos/gancho_batalla.s"
+    "G:08067E60:efectos/gancho_batalla.s",
+    "6772:fn_04:efectos/dark_panther.s"
   ],
   "filas_efecto": [
     {
@@ -231,6 +232,10 @@
     },
     {
       "id_konami": 6771
+    },
+    {
+      "id_konami": 6772,
+      "copiar_de": 4435
     }
   ]
 }

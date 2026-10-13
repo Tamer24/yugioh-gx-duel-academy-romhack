@@ -60,4 +60,5 @@ _start:
     .hword 5202                   @ Fairy Guardian
     .hword 6769                   @ Neo-Spacian Air Hummingbird
     .hword 6768                   @ Neo-Spacian Aqua Dolphin
+    .hword 6772                   @ Neo-Spacian Dark Panther
     .hword 0

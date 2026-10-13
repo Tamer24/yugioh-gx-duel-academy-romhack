@@ -1610,6 +1610,61 @@ def caso_glow_moss(ruta_rom, desfase, fotos):
     return res(EN_PARTE, " | ".join(detalles), "; ".join(fallas))
 
 
+def caso_dark_panther(ruta_rom, desfase, fotos):
+    """Una vez por turno copia el nombre y el efecto de un monstruo boca arriba del rival hasta la
+    End Phase (se cambia el indice de la ranura; ATK y DEF siguen siendo los propios)."""
+    carta, rival = "Neo-Spacian Dark Panther", "Battle Ox"
+    estado = armar(ruta_rom, "dark-panther", yo={5: carta},
+                   rival={0: rival, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA}, mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+    poner_en_campo(d, 1, rival)
+    d.g.correr(60)
+    a = ranura_de(d, 0, carta)
+    indice = lambda: d.g.r16(a + 0x24) & 0x7FFF
+    propio = indice()
+    atk0 = d.g.r32(a + 0x28)
+    d.mover(y=2)
+    d.mover(x=2 + zona_monstruo(d, 0, carta))
+    d.g.correr(20)
+    d.tecla("A", 60)
+    d.tecla("UP", 30)
+    foto(d, fotos, "dark-panther_menu")
+    d.tecla("A", 120)
+    copiada = None
+    for _ in range(4):
+        for tecla in "A A A RIGHT RIGHT RIGHT A".split():
+            d.tecla(tecla, 70)
+            if indice() != propio:
+                break
+        d.g.correr(100)
+        if indice() != propio:
+            break
+    copiada = d.rom.nombre(indice())
+    d.g.correr(120)
+    foto(d, fotos, "dark-panther_copiando")
+    atk1 = d.g.r32(a + 0x28)
+    def_1 = d.g.r32(a + 0x2C)
+    if copiada != rival:
+        return res(NO_FUNCIONA, f"no copio a {rival}: la carta es {copiada}", "no copia el nombre", estado=estado)
+    d.fin_turno(primero=True)
+    d.g.correr(600)
+    vuelta = d.rom.nombre(indice())
+    detalle = (f"{carta} copia a {rival}: nombre {copiada}, ATK {atk0} -> {atk1}, DEF {def_1}; "
+               f"despues de la End Phase: {vuelta}.")
+    fallas = []
+    if atk1 != 1000 or def_1 != 500:
+        fallas.append(f"ATK/DEF {atk1}/{def_1}, esperado 1000/500")
+    if vuelta != carta:
+        fallas.append("no recupera su nombre en la End Phase")
+    if not fallas:
+        return res(FUNCIONA, detalle, estado=estado)
+    return res(EN_PARTE, detalle, "; ".join(fallas), estado=estado)
+
+
 CASOS = {
     "Dark Necrofear": caso_necrofear,
     "Electromagnetic Bagworm": caso_bagworm,
@@ -1628,6 +1683,7 @@ CASOS = {
     "Neo-Spacian Flare Scarab": caso_flare_scarab,
     "Neo-Spacian Aqua Dolphin": caso_aqua_dolphin,
     "Neo-Spacian Grand Mole": caso_grand_mole,
+    "Neo-Spacian Dark Panther": caso_dark_panther,
     "Neo-Spacian Glow Moss": caso_glow_moss,
     "Stim-Pack": lambda r, d, f: _caso_equipo(r, d, f, "Stim-Pack", "Blazing Inpachi", [700, 500], 2),
     "Butterfly Dagger - Elma": lambda r, d, f: _caso_equipo(r, d, f, "Butterfly Dagger - Elma", "Blazing Inpachi", 300),

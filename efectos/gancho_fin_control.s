@@ -10,6 +10,10 @@
 @   - la entrada no esta marcada "saltear" (nibble alto del tipo): si lo esta, se desmarca.
 @ Al devolverlo quita la entrada con FUN_0800F050(ranura, 5).
 @
+@ Ademas, antes de todo eso: si el monstruo lleva la bandera 25 (la pone Neo-Spacian Dark Panther
+@ al copiar a otro monstruo, efectos/dark_panther.s), le devuelve su indice de Dark Panther y
+@ quita la bandera: "hasta la End Phase".
+@
 @ Entrada: r0 = r4 = id de ranura del monstruo. Puede usar r0-r3, ip y lr.
 
     .syntax unified
@@ -17,6 +21,31 @@
     .text
     .global _start
 _start:
+    movs  r1, #25                 @ Dark Panther copiando: devolverle su indice
+    ldr   r3, =TIENE_BANDERA
+    bl    .Lllamar
+    lsls  r0, r0, #0x10
+    beq   .Lsin_copia
+    push  {r5}
+    adds  r0, r4, #0
+    bl    .Lranura
+    adds  r5, r0, #0              @ r5 = ranura del monstruo
+    ldr   r0, =6772               @ ID de Neo-Spacian Dark Panther
+    ldr   r3, =0x080DD72D         @ get_ordinal_id: ID -> indice
+    bl    .Lllamar
+    ldrh  r1, [r5, #0x24]
+    lsrs  r1, r1, #15
+    lsls  r1, r1, #15             @ conserva el bit 15 del indice
+    orrs  r1, r0
+    strh  r1, [r5, #0x24]
+    movs  r0, #0x3c               @ quita la bandera 25
+    adds  r1, r4, #0
+    movs  r2, #25
+    ldr   r3, =EVENTO
+    bl    .Lllamar
+    pop   {r5}
+.Lsin_copia:
+    adds  r0, r4, #0
     movs  r1, #0x15
     ldr   r3, =0x0800E159         @ FUN_0800E158(ranura, bandera)
     bl    .Lllamar
