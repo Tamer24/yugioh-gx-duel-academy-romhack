@@ -78,8 +78,24 @@ def main(carpeta):
             "id_konami": kid, "id_real": real, "nombre": n, "atk": c["atk"], "def": c["def"], "nivel": c["level"],
             "atributo": c["attribute"], "tipo": c["race"], "clase": clase,
             "contrasena": str(c["id"]), "descripcion": desc, "arte": ruta}})
+    # recetas de fusion: solo las de materiales con nombre propio (2 o 3) que el juego tiene
+    conocidos = set(en_juego) | {c["carta"]["nombre"].lower() for c in cartas}
+    lote = json.load(open(os.path.join(RAIZ, "recetas/lote.json"), encoding="utf-8"))
+    conocidos |= {c["nombre"].lower() for c in lote["cartas"] if "nombre" in c}
+    fusiones, sin_receta = [], []
+    for c in cartas:
+        c = c["carta"]
+        if c["clase"] != "Fusion":
+            continue
+        partes = [p.strip() for p in c["descripcion"].split(" + ")]
+        nombres = [nombre_juego(p.strip('"').strip()) for p in partes]
+        if 2 <= len(nombres) <= 3 and all(n.lower() in conocidos for n in nombres):
+            fusiones.append({"resultado": c["nombre"], "materiales": nombres})
+        else:
+            sin_receta.append(c["nombre"])
+    print(len(fusiones), "recetas de fusion;", len(sin_receta), "sin receta:", ", ".join(sin_receta))
     sal = os.path.join(RAIZ, "recetas/packs/pack-4.json")
-    json.dump({"pack": "pack-4", "estado": "borrador",
+    json.dump({"pack": "pack-4", "estado": "borrador", "fusiones": fusiones,
                "nota": "Elemental Hero y Neo-Spacian que el juego nunca tuvo; se aplica sobre el ROM ampliado con ampliar.py --cartas. Los que tenian efecto entran sin el (texto lo dice).",
                "cartas": cartas}, open(sal, "w"), indent=2, ensure_ascii=False)
     print(len(cartas), "cartas ->", sal)

@@ -604,7 +604,7 @@ def main(argv):
     original, rom = Rom(argv[0]), Rom(argv[1])
     if cuantas is None:
         cuantas = 0 if ruta_cartas else 1
-    nuevas = []
+    nuevas, d = [], None
     if ruta_cartas:
         import json
         d = json.load(open(ruta_cartas, encoding="utf-8"))
@@ -616,6 +616,10 @@ def main(argv):
         for hecho in sobres.aplicar(rom, json.load(open(ruta_sobres, encoding="utf-8"))["sobres"]):
             print(f"sobre {hecho['sobre']} ({hecho['nombre']}): "
                   + ", ".join(f"{len(v)} {r}" for r, v in hecho["listas"].items() if v))
+    if ruta_cartas and isinstance(d, dict) and d.get("fusiones"):
+        import ampliar_fusiones
+        n = ampliar_fusiones.aplicar(rom, d["fusiones"])
+        print(f"tabla de fusiones: {n} filas ({len(d['fusiones'])} recetas nuevas)")
     open(argv[2], "wb").write(rom.d)
     print(f"{argv[2]}: {rom.n} cartas (capacidad {rom.CAPACIDAD}); tablas nuevas en {AMPLIADO:07X}-{fin:07X}")
     for i, nombre, cid, donde in informe:

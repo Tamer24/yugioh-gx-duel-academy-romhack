@@ -1,6 +1,188 @@
 {
   "pack": "pack-4",
   "estado": "borrador",
+  "fusiones": [
+    {
+      "resultado": "Elemental Hero Rampart Blaster",
+      "materiales": [
+        "Elemental Hero Clayman",
+        "Elemental Hero Burstinatrix"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Tempest",
+      "materiales": [
+        "Elemental Hero Avian",
+        "Elemental Hero Sparkman",
+        "Elemental Hero Bubbleman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Wildedge",
+      "materiales": [
+        "Elemental Hero Wildheart",
+        "Elemental Hero Bladedge"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Mudballman",
+      "materiales": [
+        "Elemental Hero Bubbleman",
+        "Elemental Hero Clayman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Steam Healer",
+      "materiales": [
+        "Elemental Hero Burstinatrix",
+        "Elemental Hero Bubbleman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Wild Wingman",
+      "materiales": [
+        "Elemental Hero Wildheart",
+        "Elemental Hero Avian"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Necroid Shaman",
+      "materiales": [
+        "Elemental Hero Wildheart",
+        "Elemental Hero Necroshade"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Phoenix Enforcer",
+      "materiales": [
+        "Elemental Hero Avian",
+        "Elemental Hero Burstinatrix"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Shining Phoenix Enforcer",
+      "materiales": [
+        "Elemental Hero Phoenix Enforcer",
+        "Elemental Hero Sparkman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Mariner",
+      "materiales": [
+        "Elemental Hero Bubbleman",
+        "Elemental Hero Avian"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Terra Firma",
+      "materiales": [
+        "Elemental Hero Ocean",
+        "Elemental Hero Woodsman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Dark Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Dark Panther"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Aqua Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Aqua Dolphin"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Flare Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Flare Scarab"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Glow Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Glow Moss"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Air Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Air Hummingbird"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Grand Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Grand Mole"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Inferno",
+      "materiales": [
+        "Elemental Hero Heat",
+        "Elemental Hero Lady Heat"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Marine Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Marine Dolphin"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Darkbright",
+      "materiales": [
+        "Elemental Hero Sparkman",
+        "Elemental Hero Necroshade"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Magma Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Flare Scarab",
+        "Neo-Spacian Grand Mole"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Plasma Vice",
+      "materiales": [
+        "Elemental Hero Sparkman",
+        "Elemental Hero Bladedge"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Chaos Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Dark Panther",
+        "Neo-Spacian Glow Moss"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Storm Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Air Hummingbird",
+        "Neo-Spacian Aqua Dolphin"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Nebula Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Grand Mole",
+        "Neo-Spacian Dark Panther"
+      ]
+    }
+  ],
   "nota": "Elemental Hero y Neo-Spacian que el juego nunca tuvo; se aplica sobre el ROM ampliado con ampliar.py --cartas. Los que tenian efecto entran sin el (texto lo dice).",
   "cartas": [
     {
