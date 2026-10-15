@@ -113,7 +113,7 @@ CARTAS = [
     ("Mágicas", "The Inexperienced Spy",
      dict(yo={2: "The Inexperienced Spy"}),
      "Activala (menú de la carta, *Activate Effect*).",
-     "Se muestran las cartas de la mano del rival: Penguin Soldier, Dekoichi, Fusion Sage, Snatch Steal y Hane-Hane."),
+     "Se muestra 1 carta al azar de la mano del rival (una de Penguin Soldier, Dekoichi, Fusion Sage, Snatch Steal o Hane-Hane). `B` cierra la lista y la carta va al cementerio."),
     ("Mágicas", "Exchange",
      dict(yo={2: "Exchange"}),
      "Activala. `A` en el aviso, `A` sobre *ALL*, `A` sobre una carta, icono de la mano que apunta (*DECIDE*, el "

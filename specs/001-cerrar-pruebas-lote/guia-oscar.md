@@ -53,7 +53,7 @@ Para tener en cuenta:
 
 | N.º | Carta | Estado | Pasos | Qué deberías ver |
 |---|---|---|---|---|
-| 15 | The Inexperienced Spy | `estados/revisar/15-the-inexperienced-spy.ss1` | Activala (menú de la carta, *Activate Effect*). | Se muestran las cartas de la mano del rival: Penguin Soldier, Dekoichi, Fusion Sage, Snatch Steal y Hane-Hane. |
+| 15 | The Inexperienced Spy | `estados/revisar/15-the-inexperienced-spy.ss1` | Activala (menú de la carta, *Activate Effect*). | Se muestra 1 carta al azar de la mano del rival (una de Penguin Soldier, Dekoichi, Fusion Sage, Snatch Steal o Hane-Hane). `B` cierra la lista y la carta va al cementerio. |
 | 16 | Exchange | `estados/revisar/16-exchange.ss1` | Activala. `A` en el aviso, `A` sobre *ALL*, `A` sobre una carta, icono de la mano que apunta (*DECIDE*, el 4.º), `A`. | Esa carta pasa a tu mano y una tuya, al azar, a la del rival. |
 | 17 | Chosen One | `estados/revisar/17-chosen-one.ss1` | Activala y marcá 1 monstruo (Darkfire Soldier #2) y 2 Mágicas o Trampas (Trap Hole y Dian Keto). | El rival saca una al azar. Si es el monstruo, se invoca y las otras 2 van al cementerio; si no, las 3. |
 | 18 | Seal of the Ancients | `estados/revisar/18-seal-of-the-ancients.ss1` | Turno 1: invocá a Darkfire Soldier #2 y terminá. El rival coloca cartas boca abajo. Turno 2: activala. | Pagás 1000 LP y ves, en destellos rápidos, qué son las cartas boca abajo del rival. |
