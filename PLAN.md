@@ -57,7 +57,7 @@ Dark-Eyes Illusionist, Windstorm of Etaqua, Magic Drain). **A las otras 24 les f
 solo la confirmación a ojo de Oscar**: la revisión por capturas no la reemplaza (Principio IV). Kunai
 with Chain la tenía y volvió a pendiente porque ahora hace algo más.
 
-ROM de trabajo: `build/…(Lote).gba` (MD5 `c693b77264d2f53a8e0b0113c4ffa4fc` desde el 2026-10-12, con la tabla de efectos ampliada y Air Hummingbird con efecto; antes `d017f31b380fcb73fd85b639ac52781c` con el pack 3 (Neo-Spacian), y antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`, con el dibujo chico de Elemental Hero Neos, y `0ce9fa0e…` y, con las 30, `c1b1289a…`), armado con
+ROM de trabajo: `build/…(Lote).gba` (MD5 `f5ea439aec4ce28e25a03a05e66d55a5` desde el 2026-10-13, con Spy al azar y el bloque del baúl ampliado en `0x02028264`; antes `c693b77264d2f53a8e0b0113c4ffa4fc` con la tabla de efectos ampliada y Air Hummingbird con efecto; antes `d017f31b380fcb73fd85b639ac52781c` con el pack 3 (Neo-Spacian), y antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`, con el dibujo chico de Elemental Hero Neos, y `0ce9fa0e…` y, con las 30, `c1b1289a…`), armado con
 `scripts/construir_lote.sh`. Después de rearmarlo: las pruebas `scripts/test_*.py`
 (`test_modificadores.py` pide además `datos/volcado_goddess`), `probar_lote.py`, `probar_trampas.py` y
 `scripts/repetir_sesion.py ROM evidencia/ronda*/*`, **de a un proceso por vez** (ver "Lo que NO
@@ -273,7 +273,8 @@ sobres", y en `PROYECTO.md` §5.5):
    proyecto: el ROM armó, las 30 anteriores siguieron andando y Stim-Pack funcionó sin tocar nada
    (+700 ATK, equipada). Las 142 recortadas ya están clasificadas en `datos/triage_recortadas.csv`.
    **Quedan 7 huecos seguros** (eran 20; el pack 2 usó 6, el pack 3 otros 6 y Neos 1) para esas 142: es el límite real de cuántas cartas más entran sin
-   decidir qué monstruos Normales se sacrifican o ampliar las 1200. Después, por cada carta,
+   decidir qué monstruos Normales se sacrifican o pasar al ROM ampliado (hecho el 2026-10-12, hasta 2047
+   cartas; ver Decisiones tomadas). Después, por cada carta,
    descomponer el texto de la carta en acciones y buscarlas en **`ACCIONES.md`** (el recetario: qué se
    llama para ver la mano del rival, sumar o restar ATK, mover una carta, tomar el control, equipar,
    dispararse sola...). Lo que ya está ahí se copia; solo se investiga lo que falta, y al terminar
@@ -391,7 +392,11 @@ liberar uno), que es solo datos, o se agrega el lugar 49, que es tocar unos 30 p
 
 ### Decisiones tomadas
 
-- Seguir **reemplazando** monstruos Normales; no ampliar las 1200 cartas por ahora.
+- ~~Seguir reemplazando monstruos Normales; no ampliar las 1200 cartas por ahora.~~ **Superada el
+  2026-10-12:** el ROM ampliado (hasta 2047 cartas, `scripts/ampliar.py`) existe y lo usa el ROM
+  `(Neo Space)` con el pack 4. Conviven dos líneas: `(Lote)`, que reemplaza Normales, y `(Neo Space)`,
+  ampliado. **[DECIDIR]** sobre cuál se arma la versión de juego (`armar_version.py` hoy parte del
+  `(Lote)`).
 - El ROM original no se toca; se distribuye `.bps`.
 - Una carta no entra al hack sin prueba en duelo.
 

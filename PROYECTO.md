@@ -1,6 +1,6 @@
 # Duel Academy Romhack: documento de proyecto
 
-Estado al **2026-10-09**. Reúne todo lo aprendido y dónde está el trabajo, para
+Estado al **2026-10-13** (cabecera revisada el 2026-10-15; cada sección lleva su fecha). Reúne todo lo aprendido y dónde está el trabajo, para
 usarlo como contexto de entrada de Spec Kit. El detalle byte a byte sigue en
 `NOTAS-REVERSE.md`; las instrucciones de prueba, en `PRUEBAS.md`.
 
@@ -44,9 +44,10 @@ Estas definen el alcance y no están tomadas:
 2. **Cartas restauradas vs. cartas nuevas:** **decidido por Oscar el 2026-10-11: también cartas
    que el juego nunca tuvo.** La primera es Elemental Hero Neos (monstruo Normal, solo datos).
    Las nuevas con efecto llevan una fila nueva en la tabla de efectos ampliada (§5.9.1).
-3. **Reemplazar o ampliar:** hoy cada carta restaurada pisa un monstruo Normal.
-   Pasar de 1200 cartas exige agrandar varias tablas y el guardado: está hecho en un ROM
-   experimental aparte, `(Ampliado)` (§9.1). Falta decidir si pasa a ser el ROM de trabajo.
+3. **Reemplazar o ampliar:** en el `(Lote)` cada carta restaurada pisa un monstruo Normal.
+   Pasar de 1200 cartas exige agrandar varias tablas y el guardado: está hecho (hasta 2047 cartas,
+   §9.1) y desde el 2026-10-12 lo usa el ROM `(Neo Space)` con el pack 4. Falta decidir sobre cuál
+   de los dos se arma la versión de juego.
 4. **Idioma:** dejar el inglés o traducir textos (los nombres y descripciones
    ya se pueden reubicar sin límite de largo).
 5. **Cómo se consiguen las cartas nuevas:** sobres, contraseñas, premios. Desde el 2026-10-12 se
@@ -84,8 +85,9 @@ Restricciones técnicas duras:
 
 - Procesador ARM7TDMI, código en Thumb. Los efectos de las cartas son C
   compilado, no datos: un efecto nuevo es código ensamblador.
-- 1200 cartas fijas; tabla de efectos de 901 filas con el tope escrito en el
-  código.
+- En el ROM original, 1200 cartas fijas y tabla de efectos de 901 filas con el tope escrito en
+  el código. Desde el 2026-10-12 las dos se superan con `ampliar.py` y `ampliar_efectos.py`; el tope
+  duro que queda son 2047 cartas (índices de 11 bits).
 - `keystone-engine` ya no hace falta: no tiene paquete para el Python de la Mac de Oscar (3.14) y
   `parches.py` ensambla las mismas fuentes con las binutils de ARM (`brew install
   arm-none-eabi-binutils`). Comprobado el 2026-10-11: las recetas dan los mismos MD5 que los ROMs
@@ -288,7 +290,8 @@ Comprobado: Blue-Eyes da 89631139. La compra está en `FUN_080D5EE0` (resta
 | `0x080D5EE0` | Compra por contraseña |
 | `0x0800F898` | Devuelve los flags que se copian al baúl |
 
-`yugiohgx-da` trae un `ghidra_functions.json` con 241 funciones nombradas.
+`yugiohgx-da` trae un `ghidra_functions.json` con 3862 direcciones de función, 243 con nombre
+propio (el resto `FUN_…`); copia en `ghidra/nombres_yugiohgx-da.json`.
 
 ### 5.8 Memoria durante el juego [ROM]
 
@@ -334,8 +337,11 @@ referencias. Este proyecto lo usa así: textos (`0x1800000`), código de `parche
   `7945e895487f51296bda8e690d35c61b` (parche `build/neo-space.bps`; 2026-10-13: Spy al azar y bloque del baul ampliado en `0x02028264`).
 - **Límites que quedan:** Grand Mole se activa sola cuando perdería (el juego pregunta solo desde su
   motor de cadenas); Fusiones con materiales genéricos o de 4 o más; los efectos de los 69 monstruos
-  del pack 4 que los tenían; la IA no usa ninguna de estas cartas; guardar y cargar el baúl ampliado
-  solo se probó en Unicorn.
+  del pack 4 que los tenían; la IA no usa ninguna de estas cartas. Guardar y cargar el baúl ampliado:
+  Oscar lo confirmó en emulador real el 2026-10-12, pero esa prueba no vio que el bloque se borraba al
+  arrancar; tras la corrección del 2026-10-13 lo prueba `scripts/test_baul_ram.py` en el emulador
+  (arrancar, Continue, guardar, reiniciar, menús). **Falta repetir la confirmación a ojo con el ROM
+  corregido** (comprar cartas de más de 1200, guardar, apagar, volver a cargar).
 
 ### 5.9.1 Tabla de efectos ampliada [PROBADO 2026-10-12]
 
@@ -471,6 +477,9 @@ ROMs generados:
 | `(Candidatas).gba` | Igual, sin las cartas en el baúl | `cb519dad73a0b1cf70154369e8168547` |
 | `(Prueba3).gba` | Las 4 que funcionan y Dark Necrofear, sin ayudas | `0122cad69328c075c66a6d0227a93f58` |
 | `(Prueba1).gba`, `(Prueba2).gba` | Primeras pruebas, superadas | |
+| `(Lote).gba` | ROM de trabajo: las 30, packs 2 y 3, tabla de efectos ampliada (2026-10-13) | `f5ea439aec4ce28e25a03a05e66d55a5` |
+| `(Neo Space).gba` | ROM ampliado con el pack 4, sobre Neo Space y Fusiones (2026-10-13; parche `build/neo-space.bps`) | `7945e895487f51296bda8e690d35c61b` |
+| `(Hack v0.1).gba` | Versión de juego con las 6 aptas | `668e43e7a8b85391c0f1e15d11212b05` |
 
 Proyectos externos:
 
@@ -532,7 +541,7 @@ El veredicto de cada carta, qué se observó, qué falla y cómo reproducirlo es
 Electromagnetic Bagworm (la Máquina que la destruye pierde 500) y Dark Necrofear (posesión en la End
 Phase: queda equipada al monstruo elegido y el control dura mientras siga equipada). Ninguna quedó en
 "no funciona" ni aparcada. El ROM de trabajo es `build/…(Lote).gba`
-(`scripts/construir_lote.sh`, MD5 `c693b77264d2f53a8e0b0113c4ffa4fc` desde el 2026-10-12 con la tabla de efectos ampliada y Air Hummingbird con efecto; antes `d017f31b380fcb73fd85b639ac52781c` con el pack 3 (Neo-Spacian), y antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`: Elemental Hero Neos estrena su dibujo chico; antes `0ce9fa0e…` y, con las 30, `c1b1289a…`). Falta la confirmación a ojo de
+(`scripts/construir_lote.sh`, MD5 `f5ea439aec4ce28e25a03a05e66d55a5` desde el 2026-10-13 con Spy al azar y el bloque del baúl ampliado en `0x02028264`; antes `c693b77264d2f53a8e0b0113c4ffa4fc` con la tabla de efectos ampliada y Air Hummingbird con efecto; antes `d017f31b380fcb73fd85b639ac52781c` con el pack 3 (Neo-Spacian), y antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`: Elemental Hero Neos estrena su dibujo chico; antes `0ce9fa0e…` y, con las 30, `c1b1289a…`). Falta la confirmación a ojo de
 Oscar en 24 cartas; las que cambiaron el 2026-10-11 tienen partida por capturas en `evidencia/ronda6/`
 y `evidencia/ronda7/`.
 
@@ -547,7 +556,7 @@ Cada ítem puede ser una especificación propia. El orden es una sugerencia.
 | F3 | Posesión de Dark Necrofear | Carta completa | **Hecha el 2026-10-11, versión fiel:** queda equipada al monstruo elegido; el control termina si la destruyen | Hecho |
 | F4 | Arte de las cartas restauradas | Que no muestren el dibujo del hueco | Formato conocido (80×80, 64 colores, tiles 8×8, paleta BGR555). Falta el conversor PNG → ROM | Baja-media |
 | F5 | Más recortadas, por packs | Más cartas | El alta está hecha (`scripts/alta.py`). Clasificadas las 142 (`datos/triage_recortadas.csv`): 36 con el efecto compartido con cartas en juego, 38 con código propio, 2 vacías y 66 sin función de efecto. Quedan 20 huecos seguros | Baja por carta en el primer grupo |
-| F6 | Más huecos o ampliar las 1200 | Sumar sin sacrificar cartas | Medido el 2026-10-11, ver §9.1 | Por partes: de baja a muy alta |
+| F6 | Más huecos o ampliar las 1200 | Sumar sin sacrificar cartas | **Hecho el 2026-10-12:** ROM ampliado hasta 2047 cartas, el tope de los índices de 11 bits (§9.1, §5.9.1); la tabla de efectos y la de Fusiones se pueden agrandar | Hecho. Más de 2047: muy alta |
 | F7 | Efectos escritos de cero | Las 68 con stub y cartas que el juego nunca tuvo | Requiere entender las columnas de la tabla de efectos y el segundo mecanismo | Muy alta |
 | F8 | Identificar y editar mazos de rivales | Dificultad y variedad | Tabla y formato conocidos; falta saber quién usa cada mazo y de dónde salen las cartas extra | Media |
 | F9 | IA para las cartas nuevas | Que los rivales las usen | Hay listas de categorías para la IA en `0x17E1444`–`0x17E1700` [HIP]; la lógica no está ubicada | Alta |
@@ -690,6 +699,7 @@ investigación de cómo se escribe un efecto. F9 depende de F8.
 - **Partidas guardadas entre versiones.** Cambiar qué carta ocupa un índice
   cambia el baúl de una partida vieja. Conviene fijar los huecos pronto.
 - **Huecos que se agotan.** 7 seguros para 136 recortadas pendientes (tras los packs 2 y 3) (`scripts/huecos.py`).
+  En el ROM ampliado no hacen falta huecos: el riesgo baja si la versión de juego pasa a esa base.
 - **Hardware real.** Todo se probó en emulador (mGBA); la Retroid también
   emula, así que el riesgo es bajo.
 
