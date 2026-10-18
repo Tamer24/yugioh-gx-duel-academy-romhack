@@ -1,5 +1,8 @@
 # Guía para Oscar: qué mirar y cómo
 
+> **Desde el 2026-10-18 los estados para probar están en `estados/v0.2/` (ver su `LEEME.md`).** `estados/revisar/` se archivó; las rutas de abajo son las de entonces.
+
+
 Este archivo lo genera `scripts/armar_revision.py`; para cambiarlo se cambia ese script.
 
 Las 30 cartas ya tienen veredicto. Las filas 1 a 29 se jugaron por script, con capturas
