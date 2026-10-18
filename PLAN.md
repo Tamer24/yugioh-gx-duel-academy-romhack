@@ -402,6 +402,13 @@ liberar uno), que es solo datos, o se agrega el lugar 49, que es tocar unos 30 p
 
 ## 4. Para retomar
 
+**2026-10-18: v0.2 armada** (`build/hack-v0.2.bps`, ROM MD5 `9c45523e563cc42d478fea029e06eea1`): las 30
+restauradas y Elemental Hero Neos. 17 las confirmó Oscar a ojo y 14 Claude por capturas (constitución
+2.0.0). Regresión en el ROM de la v0.2: 28 de 30 sesiones grabadas IGUAL; Exchange difiere solo por
+el azar de la carta que pasa al rival y Magic Drain (variante 28) solo por la columna del cursor (igual
+en el `(Lote)`). **Falta para cerrarla: que Oscar la juegue libre** y cuente lo raro. Quedan para la
+v0.3 las 12 del pack 2 y del pack 3 (equipos y Neo-Spacian), sin verificar.
+
 1. **Oscar:** abrir `evidencia/index.html` y `specs/001-cerrar-pruebas-lote/guia-oscar.md`, y confirmar
    o corregir carta por carta; las que quiera jugar, con su estado de `estados/revisar/` en el ROM
    `(Lote)`. Primero las nueve que cambiaron el 2026-10-11: filas 3, 23, 24, 25, 26, 30, 31, 32 y 33
