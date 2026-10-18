@@ -9,20 +9,15 @@ Para terminar el turno: `B`, `A`. Las cartas restauradas muestran el dibujo del 
 
 ## Faltan
 
-**11b. Mystical Refpanel contra Hinotama**: `faltan/11b-refpanel-hinotama.ss1`
+**11b. Mystical Refpanel contra Red Medicine**: `faltan/11b-refpanel-red-medicine.ss1`
 
-- Pasos: Colocá Mystical Refpanel boca abajo (menú de la carta, *Set*) y terminá el turno (`B`, `A`). El rival juega Hinotama (500 de daño a vos): cuando pregunte "Will you chain?", *Yes*, `A`, cursor a tu trampa, `A`, *Activate Effect*.
-- Qué tenés que ver: el daño lo recibe el rival. Quedás en 8000 y el rival en 7500.
+- Pasos: Colocá Mystical Refpanel boca abajo (menú de la carta, *Set*) y terminá el turno (`B`, `A`). En su primer turno el rival juega Red Medicine (cura 500): cuando pregunte "Will you chain?", *Yes*, `A`, cursor a tu trampa, `A`, *Activate Effect*.
+- Qué tenés que ver: la curación es para vos. Quedás en 8500 y el rival en 8000. (Esta vez el rival tiene su mano normal, no la de Blue-Eyes.)
 
-**11c. Mystical Refpanel contra Ookazi**: `faltan/11c-refpanel-ookazi.ss1`
+**11c. Mystical Refpanel contra Goblin's Secret Remedy**: `faltan/11c-refpanel-goblins-secret-remedy.ss1`
 
-- Pasos: igual que 11b; el rival juega Ookazi (800 de daño).
-- Qué tenés que ver: quedás en 8000 y el rival en 7200.
-
-**11d. Mystical Refpanel contra Pot of Greed**: `faltan/11d-refpanel-pot-of-greed.ss1`
-
-- Pasos: igual que 11b; el rival juega Pot of Greed (roba 2).
-- Qué tenés que ver: es el caso dudoso. Según el texto, Refpanel cambia el jugador de una Mágica que apunta a uno solo: si el juego la deja activar, robás vos 2 y el rival ninguna. Si no te pregunta "Will you chain?" o no te deja activarla, contame qué pasó: puede ser lo correcto para este juego.
+- Pasos: igual que 11b; el rival juega Goblin's Secret Remedy (cura 600).
+- Qué tenés que ver: quedás en 8600 y el rival en 8000.
 
 **12. Riryoku Field**: `faltan/12-riryoku-field.ss1`
 

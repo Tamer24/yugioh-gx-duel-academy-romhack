@@ -1353,3 +1353,16 @@ Cómo se **cancela** una batalla sin calcular daño: `+0xA = 0` y `+0xB = 0`, y 
   16 bytes con tope `movs r4,#0x4F`; 15 literales de la tabla en el código. La zona libre del ROM es
   **relleno aleatorio**, no ceros: no se puede comprobar que esté vacía, solo que no la use otro.
 
+
+
+## La IA y las Mágicas que apuntan a un jugador (2026-10-18) [PROBADO]
+
+Medido con el emulador sin ventana, desde el estado de Oscar, poniendo la carta en la mano del rival:
+- **La IA nunca juega Hinotama, Ookazi ni Sparks** (las de daño), ni con los LP del jugador en 400
+  (daño letal), ni con la mano rellena de Blue-Eyes ni con su mano normal, en 5 a 8 turnos.
+- Juega en su primer turno Dian Keto, Red Medicine, Goblin's Secret Remedy y Soul of the Pure (las de
+  curar). Pot of Greed la juega a veces, sin un turno fijo.
+- Mystical Refpanel contra esas curaciones: el jugador recibe 1000 / 500 / 600 y el rival nada.
+- Con la mano del rival rellena de Blue-Eyes, el corredor automático no llega a responder con la trampa
+  (en mGBA a mano sí funciona); con la mano normal del rival, sí.
+Para la IA (F9): las cartas de daño directo no tienen uso en la IA o falta la condición que las habilita.
