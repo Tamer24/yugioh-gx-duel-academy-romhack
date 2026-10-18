@@ -9,40 +9,20 @@ Para terminar el turno: `B`, `A`. Las cartas restauradas muestran el dibujo del 
 
 ## Faltan
 
-**1b. Electromagnetic Bagworm atacada por un no Máquina**: `faltan/01b-bagworm-atacada-por-no-maquina.ss1`
+**11b. Mystical Refpanel contra Hinotama**: `faltan/11b-refpanel-hinotama.ss1`
 
-- Pasos: Colocá Bagworm boca abajo (menú de la carta, *Set*) y terminá el turno (`B`, `A`). El rival invoca a Blazing Inpachi (Piro, 1850/0) y la ataca.
-- Qué tenés que ver: Bagworm se da vuelta y se destruye. **No** te deja quedarte con Blazing Inpachi (no aparece el aviso para elegir, o aparece sin nada para elegir). Blazing Inpachi baja de 1850 a 1350 de ATK: el −500 vale para cualquier monstruo que la destruya.
+- Pasos: Colocá Mystical Refpanel boca abajo (menú de la carta, *Set*) y terminá el turno (`B`, `A`). El rival juega Hinotama (500 de daño a vos): cuando pregunte "Will you chain?", *Yes*, `A`, cursor a tu trampa, `A`, *Activate Effect*.
+- Qué tenés que ver: el daño lo recibe el rival. Quedás en 8000 y el rival en 7500.
 
-**1c. Electromagnetic Bagworm con solo un no Máquina del rival**: `faltan/01c-bagworm-solo-rival-no-maquina.ss1`
+**11c. Mystical Refpanel contra Ookazi**: `faltan/11c-refpanel-ookazi.ss1`
 
-- Pasos: Colocá Bagworm boca abajo y terminá el turno. El rival invoca a Tongyo (Pez, 1350). Si la ataca, no la destruye y Bagworm queda boca arriba. Si no ataca, en tu turno siguiente dala vuelta vos (menú de la carta, *Flip Summon*).
-- Qué tenés que ver: al darse vuelta **no** te deja tomar a Tongyo. Bagworm sigue en tu campo y Tongyo sigue siendo del rival.
+- Pasos: igual que 11b; el rival juega Ookazi (800 de daño).
+- Qué tenés que ver: quedás en 8000 y el rival en 7200.
 
-**4. Penguin Knight**: `faltan/04-penguin-knight.ss1`
+**11d. Mystical Refpanel contra Pot of Greed**: `faltan/11d-refpanel-pot-of-greed.ss1`
 
-- Pasos: Penguin Knight **no** está en tu mano ni la vas a robar: está entre las 5 primeras cartas de tu mazo, y la prueba es que la mande al cementerio un efecto del rival. Turno 1: invocá a Darkfire Soldier #2 y terminá el turno. El rival coloca a Needle Worm boca abajo. Turno 2: `B`, *Enter Battle Phase*, y atacá a Needle Worm.
-- Qué tenés que ver: Needle Worm se da vuelta y manda 5 cartas de tu mazo al cementerio, Penguin Knight entre ellas. Enseguida todo tu cementerio vuelve al mazo y se baraja: el cementerio queda vacío y el mazo con la misma cantidad que antes del ataque.
-
-**7. Hiro's Shadow Scout**: `faltan/07-hiro-s-shadow-scout.ss1`
-
-- Pasos: Colocala boca abajo (menú de la carta, *Set*) y terminá el turno (`B`, `A`). El rival invoca a Mechanicalchaser y la ataca.
-- Qué tenés que ver: El rival roba 3 cartas (antes robaba 1) y se muestran: Dian Keto, que es Mágica, va a su cementerio; Blue-Eyes y Call of the Haunted quedan en su mano (después coloca la Trampa).
-
-**8. Reasoning**: `faltan/08-reasoning.ss1`
-
-- Pasos: Activala (menú de la carta, *Activate Effect*). Aviso "Your opponent declares Level N.": `A`.
-- Qué tenés que ver: Se revelan Dian Keto, Call of the Haunted y Mechanicalchaser (nivel 4). Si el aviso decía 4, las tres van al cementerio. Si decía 3 o 2, Mechanicalchaser se invoca ("Select card position.") y las otras dos van al cementerio. El nivel lo elige el juego: 4 la mayoría de las veces. Probala un par de veces para ver las dos.
-
-**9. Dark Necrofear**: `faltan/09-dark-necrofear.ss1`
-
-- Pasos: Activá Card Destruction: tus tres Demonios van al cementerio y robás a Dark Necrofear. Menú de Necrofear, *Special Summon*; aviso "Select 3 Fiend monsters to remove from the Graveyard.": `A`, `A` (entra a la lista), y en cada Demonio `A`, `A` (icono *CHECK*); con los tres marcados, `A`, `DERECHA` cuatro veces hasta *DECIDE*, `A`. Posición de ataque (`A`) y terminá el turno. El rival invoca a Goblin Attack Force (2300) y ataca a Necrofear (2200). Al final de su turno, aviso "Select and gain control of 1 opponent's face-up monster.": `A`, `A` sobre Goblin Attack Force. En tu turno robás Heavy Storm: terminá ese turno sin jugarla, dejá pasar el del rival y, en tu turno siguiente, activala.
-- Qué tenés que ver: Necrofear se invoca retirando los tres Demonios. Cuando la destruyen perdés 100 LP y va al cementerio; Goblin Attack Force sigue siendo del rival durante el resto de su turno y recién en la End Phase se muestra la carta de Necrofear y aparece el aviso. Al elegirlo pasa a tu campo y Necrofear queda boca arriba en tu zona de Mágicas y Trampas, equipada a él. Sigue siendo tuyo en tus turnos siguientes. Cuando Heavy Storm destruye a Necrofear, va a tu cementerio y Goblin Attack Force vuelve al campo del rival.
-
-**11. Mystical Refpanel**: `faltan/11-mystical-refpanel.ss1`
-
-- Pasos: Colocala boca abajo (menú de la carta, *Set*) y terminá el turno (`B`, `A`). El rival juega Dian Keto: "Will you chain?" → cuando el juego pregunte, *Yes*, `A`, llevá el cursor a tu trampa, `A`, *Activate Effect*.
-- Qué tenés que ver: Los 1000 LP los ganás vos: quedás en 9000 y el rival en 8000.
+- Pasos: igual que 11b; el rival juega Pot of Greed (roba 2).
+- Qué tenés que ver: es el caso dudoso. Según el texto, Refpanel cambia el jugador de una Mágica que apunta a uno solo: si el juego la deja activar, robás vos 2 y el rival ninguna. Si no te pregunta "Will you chain?" o no te deja activarla, contame qué pasó: puede ser lo correcto para este juego.
 
 **12. Riryoku Field**: `faltan/12-riryoku-field.ss1`
 
@@ -124,3 +104,4 @@ Para terminar el turno: `B`, `A`. Las cartas restauradas muestran el dibujo del 
 - Rigorous Reaver, Jowls of Dark Demise, Dark-Eyes Illusionist, Reaper of the Cards, Windstorm of Etaqua, Magic Drain
 - Electromagnetic Bagworm (con Máquina), 17/10
 - Electric Snake, Minar, Fairy Guardian, Kunai with Chain (los dos efectos), 18/10
+- Bagworm sin Máquina (1b y 1c), Penguin Knight, Hiro's Shadow Scout, Reasoning (niveles 4 y 3), Dark Necrofear, Mystical Refpanel con Dian Keto, 18/10
