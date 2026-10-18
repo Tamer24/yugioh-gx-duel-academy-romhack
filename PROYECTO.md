@@ -78,8 +78,10 @@ Lo que se respetó hasta ahora y conviene llevar a la constitución:
    escribir el ROM.
 9. **Los ROMs de prueba y los de juego son recetas distintas.** Contraseñas
    gratis y cartas regaladas solo en los de prueba.
-10. **Quién prueba:** Oscar juega y reporta; el emulador sin ventana queda para
-    comprobaciones que se leen de la memoria (baúl, DP), no para jugar duelos.
+10. **Quién prueba (desde el 2026-10-18, constitución 2.0.0):** Claude verifica cada efecto
+    jugando el duelo en el emulador por capturas (`scripts/paso.py`,
+    `scripts/repetir_sesion.py`, registro con `registro.py capturas`); Oscar juega libre cada
+    versión antes de cerrarla y reporta lo raro.
 
 Restricciones técnicas duras:
 
