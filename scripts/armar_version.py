@@ -95,6 +95,10 @@ def main(argv):
                       f"{datetime.date.today().isoformat()}. Generada por scripts/armar_version.py; no editar a mano.",
               "parches": parches, "cartas": cartas,
               "piezas": piezas_para(lote["piezas"], {int(c["id_konami"]) for c in cartas})}
+    # Las cartas que el juego nunca tuvo necesitan su fila nueva en la tabla de efectos.
+    filas = [f for f in lote.get("filas_efecto", []) if int(f["id_konami"]) in {int(c["id_konami"]) for c in cartas}]
+    if filas:
+        receta["filas_efecto"] = filas
     with open(receta_ruta, "w", encoding="utf-8") as f:
         json.dump(receta, f, ensure_ascii=False, indent=2)
         f.write("\n")

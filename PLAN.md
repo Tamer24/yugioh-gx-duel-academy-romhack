@@ -402,6 +402,17 @@ liberar uno), que es solo datos, o se agrega el lugar 49, que es tocar unos 30 p
 
 ## 4. Para retomar
 
+**2026-10-18 (noche): v0.3 armada** (`build/hack-v0.3.bps`, ROM MD5 `d1adf906ea761d32cf149c54c396f317`): 42
+cartas, las 31 de la v0.2 y 11 de los packs 2 y 3. Arreglos: Stim-Pack pierde 200 por turno
+(`gancho_stim_pack.s`), Twin Swords ataca dos veces (`gancho_tryce.s`), Butterfly Dagger - Elma vuelve a la
+mano (`elma_vuelve.s` y una rama en `gancho_enviada_por_rival.s`). Probadas completas Ceal (ataque directo) y
+Murasame (solo Warrior). Los 6 Neo-Spacian tenian codigo propio sin prueba de logica: ahora
+`test_neo_spacian.py`, `test_gancho_batalla.py` y `test_atk_cuenta.py` (arnes comun: `scripts/motor_uc.py`).
+Regresion en el ROM de la v0.3: 28 de 30 sesiones IGUAL (las dos de siempre), las 11 nuevas FUNCIONA, las
+pruebas de logica anteriores sin fallas. **Wicked-Breaking Flamberge - Baou, aparcada:** el +500 anda; anular
+el efecto del monstruo destruido no (ver `NOTAS-REVERSE.md`, "Los equipos del pack 2"). **Falta: que Oscar
+juegue la v0.2 o la v0.3 libre.**
+
 **2026-10-18: v0.2 armada** (`build/hack-v0.2.bps`, ROM MD5 `9c45523e563cc42d478fea029e06eea1`): las 30
 restauradas y Elemental Hero Neos. 17 las confirmó Oscar a ojo y 14 Claude por capturas (constitución
 2.0.0). Regresión en el ROM de la v0.2: 28 de 30 sesiones grabadas IGUAL; Exchange difiere solo por

@@ -1366,3 +1366,37 @@ Medido con el emulador sin ventana, desde el estado de Oscar, poniendo la carta 
 - Con la mano del rival rellena de Blue-Eyes, el corredor automático no llega a responder con la trampa
   (en mGBA a mano sí funciona); con la mano normal del rival, sí.
 Para la IA (F9): las cartas de daño directo no tienen uso en la IA o falta la condición que las habilita.
+
+
+## Los equipos del pack 2: Stim-Pack, Tryce, Elma y Baou (2026-10-18)
+
+Medido con el emulador sin ventana sobre el `(Lote)` y con Unicorn (`scripts/motor_uc.py`).
+
+- **`0x020214E0` no es "el jugador del turno"**: su primera palabra cambia varias veces por turno (es la
+  cabecera de la acción en curso). Las funciones del cambio de turno la leen con el bit 15 como "de quién
+  es esta acción". En `FUN_0801D7DC` (fin de turno) es el jugador cuyo turno termina; en `FUN_0801B724`,
+  el que entra a la Battle Phase. El jugador del turno de verdad es el bit 1 de `0x0202787E`.
+- **`FUN_0801B724` corre al entrar a la Battle Phase**, no al empezar el turno (la llama el consumidor de
+  eventos `FUN_08022124`). Pone la bandera `0xE` ("puede volver a atacar") a los monstruos de su árbol:
+  Hayabusa Knight (5137), Mataza the Zapper (5898), Cyber Twin Dragon (6396), `0x174F` (5967, con la
+  condición `FUN_0801F900`) y `0x18B9` (6329). `FUN_080666B8`, después de cada ataque, la consume y da
+  otro ataque; para un equipo mira Twin Swords (5729, `0x1661`) en la lista de equipos del monstruo
+  (`+0x3E` cantidad, `+0x40` entradas). El fin de turno (`FUN_0801D7DC`) borra la `0xE`.
+- **Banderas de ranura**: `FUN_0800E158(id, n)` lee, `FUN_0800E178(id, n)` pone y `FUN_0800E194(id, n)`
+  quita el bit `n` de la palabra `ranura + 0x60`.
+- **Stim-Pack**: el calculador ya resta 200 por cada unidad del byte `+0x3A` del equipo; el motor tiene las
+  acciones de ese contador (`FUN_0801BAF4` fijar, `FUN_0801BB3C` +1, `FUN_0801BB88` −1, `FUN_0801BBD4` a
+  cero) pero nadie las pedía. `efectos/gancho_stim_pack.s` suma 1 al terminar el turno del rival (medido:
+  sube en el cuadro 280 del turno del rival, antes de que el jugador robe en el 340; no al terminar el
+  propio). En la primera versión el gancho estaba en `FUN_0801B724` y no hacía nada sin Battle Phase.
+- **Elma**: el motor no tenía nada de "vuelve a la mano" (su ID, 5724, no aparece en el código). Cuando el
+  monstruo equipado deja el campo, la acción que manda a Elma al cementerio pasa por el procesador de
+  acciones (`0x0801706C`) con zona de origen 5: ahí se encola su efecto (ver `ACCIONES.md`, Equipar).
+- **Baou (aparcada)**: tampoco tiene nada en el motor (5727 no aparece). Probado sin éxito: marcar
+  anulada (`p[2] |= 8`) toda entrada que pasa por `FUN_080303D8`, aun todas sin condición, no impide que
+  Mystic Tomato destruido en batalla invoque desde el mazo; y su ID (4930, `0x1342`) no está en los árboles
+  de `FUN_08068C8C`. Su disparo sale por otro camino, sin ubicar. El registro de la batalla sí sirve en ese
+  momento: atacante `0x20`, defensor `0x86`, objetivo de Baou (`+0x3C`) = atacante, y la bandera 5 de Tomato
+  se pone 25 cuadros antes de que vaya al cementerio.
+- `construir_lote.sh` tapaba los errores de `restaurar.py` (el `grep` del pipe devolvía 0 y quedaba el ROM
+  anterior): corregido.

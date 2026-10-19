@@ -213,7 +213,10 @@
     "G:0801273C:efectos/gancho_atk_cuenta.s",
     "6768:fn_04:efectos/aqua_dolphin.s",
     "G:08067E60:efectos/gancho_batalla.s",
-    "6772:fn_04:efectos/dark_panther.s"
+    "6772:fn_04:efectos/dark_panther.s",
+    "G:0801D7DC:efectos/gancho_stim_pack.s",
+    "G:0801B724:efectos/gancho_tryce.s",
+    "5724:fn_04:efectos/elma_vuelve.s"
   ],
   "filas_efecto": [
     {

@@ -196,9 +196,11 @@ tipo 1 en su lista. Si el monstruo deja el campo, el motor manda sus equipos al 
 |---|---|---|---|
 | Equipar una Mágica o Trampa que ya está boca arriba en el campo | `EQUIPAR(lado, id del equipo, id del monstruo)` | `kunai_cadena.s` (molde: Metalmorph `0x0803991C`) | [PROBADO] |
 | Que una Trampa equipada no se vaya al cementerio al resolverse | Agregar su ID a `gancho_queda_campo.s` | Kunai with Chain | [PROBADO] |
-| **Equipo con bono fijo de ATK** (recortada del grupo A, p. ej. Stim-Pack, Butterfly Dagger - Elma, Shooting Star Bow - Ceal) | Solo darla de alta: su caso sigue en el calculador (`0x08012BD8`, un `case` por ID en el árbol de `0x08012F00` a `0x08013090`; `scripts/buscar_id.py ROM ID` lo muestra). Los bonos medidos: Stim-Pack +700, Elma +300, Murasame +800 (solo Warrior), Baou +500, Ceal −1000, Tryce −500 | `recetas/packs/pack-2.json`, `_caso_equipo` en `scripts/probar_lote.py` | [PROBADO] el bono; los efectos extra (devolver a la mano, ataque directo, atacar dos veces), sin probar |
+| **Equipo con bono fijo de ATK** (recortada del grupo A, p. ej. Stim-Pack, Butterfly Dagger - Elma, Shooting Star Bow - Ceal) | Solo darla de alta: su caso sigue en el calculador (`0x08012BD8`, un `case` por ID en el árbol de `0x08012F00` a `0x08013090`; `scripts/buscar_id.py ROM ID` lo muestra). Los bonos medidos: Stim-Pack +700, Elma +300, Murasame +800 (solo Warrior), Baou +500, Ceal −1000, Tryce −500 | `recetas/packs/pack-2.json`, `_caso_equipo` en `scripts/probar_lote.py` | [PROBADO] el bono y, desde el 2026-10-18, los efectos extra: el ataque directo de Ceal y "solo Warrior" de Murasame son del motor; el resto, las filas de abajo |
 | Equipo que pide **descartar una carta** al activarlo (Baou, Tryce) | Lo hace la función del motor, sin pieza propia: aparece "Discard hand." y la lista de selección (`elegir_en_lista` en `probar_lote.py`) | Wicked-Breaking Flamberge - Baou | [PROBADO] |
-| Bono de un equipo que **baja con los turnos** (Stim-Pack: 700 − 200 × contador en `ranura + 0x3A` del equipo) | El calculador ya resta; falta quien suba el contador cada turno (no ubicado). Hoy el bono queda en +700 | Stim-Pack | [ROM] |
+| Bono de un equipo que **baja con los turnos** (Stim-Pack: 700 − 200 × contador en `ranura + 0x3A` del equipo) | El calculador ya resta. Gancho al empezar el fin de turno (`FUN_0801D7DC`, `efectos/gancho_stim_pack.s`): suma 1 al contador de cada Stim-Pack boca arriba del jugador que empieza turno (el que no es el del bit 15 de `0x020214E0`). El motor tiene acciones para ese contador: `FUN_0801BAF4` fijar, `FUN_0801BB3C` +1, `FUN_0801BB88` −1, `FUN_0801BBD4` a cero | Stim-Pack | [PROBADO] |
+| Equipo que deja **atacar dos veces** | `FUN_080666B8` (después de cada ataque) da otro si el monstruo, o un equipo Tryce suyo, tiene la bandera `0xE`; la consume con el evento `0x3C`. La pone `FUN_0801B724` **al entrar a la Battle Phase**, por un árbol de IDs (Hayabusa Knight, Mataza, Cyber Twin Dragon, `0x174F`, `0x18B9`); el fin de turno la borra. Gancho en `0x0801B724` (`efectos/gancho_tryce.s`): `FUN_0800E178(id, 0xE)` a cada Tryce boca arriba | Twin Swords of Flashing Light - Tryce | [PROBADO] |
+| Equipo que **vuelve a la mano** al ir al cementerio | `gancho_enviada_por_rival.s` encola su efecto si va de la zona 5 al cementerio; su `fn_04` (`elma_vuelve.s`) atiende ese pedido (tipo 4, momento `0xE`: `(cabecera & 0x7FE00) == 0x1C800`) con `MOVER_CARTA(id, lado << 15 \| 0x3C08)` y deja todo otro pedido a la `ORIGINAL` | Butterfly Dagger - Elma | [PROBADO] |
 | Que un monstruo pase a ser equipo | `CASILLA_MAGIAS(lado)` (−1 = sin lugar); `MOVER_CARTA(id, lado << 15 \| 0x1408 \| casilla << 4)`; `EQUIPAR`. Funciona también desde el cementerio | `necrofear_posesion.s` (molde: monstruos Unión, `0x08061A74`) | [PROBADO] |
 
 ### Disparadores: cuándo se activa sola
@@ -225,7 +227,7 @@ nada se calculó (el "inicio del Damage Step").
 | **Terminar la Battle Phase** | Llamar `FUN_0801B8E0` (el evento `0x64`: `+1 \|= 0x10`, `+0xA = 6`, `+0xB = 0`) | Glow Moss (rama Monstruo); The Unhappy Maiden | [PROBADO] |
 | **Daño de ataque directo** sin calcular la batalla | `DANIO(lado, ATK)` y dar la batalla por terminada | Glow Moss (rama Magica) | [PROBADO] |
 | **Devolver a la mano** dos monstruos en batalla | `LIMPIAR_ACCIONES`, `ENVIAR(id, lado << 15 \| 4, causante)` por cada uno, `PROCESAR_ACCIONES` | Grand Mole | [PROBADO] |
-| Saber si es un **ataque directo** | Bit 0 del primer byte del registro | Glow Moss | [PROBADO] |
+| Saber si es un **ataque directo** | Bit 0 del primer byte del registro. Ojo: el defensor (bits 5-12 de `u16(+2)`) es la mitad alta de la palabra del atacante (bits 21-28 de `u32(+0)`) | Glow Moss | [PROBADO] |
 | Que un monstruo **pueda** atacar directo | Modificador de tipo 4 con origen Overpowering Eye (6291), o de tipo 1 con origen Ceal (5725), en la lista de la ranura (`FUN_0801F980`) | Overpowering Eye, Ceal | [ORIGINAL] |
 | **ATK que depende de una cuenta** | Gancho en `0x0801273C` (`efectos/gancho_atk_cuenta.s`): en ese punto `[r7]` = índice, `[r7+4]` = ATK con su base, `[sp+0x2c]` = ranura y `[sp+0x30]` = máscara. Sumar o poner `[r7+4]` y `[r7+8]` | Flare Scarab (+400 por Mágica/Trampa del rival), Dark Panther (ATK/DEF propios) | [PROBADO] |
 | Que una carta se **comporte y se llame como otra** hasta la End Phase | Cambiar el índice (`+0x24`) de su ranura por el de la otra, poner la bandera 25 de `+0x60` y devolverlo en la End Phase (`gancho_fin_control.s`). El motor decide nombre y efectos por ese índice; ATK y DEF salen del índice, así que hay que corregirlos en el calculador | Dark Panther | [PROBADO] |
@@ -312,7 +314,9 @@ carta en uno, de menos a más código:
 ## 4. Lo que todavía no tiene receta
 
 - Agregar un caso nuevo al calculador para el bono de un equipo (tipos 1 y 2).
-- Anular efectos (el motor tiene banderas `0x1F` y `0x20` de "efecto continuo activo"; [HIP]).
+- Anular efectos (el motor tiene banderas `0x1F` y `0x20` de "efecto continuo activo"; [HIP]). Marcar la entrada
+  (`p[2] |= 8`) en `FUN_080303D8` no alcanza: el disparo de Mystic Tomato al ser destruido en batalla no pasa por
+  ahí ni por los árboles de `FUN_08068C8C` (probado el 2026-10-18 para Baou; ver `NOTAS-REVERSE.md`).
 - Retirar del juego como acción propia (bandera de acción `0x2`; sin usar por una pieza nuestra).
 - Fichas, contadores, Fusión y Ritual.
 - Cualquier decisión de la IA sobre cuándo jugar una carta (sin ubicar).

@@ -1665,6 +1665,158 @@ def caso_dark_panther(ruta_rom, desfase, fotos):
     return res(EN_PARTE, detalle, "; ".join(fallas), estado=estado)
 
 
+
+def _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, nombre, descarta=False, rival=None):
+    """Equipa 'carta' a 'monstruo' en mi primer turno y espera mi segundo turno. Devuelve (None, d)
+    o (res, None) si el escenario no quedo armado. 'rival' = mano del rival (por defecto, relleno)."""
+    estado = armar(ruta_rom, nombre, yo={5: carta, 4: monstruo},
+                   rival=rival or {i: MUERTA for i in range(5)},
+                   mazo_rival={0: MUERTA, 1: MUERTA, 2: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, monstruo)
+    d.ir_mano(carta)
+    d.menu(0)
+    d.g.correr(120)
+    if descarta:
+        elegir_en_lista(d)
+        d.g.correr(150)
+    d.tecla("A", 80)
+    d.tecla("A", 120)
+    d.g.correr(150)
+    if carta not in escenario.instantanea(d)["magias_yo"]:
+        return res(NO_FUNCIONA, f"{carta} no quedo en el campo", "no se equipa", estado=estado), None
+    d.fin_turno(primero=True)
+    if not hasta_mi_turno(d):
+        return res(SIN_DISPARO, "no volvio mi turno", estado=estado), None
+    return None, d
+
+
+def _segundo_ataque(d, atacante):
+    """Ya en la Battle Phase, despues de un ataque: vuelve a atacar con 'atacante' si el menu lo
+    ofrece. El menu del monstruo trae Attack arriba de Detail Screen solo si puede atacar."""
+    d.mover(y=2)
+    d.mover(x=2 + zona_monstruo(d, 0, atacante))
+    d.g.correr(20)
+    d.tecla("A", 80)
+    d.tecla("UP", 50)
+    d.tecla("A", 110)
+    d.tecla("A", 110)
+    d.tecla("A", 70)
+
+
+def caso_tryce(ruta_rom, desfase, fotos):
+    """Twin Swords of Flashing Light - Tryce: -500 de ATK (con descarte) y ataca dos veces por
+    Battle Phase. Mi segundo turno, rival sin monstruos: dos ataques directos de 1350."""
+    carta, monstruo = "Twin Swords of Flashing Light - Tryce", "Blazing Inpachi"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, -500, descarta=True)
+    if r["resultado"] != FUNCIONA:
+        return r
+    err, d = _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, "equipo-tryce-doble", descarta=True)
+    if err:
+        return err
+    lp0 = d.lp()[1]
+    atacar(d, monstruo)
+    d.g.correr(400)
+    lp1 = d.lp()[1]
+    _segundo_ataque(d, monstruo)
+    d.g.correr(400)
+    foto(d, fotos, "tryce_doble")
+    lp2 = d.lp()[1]
+    detalle = r["detalle"] + f" Dos ataques directos en la misma Battle Phase: LP del rival {lp0} -> {lp1} -> {lp2} (esperado 8000 -> 6650 -> 5300)."
+    if (lp0, lp1, lp2) == (8000, 6650, 5300):
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, f"LP del rival {lp0} -> {lp1} -> {lp2}", estado=r.get("estado", ""))
+
+
+def caso_ceal(ruta_rom, desfase, fotos):
+    """Shooting Star Bow - Ceal: -1000 de ATK y el monstruo equipado puede atacar directo aunque el
+    rival tenga monstruos. Mi segundo turno, Meteor Dragon en el campo del rival: el juego pregunta
+    si ataca directo; Yes: el rival pierde 850."""
+    carta, monstruo, rival_m = "Shooting Star Bow - Ceal", "Blazing Inpachi", "Meteor Dragon"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, -1000)
+    if r["resultado"] != FUNCIONA:
+        return r
+    err, d = _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, "equipo-ceal-directo",
+                                 rival={0: rival_m, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA})
+    if err:
+        return err
+    if rival_m not in [n for _, n in d.mano(1)]:
+        return res(INVALIDA, f"el rival jugo {rival_m}", estado=r.get("estado", ""))
+    poner_en_campo(d, 1, rival_m)
+    d.g.correr(60)
+    lp0 = d.lp()[1]
+    d.tecla("B", 80)
+    d.tecla("A", 170)                     # Enter Battle Phase
+    d.mover(y=2)
+    d.mover(x=2 + zona_monstruo(d, 0, monstruo))
+    d.g.correr(20)
+    d.tecla("A", 80)
+    d.tecla("UP", 50)
+    d.tecla("A", 110)                     # Attack: "This monster can attack your opponent's LP directly..."
+    foto(d, fotos, "ceal_pregunta")
+    d.tecla("A", 110)                     # Yes
+    d.g.correr(500)
+    lp1 = d.lp()[1]
+    detalle = r["detalle"] + f" Con {rival_m} en el campo del rival, ataque directo: LP del rival {lp0} -> {lp1} (esperado 8000 -> 7150)."
+    if (lp0, lp1) == (8000, 7150) and rival_m in controla(d, 1):
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, f"LP del rival {lp0} -> {lp1}", estado=r.get("estado", ""))
+
+
+def caso_murasame(ruta_rom, desfase, fotos):
+    """Fusion Sword Murasame Blade: +800 de ATK a un Guerrero; con solo un monstruo que no es
+    Guerrero (Blazing Inpachi, Piro) el menu de la carta no ofrece activarla."""
+    carta = "Fusion Sword Murasame Blade"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, "Axe Raider", 800)
+    if r["resultado"] != FUNCIONA:
+        return r
+    estado = armar(ruta_rom, "equipo-murasame-piro", yo={5: carta, 4: "Blazing Inpachi"},
+                   rival={i: MUERTA for i in range(5)}, mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, "Blazing Inpachi")
+    d.ir_mano(carta)
+    d.menu(0)                             # la primera opcion: si no hay Activate, es Set
+    d.g.correr(150)
+    d.tecla("A", 80)
+    d.tecla("A", 120)
+    d.g.correr(150)
+    s = escenario.instantanea(d)
+    inpachi = next((m[2] for m in s["campo_yo"] if m[0] == "Blazing Inpachi"), None)
+    equipada = any(m == carta for m in s["magias_yo"]) and inpachi != 1850
+    detalle = r["detalle"] + f" Con solo Blazing Inpachi (Piro) en el campo: ATK {inpachi} (esperado 1850, sin equipar)."
+    if inpachi == 1850:
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, "se equipo a un monstruo que no es Guerrero", estado=r.get("estado", ""))
+
+
+
+
+def caso_elma(ruta_rom, desfase, fotos):
+    """Butterfly Dagger - Elma: +300 de ATK, y cuando va al cementerio desde el campo vuelve a la
+    mano. Mi segundo turno: el monstruo equipado (2150) ataca a Blue-Eyes (3000), puesto a mano en
+    el campo del rival; el monstruo muere y Elma tiene que terminar en mi mano."""
+    carta, monstruo = "Butterfly Dagger - Elma", "Blazing Inpachi"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, 300)
+    if r["resultado"] != FUNCIONA:
+        return r
+    err, d = _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, "equipo-elma-vuelve")
+    if err:
+        return err
+    poner_en_campo(d, 1, MUERTA)
+    d.g.correr(60)
+    atacar(d, monstruo)
+    esperar(d, lambda: carta in [n for _, n in d.mano(0)], 1500, tecla_cada=0)
+    d.g.correr(200)
+    foto(d, fotos, "elma_mano")
+    s = escenario.instantanea(d)
+    en_mano = carta in [n for _, n in d.mano(0)]
+    detalle = r["detalle"] + (f" Su monstruo destruido en batalla por Blue-Eyes: Elma en la mano {en_mano}, "
+                              f"{monstruo} en el cementerio {monstruo in s['cementerio_yo']} (esperado True y True).")
+    if en_mano and monstruo in s["cementerio_yo"]:
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, "Elma no volvio a la mano", estado=r.get("estado", ""))
+
+
 CASOS = {
     "Dark Necrofear": caso_necrofear,
     "Electromagnetic Bagworm": caso_bagworm,
@@ -1685,12 +1837,12 @@ CASOS = {
     "Neo-Spacian Grand Mole": caso_grand_mole,
     "Neo-Spacian Dark Panther": caso_dark_panther,
     "Neo-Spacian Glow Moss": caso_glow_moss,
-    "Stim-Pack": lambda r, d, f: _caso_equipo(r, d, f, "Stim-Pack", "Blazing Inpachi", [700, 500], 2),
-    "Butterfly Dagger - Elma": lambda r, d, f: _caso_equipo(r, d, f, "Butterfly Dagger - Elma", "Blazing Inpachi", 300),
-    "Fusion Sword Murasame Blade": lambda r, d, f: _caso_equipo(r, d, f, "Fusion Sword Murasame Blade", "Axe Raider", 800),
-    "Shooting Star Bow - Ceal": lambda r, d, f: _caso_equipo(r, d, f, "Shooting Star Bow - Ceal", "Blazing Inpachi", -1000),
+    "Stim-Pack": lambda r, d, f: _caso_equipo(r, d, f, "Stim-Pack", "Blazing Inpachi", [700, 500, 300], 2),
+    "Butterfly Dagger - Elma": caso_elma,
+    "Fusion Sword Murasame Blade": caso_murasame,
+    "Shooting Star Bow - Ceal": caso_ceal,
     "Wicked-Breaking Flamberge - Baou": lambda r, d, f: _caso_equipo(r, d, f, "Wicked-Breaking Flamberge - Baou", "Blazing Inpachi", 500, descarta=True),
-    "Twin Swords of Flashing Light - Tryce": lambda r, d, f: _caso_equipo(r, d, f, "Twin Swords of Flashing Light - Tryce", "Blazing Inpachi", -500, descarta=True),
+    "Twin Swords of Flashing Light - Tryce": caso_tryce,
 }
 
 
