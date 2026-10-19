@@ -314,9 +314,10 @@ carta en uno, de menos a más código:
 ## 4. Lo que todavía no tiene receta
 
 - Agregar un caso nuevo al calculador para el bono de un equipo (tipos 1 y 2).
-- Anular efectos (el motor tiene banderas `0x1F` y `0x20` de "efecto continuo activo"; [HIP]). Marcar la entrada
-  (`p[2] |= 8`) en `FUN_080303D8` no alcanza: el disparo de Mystic Tomato al ser destruido en batalla no pasa por
-  ahí ni por los árboles de `FUN_08068C8C` (probado el 2026-10-18 para Baou; ver `NOTAS-REVERSE.md`).
+- Anular efectos continuos (el motor tiene banderas `0x1F` y `0x20` de "efecto continuo activo"; [HIP]). Los
+  efectos que se encadenan sí tienen receta: marcar la entrada (`p[2] |= 8`) en el resolvedor, antes de la
+  llamada a la fn_04 (`0x080245CC` y `0x08024598`; ver `efectos/gancho_baou_a.s` y `NOTAS-REVERSE.md`, "Los
+  equipos del pack 2"). [PROBADO] con Baou y Mystic Tomato.
 - Retirar del juego como acción propia (bandera de acción `0x2`; sin usar por una pieza nuestra).
 - Fichas, contadores, Fusión y Ritual.
 - Cualquier decisión de la IA sobre cuándo jugar una carta (sin ubicar).

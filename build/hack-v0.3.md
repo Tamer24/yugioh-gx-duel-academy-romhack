@@ -1,12 +1,12 @@
 # Duel Academy Hack v0.3
 
-Fecha: 2026-10-19. 42 cartas restauradas, todas probadas en duelo y verificadas (a ojo o por capturas).
+Fecha: 2026-10-19. 43 cartas restauradas, todas probadas en duelo y verificadas (a ojo o por capturas).
 
 ## Cómo se usa
 
 1. Hace falta el ROM original *Yu-Gi-Oh! GX - Duel Academy (USA)*, MD5 `f62c47cbe08e1e3bcfcf9f1b84841a76`.
 2. Aplicar el parche: `python3 scripts/bps.py --aplicar "ROM original.gba" build/hack-v0.3.bps "Yu-Gi-Oh! GX - Duel Academy (Hack v0.3).gba"` (o cualquier programa que aplique `.bps`).
-3. El ROM que sale tiene MD5 `d1adf906ea761d32cf149c54c396f317`. El parche tiene MD5 `272fc63aed0f911782c7fabebc017c18`.
+3. El ROM que sale tiene MD5 `2734e173b21b9ba0defb1dc95ebf6d5e`. El parche tiene MD5 `43daa8ae18a1d13897dd8cd73deff8c7`.
 
 Las cartas nuevas ocupan el lugar de monstruos Normales y aparecen en los sobres donde salían ellos; también se pueden comprar con su contraseña. Todavía muestran el dibujo del monstruo que reemplazan.
 
@@ -55,10 +55,10 @@ Las cartas nuevas ocupan el lugar de monstruos Normales y aparecen en los sobres
 | The Inexperienced Spy | 84 | Doriado | Spell | 81820689 |
 | Twin Swords of Flashing Light - Tryce | 320 | Firewing Pegasus | Spell Equip | 21900719 |
 | Two-Pronged Attack | 488 | Dark Bat | Trap | 83887306 |
+| Wicked-Breaking Flamberge - Baou | 317 | Mikazukinoyaiba | Spell Equip | 68427465 |
 | Windstorm of Etaqua | 489 | Flying Kamakiri #2 | Trap | 59744639 |
 
 ## Qué quedó afuera
 
 Cartas del lote que no entran en esta versión y qué les falta:
 
-- Wicked-Breaking Flamberge - Baou: veredicto funciona en parte, aparcada, confirmacion a ojo o por capturas

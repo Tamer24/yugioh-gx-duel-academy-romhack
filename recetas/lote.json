@@ -216,7 +216,9 @@
     "6772:fn_04:efectos/dark_panther.s",
     "G:0801D7DC:efectos/gancho_stim_pack.s",
     "G:0801B724:efectos/gancho_tryce.s",
-    "5724:fn_04:efectos/elma_vuelve.s"
+    "5724:fn_04:efectos/elma_vuelve.s",
+    "G:080245CC:efectos/gancho_baou_a.s",
+    "G:08024598:efectos/gancho_baou_b.s"
   ],
   "filas_efecto": [
     {

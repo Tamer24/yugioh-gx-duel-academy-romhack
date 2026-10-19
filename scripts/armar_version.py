@@ -31,7 +31,8 @@ RAIZ = registro.RAIZ
 CON_INVOCACION_TIPO = {"Dark Necrofear": {"id_konami": 5222, "tipo": "Fiend", "cantidad": 3}}
 # Ganchos que solo sirven a ciertas cartas (por ID de Konami): entran si alguna de ellas es apta.
 # Los demas ganchos (G:, T:, B:) son del motor y van siempre.
-GANCHOS_DE = {"efectos/gancho_atk_cuenta.s": {6773}, "efectos/gancho_batalla.s": {6770, 6771}}
+GANCHOS_DE = {"efectos/gancho_atk_cuenta.s": {6773}, "efectos/gancho_batalla.s": {6770, 6771},
+              "efectos/gancho_baou_a.s": {5727}, "efectos/gancho_baou_b.s": {5727}}
 
 
 def piezas_para(piezas, ids):

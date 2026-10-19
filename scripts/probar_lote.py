@@ -1666,12 +1666,12 @@ def caso_dark_panther(ruta_rom, desfase, fotos):
 
 
 
-def _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, nombre, descarta=False, rival=None):
+def _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, nombre, descarta=False, rival=None, mazo_rival=None):
     """Equipa 'carta' a 'monstruo' en mi primer turno y espera mi segundo turno. Devuelve (None, d)
     o (res, None) si el escenario no quedo armado. 'rival' = mano del rival (por defecto, relleno)."""
     estado = armar(ruta_rom, nombre, yo={5: carta, 4: monstruo},
                    rival=rival or {i: MUERTA for i in range(5)},
-                   mazo_rival={0: MUERTA, 1: MUERTA, 2: MUERTA})
+                   mazo_rival=mazo_rival or {0: MUERTA, 1: MUERTA, 2: MUERTA})
     d = abrir(ruta_rom, estado, desfase)
     invocar(d, monstruo)
     d.ir_mano(carta)
@@ -1817,6 +1817,54 @@ def caso_elma(ruta_rom, desfase, fotos):
     return res(EN_PARTE, detalle, "Elma no volvio a la mano", estado=r.get("estado", ""))
 
 
+def caso_baou(ruta_rom, desfase, fotos):
+    """Wicked-Breaking Flamberge - Baou: +500 de ATK (con descarte) y anula los efectos del monstruo
+    que el equipado destruye en batalla. Mi segundo turno: el equipado (2350) ataca a Mystic Tomato,
+    en el campo del rival (lo invoca la IA o se pone a mano) con Tomatos en su mazo; no tiene que invocar nada. Control:
+    lo mismo sin Baou, y el Tomato invoca (Des Kangaroo o un Tomato)."""
+    carta, monstruo, tomato = "Wicked-Breaking Flamberge - Baou", "Blazing Inpachi", "Mystic Tomato"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, 500, descarta=True)
+    if r["resultado"] != FUNCIONA:
+        return r
+    mazo = {0: MUERTA, 1: tomato, 2: tomato, 3: tomato}
+    rival = {0: tomato, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA}
+
+    def pelea(d, nombre_foto):
+        if tomato in [n for _, n in d.mano(1)]:
+            poner_en_campo(d, 1, tomato)
+            d.g.correr(60)
+        if controla(d, 1) != [tomato]:      # la IA lo pudo haber invocado ella misma
+            return None
+        atacar(d, monstruo)
+        for k in range(15):
+            d.g.correr(100)
+            if k % 3 == 2:
+                d.tecla("A", 4)
+        foto(d, fotos, nombre_foto)
+        s = escenario.instantanea(d)
+        return controla(d, 1), tomato in s["cementerio_rival"]
+
+    err, d = _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, "equipo-baou-anula", descarta=True,
+                                 rival=rival, mazo_rival=mazo)
+    if err:
+        return err
+    con = pelea(d, "baou_anula")
+    estado = armar(ruta_rom, "equipo-baou-control", yo={4: monstruo}, rival=rival, mazo_rival=mazo)
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, monstruo)
+    d.fin_turno(primero=True)
+    sin = pelea(d, "baou_control") if hasta_mi_turno(d) else None
+    if con is None or sin is None:
+        return res(INVALIDA, f"el campo del rival no quedo con solo {tomato} o no volvio mi turno", estado=r.get("estado", ""))
+    detalle = r["detalle"] + (f" Mystic Tomato destruido en batalla por el equipado: campo del rival {con[0]} (esperado vacio); "
+                              f"sin Baou: {sin[0]} (esperado un monstruo del mazo).")
+    if con[1] and not con[0] and sin[0]:
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    if not sin[0]:
+        return res(INVALIDA, detalle, "el control sin Baou tampoco invoco", estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, "el Tomato invoco igual", estado=r.get("estado", ""))
+
+
 CASOS = {
     "Dark Necrofear": caso_necrofear,
     "Electromagnetic Bagworm": caso_bagworm,
@@ -1841,7 +1889,7 @@ CASOS = {
     "Butterfly Dagger - Elma": caso_elma,
     "Fusion Sword Murasame Blade": caso_murasame,
     "Shooting Star Bow - Ceal": caso_ceal,
-    "Wicked-Breaking Flamberge - Baou": lambda r, d, f: _caso_equipo(r, d, f, "Wicked-Breaking Flamberge - Baou", "Blazing Inpachi", 500, descarta=True),
+    "Wicked-Breaking Flamberge - Baou": caso_baou,
     "Twin Swords of Flashing Light - Tryce": caso_tryce,
 }
 

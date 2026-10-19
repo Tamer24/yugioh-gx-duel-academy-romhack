@@ -402,6 +402,17 @@ liberar uno), que es solo datos, o se agrega el lugar 49, que es tocar unos 30 p
 
 ## 4. Para retomar
 
+**2026-10-19: v0.3 rehecha con Baou** (`build/hack-v0.3.bps`, ROM MD5 `2734e173b21b9ba0defb1dc95ebf6d5e`):
+43 cartas. Wicked-Breaking Flamberge - Baou ya anula el efecto del monstruo que destruye en batalla: se
+encontró dónde se resuelven los efectos encadenados (`0x080245D6` y `0x080245B6`, la llamada a la fn_04 del
+eslabón) y dos ganchos marcan anulada la entrada antes de esa llamada (`gancho_baou_a.s`, `gancho_baou_b.s`;
+`NOTAS-REVERSE.md`, "Los equipos del pack 2"). Prueba de lógica `test_baou.py` (14 casos), duelo con
+control (Mystic Tomato destruido: con Baou no invoca, sin Baou invoca Des Kangaroo), capturas en
+`evidencia/ronda11/`. Regresión en el ROM nuevo: 28 de 30 sesiones IGUAL (las dos de siempre), los 25 casos
+de `probar_lote.py` FUNCIONA, las pruebas de lógica sin fallas. La v0.3 no se había compartido, así que se
+rehízo en lugar de abrir una v0.4. **Falta: que Oscar juegue la v0.3 libre.**
+
+(Lo que sigue es la primera v0.3, reemplazada por la de arriba.)
 **2026-10-18 (noche): v0.3 armada** (`build/hack-v0.3.bps`, ROM MD5 `d1adf906ea761d32cf149c54c396f317`): 42
 cartas, las 31 de la v0.2 y 11 de los packs 2 y 3. Arreglos: Stim-Pack pierde 200 por turno
 (`gancho_stim_pack.s`), Twin Swords ataca dos veces (`gancho_tryce.s`), Butterfly Dagger - Elma vuelve a la
@@ -409,7 +420,7 @@ mano (`elma_vuelve.s` y una rama en `gancho_enviada_por_rival.s`). Probadas comp
 Murasame (solo Warrior). Los 6 Neo-Spacian tenian codigo propio sin prueba de logica: ahora
 `test_neo_spacian.py`, `test_gancho_batalla.py` y `test_atk_cuenta.py` (arnes comun: `scripts/motor_uc.py`).
 Regresion en el ROM de la v0.3: 28 de 30 sesiones IGUAL (las dos de siempre), las 11 nuevas FUNCIONA, las
-pruebas de logica anteriores sin fallas. **Wicked-Breaking Flamberge - Baou, aparcada:** el +500 anda; anular
+pruebas de logica anteriores sin fallas. **Wicked-Breaking Flamberge - Baou, aparcada (resuelta el 2026-10-19):** el +500 anda; anular
 el efecto del monstruo destruido no (ver `NOTAS-REVERSE.md`, "Los equipos del pack 2"). **Falta: que Oscar
 juegue la v0.2 o la v0.3 libre.**
 

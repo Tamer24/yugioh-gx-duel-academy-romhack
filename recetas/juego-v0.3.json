@@ -1,5 +1,5 @@
 {
-  "nota": "Version de JUEGO 0.3: las 42 cartas aptas del registro al 2026-10-19. Generada por scripts/armar_version.py; no editar a mano.",
+  "nota": "Version de JUEGO 0.3: las 43 cartas aptas del registro al 2026-10-19. Generada por scripts/armar_version.py; no editar a mano.",
   "parches": {
     "busqueda_ids": true,
     "invocacion_tipo": [
@@ -399,6 +399,15 @@
       "descripcion": "Equip only to a monster. It loses 1000 ATK and can attack your opponent's Life Points directly."
     },
     {
+      "hueco": 317,
+      "hueco_nombre": "Mikazukinoyaiba",
+      "id_konami": 5727,
+      "nombre": "Wicked-Breaking Flamberge - Baou",
+      "clase": "Spell Equip",
+      "contrasena": "68427465",
+      "descripcion": "Equip only to a monster. It gains 500 ATK. Discard 1 card from your hand to equip."
+    },
+    {
       "hueco": 320,
       "hueco_nombre": "Firewing Pegasus",
       "id_konami": 5729,
@@ -534,7 +543,9 @@
     "6772:fn_04:efectos/dark_panther.s",
     "G:0801D7DC:efectos/gancho_stim_pack.s",
     "G:0801B724:efectos/gancho_tryce.s",
-    "5724:fn_04:efectos/elma_vuelve.s"
+    "5724:fn_04:efectos/elma_vuelve.s",
+    "G:080245CC:efectos/gancho_baou_a.s",
+    "G:08024598:efectos/gancho_baou_b.s"
   ],
   "filas_efecto": [
     {

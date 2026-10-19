@@ -1392,11 +1392,17 @@ Medido con el emulador sin ventana sobre el `(Lote)` y con Unicorn (`scripts/mot
 - **Elma**: el motor no tenía nada de "vuelve a la mano" (su ID, 5724, no aparece en el código). Cuando el
   monstruo equipado deja el campo, la acción que manda a Elma al cementerio pasa por el procesador de
   acciones (`0x0801706C`) con zona de origen 5: ahí se encola su efecto (ver `ACCIONES.md`, Equipar).
-- **Baou (aparcada)**: tampoco tiene nada en el motor (5727 no aparece). Probado sin éxito: marcar
-  anulada (`p[2] |= 8`) toda entrada que pasa por `FUN_080303D8`, aun todas sin condición, no impide que
-  Mystic Tomato destruido en batalla invoque desde el mazo; y su ID (4930, `0x1342`) no está en los árboles
-  de `FUN_08068C8C`. Su disparo sale por otro camino, sin ubicar. El registro de la batalla sí sirve en ese
-  momento: atacante `0x20`, defensor `0x86`, objetivo de Baou (`+0x3C`) = atacante, y la bandera 5 de Tomato
-  se pone 25 cuadros antes de que vaya al cementerio.
+- **Baou (resuelta el 2026-10-19)**: tampoco tiene nada en el motor (5727 no aparece). Lo que no sirvió:
+  marcar anulada (`p[2] |= 8`) toda entrada que pasa por `FUN_080303D8` o por `FUN_0806629C`, y buscar el ID
+  de Mystic Tomato (4930, `0x1342`) en los árboles de `FUN_08068C8C`. **Dónde se resuelven de verdad los
+  efectos encadenados**: un espía sobre la fn_04 de Mystic Tomato mostró que la llaman 4 veces (una por
+  estado) desde `0x080245D6` (`bl call_function_bx_r2`, `0x080F23D8`), con `p = 0x02020004`. Ahí el
+  resolvedor toma el eslabón de turno: la entrada es `r8 + 24 x índice` y la fn sale de `r6 + 0x7D4`
+  (eslabones 0 y 1, llamada en `0x080245D6`) o de `r6 + 0x7D4 + 24 x índice` (eslabones 2 en adelante,
+  llamada en `0x080245B6`). Toda fn_04 mira el bit 3 de `p[2]` y no hace nada si está: marcar ahí, justo
+  antes de la llamada, anula el efecto. Los ganchos `efectos/gancho_baou_a.s` (`0x080245CC`) y
+  `gancho_baou_b.s` (`0x08024598`) marcan la entrada cuando su carta tiene la bandera 5 (destruida en batalla
+  este turno), es uno de los dos de la última batalla (`0x02020C20`) y el otro tiene una Baou boca arriba
+  equipada (`+0x3C`). Sirve para cualquier "anula los efectos de X" que haya que agregar: el lugar es este.
 - `construir_lote.sh` tapaba los errores de `restaurar.py` (el `grep` del pipe devolvía 0 y quedaba el ROM
   anterior): corregido.
