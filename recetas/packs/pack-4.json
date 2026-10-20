@@ -1,0 +1,1293 @@
+{
+  "pack": "pack-4",
+  "estado": "borrador",
+  "fusiones": [
+    {
+      "resultado": "Elemental Hero Rampart Blaster",
+      "materiales": [
+        "Elemental Hero Clayman",
+        "Elemental Hero Burstinatrix"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Tempest",
+      "materiales": [
+        "Elemental Hero Avian",
+        "Elemental Hero Sparkman",
+        "Elemental Hero Bubbleman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Wildedge",
+      "materiales": [
+        "Elemental Hero Wildheart",
+        "Elemental Hero Bladedge"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Mudballman",
+      "materiales": [
+        "Elemental Hero Bubbleman",
+        "Elemental Hero Clayman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Steam Healer",
+      "materiales": [
+        "Elemental Hero Burstinatrix",
+        "Elemental Hero Bubbleman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Wild Wingman",
+      "materiales": [
+        "Elemental Hero Wildheart",
+        "Elemental Hero Avian"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Necroid Shaman",
+      "materiales": [
+        "Elemental Hero Wildheart",
+        "Elemental Hero Necroshade"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Phoenix Enforcer",
+      "materiales": [
+        "Elemental Hero Avian",
+        "Elemental Hero Burstinatrix"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Shining Phoenix Enforcer",
+      "materiales": [
+        "Elemental Hero Phoenix Enforcer",
+        "Elemental Hero Sparkman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Mariner",
+      "materiales": [
+        "Elemental Hero Bubbleman",
+        "Elemental Hero Avian"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Terra Firma",
+      "materiales": [
+        "Elemental Hero Ocean",
+        "Elemental Hero Woodsman"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Dark Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Dark Panther"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Aqua Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Aqua Dolphin"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Flare Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Flare Scarab"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Glow Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Glow Moss"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Air Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Air Hummingbird"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Grand Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Grand Mole"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Inferno",
+      "materiales": [
+        "Elemental Hero Heat",
+        "Elemental Hero Lady Heat"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Marine Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Marine Dolphin"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Darkbright",
+      "materiales": [
+        "Elemental Hero Sparkman",
+        "Elemental Hero Necroshade"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Magma Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Flare Scarab",
+        "Neo-Spacian Grand Mole"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Plasma Vice",
+      "materiales": [
+        "Elemental Hero Sparkman",
+        "Elemental Hero Bladedge"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Chaos Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Dark Panther",
+        "Neo-Spacian Glow Moss"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Storm Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Air Hummingbird",
+        "Neo-Spacian Aqua Dolphin"
+      ]
+    },
+    {
+      "resultado": "Elemental Hero Nebula Neos",
+      "materiales": [
+        "Elemental Hero Neos",
+        "Neo-Spacian Grand Mole",
+        "Neo-Spacian Dark Panther"
+      ]
+    }
+  ],
+  "nota": "Elemental Hero y Neo-Spacian que el juego nunca tuvo; se aplica sobre el ROM ampliado con ampliar.py --cartas. Los que tenian efecto entran sin el (texto lo dice).",
+  "cartas": [
+    {
+      "carta": {
+        "id_konami": 6477,
+        "id_real": 6477,
+        "nombre": "Elemental Hero Bladedge",
+        "atk": 2600,
+        "def": 1800,
+        "nivel": 7,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "59793705",
+        "descripcion": "A earth Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-bladedge.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6478,
+        "id_real": 6478,
+        "nombre": "Elemental Hero Wildheart",
+        "atk": 1500,
+        "def": 1600,
+        "nivel": 4,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "86188410",
+        "descripcion": "A earth Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-wildheart.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6486,
+        "id_real": 6486,
+        "nombre": "Elemental Hero Rampart Blaster",
+        "atk": 2000,
+        "def": 2500,
+        "nivel": 6,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "47737087",
+        "descripcion": "Elemental HERO Clayman + Elemental HERO Burstinatrix",
+        "arte": "arte/elemental-hero-rampart-blaster.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6487,
+        "id_real": 6487,
+        "nombre": "Elemental Hero Tempest",
+        "atk": 2800,
+        "def": 2800,
+        "nivel": 8,
+        "atributo": "WIND",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "83121692",
+        "descripcion": "Elemental HERO Avian + Elemental HERO Sparkman + Elemental HERO Bubbleman",
+        "arte": "arte/elemental-hero-tempest.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6488,
+        "id_real": 6488,
+        "nombre": "Elemental Hero Wildedge",
+        "atk": 2600,
+        "def": 2300,
+        "nivel": 8,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "10526791",
+        "descripcion": "Elemental HERO Wildheart + Elemental HERO Bladedge",
+        "arte": "arte/elemental-hero-wildedge.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6527,
+        "id_real": 6527,
+        "nombre": "Elemental Hero Necroshade",
+        "atk": 1600,
+        "def": 1800,
+        "nivel": 5,
+        "atributo": "DARK",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "89252153",
+        "descripcion": "A dark Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-necroshade.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6529,
+        "id_real": 6529,
+        "nombre": "Elemental Hero Mudballman",
+        "atk": 1900,
+        "def": 3000,
+        "nivel": 6,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "52031567",
+        "descripcion": "Elemental HERO Bubbleman + Elemental HERO Clayman",
+        "arte": "arte/elemental-hero-mudballman.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6535,
+        "id_real": 6535,
+        "nombre": "Elemental Hero Steam Healer",
+        "atk": 1800,
+        "def": 1000,
+        "nivel": 5,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "81197327",
+        "descripcion": "Elemental HERO Burstinatrix + Elemental HERO Bubbleman",
+        "arte": "arte/elemental-hero-steam-healer.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6566,
+        "id_real": 6566,
+        "nombre": "Elemental Hero Neo Bubbleman",
+        "atk": 800,
+        "def": 1200,
+        "nivel": 4,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "5285665",
+        "descripcion": "A water Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-neo-bubbleman.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6639,
+        "id_real": 6639,
+        "nombre": "Elemental Hero Electrum",
+        "atk": 2900,
+        "def": 2600,
+        "nivel": 10,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "29343734",
+        "descripcion": "Elemental HERO Avian + Elemental HERO Burstinatrix + Elemental HERO Clayman + Elemental HERO Bubbleman",
+        "arte": "arte/elemental-hero-electrum.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6643,
+        "id_real": 6643,
+        "nombre": "Elemental Hero Wild Wingman",
+        "atk": 1900,
+        "def": 2300,
+        "nivel": 8,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "55615891",
+        "descripcion": "Elemental HERO Wildheart + Elemental HERO Avian",
+        "arte": "arte/elemental-hero-wild-wingman.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6644,
+        "id_real": 6644,
+        "nombre": "Elemental Hero Necroid Shaman",
+        "atk": 1900,
+        "def": 1800,
+        "nivel": 6,
+        "atributo": "DARK",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "81003500",
+        "descripcion": "Elemental HERO Wildheart + Elemental HERO Necroshade",
+        "arte": "arte/elemental-hero-necroid-shaman.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6655,
+        "id_real": 6655,
+        "nombre": "Elemental Hero Phoenix Enforcer",
+        "atk": 2100,
+        "def": 1200,
+        "nivel": 6,
+        "atributo": "FIRE",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "41436536",
+        "descripcion": "Elemental HERO Avian + Elemental HERO Burstinatrix",
+        "arte": "arte/elemental-hero-phoenix-enforcer.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6656,
+        "id_real": 6656,
+        "nombre": "Elemental Hero Shining Phoenix Enforcer",
+        "atk": 2500,
+        "def": 2100,
+        "nivel": 8,
+        "atributo": "FIRE",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "88820235",
+        "descripcion": "Elemental HERO Phoenix Enforcer + Elemental HERO Sparkman",
+        "arte": "arte/elemental-hero-shining-phoenix-enforcer.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6657,
+        "id_real": 6657,
+        "nombre": "Elemental Hero Mariner",
+        "atk": 1400,
+        "def": 1000,
+        "nivel": 5,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "14225239",
+        "descripcion": "Elemental HERO Bubbleman + Elemental HERO Avian",
+        "arte": "arte/elemental-hero-mariner.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6728,
+        "id_real": 6728,
+        "nombre": "Elemental Hero Woodsman",
+        "atk": 1000,
+        "def": 2000,
+        "nivel": 4,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "75434695",
+        "descripcion": "A earth Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-woodsman.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6731,
+        "id_real": 6731,
+        "nombre": "Elemental Hero Terra Firma",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 8,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "74711057",
+        "descripcion": "Elemental HERO Ocean + Elemental HERO Woodsman",
+        "arte": "arte/elemental-hero-terra-firma.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6733,
+        "id_real": 6733,
+        "nombre": "Elemental Hero Ocean",
+        "atk": 1500,
+        "def": 1200,
+        "nivel": 4,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "37195861",
+        "descripcion": "A water Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-ocean.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6765,
+        "id_real": 6765,
+        "nombre": "Elemental Hero Dark Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "DARK",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "28677304",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Dark Panther",
+        "arte": "arte/elemental-hero-dark-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6766,
+        "id_real": 6766,
+        "nombre": "Elemental Hero Aqua Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "55171412",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Aqua Dolphin",
+        "arte": "arte/elemental-hero-aqua-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6767,
+        "id_real": 6767,
+        "nombre": "Elemental Hero Flare Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "FIRE",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "81566151",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Flare Scarab",
+        "arte": "arte/elemental-hero-flare-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6784,
+        "id_real": 6784,
+        "nombre": "Elemental Hero Stratos",
+        "atk": 1800,
+        "def": 300,
+        "nivel": 4,
+        "atributo": "WIND",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "40044919",
+        "descripcion": "A wind Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-stratos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6863,
+        "id_real": 6863,
+        "nombre": "Elemental Hero Knospe",
+        "atk": 600,
+        "def": 1000,
+        "nivel": 3,
+        "atributo": "EARTH",
+        "tipo": "Plant",
+        "clase": "Normal",
+        "contrasena": "62107981",
+        "descripcion": "A earth Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-knospe.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6866,
+        "id_real": 6866,
+        "nombre": "Elemental Hero Poison Rose",
+        "atk": 1900,
+        "def": 2000,
+        "nivel": 6,
+        "atributo": "EARTH",
+        "tipo": "Plant",
+        "clase": "Normal",
+        "contrasena": "51085303",
+        "descripcion": "A earth Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-poison-rose.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6927,
+        "id_real": 6927,
+        "nombre": "Elemental Hero Heat",
+        "atk": 1600,
+        "def": 1200,
+        "nivel": 4,
+        "atributo": "FIRE",
+        "tipo": "Pyro",
+        "clase": "Normal",
+        "contrasena": "98266377",
+        "descripcion": "A fire Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-heat.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6988,
+        "id_real": 6988,
+        "nombre": "Elemental Hero Glow Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "85507811",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Glow Moss",
+        "arte": "arte/elemental-hero-glow-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6989,
+        "id_real": 6989,
+        "nombre": "Elemental Hero Air Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "WIND",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "11502550",
+        "descripcion": "Elemental Hero Neos + Neo-Spacian Air Hummingbird",
+        "arte": "arte/elemental-hero-air-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 6990,
+        "id_real": 6990,
+        "nombre": "Elemental Hero Grand Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "48996569",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Grand Mole",
+        "arte": "arte/elemental-hero-grand-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7024,
+        "id_real": 7024,
+        "nombre": "Elemental Hero Lady Heat",
+        "atk": 1300,
+        "def": 1000,
+        "nivel": 4,
+        "atributo": "FIRE",
+        "tipo": "Pyro",
+        "clase": "Normal",
+        "contrasena": "95362816",
+        "descripcion": "A fire Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-lady-heat.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7026,
+        "id_real": 7026,
+        "nombre": "Elemental Hero Inferno",
+        "atk": 2300,
+        "def": 1600,
+        "nivel": 8,
+        "atributo": "FIRE",
+        "tipo": "Pyro",
+        "clase": "Fusion",
+        "contrasena": "68745629",
+        "descripcion": "Elemental HERO Heat + Elemental HERO Lady Heat",
+        "arte": "arte/elemental-hero-inferno.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7058,
+        "id_real": 7058,
+        "nombre": "Elemental Hero Voltic",
+        "atk": 1000,
+        "def": 1500,
+        "nivel": 4,
+        "atributo": "LIGHT",
+        "tipo": "Thunder",
+        "clase": "Normal",
+        "contrasena": "9327502",
+        "descripcion": "A light Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-voltic.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7105,
+        "id_real": 7105,
+        "nombre": "Elemental Hero Captain Gold",
+        "atk": 2100,
+        "def": 800,
+        "nivel": 4,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "80908502",
+        "descripcion": "A light Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-captain-gold.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7174,
+        "id_real": 7174,
+        "nombre": "Neo-Spacian Marine Dolphin",
+        "atk": 900,
+        "def": 1100,
+        "nivel": 4,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "78734254",
+        "descripcion": "A Fusion Monster of the Elemental Heroes.",
+        "arte": "arte/neo-spacian-marine-dolphin.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7175,
+        "id_real": 7175,
+        "nombre": "Elemental Hero Marine Neos",
+        "atk": 2800,
+        "def": 2300,
+        "nivel": 8,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "5128859",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Marine Dolphin",
+        "arte": "arte/elemental-hero-marine-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7176,
+        "id_real": 7176,
+        "nombre": "Elemental Hero Darkbright",
+        "atk": 2000,
+        "def": 1000,
+        "nivel": 6,
+        "atributo": "DARK",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "41517968",
+        "descripcion": "Elemental HERO Sparkman + Elemental HERO Necroshade",
+        "arte": "arte/elemental-hero-darkbright.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7177,
+        "id_real": 7177,
+        "nombre": "Elemental Hero Magma Neos",
+        "atk": 3000,
+        "def": 2500,
+        "nivel": 9,
+        "atributo": "FIRE",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "78512663",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Flare Scarab + Neo-Spacian Grand Mole",
+        "arte": "arte/elemental-hero-magma-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7195,
+        "id_real": 7195,
+        "nombre": "Elemental Hero Neos Alius",
+        "atk": 1900,
+        "def": 1300,
+        "nivel": 4,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "69884162",
+        "descripcion": "A light Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-neos-alius.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7252,
+        "id_real": 7252,
+        "nombre": "Elemental Hero Plasma Vice",
+        "atk": 2600,
+        "def": 2300,
+        "nivel": 8,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "60493189",
+        "descripcion": "Elemental HERO Sparkman + Elemental HERO Bladedge",
+        "arte": "arte/elemental-hero-plasma-vice.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7275,
+        "id_real": 7275,
+        "nombre": "Elemental Hero Chaos Neos",
+        "atk": 3000,
+        "def": 2500,
+        "nivel": 9,
+        "atributo": "DARK",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "17032740",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Dark Panther + Neo-Spacian Glow Moss",
+        "arte": "arte/elemental-hero-chaos-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7441,
+        "id_real": 7441,
+        "nombre": "Neo-Spacian Twinkle Moss",
+        "atk": 500,
+        "def": 1100,
+        "nivel": 4,
+        "atributo": "LIGHT",
+        "tipo": "Plant",
+        "clase": "Fusion",
+        "contrasena": "13857930",
+        "descripcion": "A Fusion Monster of the Elemental Heroes.",
+        "arte": "arte/neo-spacian-twinkle-moss.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7442,
+        "id_real": 7442,
+        "nombre": "Elemental Hero Storm Neos",
+        "atk": 3000,
+        "def": 2500,
+        "nivel": 9,
+        "atributo": "WIND",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "49352945",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Air Hummingbird + Neo-Spacian Aqua Dolphin",
+        "arte": "arte/elemental-hero-storm-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7491,
+        "id_real": 7491,
+        "nombre": "Elemental Hero Prisma",
+        "atk": 1700,
+        "def": 1100,
+        "nivel": 4,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "89312388",
+        "descripcion": "A light Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-prisma.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 7806,
+        "id_real": 7806,
+        "nombre": "Elemental Hero Divine Neos",
+        "atk": 2500,
+        "def": 2500,
+        "nivel": 12,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "31111109",
+        "descripcion": "A Fusion Monster of the Elemental Heroes.",
+        "arte": "arte/elemental-hero-divine-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8122,
+        "id_real": 8122,
+        "nombre": "Elemental Hero Gaia",
+        "atk": 2200,
+        "def": 2600,
+        "nivel": 6,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "16304628",
+        "descripcion": "1 Elemental HERO monster + 1 EARTH monster",
+        "arte": "arte/elemental-hero-gaia.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8126,
+        "id_real": 8126,
+        "nombre": "Elemental Hero Ice Edge",
+        "atk": 800,
+        "def": 900,
+        "nivel": 3,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "41077745",
+        "descripcion": "A water Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-ice-edge.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8129,
+        "id_real": 8129,
+        "nombre": "Elemental Hero Absolute Zero",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 8,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "40854197",
+        "descripcion": "1 HERO monster + 1 WATER monster",
+        "arte": "arte/elemental-hero-absolute-zero.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8191,
+        "id_real": 8543,
+        "nombre": "Elemental Hero Flash",
+        "atk": 1100,
+        "def": 1600,
+        "nivel": 4,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "69572169",
+        "descripcion": "A light Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-flash.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8190,
+        "id_real": 8545,
+        "nombre": "Elemental Hero The Shining",
+        "atk": 2600,
+        "def": 2100,
+        "nivel": 8,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "22061412",
+        "descripcion": "1 Elemental HERO monster + 1 LIGHT monster",
+        "arte": "arte/elemental-hero-the-shining.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8189,
+        "id_real": 8592,
+        "nombre": "Elemental Hero Great Tornado",
+        "atk": 2800,
+        "def": 2200,
+        "nivel": 8,
+        "atributo": "WIND",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "3642509",
+        "descripcion": "1 Elemental HERO monster + 1 WIND monster",
+        "arte": "arte/elemental-hero-great-tornado.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8188,
+        "id_real": 8866,
+        "nombre": "Elemental Hero Neos Knight",
+        "atk": 2500,
+        "def": 1000,
+        "nivel": 7,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "72926163",
+        "descripcion": "Elemental HERO Neos + 1 Warrior monster",
+        "arte": "arte/elemental-hero-neos-knight.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8187,
+        "id_real": 9439,
+        "nombre": "Elemental Hero Nova Master",
+        "atk": 2600,
+        "def": 2100,
+        "nivel": 8,
+        "atributo": "FIRE",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "1945387",
+        "descripcion": "1 Elemental HERO monster + 1 FIRE monster",
+        "arte": "arte/elemental-hero-nova-master.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8186,
+        "id_real": 9838,
+        "nombre": "Elemental Hero Escuridao",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 8,
+        "atributo": "DARK",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "33574806",
+        "descripcion": "1 Elemental HERO monster + 1 DARK monster",
+        "arte": "arte/elemental-hero-escuridao.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8185,
+        "id_real": 11308,
+        "nombre": "Elemental Hero Shadow Mist",
+        "atk": 1000,
+        "def": 1500,
+        "nivel": 4,
+        "atributo": "DARK",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "50720316",
+        "descripcion": "A dark Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-shadow-mist.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8184,
+        "id_real": 11314,
+        "nombre": "Elemental Hero Core",
+        "atk": 2700,
+        "def": 2200,
+        "nivel": 9,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "95486586",
+        "descripcion": "A Fusion Monster of the Elemental Heroes.",
+        "arte": "arte/elemental-hero-core.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8183,
+        "id_real": 11419,
+        "nombre": "Elemental Hero Blazeman",
+        "atk": 1200,
+        "def": 1800,
+        "nivel": 4,
+        "atributo": "FIRE",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "63060238",
+        "descripcion": "A fire Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-blazeman.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8182,
+        "id_real": 12901,
+        "nombre": "Elemental Hero Honest Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "14124483",
+        "descripcion": "A light Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-honest-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8181,
+        "id_real": 13638,
+        "nombre": "Elemental Hero Solid Soldier",
+        "atk": 1300,
+        "def": 1100,
+        "nivel": 4,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "45195443",
+        "descripcion": "A earth Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-solid-soldier.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8180,
+        "id_real": 13867,
+        "nombre": "Elemental Hero Nebula Neos",
+        "atk": 3000,
+        "def": 2500,
+        "nivel": 9,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "40080312",
+        "descripcion": "Elemental HERO Neos + Neo-Spacian Grand Mole + Neo-Spacian Dark Panther",
+        "arte": "arte/elemental-hero-nebula-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8179,
+        "id_real": 14112,
+        "nombre": "Elemental Hero Brave Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "64655485",
+        "descripcion": "Elemental HERO Neos + 1 Level 4 or lower Effect Monster",
+        "arte": "arte/elemental-hero-brave-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8178,
+        "id_real": 14113,
+        "nombre": "Elemental Hero Cosmo Neos",
+        "atk": 3500,
+        "def": 3000,
+        "nivel": 11,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "90050480",
+        "descripcion": "Elemental HERO Neos + 3 Neo-Spacian monsters with different Attributes",
+        "arte": "arte/elemental-hero-cosmo-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8177,
+        "id_real": 14216,
+        "nombre": "Elemental Hero Grandmerge",
+        "atk": 0,
+        "def": 0,
+        "nivel": 6,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "36841733",
+        "descripcion": "A Fusion Monster of the Elemental Heroes.",
+        "arte": "arte/elemental-hero-grandmerge.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8176,
+        "id_real": 14910,
+        "nombre": "Elemental Hero Sunrise",
+        "atk": 2500,
+        "def": 1200,
+        "nivel": 7,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "22908820",
+        "descripcion": "A Fusion Monster of the Elemental Heroes.",
+        "arte": "arte/elemental-hero-sunrise.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8175,
+        "id_real": 14911,
+        "nombre": "Elemental Hero Liquid Soldier",
+        "atk": 1400,
+        "def": 1300,
+        "nivel": 4,
+        "atributo": "WATER",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "59392529",
+        "descripcion": "A water Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-liquid-soldier.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8174,
+        "id_real": 14954,
+        "nombre": "Elemental Hero Neos Kluger",
+        "atk": 3000,
+        "def": 2500,
+        "nivel": 9,
+        "atributo": "LIGHT",
+        "tipo": "Spellcaster",
+        "clase": "Fusion",
+        "contrasena": "90307498",
+        "descripcion": "Elemental HERO Neos + Yubel",
+        "arte": "arte/elemental-hero-neos-kluger.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8173,
+        "id_real": 17403,
+        "nombre": "Elemental Hero Spirit of Neos",
+        "atk": 2500,
+        "def": 2000,
+        "nivel": 7,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Normal",
+        "contrasena": "13256226",
+        "descripcion": "A light Elemental Hero with a special power. Its original effect is not in this version.",
+        "arte": "arte/elemental-hero-spirit-of-neos.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8172,
+        "id_real": 17443,
+        "nombre": "Elemental Hero Shining Neos Wingman",
+        "atk": 3100,
+        "def": 2500,
+        "nivel": 8,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "56733747",
+        "descripcion": "Elemental HERO Neos + 1 Wingman Fusion Monster",
+        "arte": "arte/elemental-hero-shining-neos-wingman.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8171,
+        "id_real": 18663,
+        "nombre": "Elemental Hero Flame Wingman - Infernal Rage",
+        "atk": 2100,
+        "def": 1200,
+        "nivel": 8,
+        "atributo": "WIND",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "93347961",
+        "descripcion": "A Fusion Monster of the Elemental Heroes.",
+        "arte": "arte/elemental-hero-flame-wingman-infernal-rage.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8170,
+        "id_real": 21621,
+        "nombre": "Elemental Hero Thunder Giant - Voltic Thunder",
+        "atk": 2400,
+        "def": 1500,
+        "nivel": 6,
+        "atributo": "LIGHT",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "19222426",
+        "descripcion": "A Fusion Monster of the Elemental Heroes.",
+        "arte": "arte/elemental-hero-thunder-giant-voltic-thunder.png"
+      }
+    },
+    {
+      "carta": {
+        "id_konami": 8169,
+        "id_real": 23147,
+        "nombre": "Elemental Hero Clay Guardian",
+        "atk": 0,
+        "def": 2800,
+        "nivel": 4,
+        "atributo": "EARTH",
+        "tipo": "Warrior",
+        "clase": "Fusion",
+        "contrasena": "8593259",
+        "descripcion": "1 Elemental HERO monster + 1 Warrior monster",
+        "arte": "arte/elemental-hero-clay-guardian.png"
+      }
+    }
+  ]
+}

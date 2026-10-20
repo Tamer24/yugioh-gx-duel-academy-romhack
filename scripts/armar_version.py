@@ -1,9 +1,9 @@
 """Arma una version de JUEGO del hack: solo las cartas aptas, sin ayudas de prueba.
 
 Una carta es apta cuando el registro (datos/pruebas.csv) dice que funciona y tiene sus tres
-evidencias: logica, duelo y la confirmacion a ojo de Oscar (scripts/registro.py aptas ROM).
+evidencias: logica, duelo y la confirmacion (a ojo de Oscar o por capturas; scripts/registro.py aptas ROM).
 La version lleva los parches que necesita el juego (busqueda de IDs y, si entra Dark Necrofear,
-la invocacion por tipo) y todas las piezas de efectos/; no lleva contrasenas gratis ni cartas
+la invocacion por tipo) y las piezas de efectos/ de las cartas aptas; no lleva contrasenas gratis ni cartas
 regaladas en el baul. Cada carta ocupa el hueco que le fija datos/huecos.csv.
 
 Uso (desde la raiz del proyecto):
@@ -29,6 +29,27 @@ from da_lib import MD5_USA, Rom
 
 RAIZ = registro.RAIZ
 CON_INVOCACION_TIPO = {"Dark Necrofear": {"id_konami": 5222, "tipo": "Fiend", "cantidad": 3}}
+# Ganchos que solo sirven a ciertas cartas (por ID de Konami): entran si alguna de ellas es apta.
+# Los demas ganchos (G:, T:, B:) son del motor y van siempre.
+GANCHOS_DE = {"efectos/gancho_atk_cuenta.s": {6773}, "efectos/gancho_batalla.s": {6770, 6771},
+              "efectos/gancho_baou_a.s": {5727}, "efectos/gancho_baou_b.s": {5727}}
+
+
+def piezas_para(piezas, ids):
+    """Las piezas de lote.json que necesitan las cartas de ids: las de una carta (ID:columna:fuente)
+    solo si la carta entra; los ganchos de GANCHOS_DE solo si entra alguna de sus cartas."""
+    out = []
+    for p in piezas:
+        cabeza = p.split(":")[0]
+        if cabeza.isdigit():
+            if int(cabeza) in ids:
+                out.append(p)
+        elif p.split(":")[-1] in GANCHOS_DE:
+            if GANCHOS_DE[p.split(":")[-1]] & ids:
+                out.append(p)
+        else:
+            out.append(p)
+    return out
 
 
 def main(argv):
@@ -73,7 +94,12 @@ def main(argv):
         parches["invocacion_tipo"] = tipo
     receta = {"nota": f"Version de JUEGO {version}: las {len(cartas)} cartas aptas del registro al "
                       f"{datetime.date.today().isoformat()}. Generada por scripts/armar_version.py; no editar a mano.",
-              "parches": parches, "cartas": cartas, "piezas": lote["piezas"]}
+              "parches": parches, "cartas": cartas,
+              "piezas": piezas_para(lote["piezas"], {int(c["id_konami"]) for c in cartas})}
+    # Las cartas que el juego nunca tuvo necesitan su fila nueva en la tabla de efectos.
+    filas = [f for f in lote.get("filas_efecto", []) if int(f["id_konami"]) in {int(c["id_konami"]) for c in cartas}]
+    if filas:
+        receta["filas_efecto"] = filas
     with open(receta_ruta, "w", encoding="utf-8") as f:
         json.dump(receta, f, ensure_ascii=False, indent=2)
         f.write("\n")
@@ -86,7 +112,7 @@ def main(argv):
     md5_bps = hashlib.md5(open(bps_ruta, "rb").read()).hexdigest()
     lineas = [f"# Duel Academy Hack v{version}", "",
               f"Fecha: {datetime.date.today().isoformat()}. {len(cartas)} cartas restauradas, todas probadas en duelo "
-              "y confirmadas a ojo.", "",
+              "y verificadas (a ojo o por capturas).", "",
               "## Cómo se usa", "",
               f"1. Hace falta el ROM original *Yu-Gi-Oh! GX - Duel Academy (USA)*, MD5 `{MD5_USA}`.",
               f"2. Aplicar el parche: `python3 scripts/bps.py --aplicar \"ROM original.gba\" build/hack-v{version}.bps "

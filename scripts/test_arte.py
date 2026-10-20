@@ -5,7 +5,8 @@ fuera un PNG nuevo y se vuelve a leer. Lo esperado sale del formato (80x80, 64 c
   - un dibujo que usa 63 colores o menos tiene que volver identico, pixel por pixel;
   - uno que usa los 64 pierde un color (el indice 0 se reserva): la diferencia tiene que ser chica;
   - el indice 0 no se usa y la paleta trae ahi el marcador 0x83E0;
-  - una imagen de otro tamano o no cuadrada se acepta y sale de 80x80.
+  - una imagen de otro tamano o no cuadrada se acepta y sale de 80x80;
+  - el dibujo chico (32x32, el de los sobres) sale del grande y se parece al del juego.
 Tambien escribe un dibujo en una copia del ROM en memoria y comprueba que solo cambian los
 bytes de esa carta.
 
@@ -17,7 +18,7 @@ import sys
 from PIL import Image, ImageChops
 
 import arte
-from da_lib import ARTE, PALETAS, Rom
+from da_lib import ARTE, MINI_ARTE, MINI_PALETAS, PALETAS, Rom
 
 
 def colores_usados(rom, i):
@@ -72,9 +73,16 @@ def main():
     arte.escribir(rom, destino, arte.leer(rom, indices["Sangan"]))
     cambiados = [k for k in range(len(antes)) if antes[k] != rom.d[k]]
     en_carta = all(PALETAS + 128 * destino <= k < PALETAS + 128 * (destino + 1)
-                   or ARTE + 6400 * destino <= k < ARTE + 6400 * (destino + 1) for k in cambiados)
-    caso("escribir en el ROM: solo cambian la paleta y el arte de esa carta", bool(cambiados) and en_carta,
-         f"{len(cambiados)} bytes")
+                   or ARTE + 6400 * destino <= k < ARTE + 6400 * (destino + 1)
+                   or MINI_PALETAS + 64 * destino <= k < MINI_PALETAS + 64 * (destino + 1)
+                   or MINI_ARTE + 1024 * destino <= k < MINI_ARTE + 1024 * (destino + 1) for k in cambiados)
+    caso("escribir en el ROM: solo cambian las paletas y los dibujos (grande y chico) de esa carta",
+         bool(cambiados) and en_carta, f"{len(cambiados)} bytes")
+    # el dibujo chico que arma el conversor tiene que parecerse al que trae el juego para ese dibujo
+    dif = ImageChops.difference(arte.leer_mini(rom, destino), arte.leer_mini(rom, indices["Sangan"]))
+    media = sum(dif.convert("L").tobytes()) / 1024
+    caso("escribir en el ROM: el dibujo chico sale parecido al del juego", media < 24,
+         f"diferencia media {media:.1f} sobre 255")
     caso("escribir en el ROM: la carta muestra el dibujo nuevo",
          ImageChops.difference(arte.leer(rom, destino), arte.leer(rom, indices["Sangan"])).getbbox() is None)
     try:

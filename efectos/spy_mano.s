@@ -6,7 +6,8 @@
 @ comprobacion original falla, devuelve 0 (igual que Telescope).
 @
 @ Entrada: r0 = puntero a la carta (byte *). Salida: estado siguiente (0 = nada).
-@ Simbolos: ORIGINAL, CLEAR_ZONE, REGISTRAR, DIALOGO (direcciones Thumb, bit 0 en 1).
+@ Muestra 1 carta al azar de la mano (el texto dice "select and look at 1").
+@ Simbolos: AZAR, ORIGINAL, CLEAR_ZONE, REGISTRAR, DIALOGO (direcciones Thumb, bit 0 en 1).
 @
 @ Campos del lado (0x02022250 + lado * 0x2B08):
 @   mano: lista en +0x2824, cantidad = ((b[+0x1C] & 0x3F) << 1) | (b[+0x1B] >> 7)
@@ -54,25 +55,32 @@ _start:
     lsrs  r1, r1, #7
     orrs  r0, r1
     adds  r6, r0, #0
-    movs  r7, #0                  @ r7 = indice
-
-.Lbucle:
-    cmp   r7, r6
-    bge   .Lmostrar
-    ldr   r0, =0x00002824         @ lista de mano
-    adds  r0, r0, r5
-    ldrb  r0, [r0, r7]
-    ldr   r3, =REGISTRAR          @ registra la carta como visible
+    movs  r7, #0
+    cmp   r6, #0
+    beq   .Lfin                   @ mano vacia: nada que mirar
+    ldr   r3, =AZAR               @ "mira 1 carta": una al azar (la lista del motor muestra los
+    mov   ip, r3                  @ nombres de todas las candidatas, asi que elegir a ciegas no
+    bl    .Lllamar                @ se puede; el azar es lo que hace Inspection)
+    movs  r1, #0xff
+    ands  r0, r1
+.Lmod:
+    cmp   r0, r6
+    blt   .Lmodfin
+    subs  r0, r0, r6
+    b     .Lmod
+.Lmodfin:
+    ldr   r1, =0x00002824         @ lista de mano
+    adds  r1, r1, r5
+    ldrb  r0, [r1, r0]
+    ldr   r3, =REGISTRAR          @ registra solo esa carta como visible
     mov   ip, r3
     bl    .Lllamar
-    adds  r7, #1
-    b     .Lbucle
 
 .Lmostrar:
     ldr   r3, =DIALOGO            @ init_effect_dialogue(0, n, 0x02019F24, 0)
     mov   ip, r3
     movs  r0, #0
-    adds  r1, r6, #0
+    movs  r1, #1
     ldr   r2, =0x02019F24
     movs  r3, #0
     bl    .Lllamar

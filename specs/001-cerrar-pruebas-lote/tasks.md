@@ -1,5 +1,8 @@
 # Tasks: Cerrar las pruebas del lote de 30 cartas restauradas
 
+> **2026-10-20: feature cerrada en los hechos.** Las 30 funcionan y entraron en la v0.2 y la v0.3; con la
+> constitución 2.0.0 la confirmación por capturas reemplaza a T033. Estado actual en `CLAUDE.md` y `PLAN.md`.
+
 **Input**: documentos de diseño en `specs/001-cerrar-pruebas-lote/`
 
 **Prerequisites**: plan.md, spec.md, research.md, data-model.md, contracts/, quickstart.md

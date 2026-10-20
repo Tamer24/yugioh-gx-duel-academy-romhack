@@ -1,0 +1,241 @@
+paso 0 (desde estado estados/revisar/34-elemental-hero-neos.ss1): sin ordenes
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 3 | carta bajo el cursor: Monster Reincarnation | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Clayman', 'Mystical Elf', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Nimble Momonga', 'Gyaku-Gire Panda', 'Dian Keto the Cure Master', 'Des Wombat', 'Call of the Haunted']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 48
+
+paso 1 (desde paso 0): mano:Elemental Hero Neos | w30 f A w50 f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Monster Reincarnation | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Clayman', 'Mystical Elf', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Nimble Momonga', 'Gyaku-Gire Panda', 'Dian Keto the Cure Master', 'Des Wombat', 'Call of the Haunted']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 48
+
+paso 2 (desde paso 1): B w60 B w40 | mano:Elemental Hero Clayman | A w50 UP f A w120 f
+ERROR: no llegue a la carta; puede haber un menu abierto
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Monster Reincarnation | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Clayman', 'Mystical Elf', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Nimble Momonga', 'Gyaku-Gire Panda', 'Dian Keto the Cure Master', 'Des Wombat', 'Call of the Haunted']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 48
+
+paso 3 (desde paso 1): B w60 f | mano:Elemental Hero Clayman | A w50 UP f A w120 f
+LP: yo 8000 | rival 8000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 1 | carta bajo el cursor: Elemental Hero Clayman | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Mystical Elf', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation']
+    monstruos ['Elemental Hero Clayman (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Nimble Momonga', 'Gyaku-Gire Panda', 'Dian Keto the Cure Master', 'Des Wombat', 'Call of the Haunted']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 48
+
+paso 4 (desde paso 3): B w50 f A w120 | w120 f A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Dian Keto the Cure Master | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Mystical Elf', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation']
+    monstruos ['Elemental Hero Clayman (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Nimble Momonga', 'Gyaku-Gire Panda', 'Dian Keto the Cure Master', 'Des Wombat', 'Call of the Haunted', 'Dian Keto the Cure Master']
+    monstruos [] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 47
+
+paso 5 (desde paso 4): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 8000
+cursor: columna 6, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Dian Keto the Cure Master | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Mystical Elf', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation']
+    monstruos ['Elemental Hero Clayman (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Nimble Momonga', 'Gyaku-Gire Panda', 'Des Wombat', 'Call of the Haunted', 'Dian Keto the Cure Master']
+    monstruos [] | magias y trampas ['Dian Keto the Cure Master']
+    cementerio [] | retiradas [] | mazo 47
+
+paso 6 (desde paso 5): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 9000
+cursor: columna 6, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Gyaku-Gire Panda | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Mystical Elf', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation']
+    monstruos ['Elemental Hero Clayman (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Nimble Momonga', 'Des Wombat', 'Call of the Haunted', 'Dian Keto the Cure Master']
+    monstruos ['Gyaku-Gire Panda (ataque, ATK 1300, DEF 1600)'] | magias y trampas []
+    cementerio ['Dian Keto the Cure Master'] | retiradas [] | mazo 47
+
+paso 7 (desde paso 6): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 10000
+cursor: columna 6, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Dian Keto the Cure Master | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Mystical Elf', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation']
+    monstruos ['Elemental Hero Clayman (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 34
+rival: mano ['Nimble Momonga', 'Des Wombat', 'Call of the Haunted']
+    monstruos ['Gyaku-Gire Panda (ataque, ATK 1300, DEF 1600)'] | magias y trampas []
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 47
+
+paso 8 (desde paso 7): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 10000
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Charcoal Inpachi | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Mystical Elf', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi']
+    monstruos ['Elemental Hero Clayman (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Nimble Momonga', 'Des Wombat']
+    monstruos ['Gyaku-Gire Panda (ataque, ATK 1300, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 47
+
+paso 9 (desde paso 8): mano:Mystical Elf | A w50 UP f A w120 f | B w50 DOWN f A w120
+LP: yo 8000 | rival 10000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Mystical Elf | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi']
+    monstruos ['Elemental Hero Clayman (boca abajo, ATK 800, DEF 2000)', 'Mystical Elf (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Nimble Momonga', 'Des Wombat']
+    monstruos ['Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 47
+
+paso 10 (desde paso 9): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 10000
+cursor: columna 1, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Des Wombat | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi']
+    monstruos ['Elemental Hero Clayman (boca abajo, ATK 800, DEF 2000)', 'Mystical Elf (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Nimble Momonga', 'Dian Keto the Cure Master']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 11 (desde paso 10): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 10000
+cursor: columna 5, fila 4 (magias y trampas del rival), indice en la mano 1 | carta bajo el cursor: Dian Keto the Cure Master | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi']
+    monstruos ['Elemental Hero Clayman (boca abajo, ATK 800, DEF 2000)', 'Mystical Elf (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted', 'Dian Keto the Cure Master']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 12 (desde paso 11): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 11000
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Elemental Hero Clayman | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi']
+    monstruos ['Elemental Hero Clayman (defensa, ATK 800, DEF 2000)', 'Mystical Elf (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 13 (desde paso 12): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 10600
+cursor: columna 3, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Elemental Hero Clayman | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi']
+    monstruos ['Elemental Hero Clayman (defensa, ATK 800, DEF 2000)', 'Mystical Elf (boca abajo, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 14 (desde paso 13): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 10600
+cursor: columna 3, fila 2 (mis monstruos), indice en la mano 1 | carta bajo el cursor: Mystical Elf | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi']
+    monstruos ['Elemental Hero Clayman (defensa, ATK 800, DEF 2000)', 'Mystical Elf (defensa, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 33
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 15 (desde paso 14): w120 f A w90 f A w90 f
+LP: yo 8000 | rival 10400
+cursor: columna 7, fila 0 (mi mano), indice en la mano 5 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Elemental Hero Clayman (defensa, ATK 800, DEF 2000)', 'Mystical Elf (defensa, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 32
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 16 (desde paso 15): mano:Elemental Hero Neos | A w50 DOWN f A w90 f
+LP: yo 8000 | rival 10400
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Elemental Hero Clayman (defensa, ATK 800, DEF 2000)', 'Mystical Elf (defensa, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 32
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 17 (desde paso 16): A w90 f
+LP: yo 8000 | rival 10400
+cursor: columna 7, fila 0 (mi mano), indice en la mano 0 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Elemental Hero Clayman (defensa, ATK 800, DEF 2000)', 'Mystical Elf (defensa, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 32
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 18 (desde paso 17): A w60 f A w90 f
+LP: yo 8000 | rival 10400
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Spiritual Fire Art - Kurenai | evento 0x0
+yo: mano ['Elemental Hero Neos', 'Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Elemental Hero Clayman (defensa, ATK 800, DEF 2000)', 'Mystical Elf (defensa, ATK 800, DEF 2000)'] | magias y trampas []
+    cementerio [] | retiradas [] | mazo 32
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1800, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 19 (desde paso 18): A w60 RIGHT w30 f A w300 f
+LP: yo 8000 | rival 10400
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Elemental Hero Neos | evento 0x0
+yo: mano ['Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Elemental Hero Neos (ataque, ATK 2500, DEF 2000)'] | magias y trampas []
+    cementerio ['Elemental Hero Clayman', 'Mystical Elf'] | retiradas [] | mazo 32
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1300, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 20 (desde paso 19): B w80 A w170 f | cursor:2,2 | A w50 f
+LP: yo 8000 | rival 10400
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Elemental Hero Neos | evento 0x0
+yo: mano ['Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Elemental Hero Neos (ataque, ATK 2500, DEF 2000)'] | magias y trampas []
+    cementerio ['Elemental Hero Clayman', 'Mystical Elf'] | retiradas [] | mazo 32
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1300, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 21 (desde paso 20): UP A w80 f
+LP: yo 8000 | rival 10400
+cursor: columna 2, fila 2 (mis monstruos), indice en la mano 0 | carta bajo el cursor: Elemental Hero Neos | evento 0x0
+yo: mano ['Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Elemental Hero Neos (ataque, ATK 2500, DEF 2000)'] | magias y trampas []
+    cementerio ['Elemental Hero Clayman', 'Mystical Elf'] | retiradas [] | mazo 32
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1300, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 22 (desde paso 21): A w200 f A w200 f A w120 f
+LP: yo 8000 | rival 10400
+cursor: columna 5, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Elemental Hero Neos | evento 0x14
+yo: mano ['Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Elemental Hero Neos (ataque, ATK 2500, DEF 2000)'] | magias y trampas []
+    cementerio ['Elemental Hero Clayman', 'Mystical Elf'] | retiradas [] | mazo 32
+rival: mano ['Nimble Momonga']
+    monstruos ['Des Wombat (ataque, ATK 1600, DEF 300)', 'Gyaku-Gire Panda (ataque, ATK 1300, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+
+paso 23 (desde paso 22): w200 f
+LP: yo 8000 | rival 9500
+cursor: columna 5, fila 3 (monstruos del rival), indice en la mano 0 | carta bajo el cursor: Call of the Haunted | evento 0x0
+yo: mano ['Elemental Hero Sparkman', 'Skyscraper', 'Monster Reincarnation', 'Charcoal Inpachi', 'Spiritual Fire Art - Kurenai']
+    monstruos ['Elemental Hero Neos (ataque, ATK 2500, DEF 2000)'] | magias y trampas []
+    cementerio ['Elemental Hero Clayman', 'Mystical Elf'] | retiradas [] | mazo 32
+rival: mano ['Nimble Momonga']
+    monstruos ['Gyaku-Gire Panda (ataque, ATK 1300, DEF 1600)'] | magias y trampas ['Call of the Haunted']
+    cementerio ['Des Wombat', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master', 'Dian Keto the Cure Master'] | retiradas [] | mazo 46
+

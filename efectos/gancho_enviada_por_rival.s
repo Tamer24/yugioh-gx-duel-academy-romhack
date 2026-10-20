@@ -17,6 +17,11 @@
 @     disparador "de la mano al cementerio" si existe.
 @ Las fn_04 de las tres (robar 2, 1000 de dano, cementerio al mazo) son las originales.
 @
+@ Butterfly Dagger - Elma (5724) va antes que todo eso: si pasa de la zona de Magicas y Trampas
+@ (zona de origen 5) al cementerio, por lo que sea (destruida, o porque el monstruo equipado dejo
+@ el campo), se encola su efecto igual que el de Electric Snake; efectos/elma_vuelve.s la devuelve
+@ a la mano.
+@
 @ Dark Necrofear (5222) es la excepcion: la bandera 6 solo se le pone si ademas fue DESTRUIDA
 @ (bit 0x40 de las banderas de la accion; medido: 0x9041 con Raigeki del rival, 0x9001 descartada
 @ de la mano por Card Destruction del rival). Es lo que lee efectos/gancho_fin_necrofear.s en la
@@ -41,6 +46,22 @@ _start:
     bl    .Lllamar
     cmp   r5, #0xd
     bne   .Lvolver                @ no fue al cementerio
+    adds  r0, r6, #0              @ Butterfly Dagger - Elma: de la zona de Magicas al cementerio,
+    bl    .Lranura                @ sea quien sea el causante, encola su vuelta a la mano
+    adds  r7, r0, #0              @ (efectos/elma_vuelve.s)
+    ldrh  r0, [r7, #0x24]
+    lsls  r0, r0, #17
+    lsrs  r0, r0, #16
+    ldr   r1, =0x087A8624
+    ldrh  r0, [r0, r1]
+    ldr   r1, =5724
+    cmp   r0, r1
+    bne   .Lno_elma
+    ldr   r0, [sp, #(0x5c + PILA)]
+    cmp   r0, #5
+    bne   .Lvolver
+    b     .Ldisparar
+.Lno_elma:
     ldr   r0, [sp, #(0x50 + PILA)]
     lsls  r0, r0, #20             @ bit 0x800: destruida en batalla
     bmi   .Lvolver

@@ -9,6 +9,7 @@ Uso (desde la raiz del proyecto):
   python3 scripts/registro.py aptas ROM              cartas que pueden ir a una receta de juego
   python3 scripts/registro.py pendientes ROM         cartas que Oscar tiene que mirar
   python3 scripts/registro.py ojo ROM "CARTA" si|no ["que vio"] [--veredicto "funciona en parte"]
+  python3 scripts/registro.py capturas ROM "CARTA" "SESION" ["nota"]   verificada por Claude por capturas
 
 Hay una fila por cada carta de datos/huecos.csv. Una carta recien dada de alta (scripts/alta.py)
 no tiene veredicto todavia: es valido mientras no tenga evidencia registrada.
@@ -33,7 +34,8 @@ COLUMNAS = ["carta", "indice", "id_konami", "clase", "usa_piezas_nuevas", "vered
 VEREDICTOS = ("funciona", "funciona en parte", "no funciona")
 HUECOS = os.path.join(RAIZ, "datos", "huecos.csv")     # que cartas hay: una fila del registro por cada una
 EN_CURSO = False            # --en-curso: se conserva por compatibilidad; ya no cambia ninguna regla
-ROMS = {"c1b1289a1e0a3ca4c725272073c791db": "Lote",
+ROMS = {"0ce9fa0eed946507f44a919ab6ba02a1": "Lote",
+        "c1b1289a1e0a3ca4c725272073c791db": "Lote (2026-10-11, antes de Elemental Hero Neos)",
         "6c667223c062b6a3aa6f602e55a904dc": "Lote (2026-10-11, Necrofear en version simplificada)",
         "d15bb70918d2d2e2ae218ea553f807f4": "Lote (2026-10-11, con el aviso de Necrofear al ser destruida en batalla)",
         "990aefb8bc7ff1cf159f52caeda97999": "Lote (2026-10-11, antes del -500 de Bagworm y la posesion de Necrofear)",
@@ -98,7 +100,7 @@ def errores(filas, rom):
             if str(rom.id_de(i)) != f["id_konami"]:
                 mal("id_konami", f"en el ROM el indice {i} tiene el ID {rom.id_de(i)}")
         for col, validos in (("usa_piezas_nuevas", ("si", "no")), ("aparcada", ("si", "no")),
-                             ("ev_ojo", ("si", "no", "pendiente")), ("veredicto", VEREDICTOS + ("",))):
+                             ("ev_ojo", ("si", "capturas", "no", "pendiente")), ("veredicto", VEREDICTOS + ("",))):
             if f[col] not in validos:
                 mal(col, f"valor no permitido: {f[col]!r}")
         # Sin veredicto es el estado de una carta recien dada de alta (scripts/alta.py). Lo que no
@@ -135,8 +137,8 @@ def apta(f):
         falta.append("veredicto " + (f["veredicto"] or "sin definir"))
     if f["aparcada"] == "si":
         falta.append("aparcada")
-    if f["ev_ojo"] != "si":
-        falta.append("confirmacion a ojo")
+    if f["ev_ojo"] not in ("si", "capturas"):
+        falta.append("confirmacion a ojo o por capturas")
     if not f["ev_auto"]:
         falta.append("prueba en duelo registrada")
     if f["usa_piezas_nuevas"] == "si" and f["ev_logica"] in ("", "n/a"):
@@ -158,10 +160,10 @@ def tabla(filas):
             ver += " (aparcada: " + f["motivo_aparcada"] + ")"
         logica = "n/a" if f["usa_piezas_nuevas"] == "no" else ("sí" if f["ev_logica"] not in ("", "n/a") else "falta")
         duelo = "sí" if f["ev_auto"] else "falta"
-        ojo = {"si": "sí", "no": "no hace falta", "pendiente": "**pendiente**"}[f["ev_ojo"]]
+        ojo = {"si": "sí (Oscar)", "capturas": "sí (capturas)", "no": "no hace falta", "pendiente": "**pendiente**"}[f["ev_ojo"]]
         detalle = f["detalle"] + (" **Falla:** " + f["falla"] if f["falla"] else "")
         if f["nota_ojo"]:
-            detalle += " **Oscar:** " + f["nota_ojo"]
+            detalle += (" **Capturas:** " if f["ev_ojo"] == "capturas" else " **Oscar:** ") + f["nota_ojo"]
         como = []
         if f["rom_md5"]:
             como.append("ROM `" + ROMS.get(f["rom_md5"], f["rom_md5"][:8]) + "`")
@@ -275,18 +277,40 @@ def cmd_ojo(filas, rom, args):
     print("falta regenerar la tabla: python3 scripts/registro.py tabla ROM")
 
 
+def cmd_capturas(filas, rom, args):
+    """Principio IV (1.1.0): Claude jugo el duelo en el emulador desde un estado preparado y
+    comparo con el efecto esperado; SESION es la carpeta de paso.py con las capturas."""
+    if len(args) < 2:
+        raise SystemExit('uso: registro.py capturas ROM "CARTA" "SESION" ["nota"]')
+    carta, sesion, nota = args[0], args[1], (args[2] if len(args) > 2 else "")
+    fila = next((f for f in filas if f["carta"] == carta), None)
+    if fila is None:
+        raise SystemExit(f"error: {carta!r} no esta en el registro")
+    if not os.path.isdir(os.path.join(RAIZ, sesion)):
+        raise SystemExit(f"error: no existe la sesion {sesion}")
+    if fila["ev_ojo"] == "si":
+        raise SystemExit(f"{carta}: ya la confirmo Oscar; no se pisa")
+    fila.update(ev_ojo="capturas", nota_ojo=f"{sesion}: {nota}".rstrip(": "), rom_md5=rom.md5,
+                fecha=datetime.date.today().isoformat())
+    validar(filas, rom)
+    escribir(filas)
+    print(f"{carta}: ev_ojo = capturas")
+
+
 def main(argv):
     global EN_CURSO
     if "--en-curso" in argv:
         EN_CURSO = True
         argv = [a for a in argv if a != "--en-curso"]
-    if len(argv) < 2 or argv[0] not in ("verificar", "tabla", "aptas", "pendientes", "ojo"):
+    if len(argv) < 2 or argv[0] not in ("verificar", "tabla", "aptas", "pendientes", "ojo", "capturas"):
         raise SystemExit(__doc__)
     if not os.path.exists(argv[1]):
         raise SystemExit(f"error: no existe el ROM {argv[1]}")
     rom, filas = Rom(argv[1]), leer()
     if argv[0] == "ojo":
         cmd_ojo(filas, rom, argv[2:])
+    elif argv[0] == "capturas":
+        cmd_capturas(filas, rom, argv[2:])
     else:
         {"verificar": cmd_verificar, "tabla": cmd_tabla, "aptas": cmd_aptas,
          "pendientes": cmd_pendientes}[argv[0]](filas, rom)

@@ -21,6 +21,9 @@ NOMBRES_OFF = 0xF2A68C     # 1201 x u32, relativos a NOMBRES
 DESCS = 0xF2B950           # base de descripciones
 DESCS_OFF = 0xF58294       # 1201 x u32, relativos a DESCS
 ORDEN_ALFA = 0xF59558      # 1201 x u16: puesto alfabetico (0..1199) de cada indice; [0] = FFFF
+# El dibujo chico (32x32) que se ve al abrir un sobre y en las listas con miniaturas: 5 referencias
+MINI_PALETAS = 0xF61184    # 1201 x 64 bytes (32 colores BGR555)
+MINI_ARTE = 0xF73DC4       # 1201 x 1024 bytes (32x32, 8bpp, en tiles de 8x8; valores 0..31)
 
 # Tabla de efectos por carta: 901 filas de 28 bytes, ORDENADA por ID de Konami.
 # La busca FUN_0806162C por busqueda binaria; el indice maximo (900) esta fijo en el codigo.
@@ -28,6 +31,9 @@ EFECTOS = 0x17D9BEC
 EFECTOS_FILAS = 901
 EFECTOS_FILA = 28          # u16 id, u16 0, fn +4, u32 flags +8, fn +0xC, +0x10, +0x14, +0x18
 SIN_EFECTO = 0x08061629    # card_effect_handler_no_effect
+# Tabla de efectos mudada (scripts/ampliar_efectos.py): marca, u32 cantidad de filas y las filas.
+EFECTOS_NUEVA = 0x1F00000
+EFECTOS_MARCA = b"DA-EFECTOS-1\0\0\0\0"
 
 # Mazos: tabla de 36 entradas de 12 bytes {puntero, cantidad de renglones, 0}.
 # Cada renglon del mazo es {u32 ID de Konami, u32 copias}.
@@ -37,6 +43,17 @@ MAZOS_N = 36
 LISTAS_INI = 0x17DFE78     # listas de IDs (fusiones, IA, examenes, sobres) hasta FIN_DATOS
 FIN_DATOS = 0x17FD89C      # desde aca hasta el final el ROM es relleno aleatorio
 LIBRE = 0x1800000          # donde este proyecto empieza a escribir datos nuevos
+
+# ROM ampliado (scripts/ampliar.py, experimental): las tablas por carta mudadas al espacio libre
+# para pasar de 1200. Empieza con MARCA y sigue con un u32 por cada nombre de TABLAS: la capacidad
+# y el offset de archivo de cada tabla. Rom lo lee solo: sus metodos sirven para los dos ROMs.
+AMPLIADO = 0x1B00000
+SEGMENTOS = 0              # solo existe en un ROM ampliado (ver TABLAS)
+MARCA = b"DA-AMPLIADO-3\0\0\0"      # la 1 no mudaba los dibujos chicos (MINI_*); la 2 no tenia SEGMENTOS
+TABLAS = ("CAPACIDAD", "CANTIDAD", "IDS", "CLAVES", "STATS", "NOMBRES", "NOMBRES_OFF", "DESCS",
+          "DESCS_OFF", "ORDEN_ALFA", "PALETAS", "ARTE", "MINI_PALETAS", "MINI_ARTE", "SEGMENTOS")
+# SEGMENTOS: u32 indice desde el que el arte ya no esta junto (a ARTE + 6400 * indice), u32 cantidad
+# de segmentos y, por cada uno, {u32 cuantas cartas caben, u32 direccion GBA donde empieza}.
 
 # Menus de seleccion del duelo: FUN_08026614 despacha por modo (1..29) con esta
 # tabla de direcciones GBA. Las entradas vacias apuntan a MENU_VACIO (movs r0,#0).
@@ -60,6 +77,40 @@ class Rom:
     def __init__(self, ruta):
         self.d = bytearray(open(ruta, "rb").read())
         self.md5 = hashlib.md5(self.d).hexdigest()
+        self.leer_tablas()
+
+    def leer_tablas(self):
+        """Donde esta cada tabla por carta: las direcciones de siempre o las de un ROM ampliado."""
+        g = globals()
+        for nombre in TABLAS[1:]:
+            setattr(self, nombre, g[nombre])
+        self.CAPACIDAD = N_CARTAS
+        self.ampliado = bytes(self.d[AMPLIADO:AMPLIADO + len(MARCA)]) == MARCA
+        assert self.ampliado or bytes(self.d[AMPLIADO:AMPLIADO + 11]) != MARCA[:11], \
+            "ROM ampliado con un formato viejo: hay que rearmarlo con scripts/ampliar.py"
+        if self.ampliado:
+            for k, nombre in enumerate(TABLAS):
+                setattr(self, nombre, self.u32(AMPLIADO + len(MARCA) + 4 * k))
+
+    def arte_dir(self, i):
+        """Offset de archivo del dibujo grande (6400 bytes) de la carta de indice i."""
+        if not self.ampliado:
+            return self.ARTE + 6400 * i
+        limite = self.u32(self.SEGMENTOS)
+        if i < limite:
+            return self.ARTE + 6400 * i
+        k = i - limite
+        for j in range(self.u32(self.SEGMENTOS + 4)):
+            cuantas, base = self.u32(self.SEGMENTOS + 8 + 8 * j), self.u32(self.SEGMENTOS + 12 + 8 * j)
+            if k < cuantas:
+                return base - BASE + 6400 * k
+            k -= cuantas
+        raise IndexError(f"la carta {i} no tiene lugar de arte")
+
+    @property
+    def n(self):
+        """Cantidad de cartas del ROM (1200 salvo en un ROM ampliado)."""
+        return self.u16(self.CANTIDAD)
 
     def u16(self, o): return struct.unpack_from("<H", self.d, o)[0]
     def u32(self, o): return struct.unpack_from("<I", self.d, o)[0]
@@ -85,19 +136,19 @@ class Rom:
         self.w32(MENU_TABLA + 4 * (modo - 1), destino)
 
     # --- cartas -----------------------------------------------------------
-    def id_de(self, i): return self.u16(IDS + 2 * i)
-    def nombre(self, i): return self.cstr(NOMBRES + self.u32(NOMBRES_OFF + 4 * i))
-    def desc(self, i): return self.cstr(DESCS + self.u32(DESCS_OFF + 4 * i))
+    def id_de(self, i): return self.u16(self.IDS + 2 * i)
+    def nombre(self, i): return self.cstr(self.NOMBRES + self.u32(self.NOMBRES_OFF + 4 * i))
+    def desc(self, i): return self.cstr(self.DESCS + self.u32(self.DESCS_OFF + 4 * i))
 
     def indice_de(self, cid):
         """ID de Konami -> indice (1..1200) o 0. Busqueda lineal: no depende del orden."""
-        for i in range(1, self.u16(CANTIDAD) + 1):
+        for i in range(1, self.n + 1):
             if self.id_de(i) == cid:
                 return i
         return 0
 
     def stats(self, i):
-        v = self.u32(STATS + 4 * i)
+        v = self.u32(self.STATS + 4 * i)
         return {"def": (v & 0x1FF) * 10, "atk": ((v >> 9) & 0x1FF) * 10,
                 "clase": (v >> 18) & 3, "sub17": (v >> 17) & 1, "tipo": (v >> 20) & 0x1F,
                 "nivel": (v >> 25) & 0xF, "atributo": v >> 29, "u32": v}
@@ -108,14 +159,27 @@ class Rom:
                 (clase & 3) << 18 | ((atk // 10) & 0x1FF) << 9 | ((de // 10) & 0x1FF))
 
     # --- efectos ----------------------------------------------------------
+    @property
+    def efectos_mudada(self):
+        return bytes(self.d[EFECTOS_NUEVA:EFECTOS_NUEVA + len(EFECTOS_MARCA)]) == EFECTOS_MARCA
+
+    @property
+    def efectos_base(self):
+        """Offset de archivo de la fila 0 de la tabla de efectos (la original o la mudada)."""
+        return EFECTOS_NUEVA + 32 if self.efectos_mudada else EFECTOS
+
+    @property
+    def efectos_n(self):
+        return self.u32(EFECTOS_NUEVA + 16) if self.efectos_mudada else EFECTOS_FILAS
+
     def fila_efecto(self, k):
-        o = EFECTOS + EFECTOS_FILA * k
+        o = self.efectos_base + EFECTOS_FILA * k
         return {"id": self.u16(o), "fn_04": self.u32(o + 4), "flags": self.u32(o + 8),
                 "fn_c": self.u32(o + 0xC), "fn_10": self.u32(o + 0x10),
                 "fn_14": self.u32(o + 0x14), "fn_18": self.u32(o + 0x18)}
 
     def efectos(self):
-        return [self.fila_efecto(k) for k in range(EFECTOS_FILAS)]
+        return [self.fila_efecto(k) for k in range(self.efectos_n)]
 
     # --- mazos ------------------------------------------------------------
     def mazos(self):
@@ -134,7 +198,7 @@ class Rom:
         (0x17F3D44 en adelante). Se detectan por forma: corridas de 5 o mas
         renglones con ID valido y 1 a 3 copias.
         """
-        validos = {self.id_de(i) for i in range(1, N_CARTAS + 1)}
+        validos = {self.id_de(i) for i in range(1, self.n + 1)}
         out, o = [], LISTAS_INI & ~3
         while o < FIN_DATOS - 8:
             if self.u32(o) in validos and 1 <= self.u32(o + 4) <= 3:
@@ -153,11 +217,11 @@ class Rom:
         return (((i * 0x343FD + 0x269EC3) >> 16) | 0x9EC30000) & 0xFFFFFFFF
 
     def contrasena(self, i):
-        h = self.u32(CLAVES + 4 * i) ^ self._relleno(i)
+        h = self.u32(self.CLAVES + 4 * i) ^ self._relleno(i)
         return "".join("%X" % ((h >> (4 * k)) & 0xF) for k in range(7, -1, -1))
 
     def fijar_contrasena(self, i, digitos):
         h = 0
         for c in digitos:
             h = (h << 4) | int(c)
-        self.w32(CLAVES + 4 * i, h ^ self._relleno(i))
+        self.w32(self.CLAVES + 4 * i, h ^ self._relleno(i))

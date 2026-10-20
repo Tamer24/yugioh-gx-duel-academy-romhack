@@ -4,6 +4,9 @@ El motor busca el efecto de una carta por su ID de Konami. Si a un indice del
 juego le cambiamos el ID por el de una carta que tiene fila en la tabla de
 efectos, ese hueco pasa a ser esa carta, con su efecto.
 
+Una carta que el juego nunca tuvo (sin fila de efecto) entra igual si es un
+monstruo Normal ("clase": "Normal"): no necesita efecto, solo los datos.
+
 La receta (JSON) puede pedir parches de codigo en "parches":
 
   "busqueda_ids": true        cualquier hueco sirve para cualquier carta. Sin
@@ -43,6 +46,14 @@ de SUBTIPOS para magicas y trampas. "anular_columnas" pone en cero columnas de
 su fila de efecto (por ejemplo ["fn_c", "fn_18"]).
 "arte" (opcional) es la ruta de un PNG, relativa a la carpeta del proyecto, con el
 dibujo de la carta; sin esa clave la carta muestra el dibujo del hueco. Ver arte.py.
+
+"filas_efecto" (opcional, fuera de "parches") es una lista de filas nuevas para la tabla de efectos,
+para cartas que el juego nunca tuvo y llevan efecto: {"id_konami": N, "copiar_de": ID} (toma las
+columnas de la fila de otra carta) o con las columnas dadas a mano. Muda y agranda la tabla; ver
+ampliar_efectos.py. La fn_04 propia se pone despues con una pieza "N:fn_04:efectos/x.s".
+
+"sobres" (opcional, fuera de "parches") es una lista de cambios a los sobres de la tienda: que
+cartas trae cada uno, el nombre, el precio. Se aplican despues de las cartas. Ver sobres.py.
 
 Uso: python3 restaurar.py original.gba receta.json salida.gba
 """
@@ -114,6 +125,8 @@ def main(ruta_rom, ruta_receta, ruta_salida):
     parches_pedidos = receta.get("parches", {})
     libre_orden = bool(parches_pedidos.get("busqueda_ids"))
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
+    filas_nuevas_pedidas = receta.get("filas_efecto", [])
+    filas_nuevas = {n["id_konami"] for n in filas_nuevas_pedidas}
     cursor = LIBRE
     informe = []
 
@@ -135,7 +148,8 @@ def main(ruta_rom, ruta_receta, ruta_salida):
         huecos_usados.add(i)
         assert rom.nombre(i) == c["hueco_nombre"], f"el hueco {i} es {rom.nombre(i)!r}, no {c['hueco_nombre']!r}"
         assert s["tipo"] <= 20 and s["clase"] == 0, f"{rom.nombre(i)} no es un monstruo Normal"
-        assert nuevo in filas, f"el ID {nuevo} no tiene fila de efecto"
+        assert nuevo in filas or c["clase"] == "Normal" or nuevo in filas_nuevas, \
+            f"el ID {nuevo} no tiene fila de efecto (ni se pide una en \"filas_efecto\")"
         assert rom.indice_de(nuevo) == 0, f"el ID {nuevo} ya esta en el juego"
         assert len(c["nombre"]) <= 45, f"nombre demasiado largo: {c['nombre']}"
         if not libre_orden:
@@ -175,6 +189,11 @@ def main(ruta_rom, ruta_receta, ruta_salida):
         for o in range(LISTAS_INI, FIN_DATOS - 1, 2):
             if rom.u16(o) != viejo or o in en_mazos:
                 continue
+            # la mitad baja de un puntero a una lista de IDs (los pares de los sobres) no es un ID
+            if o % 4 == 0 and 0x0800 <= rom.u16(o + 2) < 0x0A00:
+                destino = rom.u32(o) - BASE
+                if 0 < destino < len(rom.d) - 2 and rom.indice_de(rom.u16(destino)):
+                    continue
             # solo si esta dentro de una lista de cartas: algun vecino tambien es un ID valido
             if rom.indice_de(rom.u16(o - 2)) or rom.indice_de(rom.u16(o + 2)):
                 rom.w16(o, nuevo)
@@ -226,11 +245,25 @@ def main(ruta_rom, ruta_receta, ruta_salida):
             parches.efecto_nuevo(rom, esp, e["id_konami"], e["columna"], fuente)
         print(f"codigo nuevo en {parches.CODIGO:07X}-{esp.cur:07X}")
 
+    # Filas nuevas de la tabla de efectos (cartas que el juego nunca tuvo, con efecto): muda y
+    # agranda la tabla (scripts/ampliar_efectos.py). Va antes de las piezas, que escriben en ella.
+    if filas_nuevas_pedidas:
+        import ampliar_efectos
+        info = ampliar_efectos.ampliar(rom, filas_nuevas_pedidas)
+        print(f"tabla de efectos mudada: {info['filas']} filas (tope {info['tope']})")
+
     # Piezas de efectos/ (funciones de efecto, ganchos y entradas de tabla), en el orden dado.
     if receta.get("piezas"):
         import parche_efecto
         raiz = os.path.join(os.path.dirname(os.path.abspath(ruta_receta)), "..")
         parche_efecto.aplicar(Rom(ruta_rom), rom, receta["piezas"], raiz)
+
+    # Sobres de la tienda: despues de las cartas, para poder nombrar a las restauradas.
+    if receta.get("sobres"):
+        import sobres
+        for hecho in sobres.aplicar(rom, receta["sobres"]):
+            print(f"sobre {hecho['sobre']} ({hecho['nombre']}): "
+                  + ", ".join(f"{len(v)} {r}" for r, v in hecho["listas"].items() if v))
 
     # Comprobaciones finales sobre el resultado.
     ids = [rom.id_de(i) for i in range(1, N_CARTAS + 1)]

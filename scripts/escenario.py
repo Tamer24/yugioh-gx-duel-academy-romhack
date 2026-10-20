@@ -22,7 +22,7 @@ import sys
 import tempfile
 
 import estado
-from da_lib import Rom, N_CARTAS
+from da_lib import Rom
 
 MAZO = 0x28A4                  # lista de ranuras del mazo; la PRIMERA es la proxima que se roba
 CONTADORES = 0x1B              # u64 empaquetado: total, mano, mazo, cementerio (7 bits cada uno)
@@ -38,10 +38,10 @@ def indice(rom, carta):
     """Nombre exacto o indice -> indice (1..1200)."""
     if isinstance(carta, int) or str(carta).isdigit():
         i = int(carta)
-        if not 1 <= i <= N_CARTAS:
+        if not 1 <= i <= rom.n:
             raise ErrorEscenario(f"indice de carta fuera de rango: {carta}")
         return i
-    for i in range(1, N_CARTAS + 1):
+    for i in range(1, rom.n + 1):
         if rom.nombre(i) == carta:
             return i
     raise ErrorEscenario(f"la carta {carta!r} no existe en el ROM")

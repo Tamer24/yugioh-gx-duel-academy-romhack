@@ -121,6 +121,7 @@ se escribe `ldr r3, =NOMBRE` y `bl .Lllamar` (con `.Lllamar: bx r3`). Molde list
 | Restringir la selección a un caso | Envolver la `fn_18`: dejarla correr solo para el pedido que corresponde y devolver 1 en los demás | `necrofear_seleccion.s` | [PROBADO] |
 | Selección propia en el campo | Paso 0 = la original (avisa); después B cancela y A graba el id bajo el cursor (`0x02022250 + 0x5668`) con `FUN_08051680(p, id)` | `bagworm_seleccion.s` | [PROBADO] |
 | Elegir de una lista (mano, cementerio) | `0x80`: `CANDIDATAS(lado, ID de una carta original que liste eso, 0)` + `ASK_QUESTION` → `0x7F`: `DIALOGO` abre la lista → `0x7E`: leer lo elegido en `0x02019F24` (y `…28`, `…2C`): `(v & 0x7FFFF) >> 11` = id de ranura | `exchange.s`, `chosen_one.s` | [PROBADO] |
+| Elegir **solo entre algunas cartas** de una mano (p. ej. los monstruos de la mano rival) | En vez de `CANDIDATAS`: `CLEAR_ZONE(6, 0)`, `REGISTRAR(id)` por cada carta que vale y `DIALOGO(0, 1, 0x02019F24, 1)` con los ajustes de `exchange.s`. Dos selecciones seguidas: 0x80 → 0x7F → 0x7E (primera) → 0x7D → 0x7C (segunda) | `aqua_dolphin.s`, `dark_panther.s` | [PROBADO] |
 | Que elija la IA | Si `p[0] & 1` es el rival, no abrir menú: elegir en el código (al azar, el de menor ATK…) | `exchange.s`, `share_the_pain.s` | [PROBADO] |
 | Validar un objetivo | `fn_0C(p, id)`: devuelve 1 si sirve. Ej.: en el campo, del rival y boca arriba | original `0x0802A750` | [ORIGINAL] |
 
@@ -157,6 +158,7 @@ que ya comparte la función suele traer su caso (Minar funcionó sin tocar su `f
 | Cambiar de zona directamente | `MOVER_CARTA(id, lado << 15 \| zona << 10 \| casilla << 4 \| 8 si boca arriba)`. `0x3008` = al mazo | `penguin_knight.s`, `necrofear_posesion.s` | [PROBADO] |
 | Robar | `ROBAR(lado, cantidad)` (`FUN_0801B28C`) | Pot of Greed (`0x0803DFE4`); familia Electric Snake (`0x08039320`) | [ORIGINAL] |
 | Robar del mazo del rival revisando cada carta | Una carta por llamada: devolver `0x7F` mientras queden, con el contador en `0x020204C7` | `hiro_scout.s` | [PROBADO] |
+| **Descartar** una carta de mi mano (coste) | `A_CEMENTERIO(lado, id de ranura, 0xFF)` (es `FUN_08019598`: no anota causante) | `aqua_dolphin.s` | [PROBADO] |
 | Intercambiar dos cartas de mano entre jugadores | Intercambiar los `0x50` bytes de las dos ranuras e invertir el bit de dueño (`+0x32` bit 3). Las listas de mano no se tocan | `exchange.s` | [PROBADO] |
 | Cementerio al mazo | Copiar la lista del cementerio y mover cada carta con `MOVER_CARTA(…, 0x3008)`; después barajar (evento `0x24`) | `penguin_knight.s` (molde: Fiber Jar `0x0804587C`) | [PROBADO] |
 | Tributar un monstruo del rival | `FUN_08010FA4(rival, 0xFF, 3, ranura)` dice cuántos se pueden tributar; después `A_CEMENTERIO` | `share_the_pain.s` | [PROBADO] |
@@ -194,6 +196,11 @@ tipo 1 en su lista. Si el monstruo deja el campo, el motor manda sus equipos al 
 |---|---|---|---|
 | Equipar una Mágica o Trampa que ya está boca arriba en el campo | `EQUIPAR(lado, id del equipo, id del monstruo)` | `kunai_cadena.s` (molde: Metalmorph `0x0803991C`) | [PROBADO] |
 | Que una Trampa equipada no se vaya al cementerio al resolverse | Agregar su ID a `gancho_queda_campo.s` | Kunai with Chain | [PROBADO] |
+| **Equipo con bono fijo de ATK** (recortada del grupo A, p. ej. Stim-Pack, Butterfly Dagger - Elma, Shooting Star Bow - Ceal) | Solo darla de alta: su caso sigue en el calculador (`0x08012BD8`, un `case` por ID en el árbol de `0x08012F00` a `0x08013090`; `scripts/buscar_id.py ROM ID` lo muestra). Los bonos medidos: Stim-Pack +700, Elma +300, Murasame +800 (solo Warrior), Baou +500, Ceal −1000, Tryce −500 | `recetas/packs/pack-2.json`, `_caso_equipo` en `scripts/probar_lote.py` | [PROBADO] el bono y, desde el 2026-10-18, los efectos extra: el ataque directo de Ceal y "solo Warrior" de Murasame son del motor; el resto, las filas de abajo |
+| Equipo que pide **descartar una carta** al activarlo (Baou, Tryce) | Lo hace la función del motor, sin pieza propia: aparece "Discard hand." y la lista de selección (`elegir_en_lista` en `probar_lote.py`) | Wicked-Breaking Flamberge - Baou | [PROBADO] |
+| Bono de un equipo que **baja con los turnos** (Stim-Pack: 700 − 200 × contador en `ranura + 0x3A` del equipo) | El calculador ya resta. Gancho al empezar el fin de turno (`FUN_0801D7DC`, `efectos/gancho_stim_pack.s`): suma 1 al contador de cada Stim-Pack boca arriba del jugador que empieza turno (el que no es el del bit 15 de `0x020214E0`). El motor tiene acciones para ese contador: `FUN_0801BAF4` fijar, `FUN_0801BB3C` +1, `FUN_0801BB88` −1, `FUN_0801BBD4` a cero | Stim-Pack | [PROBADO] |
+| Equipo que deja **atacar dos veces** | `FUN_080666B8` (después de cada ataque) da otro si el monstruo, o un equipo Tryce suyo, tiene la bandera `0xE`; la consume con el evento `0x3C`. La pone `FUN_0801B724` **al entrar a la Battle Phase**, por un árbol de IDs (Hayabusa Knight, Mataza, Cyber Twin Dragon, `0x174F`, `0x18B9`); el fin de turno la borra. Gancho en `0x0801B724` (`efectos/gancho_tryce.s`): `FUN_0800E178(id, 0xE)` a cada Tryce boca arriba | Twin Swords of Flashing Light - Tryce | [PROBADO] |
+| Equipo que **vuelve a la mano** al ir al cementerio | `gancho_enviada_por_rival.s` encola su efecto si va de la zona 5 al cementerio; su `fn_04` (`elma_vuelve.s`) atiende ese pedido (tipo 4, momento `0xE`: `(cabecera & 0x7FE00) == 0x1C800`) con `MOVER_CARTA(id, lado << 15 \| 0x3C08)` y deja todo otro pedido a la `ORIGINAL` | Butterfly Dagger - Elma | [PROBADO] |
 | Que un monstruo pase a ser equipo | `CASILLA_MAGIAS(lado)` (−1 = sin lugar); `MOVER_CARTA(id, lado << 15 \| 0x1408 \| casilla << 4)`; `EQUIPAR`. Funciona también desde el cementerio | `necrofear_posesion.s` (molde: monstruos Unión, `0x08061A74`) | [PROBADO] |
 
 ### Disparadores: cuándo se activa sola
@@ -205,6 +212,41 @@ tipo 1 en su lista. Si el monstruo deja el campo, el motor manda sus equipos al 
 | Al ir al cementerio por un efecto del rival | `gancho_enviada_por_rival.s`: pone la bandera 6 y encola el efecto según ID y zona de origen. Las banderas de la acción dicen cómo fue: `0x40` destruida, `0x800` en batalla | Electric Snake, Minar, Penguin Knight | [PROBADO] |
 | En la End Phase del turno en que pasó algo | Un gancho en la End Phase busca la carta con su bandera y encola el efecto con un momento propio | `gancho_fin_necrofear.s` | [PROBADO] |
 | Encolar un efecto a mano | `ENCOLAR_EFECTO(lado << 31 \| (momento << 4 \| tipo) << 21 \| id, d \| d << 16)` con `d = (zona y controlador) << 8 \| id` | `gancho_fin_necrofear.s` | [PROBADO] |
+
+### Batalla [PROBADO]
+
+Los efectos que ocurren **durante** una batalla no pasan por la tabla de efectos: están en árboles de
+IDs de la máquina de estados de la batalla (registro en `0x02020C20`, ver `NOTAS-REVERSE.md`, "La
+batalla y los Neo-Spacian"). La fase en que se calcula el daño es `FUN_08067E60`, y un gancho en su
+entrada (`efectos/gancho_batalla.s`) ve el primer cuadro: atacante y defensor ya están decididos y
+nada se calculó (el "inicio del Damage Step").
+
+| Quiero | Cómo | Ejemplo | Certeza |
+|---|---|---|---|
+| Efecto al **atacar o ser atacado**, antes del daño | `efectos/gancho_batalla.s` (gancho en `0x08067E60`): leer atacante `(u32 << 11) >> 24` y defensor `(u16 en +2 << 19) >> 24` del registro y actuar si son la carta. Para dar la batalla por terminada sin calcular: `+0xA = 6`, `+0xB = 0` y salir de la función sin seguir con la original | Glow Moss, Grand Mole | [PROBADO] |
+| **Terminar la Battle Phase** | Llamar `FUN_0801B8E0` (el evento `0x64`: `+1 \|= 0x10`, `+0xA = 6`, `+0xB = 0`) | Glow Moss (rama Monstruo); The Unhappy Maiden | [PROBADO] |
+| **Daño de ataque directo** sin calcular la batalla | `DANIO(lado, ATK)` y dar la batalla por terminada | Glow Moss (rama Magica) | [PROBADO] |
+| **Devolver a la mano** dos monstruos en batalla | `LIMPIAR_ACCIONES`, `ENVIAR(id, lado << 15 \| 4, causante)` por cada uno, `PROCESAR_ACCIONES` | Grand Mole | [PROBADO] |
+| Saber si es un **ataque directo** | Bit 0 del primer byte del registro. Ojo: el defensor (bits 5-12 de `u16(+2)`) es la mitad alta de la palabra del atacante (bits 21-28 de `u32(+0)`) | Glow Moss | [PROBADO] |
+| Que un monstruo **pueda** atacar directo | Modificador de tipo 4 con origen Overpowering Eye (6291), o de tipo 1 con origen Ceal (5725), en la lista de la ranura (`FUN_0801F980`) | Overpowering Eye, Ceal | [ORIGINAL] |
+| **ATK que depende de una cuenta** | Gancho en `0x0801273C` (`efectos/gancho_atk_cuenta.s`): en ese punto `[r7]` = índice, `[r7+4]` = ATK con su base, `[sp+0x2c]` = ranura y `[sp+0x30]` = máscara. Sumar o poner `[r7+4]` y `[r7+8]` | Flare Scarab (+400 por Mágica/Trampa del rival), Dark Panther (ATK/DEF propios) | [PROBADO] |
+| Que una carta se **comporte y se llame como otra** hasta la End Phase | Cambiar el índice (`+0x24`) de su ranura por el de la otra, poner la bandera 25 de `+0x60` y devolverlo en la End Phase (`gancho_fin_control.s`). El motor decide nombre y efectos por ese índice; ATK y DEF salen del índice, así que hay que corregirlos en el calculador | Dark Panther | [PROBADO] |
+
+El motor recalcula el ATK **en cada cambio de fase y evento**, no en cada cuadro: una prueba que cambia
+la memoria a mano tiene que provocar uno (terminar el turno) antes de leer.
+
+### Cartas de Fusión
+
+La receta de cada Fusión está en una tabla de 16 bytes por fila (`0x17D9678`, ordenada por ID): ID de
+la Fusión, cantidad de materiales (2 o 3) y los IDs. La busca `card_type_classifier` (`0x0804FB3C`)
+por bisección. `scripts/ampliar_fusiones.py` (o la clave `"fusiones"` del JSON de `--cartas`) la muda
+a `0x1F1F000`, cambia sus 15 literales y el tope de la bisección, y agrega recetas
+`{"resultado", "materiales"}`.
+
+| Quiero | Cómo | Ejemplo | Certeza |
+|---|---|---|---|
+| Que una Fusión nueva **se pueda invocar** | Clase `Fusion` en la carta y su receta en `"fusiones"` con materiales por nombre (2 o 3) | `recetas/packs/pack-4.json`: 25 recetas | [PROBADO] en duelo (`scripts/probar_fusion.py`: Air Neos, Steam Healer, Tempest) |
+| Una Fusión con materiales **genéricos** ("1 monstruo EARTH") o de 4 o más | No cabe en el formato: la regla va en código por ID (UFOroid Fighter, Divine Neos) | — | sin hacer |
 
 ### Activación y permanencia
 
@@ -224,6 +266,17 @@ carta en uno, de menos a más código:
 | Que el motor **deje de hacer** algo con una carta | Pieza `B:`: cambiar su `beq` por un `nop` | El aviso de Necrofear al ser destruida (`B:0801786E:2BD0:C046`) |
 | Que trate a una carta **como a otra** en un árbol | Gancho que, antes del árbol, cambia el ID leído por el de la otra | `gancho_necrofear_equipo.s` |
 | **Agregar** una carta a un árbol o lista | Gancho que resuelve la rama antes y vuelve | `gancho_destruida_batalla_a.s`, `gancho_lista_campo.s` |
+
+### Cartas que el juego nunca tuvo
+
+| Quiero | Cómo | Ejemplo | Certeza |
+|---|---|---|---|
+| Un **monstruo Normal** nuevo | Cargar sus datos en `scripts/cartas_nuevas.csv` (mismas columnas que `nombres_konami.csv`; el ID es el `cid` de la base oficial de Konami, que es la numeración que usa el juego) y darlo de alta con `scripts/alta.py`. No lleva fila de efecto: el motor busca el ID, no lo encuentra y lo trata como Normal. Un ID mayor que 6467 (el último del juego) no rompe nada | Elemental Hero Neos (ID 6653, hueco 7) | [PROBADO] |
+| Su **dibujo** | PNG de cualquier tamaño en `arte/` y la clave `"arte": "arte/x.png"` en el borrador del pack. Sale también el dibujo chico (32×32), el que se ve al abrir un sobre | `arte/elemental-hero-neos.png` | [PROBADO] |
+| Que **salga en un sobre** de la tienda | Clave `"sobres"` de la receta: `{"sobre": "Basic 1-A", "agregar": {"comunes": ["Carta"]}}`. Una restaurada ya sale en los sobres del monstruo que reemplazó. `scripts/sobres.py ver ROM SOBRE` muestra cómo queda | `recetas/sobres-demo.json` | [PROBADO] en pantalla |
+| Que cuente como **"Elemental Hero"** para otras cartas | No hay una lista: cada carta que pide un "Elemental Hero" compara contra los IDs uno por uno en su propio árbol (6310 a 6313, 6344, 6345, 6393 y 6467). Hace falta un gancho "como a otra" por árbol: `0x08015200` (la cuenta de Shining Flare Wingman), `0x08010060`, `0x080205E0`, `0x08050B52`, `0x08060770` (dos sitios), `0x08060AA0`, `0x08060D04`, `0x08060FF0`. Falta identificar cuál es de cada carta | Sin hacer: Neos hoy **no** cuenta como Elemental Hero | [ROM] |
+| Una carta con **ID de Konami desde 8192** en un sobre | No sale (sale en blanco): el sorteo guarda el ID en 13 bits. Darle un ID propio libre de 8191 para abajo (`scripts/hacer_pack4.py` lo hace solo y guarda el real en `id_real`) | Elemental Hero Flash (8543 -> 8191) | [PROBADO] en pantalla |
+| Una carta nueva **con efecto** | Clase `Effect` en la receta; en la clave `"filas_efecto"` una fila nueva (`{"id_konami": N, "copiar_de": ID de una carta con un efecto del mismo estilo}`: toma sus columnas, `scripts/ampliar_efectos.py` muda y agranda la tabla); una pieza `N:fn_04:efectos/x.s` con el efecto; si se activa desde el menú del campo, su ID en las dos listas de `gancho_lista_campo.s` y `gancho_menu_campo.s`, y la pieza quita la bandera 14 con `EVENTO(0x3C, ranura, 14)` para que sea una vez por turno | Neo-Spacian Air Hummingbird (`efectos/air_hummingbird.s`) | [PROBADO] |
 
 ## 3. Cómo encontrar lo que falta
 
@@ -261,7 +314,10 @@ carta en uno, de menos a más código:
 ## 4. Lo que todavía no tiene receta
 
 - Agregar un caso nuevo al calculador para el bono de un equipo (tipos 1 y 2).
-- Anular efectos (el motor tiene banderas `0x1F` y `0x20` de "efecto continuo activo"; [HIP]).
+- Anular efectos continuos (el motor tiene banderas `0x1F` y `0x20` de "efecto continuo activo"; [HIP]). Los
+  efectos que se encadenan sí tienen receta: marcar la entrada (`p[2] |= 8`) en el resolvedor, antes de la
+  llamada a la fn_04 (`0x080245CC` y `0x08024598`; ver `efectos/gancho_baou_a.s` y `NOTAS-REVERSE.md`, "Los
+  equipos del pack 2"). [PROBADO] con Baou y Mystic Tomato.
 - Retirar del juego como acción propia (bandera de acción `0x2`; sin usar por una pieza nuestra).
 - Fichas, contadores, Fusión y Ritual.
 - Cualquier decisión de la IA sobre cuándo jugar una carta (sin ubicar).

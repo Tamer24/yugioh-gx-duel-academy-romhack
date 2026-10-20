@@ -1298,6 +1298,573 @@ def caso_necrofear(ruta_rom, desfase, fotos):
     return res(EN_PARTE if fallas else FUNCIONA, " ".join(vistos + [nota]), "; ".join(fallas), estado=estado)
 
 
+def _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, delta, turnos=1, descarta=False):
+    """Equipo jugado desde la mano sobre mi monstruo: el ATK tiene que subir (o bajar) 'delta' y
+    mantenerse cuando vuelve mi turno ('turnos' veces; si delta es una lista, el de cada turno)."""
+    estado = armar(ruta_rom, "equipo-" + carta.split()[0].lower().strip("-"), yo={5: carta, 4: monstruo},
+                   rival={0: MUERTA, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA},
+                   mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, monstruo)
+    faltas = escenario.comprobar(d, {"campo_yo": [monstruo]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+
+    def atk():
+        s = escenario.instantanea(d)
+        return next((m[2] for m in s["campo_yo"] if m[0] == monstruo), None), s
+    base, _ = atk()
+    d.ir_mano(carta)
+    d.menu(0)
+    d.g.correr(120)
+    foto(d, fotos, "equipo_aviso")
+    if descarta:                          # "Discard hand.": elegir la carta que se descarta
+        elegir_en_lista(d)
+        d.g.correr(150)
+    d.tecla("A", 80)                      # cierra "Select your monster to equip."
+    d.tecla("A", 120)
+    d.g.correr(150)
+    a1, s1 = atk()
+    foto(d, fotos, "equipo_equipada")
+    if carta not in s1["magias_yo"]:
+        return res(NO_FUNCIONA, f"{carta} no quedo en el campo (ATK {base} -> {a1})", "no se equipa", estado=estado)
+    vistos = [a1]
+    esperado = [base + (delta if not isinstance(delta, list) else delta[0])]
+    for k in range(turnos):
+        d.fin_turno(primero=(k == 0))
+        if not hasta_mi_turno(d):
+            return res(SIN_DISPARO, "no volvio mi turno", estado=estado)
+        a, s = atk()
+        vistos.append(a)
+        if isinstance(delta, list):
+            esperado.append(base + delta[min(k + 1, len(delta) - 1)])
+        else:
+            esperado.append(base + delta)
+    detalle = f"{monstruo} ({base} de ATK) equipado con {carta}: ATK por turno {vistos}; esperado {esperado}."
+    if vistos == esperado:
+        return res(FUNCIONA, detalle, estado=estado)
+    return res(EN_PARTE if vistos[0] == esperado[0] else NO_FUNCIONA, detalle, f"ATK {vistos}, esperado {esperado}", estado=estado)
+
+
+def caso_air_hummingbird(ruta_rom, desfase, fotos):
+    """Primera carta con efecto que el juego nunca tuvo (fila nueva de la tabla de efectos): en el
+    campo, el menu ofrece el efecto y gano 500 LP por cada carta de la mano del rival."""
+    carta = "Neo-Spacian Air Hummingbird"
+    estado = armar(ruta_rom, "air-hummingbird", yo={5: carta},
+                   rival={0: MUERTA, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA},
+                   mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+    lp0, n_mano = d.lp()[0], len(d.mano(1))
+    esperado = lp0 + 500 * n_mano
+    ofrecido = activar_desde_el_campo(d, carta, lambda: d.lp()[0] != lp0, fotos, "air-hummingbird_menu")
+    d.g.correr(200)
+    lp1 = d.lp()[0]
+    foto(d, fotos, "air-hummingbird_final")
+    detalle = (f"{carta} en el campo con {n_mano} cartas en la mano del rival: LP {lp0} -> {lp1} "
+               f"(esperado {esperado}).")
+    if not ofrecido:
+        return res(NO_FUNCIONA, detalle + " El menu no ofrece el efecto.", "el menu del campo no ofrece el efecto", estado=estado)
+    if lp1 != esperado:
+        return res(EN_PARTE, detalle, f"LP {lp1}, esperado {esperado}", estado=estado)
+    # Una vez por turno: la segunda vez no tiene que darle nada.
+    activar_desde_el_campo(d, carta, lambda: d.lp()[0] != lp1, None, "")
+    d.g.correr(200)
+    lp2 = d.lp()[0]
+    if lp2 != lp1:
+        return res(EN_PARTE, detalle + f" Una segunda vez en el mismo turno: LP {lp2}.", "se puede usar mas de una vez por turno", estado=estado)
+    return res(FUNCIONA, detalle + " Una segunda vez en el mismo turno no hace nada.", estado=estado)
+
+
+def caso_flare_scarab(ruta_rom, desfase, fotos):
+    """ATK por cuenta: +400 por cada Magica o Trampa que controla el rival (caso nuevo en el
+    calculador de ATK, efectos/gancho_atk_cuenta.s). El rival no tiene ninguna en el campo: se
+    escriben a mano entradas en su lista de zonas de Magicas y Trampas (ayuda de prueba) y se
+    mira el ATK que calcula el motor, en mi turno y despues de un turno completo."""
+    carta = "Neo-Spacian Flare Scarab"
+    estado = armar(ruta_rom, "flare-scarab", yo={5: carta},
+                   rival={0: MUERTA, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA},
+                   mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+    a = ranura_de(d, 0, carta)
+    rival_st = LISTA_ZONAS + 11 + 5
+
+    def poner(cuantas):
+        for z in range(5):
+            d.g.w8(rival_st + z, (0x80 | z) if z < cuantas else 0xFF)
+    # El motor recalcula el ATK en cada cambio de fase (no en cada cuadro): 3 cartas del rival,
+    # un cambio de fase y se mira; despues 1 carta y otro cambio.
+    base = d.g.r32(a + 0x28)
+    vistos = [base]
+    poner(3)
+    d.fin_turno(primero=True)
+    d.g.correr(240)
+    vistos.append(d.g.r32(a + 0x28))
+    poner(1)
+    hasta_mi_turno(d)                    # el turno del rival pasa y vuelve el mio: varios cambios de fase
+    d.g.correr(240)
+    vistos.append(d.g.r32(a + 0x28))
+    esperado = [500, 500 + 1200, 500 + 400]
+    foto(d, fotos, "flare-scarab_final")
+    detalle = f"{carta} con 0, 3 y 1 Magicas/Trampas del rival: ATK {vistos}; esperado {esperado}."
+    if vistos == esperado:
+        return res(FUNCIONA, detalle, estado=estado)
+    return res(EN_PARTE if vistos[1] == esperado[1] else NO_FUNCIONA, detalle, f"ATK {vistos}, esperado {esperado}", estado=estado)
+
+
+def elegir_en_lista_hasta(d, hasta):
+    """Lista "Select card" de una carta propia con varios estados: repite A (aviso), A (ALL),
+    A (la carta), RIGHT x 3 (DECIDE) y A hasta que el estado de la resolucion (0x020204C6) llegue
+    a 'hasta'. Devuelve True si llego."""
+    for _ in range(4):
+        for tecla in "A A A RIGHT RIGHT RIGHT A".split():
+            d.tecla(tecla, 70)
+            if d.g.r8(0x020204C6) == hasta:
+                return True
+        d.g.correr(100)
+        if d.g.r8(0x020204C6) == hasta:
+            return True
+    return False
+
+
+def _aqua_dolphin(ruta_rom, desfase, fotos, gana):
+    """Descarta 1 carta de mi mano, mira la mano del rival y elige 1 monstruo. Si controlo un
+    monstruo con ATK igual o mayor lo destruye y le hace 500 de dano; si no, recibo 500."""
+    carta = "Neo-Spacian Aqua Dolphin"
+    del_rival = "Kuriboh" if gana else MUERTA            # 300 de ATK contra los 3000 de Blue-Eyes
+    nombre = "aqua-dolphin-" + ("gana" if gana else "pierde")
+    estado = armar(ruta_rom, nombre, yo={5: carta},
+                   rival={i: del_rival for i in range(5)}, mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+    lp0, mano0, gy0 = d.lp(), len(d.mano()), len(d.zona(0, "d"))
+    rmano0, rgy0 = len(d.mano(1)), len(d.zona(1, "d"))
+    d.mover(y=2)
+    d.mover(x=2 + zona_monstruo(d, 0, carta))
+    d.g.correr(20)
+    d.tecla("A", 60)
+    d.tecla("UP", 30)                     # Activate Effect
+    foto(d, fotos, nombre + "_menu")
+    d.tecla("A", 120)
+    if not elegir_en_lista_hasta(d, 0x7D):
+        return res(NO_FUNCIONA, "no llego a la segunda lista (la del monstruo del rival)",
+                   "no se pudo elegir la carta que se descarta", estado=estado)
+    gy1 = len(d.zona(0, "d"))
+    foto(d, fotos, nombre + "_monstruo")
+    elegir_en_lista_hasta(d, 0x64)
+    d.g.correr(300)
+    foto(d, fotos, nombre + "_final")
+    lp1, mano1, gy2 = d.lp(), len(d.mano()), len(d.zona(0, "d"))
+    rmano1, rgy1 = len(d.mano(1)), len(d.zona(1, "d"))
+    if gana:
+        esperado = (lp0[0], lp0[1] - 500, mano0 - 1, gy0 + 1, rmano0 - 1, rgy0 + 1)
+    else:
+        esperado = (lp0[0] - 500, lp0[1], mano0 - 1, gy0 + 1, rmano0, rgy0)
+    visto = (lp1[0], lp1[1], mano1, gy2, rmano1, rgy1)
+    detalle = (f"{'monstruo debil' if gana else 'monstruo fuerte'} en la mano del rival: "
+               f"(mis LP, LP rival, mi mano, mi cementerio, mano rival, cementerio rival) {visto}; esperado {esperado}.")
+    if visto == esperado:
+        return res(FUNCIONA, detalle, estado=estado)
+    return res(NO_FUNCIONA, detalle, f"{visto}, esperado {esperado}", estado=estado)
+
+
+def caso_aqua_dolphin(ruta_rom, desfase, fotos):
+    a = _aqua_dolphin(ruta_rom, desfase, fotos, gana=False)
+    b = _aqua_dolphin(ruta_rom, desfase, fotos, gana=True)
+    if a["resultado"] == FUNCIONA == b["resultado"]:
+        return res(FUNCIONA, a["detalle"] + " | " + b["detalle"], estado=a.get("estado", ""))
+    malo = a if a["resultado"] != FUNCIONA else b
+    return res(malo["resultado"], a["detalle"] + " | " + b["detalle"], malo["falla"], estado=malo.get("estado", ""))
+
+
+def poner_en_campo(d, lado, nombre, posicion=0x10, zona=0):
+    """Ayuda de prueba: pasa una carta de la mano de 'lado' a su zona de monstruos (la saca de la
+    lista de la mano, baja el contador de la mano y la anota en la lista de zonas)."""
+    import struct
+    base = J1 if lado else J0
+    s = next(s for s, n in d.mano(lado) if n == nombre)
+    ident = s | (0x80 if lado else 0)
+    lista = base + 0x2824
+    n = (d.g.r8(base + 0x1c) & 0x3F) << 1 | d.g.r8(base + 0x1b) >> 7
+    ids = [d.g.r8(lista + k) for k in range(n)]
+    ids.remove(ident)
+    for k in range(n):
+        d.g.w8(lista + k, ids[k] if k < n - 1 else 0xFF)
+    v = struct.unpack("<Q", bytes(d.g.leer(base + 0x1b, 8)))[0]
+    v = (v & ~(0x7F << 7)) | (((v >> 7) & 0x7F) - 1) << 7
+    for k, b in enumerate(struct.pack("<Q", v)):
+        d.g.w8(base + 0x1b + k, b)
+    a = base + s * 0x50
+    d.g.w8(a + 0x31, d.g.r8(a + 0x31) & 0x0F)         # zona 0: monstruos
+    d.g.w8(a + 0x33, posicion)
+    d.g.w8(LISTA_ZONAS + 11 * lado + zona, ident)
+    return a
+
+
+def _batalla_mia(ruta_rom, desfase, fotos, carta, nombre_estado, top_del_mazo=MUERTA, monstruo="Meteor Dragon"):
+    """Mi segundo turno: 'carta' en mi campo ataca a 'monstruo' (nivel 6, ATK 1800), que el rival
+    no pudo invocar y se pone en su campo a mano (ayuda de prueba). 'top_del_mazo' es la carta que
+    el rival roba cuando se la pide el efecto. Devuelve (None, d), o (res, None) si el escenario no quedo armado."""
+    estado = armar(ruta_rom, nombre_estado, yo={5: carta},
+                   rival={0: monstruo, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA},
+                   mazo_rival={0: MUERTA, 1: top_del_mazo, 2: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado), None
+    d.fin_turno(primero=True)
+    if not hasta_mi_turno(d):
+        return res(SIN_DISPARO, "no volvio mi turno", estado=estado), None
+    if carta not in controla(d, 0):
+        return res(INVALIDA, f"{carta} ya no esta en mi campo ({controla(d, 0)})", estado=estado), None
+    if monstruo not in [n for _, n in d.mano(1)]:
+        return res(INVALIDA, f"el rival jugo {monstruo}", estado=estado), None
+    poner_en_campo(d, 1, monstruo)
+    d.g.correr(60)
+    return None, d
+
+
+def _observar(d, carta, cuadros=1500):
+    """Ataca con 'carta' y anota, cuadro a cuadro, lo que cambia: posicion de la carta, LP, y a
+    donde fueron las cartas. Termina cuando pasan 'cuadros' o vuelve el cursor a la mano."""
+    atacar(d, carta)
+    a = ranura_de(d, 0, carta)
+    vistos = {"pos": set(), "lp": set()}
+    for _ in range(cuadros // 10):
+        d.g.correr(10)
+        if a is not None:
+            vistos["pos"].add(d.g.r8(a + 0x33))
+        vistos["lp"].add(d.lp())
+    d.g.correr(200)
+    return vistos
+
+
+def caso_grand_mole(ruta_rom, desfase, fotos):
+    """Mole ataca a un monstruo de ATK mayor (1800 contra 900): vuelve a la mano con el, sin dano.
+    Despues, atacada por Battle Ox en el turno del rival, lo mismo (la IA ataca sola)."""
+    carta = "Neo-Spacian Grand Mole"
+    err, d = _batalla_mia(ruta_rom, desfase, fotos, carta, "grand-mole")
+    if err:
+        return err
+    lp0 = d.lp()
+    _observar(d, carta)
+    foto(d, fotos, "grand-mole_final")
+    en_mi_mano = carta in [n for _, n in d.mano(0)]
+    en_su_mano = "Meteor Dragon" in [n for _, n in d.mano(1)]
+    campo = (controla(d, 0), controla(d, 1))
+    detalle = (f"{carta} ataca a Meteor Dragon (1800): Mole en mi mano {en_mi_mano}, Meteor Dragon en la mano "
+               f"del rival {en_su_mano}, campos {campo}, LP {lp0} -> {d.lp()}.")
+    if en_mi_mano and en_su_mano and d.lp() == lp0 and campo == ([], []):
+        return res(FUNCIONA, detalle)
+    return res(NO_FUNCIONA, detalle, "no volvieron los dos a la mano sin dano")
+
+
+def _glow_moss(ruta_rom, desfase, fotos, top, esperado_texto):
+    carta = "Neo-Spacian Glow Moss"
+    err, d = _batalla_mia(ruta_rom, desfase, fotos, carta, "glow-moss-" + esperado_texto, top_del_mazo=top)
+    if err:
+        return err, None
+    n_mano = len(d.mano(1))
+    lp0 = d.lp()
+    vistos = _observar(d, carta)
+    foto(d, fotos, "glow-moss_" + esperado_texto)
+    return None, dict(d=d, vistos=vistos, lp0=lp0, mano_antes=n_mano, mano_despues=len(d.mano(1)),
+                      campo=(controla(d, 0), controla(d, 1)), carta=carta)
+
+
+def caso_glow_moss(ruta_rom, desfase, fotos):
+    """Glow Moss ataca a Meteor Dragon (1800): el rival roba 1 carta y la muestra; segun su tipo:
+    Monstruo = termina la Battle Phase (no hay dano ni destruccion); Magica = ataque directo (el
+    rival pierde 300 y la batalla no se calcula); Trampa = Glow Moss pasa a defensa."""
+    detalles, fallas = [], []
+    for top, texto in ((MUERTA, "monstruo"), ("Pot of Greed", "magica"), ("Mirror Force", "trampa")):
+        err, o = _glow_moss(ruta_rom, desfase, fotos, top, texto)
+        if err:
+            return err
+        lp0, lp1 = o["lp0"], o["d"].lp()
+        robo = o["mano_despues"] - o["mano_antes"]
+        pos = o["vistos"]["pos"]
+        detalle = f"{texto}: rival robo {robo} carta(s), LP {lp0} -> {lp1}, posiciones de Glow Moss vistas {sorted(hex(p) for p in pos)}, campos {o['campo']}"
+        detalles.append(detalle)
+        if robo < 1:
+            fallas.append(f"{texto}: el rival no robo")
+        if texto == "monstruo" and not (lp1 == lp0 and o["carta"] in o["campo"][0]):
+            fallas.append("monstruo: tendria que terminar la Battle Phase sin dano")
+        if texto == "magica" and not (lp1[1] == lp0[1] - 300 and lp1[0] == lp0[0] and o["carta"] in o["campo"][0]):
+            fallas.append("magica: tendria que ser un ataque directo de 300")
+        if texto == "trampa" and 0x30 not in pos:
+            fallas.append("trampa: Glow Moss no paso a defensa")
+    if not fallas:
+        return res(FUNCIONA, " | ".join(detalles))
+    return res(EN_PARTE, " | ".join(detalles), "; ".join(fallas))
+
+
+def caso_dark_panther(ruta_rom, desfase, fotos):
+    """Una vez por turno copia el nombre y el efecto de un monstruo boca arriba del rival hasta la
+    End Phase (se cambia el indice de la ranura; ATK y DEF siguen siendo los propios)."""
+    carta, rival = "Neo-Spacian Dark Panther", "Battle Ox"
+    estado = armar(ruta_rom, "dark-panther", yo={5: carta},
+                   rival={0: rival, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA}, mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, carta)
+    faltas = escenario.comprobar(d, {"campo_yo": [carta]})
+    if faltas:
+        return res(INVALIDA, "; ".join(faltas), estado=estado)
+    poner_en_campo(d, 1, rival)
+    d.g.correr(60)
+    a = ranura_de(d, 0, carta)
+    indice = lambda: d.g.r16(a + 0x24) & 0x7FFF
+    propio = indice()
+    atk0 = d.g.r32(a + 0x28)
+    d.mover(y=2)
+    d.mover(x=2 + zona_monstruo(d, 0, carta))
+    d.g.correr(20)
+    d.tecla("A", 60)
+    d.tecla("UP", 30)
+    foto(d, fotos, "dark-panther_menu")
+    d.tecla("A", 120)
+    copiada = None
+    for _ in range(4):
+        for tecla in "A A A RIGHT RIGHT RIGHT A".split():
+            d.tecla(tecla, 70)
+            if indice() != propio:
+                break
+        d.g.correr(100)
+        if indice() != propio:
+            break
+    copiada = d.rom.nombre(indice())
+    d.g.correr(120)
+    foto(d, fotos, "dark-panther_copiando")
+    atk1 = d.g.r32(a + 0x28)
+    def_1 = d.g.r32(a + 0x2C)
+    if copiada != rival:
+        return res(NO_FUNCIONA, f"no copio a {rival}: la carta es {copiada}", "no copia el nombre", estado=estado)
+    d.fin_turno(primero=True)
+    d.g.correr(600)
+    vuelta = d.rom.nombre(indice())
+    detalle = (f"{carta} copia a {rival}: nombre {copiada}, ATK {atk0} -> {atk1}, DEF {def_1}; "
+               f"despues de la End Phase: {vuelta}.")
+    fallas = []
+    if atk1 != 1000 or def_1 != 500:
+        fallas.append(f"ATK/DEF {atk1}/{def_1}, esperado 1000/500")
+    if vuelta != carta:
+        fallas.append("no recupera su nombre en la End Phase")
+    if not fallas:
+        return res(FUNCIONA, detalle, estado=estado)
+    return res(EN_PARTE, detalle, "; ".join(fallas), estado=estado)
+
+
+
+def _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, nombre, descarta=False, rival=None, mazo_rival=None):
+    """Equipa 'carta' a 'monstruo' en mi primer turno y espera mi segundo turno. Devuelve (None, d)
+    o (res, None) si el escenario no quedo armado. 'rival' = mano del rival (por defecto, relleno)."""
+    estado = armar(ruta_rom, nombre, yo={5: carta, 4: monstruo},
+                   rival=rival or {i: MUERTA for i in range(5)},
+                   mazo_rival=mazo_rival or {0: MUERTA, 1: MUERTA, 2: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, monstruo)
+    d.ir_mano(carta)
+    d.menu(0)
+    d.g.correr(120)
+    if descarta:
+        elegir_en_lista(d)
+        d.g.correr(150)
+    d.tecla("A", 80)
+    d.tecla("A", 120)
+    d.g.correr(150)
+    if carta not in escenario.instantanea(d)["magias_yo"]:
+        return res(NO_FUNCIONA, f"{carta} no quedo en el campo", "no se equipa", estado=estado), None
+    d.fin_turno(primero=True)
+    if not hasta_mi_turno(d):
+        return res(SIN_DISPARO, "no volvio mi turno", estado=estado), None
+    return None, d
+
+
+def _segundo_ataque(d, atacante):
+    """Ya en la Battle Phase, despues de un ataque: vuelve a atacar con 'atacante' si el menu lo
+    ofrece. El menu del monstruo trae Attack arriba de Detail Screen solo si puede atacar."""
+    d.mover(y=2)
+    d.mover(x=2 + zona_monstruo(d, 0, atacante))
+    d.g.correr(20)
+    d.tecla("A", 80)
+    d.tecla("UP", 50)
+    d.tecla("A", 110)
+    d.tecla("A", 110)
+    d.tecla("A", 70)
+
+
+def caso_tryce(ruta_rom, desfase, fotos):
+    """Twin Swords of Flashing Light - Tryce: -500 de ATK (con descarte) y ataca dos veces por
+    Battle Phase. Mi segundo turno, rival sin monstruos: dos ataques directos de 1350."""
+    carta, monstruo = "Twin Swords of Flashing Light - Tryce", "Blazing Inpachi"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, -500, descarta=True)
+    if r["resultado"] != FUNCIONA:
+        return r
+    err, d = _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, "equipo-tryce-doble", descarta=True)
+    if err:
+        return err
+    lp0 = d.lp()[1]
+    atacar(d, monstruo)
+    d.g.correr(400)
+    lp1 = d.lp()[1]
+    _segundo_ataque(d, monstruo)
+    d.g.correr(400)
+    foto(d, fotos, "tryce_doble")
+    lp2 = d.lp()[1]
+    detalle = r["detalle"] + f" Dos ataques directos en la misma Battle Phase: LP del rival {lp0} -> {lp1} -> {lp2} (esperado 8000 -> 6650 -> 5300)."
+    if (lp0, lp1, lp2) == (8000, 6650, 5300):
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, f"LP del rival {lp0} -> {lp1} -> {lp2}", estado=r.get("estado", ""))
+
+
+def caso_ceal(ruta_rom, desfase, fotos):
+    """Shooting Star Bow - Ceal: -1000 de ATK y el monstruo equipado puede atacar directo aunque el
+    rival tenga monstruos. Mi segundo turno, Meteor Dragon en el campo del rival: el juego pregunta
+    si ataca directo; Yes: el rival pierde 850."""
+    carta, monstruo, rival_m = "Shooting Star Bow - Ceal", "Blazing Inpachi", "Meteor Dragon"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, -1000)
+    if r["resultado"] != FUNCIONA:
+        return r
+    err, d = _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, "equipo-ceal-directo",
+                                 rival={0: rival_m, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA})
+    if err:
+        return err
+    if rival_m not in [n for _, n in d.mano(1)]:
+        return res(INVALIDA, f"el rival jugo {rival_m}", estado=r.get("estado", ""))
+    poner_en_campo(d, 1, rival_m)
+    d.g.correr(60)
+    lp0 = d.lp()[1]
+    d.tecla("B", 80)
+    d.tecla("A", 170)                     # Enter Battle Phase
+    d.mover(y=2)
+    d.mover(x=2 + zona_monstruo(d, 0, monstruo))
+    d.g.correr(20)
+    d.tecla("A", 80)
+    d.tecla("UP", 50)
+    d.tecla("A", 110)                     # Attack: "This monster can attack your opponent's LP directly..."
+    foto(d, fotos, "ceal_pregunta")
+    d.tecla("A", 110)                     # Yes
+    d.g.correr(500)
+    lp1 = d.lp()[1]
+    detalle = r["detalle"] + f" Con {rival_m} en el campo del rival, ataque directo: LP del rival {lp0} -> {lp1} (esperado 8000 -> 7150)."
+    if (lp0, lp1) == (8000, 7150) and rival_m in controla(d, 1):
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, f"LP del rival {lp0} -> {lp1}", estado=r.get("estado", ""))
+
+
+def caso_murasame(ruta_rom, desfase, fotos):
+    """Fusion Sword Murasame Blade: +800 de ATK a un Guerrero; con solo un monstruo que no es
+    Guerrero (Blazing Inpachi, Piro) el menu de la carta no ofrece activarla."""
+    carta = "Fusion Sword Murasame Blade"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, "Axe Raider", 800)
+    if r["resultado"] != FUNCIONA:
+        return r
+    estado = armar(ruta_rom, "equipo-murasame-piro", yo={5: carta, 4: "Blazing Inpachi"},
+                   rival={i: MUERTA for i in range(5)}, mazo_rival={0: MUERTA, 1: MUERTA})
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, "Blazing Inpachi")
+    d.ir_mano(carta)
+    d.menu(0)                             # la primera opcion: si no hay Activate, es Set
+    d.g.correr(150)
+    d.tecla("A", 80)
+    d.tecla("A", 120)
+    d.g.correr(150)
+    s = escenario.instantanea(d)
+    inpachi = next((m[2] for m in s["campo_yo"] if m[0] == "Blazing Inpachi"), None)
+    equipada = any(m == carta for m in s["magias_yo"]) and inpachi != 1850
+    detalle = r["detalle"] + f" Con solo Blazing Inpachi (Piro) en el campo: ATK {inpachi} (esperado 1850, sin equipar)."
+    if inpachi == 1850:
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, "se equipo a un monstruo que no es Guerrero", estado=r.get("estado", ""))
+
+
+
+
+def caso_elma(ruta_rom, desfase, fotos):
+    """Butterfly Dagger - Elma: +300 de ATK, y cuando va al cementerio desde el campo vuelve a la
+    mano. Mi segundo turno: el monstruo equipado (2150) ataca a Blue-Eyes (3000), puesto a mano en
+    el campo del rival; el monstruo muere y Elma tiene que terminar en mi mano."""
+    carta, monstruo = "Butterfly Dagger - Elma", "Blazing Inpachi"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, 300)
+    if r["resultado"] != FUNCIONA:
+        return r
+    err, d = _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, "equipo-elma-vuelve")
+    if err:
+        return err
+    poner_en_campo(d, 1, MUERTA)
+    d.g.correr(60)
+    atacar(d, monstruo)
+    esperar(d, lambda: carta in [n for _, n in d.mano(0)], 1500, tecla_cada=0)
+    d.g.correr(200)
+    foto(d, fotos, "elma_mano")
+    s = escenario.instantanea(d)
+    en_mano = carta in [n for _, n in d.mano(0)]
+    detalle = r["detalle"] + (f" Su monstruo destruido en batalla por Blue-Eyes: Elma en la mano {en_mano}, "
+                              f"{monstruo} en el cementerio {monstruo in s['cementerio_yo']} (esperado True y True).")
+    if en_mano and monstruo in s["cementerio_yo"]:
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, "Elma no volvio a la mano", estado=r.get("estado", ""))
+
+
+def caso_baou(ruta_rom, desfase, fotos):
+    """Wicked-Breaking Flamberge - Baou: +500 de ATK (con descarte) y anula los efectos del monstruo
+    que el equipado destruye en batalla. Mi segundo turno: el equipado (2350) ataca a Mystic Tomato,
+    en el campo del rival (lo invoca la IA o se pone a mano) con Tomatos en su mazo; no tiene que invocar nada. Control:
+    lo mismo sin Baou, y el Tomato invoca (Des Kangaroo o un Tomato)."""
+    carta, monstruo, tomato = "Wicked-Breaking Flamberge - Baou", "Blazing Inpachi", "Mystic Tomato"
+    r = _caso_equipo(ruta_rom, desfase, fotos, carta, monstruo, 500, descarta=True)
+    if r["resultado"] != FUNCIONA:
+        return r
+    mazo = {0: MUERTA, 1: tomato, 2: tomato, 3: tomato}
+    rival = {0: tomato, 1: MUERTA, 2: MUERTA, 3: MUERTA, 4: MUERTA}
+
+    def pelea(d, nombre_foto):
+        if tomato in [n for _, n in d.mano(1)]:
+            poner_en_campo(d, 1, tomato)
+            d.g.correr(60)
+        if controla(d, 1) != [tomato]:      # la IA lo pudo haber invocado ella misma
+            return None
+        atacar(d, monstruo)
+        for k in range(15):
+            d.g.correr(100)
+            if k % 3 == 2:
+                d.tecla("A", 4)
+        foto(d, fotos, nombre_foto)
+        s = escenario.instantanea(d)
+        return controla(d, 1), tomato in s["cementerio_rival"]
+
+    err, d = _equipado_mi_turno2(ruta_rom, desfase, fotos, carta, monstruo, "equipo-baou-anula", descarta=True,
+                                 rival=rival, mazo_rival=mazo)
+    if err:
+        return err
+    con = pelea(d, "baou_anula")
+    estado = armar(ruta_rom, "equipo-baou-control", yo={4: monstruo}, rival=rival, mazo_rival=mazo)
+    d = abrir(ruta_rom, estado, desfase)
+    invocar(d, monstruo)
+    d.fin_turno(primero=True)
+    sin = pelea(d, "baou_control") if hasta_mi_turno(d) else None
+    if con is None or sin is None:
+        return res(INVALIDA, f"el campo del rival no quedo con solo {tomato} o no volvio mi turno", estado=r.get("estado", ""))
+    detalle = r["detalle"] + (f" Mystic Tomato destruido en batalla por el equipado: campo del rival {con[0]} (esperado vacio); "
+                              f"sin Baou: {sin[0]} (esperado un monstruo del mazo).")
+    if con[1] and not con[0] and sin[0]:
+        return res(FUNCIONA, detalle, estado=r.get("estado", ""))
+    if not sin[0]:
+        return res(INVALIDA, detalle, "el control sin Baou tampoco invoco", estado=r.get("estado", ""))
+    return res(EN_PARTE, detalle, "el Tomato invoco igual", estado=r.get("estado", ""))
+
+
 CASOS = {
     "Dark Necrofear": caso_necrofear,
     "Electromagnetic Bagworm": caso_bagworm,
@@ -1312,6 +1879,18 @@ CASOS = {
     "Lady Panther": caso_lady_panther,
     "Fairy Guardian": caso_fairy_guardian,
     "Reasoning": caso_reasoning,
+    "Neo-Spacian Air Hummingbird": caso_air_hummingbird,
+    "Neo-Spacian Flare Scarab": caso_flare_scarab,
+    "Neo-Spacian Aqua Dolphin": caso_aqua_dolphin,
+    "Neo-Spacian Grand Mole": caso_grand_mole,
+    "Neo-Spacian Dark Panther": caso_dark_panther,
+    "Neo-Spacian Glow Moss": caso_glow_moss,
+    "Stim-Pack": lambda r, d, f: _caso_equipo(r, d, f, "Stim-Pack", "Blazing Inpachi", [700, 500, 300], 2),
+    "Butterfly Dagger - Elma": caso_elma,
+    "Fusion Sword Murasame Blade": caso_murasame,
+    "Shooting Star Bow - Ceal": caso_ceal,
+    "Wicked-Breaking Flamberge - Baou": caso_baou,
+    "Twin Swords of Flashing Light - Tryce": caso_tryce,
 }
 
 

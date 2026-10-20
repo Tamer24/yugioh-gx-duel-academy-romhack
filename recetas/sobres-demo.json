@@ -1,0 +1,17 @@
+{
+  "nota": "DEMOSTRACION, no es parte del juego: un sobre con otro nombre, otro precio y cartas propias ocupando el lugar de Basic 2-B (la tienda tiene 48 sobres fijos; ver PROYECTO.md 5.5). Se aplica sobre el ROM ampliado: python3 scripts/ampliar.py ORIGINAL LOTE SALIDA --cuantas 3 --sobres recetas/sobres-demo.json",
+  "sobres": [
+    {
+      "sobre": "Basic 2-B",
+      "nombre": "Neo Space",
+      "comentario": "This one just arrived from Neo-Space!",
+      "precio": 300,
+      "cartas_por_sobre": 3,
+      "cartas": {
+        "comunes": ["Fiend's Hand", "Fire Reaper", "Spirit of the Harp", "Dark-Eyes Illusionist", "Lady Panther", "Chosen One"],
+        "raras": ["Elemental Hero Neos"],
+        "super": ["Dark Necrofear"]
+      }
+    }
+  ]
+}

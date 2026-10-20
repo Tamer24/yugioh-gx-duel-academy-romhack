@@ -36,7 +36,7 @@ def correr(rom, mano_ia, propia):
     carta = 0x02010000
     uc.mem_write(carta, bytes([((propia << 1) | 1) & 0xFF, 1, 0, 0] + [0] * 12))   # bit 8 = dueno del lado 1
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[5101] + 4)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[5101] + 4)
     uc.reg_write(UC_ARM_REG_R0, carta)
     uc.reg_write(UC_ARM_REG_SP, 0x03007E00)
     uc.reg_write(UC_ARM_REG_LR, 0x03007F00 | 1)

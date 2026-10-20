@@ -1,6 +1,6 @@
 # Duel Academy romhack: plan de trabajo
 
-Estado al **2026-10-11** (noche). Complementa a `PROYECTO.md` (mapa del ROM y backlog),
+Estado al **2026-10-20** (la entrada más nueva está en la sección de versiones: v0.3 con 43 cartas, Baou incluida; resumen para retomar en `CLAUDE.md`). Complementa a `PROYECTO.md` (mapa del ROM y backlog),
 `NOTAS-REVERSE.md` (detalle técnico), `PRUEBAS.md` (cómo probar y resultados) y `ACCIONES.md` (el
 recetario: cómo se implementa cada acción de una carta).
 
@@ -57,11 +57,128 @@ Dark-Eyes Illusionist, Windstorm of Etaqua, Magic Drain). **A las otras 24 les f
 solo la confirmación a ojo de Oscar**: la revisión por capturas no la reemplaza (Principio IV). Kunai
 with Chain la tenía y volvió a pendiente porque ahora hace algo más.
 
-ROM de trabajo: `build/…(Lote).gba` (MD5 `c1b1289a1e0a3ca4c725272073c791db`), armado con
+ROM de trabajo: `build/…(Lote).gba` (MD5 `f5ea439aec4ce28e25a03a05e66d55a5` desde el 2026-10-13, con Spy al azar y el bloque del baúl ampliado en `0x02028264`; antes `c693b77264d2f53a8e0b0113c4ffa4fc` con la tabla de efectos ampliada y Air Hummingbird con efecto; antes `d017f31b380fcb73fd85b639ac52781c` con el pack 3 (Neo-Spacian), y antes `e8893dd2dabeb6adb24bb86b07448290` con el pack 2 (6 equipos), y antes `57e98b8c579ec74d84e49c9998b9d9a3`, con el dibujo chico de Elemental Hero Neos, y `0ce9fa0e…` y, con las 30, `c1b1289a…`), armado con
 `scripts/construir_lote.sh`. Después de rearmarlo: las pruebas `scripts/test_*.py`
 (`test_modificadores.py` pide además `datos/volcado_goddess`), `probar_lote.py`, `probar_trampas.py` y
 `scripts/repetir_sesion.py ROM evidencia/ronda*/*`, **de a un proceso por vez** (ver "Lo que NO
-funciona"). Las cuatro se corrieron sobre este ROM: todo igual que antes salvo las dos cartas nuevas.
+funciona"). Sobre el ROM del 2026-10-12 se corrieron las 17 `test_*.py` (todas bien), la regresión
+(41 `IGUAL` y las 11 `DISTINTA` de siempre) y `probar_sobres.py`. `probar_lote.py` y
+`probar_trampas.py` **no** se repitieron: respecto del ROM anterior, donde sí se corrieron, solo
+cambian 1059 bytes, todos del dibujo chico de la carta 7.
+
+**Tanda del 2026-10-12 (noche): pack 2, seis equipos del grupo A.** Stim-Pack, Butterfly Dagger - Elma,
+Fusion Sword Murasame Blade, Shooting Star Bow - Ceal, Wicked-Breaking Flamberge - Baou y Twin Swords of
+Flashing Light - Tryce entraron **sin pieza nueva**: conservaban su caso en el calculador de bonos.
+Prueba en duelo (`probar_lote.py`, 3 corridas, jugándolas desde la mano): el bono de ATK coincide en las
+seis. **Stim-Pack: en parte** (+700 pero no pierde 200 por turno: falta quien suba el contador).
+Baou y Tryce piden descartar una carta (lo hace el motor). Sin probar: Elma volviendo a la mano, el ataque
+directo de Ceal, el doble ataque de Tryce. Regresión: las `test_*.py` bien, 41 `IGUAL` y las 11 `DISTINTA`
+de siempre; `probar_lote.py` y `probar_trampas.py` de las 30 anteriores no se repitieron.
+
+**Tanda del 2026-10-12 (noche): pack 3, los Neo-Spacian, y el sobre "Neo Space".** Seis monstruos
+nuevos (Aqua Dolphin, Air Hummingbird, Grand Mole, Glow Moss, Dark Panther, Flare Scarab), **sin efecto**
+(los originales lo tienen; una carta nueva con efecto no entra todavía), con dibujo propio
+(`arte/neo-spacian-*.png`) y datos de la base de Konami. `recetas/sobres-neo-space.json` los junta con
+Neos (súper), Shining Flare Wingman (ultra), cinco Elemental Hero y cuatro cartas de apoyo en un sobre
+**"Neo Space"**, 300 DP, en el lugar de Basic 2-B: `python3 scripts/ampliar.py ORIGINAL LOTE SALIDA
+--cuantas 3 --sobres recetas/sobres-neo-space.json` (ROM `build/…(Neo Space).gba`; va sobre el
+ampliado porque los sobres originales traen cartas de más de 1200). Comprado en pantalla 2 veces x 5
+sobres: salen Neos y los seis Neo-Spacian, con su dibujo (`evidencia/neo-space/`). **Defecto encontrado
+y arreglado:** `restaurar.py` tomaba por un ID la mitad baja de un puntero de lista de sobre (el de
+Ryu-Ran, 4732 = `0x127C`) y rompía la lista del sobre 10; ahora salta los punteros. Regresión: 41
+`IGUAL` y 11 `DISTINTA`, tests en orden.
+
+**Tanda del 2026-10-12 (madrugada): la tabla de efectos se puede ampliar, y hay una carta nueva con
+efecto.** `scripts/ampliar_efectos.py` muda la tabla de efectos (901 filas, `0x17D9BEC`) a
+`0x1F00000`, la agranda y reemplaza sus 13 referencias y el tope de la búsqueda. Medido: el código
+del juego encuentra la misma fila que antes para las 765 cartas con efecto (`test_tabla_efectos.py`,
+corre `FUN_0806162C` en Unicorn), y las 52 sesiones grabadas dan lo mismo (41 `IGUAL`, 11 `DISTINTA`).
+En la receta, la clave `"filas_efecto"` pide filas nuevas (`copiar_de` otra carta) y una pieza
+`ID:fn_04:efectos/x.s` les pone su función. **Neo-Spacian Air Hummingbird** es la primera carta que el
+juego nunca tuvo con efecto: en el campo el menú ofrece el efecto, gana 500 LP por cada carta de la mano
+del rival y una vez por turno (3 corridas, también en el ROM ampliado). Detalle de los límites que
+quedan en `PROYECTO.md`, F6.
+
+**Tanda del 2026-10-12 (mañana): el ROM ampliado pasa de 1234 a 1443 cartas.** Detrás del arte
+quedaban libres, además de las tablas mudadas, las dos tablas de nombres en japonés y el dibujo chico
+original: el arte de las cartas nuevas llega hasta `0x10A01C4`. El bloque del baúl aparte se mudó a
+`0x0203A000` y crece con la cantidad. `ampliar.py --cartas` agrega cartas nuevas directo en la
+ampliación. Probado con 200 cartas de prueba (compra, duelo, lógica del baúl) y las 52 sesiones.
+Detalle y límites en `PROYECTO.md` §9.1.
+
+**Tanda del 2026-10-12 (tarde): el ROM ampliado llega al tope, 2047 cartas.** Los dibujos de las cartas
+desde la 1444 van en trozos del espacio libre y 9 sitios del código se enganchan para encontrarlos; el
+bloque del baúl se guarda compacto (8 bytes por carta) para que entre en la SRAM. Probado con 804
+cartas de prueba (detalle en duelo, compra en pantalla, guardar/cargar en Unicorn) y las 52 sesiones.
+Detalle en `PROYECTO.md` §9.1.
+
+**CORREGIDO 2026-10-13: el bloque del baul ampliado se perdia en RAM.** El juego pone en cero
+`0x0202B0C0-0x020350BF` al arrancar (cuadros 13-15 despues del reinicio) y `0x0202B0C0-0x0203A8BF` al
+elegir Continue y en los menus; el bloque estaba en `0x02032000`: las cartas 1201 en adelante se
+cargaban de la SRAM y se borraban antes de llegar al menu, y el siguiente guardado las pisaba con ceros.
+Los chequeos anteriores ("en cero en 52 estados") no lo veian: poner en cero lo que ya es cero no se
+nota. Nuevo lugar `0x02028264` (11676 bytes) elegido sembrando 0xA7 y jugando (arranque, Continue, los
+iconos del menu, guardar, ~190 estados con teclas): no cambia nunca. `scripts/test_baul_ram.py` lo
+prueba en el emulador (arrancar, Continue, guardar, reiniciar, menus). Las partidas guardadas con el
+ROM anterior perdieron las cartas ampliadas que hubieran comprado; las demas estan bien.
+La Inexperienced Spy ahora muestra 1 carta al azar de la mano rival (el texto dice elegir 1, pero la
+lista del motor muestra el nombre de todas las candidatas; funciona como Inspection).
+
+**Tanda del 2026-10-12 (noche 4): los seis Neo-Spacian con su efecto, y las Fusiones del pack 4 se
+pueden invocar.** Después de la investigación (siguiente entrada) se implementó todo lo que faltaba:
+- **Flare Scarab**: +400 ATK por Mágica/Trampa del rival. Gancho en el calculador de ATK
+  (`efectos/gancho_atk_cuenta.s`, `0x0801273C`); `scripts/test_atk_cuenta.py` compara 600 casos contra
+  el ROM sin el gancho.
+- **Aqua Dolphin**: descarta 1, mira la mano rival, elige un monstruo, compara ATK, destruye y daña
+  500 (o recibo 500). `efectos/aqua_dolphin.s`.
+- **Grand Mole** y **Glow Moss**: gancho en la fase de daño de la batalla (`FUN_08067E60`,
+  `efectos/gancho_batalla.s`). Mole vuelve a la mano con el monstruo contra el que pelea (se activa
+  sola cuando perdería: el juego no deja escribir una pregunta propia). Glow Moss: el rival roba y
+  muestra; Monstruo = termina la Battle Phase, Magica = ataque directo (300 de dano), Trampa = a
+  defensa; también al atacar directo.
+- **Dark Panther**: copia nombre y efecto de un monstruo rival cambiando el índice de su ranura
+  (`efectos/dark_panther.s`); `gancho_fin_control.s` lo devuelve en la End Phase; ATK y DEF propios.
+- **Fusiones**: la tabla de recetas (80 filas) se muda y se agranda (`scripts/ampliar_fusiones.py`,
+  clave `"fusiones"` del JSON de `--cartas`): 25 recetas nuevas, las de materiales con nombre propio.
+  Probado en duelo: Air Neos (Neos + Air Hummingbird), Steam Healer, Tempest (3 materiales).
+Pruebas: `probar_lote.py` en el ROM `(Lote)` y en `(Neo Space)`, 3 corridas cada una, todas
+FUNCIONA; regresión 41 `IGUAL` y 11 `DISTINTA`; las `test_*.py` bien. Quedan sin receta de Fusión
+las de materiales genéricos ("1 monstruo EARTH") y Divine/Cosmo Neos (21 cartas).
+
+**Investigación del 2026-10-12 (noche 3): lo que falta para los Neo-Spacian con efecto.** Sin pieza
+nueva: se ubicó en el ROM original el molde de cada efecto pendiente (Dimensional Warrior, Reflect
+Bounder, The Unhappy Maiden, Ceal, Chaos Necromancer…) y se leyó la máquina de estados de la batalla
+(`0x02020C20`, 6 estados). Resultados en `NOTAS-REVERSE.md` ("La batalla y los Neo-Spacian") y
+`ACCIONES.md` ("Batalla"). Hallazgos: el evento `0x64` termina la Battle Phase; un ataque directo
+sale de la lista de modificadores (Ceal, Overpowering Eye); un ATK por cuenta es un caso más del
+calculador; los efectos de batalla están en árboles de IDs, no en la tabla de efectos. Sin molde en
+el juego: copiar el efecto de otro monstruo (Dark Panther).
+
+**Tanda del 2026-10-12 (noche 2): pack 4, todos los Elemental Hero y Neo-Spacian que faltaban.** 69
+cartas nuevas (`recetas/packs/pack-4.json`, armado por `scripts/hacer_pack4.py` desde la base de
+ygoprodeck, con su dibujo en `arte/`): 46 de fusión y 23 normales (algunos con efecto en el juego real, que
+aquí entran **sin el efecto**, como Normal con un texto que lo dice). El sobre "Neo Space" (400 DP) pasó
+a traer las 87 cartas del tema. `python3 scripts/ampliar.py ORIGINAL LOTE SALIDA --cuantas 3 --cartas
+recetas/packs/pack-4.json --sobres recetas/sobres-neo-space.json`. **Límite encontrado:** el sorteo de
+sobres guarda el ID en 13 bits (`0x1FFF` en `FUN_080BD89C`): una carta con ID de Konami desde 8192
+sale en blanco del sobre. Las 23 cartas con ID mayor llevan un ID propio de 8191 para abajo
+(`id_real` guarda el de Konami; la contraseña es la real). Comprado 2 veces x 5 sobres: salen con
+su dibujo (`evidencia/neo-space/pack4-*`). Las de fusión no se pueden invocar: faltan sus recetas.
+
+**Tanda del 2026-10-12: la tienda y los sobres** (detalle en `NOTAS-REVERSE.md`, "La tienda y los
+sobres", y en `PROYECTO.md` §5.5):
+
+- Con un estado de Oscar parado en la tienda (`estados/tienda.ss1`) se compraron sobres por script:
+  **las restauradas salen de los sobres** del monstruo que reemplazaron, y en el ROM ampliado salen
+  también las cartas 1201 en adelante. Capturas en `evidencia/sobres/`.
+- `scripts/sobres.py` lista los 48 sobres y les cambia cartas, rareza, nombre, textos y precio (clave
+  `"sobres"` de una receta). `scripts/probar_sobres.py` repite la compra en pantalla y la comprueba.
+- Aparecieron y se arreglaron: el dibujo chico de las cartas (dos tablas por carta que nadie tenía
+  ubicadas; `arte.py` ahora lo genera y `ampliar.py` lo muda), y la última carta del ROM, que el
+  sorteo de sobres descarta (corregido solo en el ROM ampliado).
+- `build/…(Sobres demo).gba` muestra un sobre "Neo Space" en el lugar de Basic 2-B
+  (`recetas/sobres-demo.json`). Es una demostración, no parte del juego.
+- **Pendiente, a decidir por Oscar:** cómo se suman sobres propios (ver §4, punto 4).
 
 ## 2. Lo aprendido (lo que no hay que redescubrir)
 
@@ -155,8 +272,9 @@ funciona"). Las cuatro se corrieron sobre este ROM: todo igual que antes salvo l
    Probado en seco el 2026-10-11 con Stim-Pack, Night Assailant y Double Snare sobre una copia del
    proyecto: el ROM armó, las 30 anteriores siguieron andando y Stim-Pack funcionó sin tocar nada
    (+700 ATK, equipada). Las 142 recortadas ya están clasificadas en `datos/triage_recortadas.csv`.
-   **Quedan 20 huecos seguros** para esas 142: es el límite real de cuántas cartas más entran sin
-   decidir qué monstruos Normales se sacrifican o ampliar las 1200. Después, por cada carta,
+   **Quedan 7 huecos seguros** (eran 20; el pack 2 usó 6, el pack 3 otros 6 y Neos 1) para esas 142: es el límite real de cuántas cartas más entran sin
+   decidir qué monstruos Normales se sacrifican o pasar al ROM ampliado (hecho el 2026-10-12, hasta 2047
+   cartas; ver Decisiones tomadas). Después, por cada carta,
    descomponer el texto de la carta en acciones y buscarlas en **`ACCIONES.md`** (el recetario: qué se
    llama para ver la mano del rival, sumar o restar ATK, mover una carta, tomar el control, equipar,
    dispararse sola...). Lo que ya está ahí se copia; solo se investiga lo que falta, y al terminar
@@ -251,8 +369,16 @@ Hecho el 2026-10-11 (tarde):
    las partidas grabadas de esas 6 cartas se repiten iguales en ese ROM. El nombre "Hack vN" es
    provisorio. [DECIDIR]
 
-Queda: los dibujos, y decidir nombre y cómo se consiguen las cartas (hoy heredan el lugar del hueco en
-los sobres y se compran con su contraseña).
+5. **Sobres de la tienda (2026-10-12).** `scripts/sobres.py` lista los 48 sobres y les cambia las
+   cartas, el nombre, el precio y los textos; en una receta va en la clave `"sobres"`. Probado en
+   pantalla con el estado de Oscar en la tienda (`evidencia/sobres/`): las restauradas salen de los
+   sobres del hueco que ocupan, las cartas 1201 en adelante del ROM ampliado también, y un sobre
+   renombrado con cartas propias se compra y se abre bien (`recetas/sobres-demo.json`). Lo medido
+   está en `PROYECTO.md` §5.5.
+
+Queda: los dibujos, y decidir nombre y cómo se reparten las cartas en los sobres. **[DECIDIR] sobres
+nuevos:** la tienda tiene 48 lugares fijos. O se reusa un lugar (por ejemplo juntar dos Basic y
+liberar uno), que es solo datos, o se agrega el lugar 49, que es tocar unos 30 puntos del código.
 
 ### Fase 3: mazos e IA (objetivos 3 y 4)
 
@@ -266,11 +392,44 @@ los sobres y se compran con su contraseña).
 
 ### Decisiones tomadas
 
-- Seguir **reemplazando** monstruos Normales; no ampliar las 1200 cartas por ahora.
+- ~~Seguir reemplazando monstruos Normales; no ampliar las 1200 cartas por ahora.~~ **Superada el
+  2026-10-12:** el ROM ampliado (hasta 2047 cartas, `scripts/ampliar.py`) existe y lo usa el ROM
+  `(Neo Space)` con el pack 4. Conviven dos líneas: `(Lote)`, que reemplaza Normales, y `(Neo Space)`,
+  ampliado. **[DECIDIR]** sobre cuál se arma la versión de juego (`armar_version.py` hoy parte del
+  `(Lote)`).
 - El ROM original no se toca; se distribuye `.bps`.
 - Una carta no entra al hack sin prueba en duelo.
 
 ## 4. Para retomar
+
+**2026-10-19: v0.3 rehecha con Baou** (`build/hack-v0.3.bps`, ROM MD5 `2734e173b21b9ba0defb1dc95ebf6d5e`):
+43 cartas. Wicked-Breaking Flamberge - Baou ya anula el efecto del monstruo que destruye en batalla: se
+encontró dónde se resuelven los efectos encadenados (`0x080245D6` y `0x080245B6`, la llamada a la fn_04 del
+eslabón) y dos ganchos marcan anulada la entrada antes de esa llamada (`gancho_baou_a.s`, `gancho_baou_b.s`;
+`NOTAS-REVERSE.md`, "Los equipos del pack 2"). Prueba de lógica `test_baou.py` (14 casos), duelo con
+control (Mystic Tomato destruido: con Baou no invoca, sin Baou invoca Des Kangaroo), capturas en
+`evidencia/ronda11/`. Regresión en el ROM nuevo: 28 de 30 sesiones IGUAL (las dos de siempre), los 25 casos
+de `probar_lote.py` FUNCIONA, las pruebas de lógica sin fallas. La v0.3 no se había compartido, así que se
+rehízo en lugar de abrir una v0.4. **Falta: que Oscar juegue la v0.3 libre.**
+
+(Lo que sigue es la primera v0.3, reemplazada por la de arriba.)
+**2026-10-18 (noche): v0.3 armada** (`build/hack-v0.3.bps`, ROM MD5 `d1adf906ea761d32cf149c54c396f317`): 42
+cartas, las 31 de la v0.2 y 11 de los packs 2 y 3. Arreglos: Stim-Pack pierde 200 por turno
+(`gancho_stim_pack.s`), Twin Swords ataca dos veces (`gancho_tryce.s`), Butterfly Dagger - Elma vuelve a la
+mano (`elma_vuelve.s` y una rama en `gancho_enviada_por_rival.s`). Probadas completas Ceal (ataque directo) y
+Murasame (solo Warrior). Los 6 Neo-Spacian tenian codigo propio sin prueba de logica: ahora
+`test_neo_spacian.py`, `test_gancho_batalla.py` y `test_atk_cuenta.py` (arnes comun: `scripts/motor_uc.py`).
+Regresion en el ROM de la v0.3: 28 de 30 sesiones IGUAL (las dos de siempre), las 11 nuevas FUNCIONA, las
+pruebas de logica anteriores sin fallas. **Wicked-Breaking Flamberge - Baou, aparcada (resuelta el 2026-10-19):** el +500 anda; anular
+el efecto del monstruo destruido no (ver `NOTAS-REVERSE.md`, "Los equipos del pack 2"). **Falta: que Oscar
+juegue la v0.2 o la v0.3 libre.**
+
+**2026-10-18: v0.2 armada** (`build/hack-v0.2.bps`, ROM MD5 `9c45523e563cc42d478fea029e06eea1`): las 30
+restauradas y Elemental Hero Neos. 17 las confirmó Oscar a ojo y 14 Claude por capturas (constitución
+2.0.0). Regresión en el ROM de la v0.2: 28 de 30 sesiones grabadas IGUAL; Exchange difiere solo por
+el azar de la carta que pasa al rival y Magic Drain (variante 28) solo por la columna del cursor (igual
+en el `(Lote)`). **Falta para cerrarla: que Oscar la juegue libre** y cuente lo raro. Quedan para la
+v0.3 las 12 del pack 2 y del pack 3 (equipos y Neo-Spacian), sin verificar.
 
 1. **Oscar:** abrir `evidencia/index.html` y `specs/001-cerrar-pruebas-lote/guia-oscar.md`, y confirmar
    o corregir carta por carta; las que quiera jugar, con su estado de `estados/revisar/` en el ROM
@@ -281,6 +440,18 @@ los sobres y se compran con su contraseña).
    juego con todas las que queden aptas (Fase 1, punto 4).
 3. Después, a elección: un lote nuevo de cartas (con `ACCIONES.md` como punto de partida), los dibujos
    de las cartas (Fase 2) o la Fase 3 (mazos e IA).
+4. **Pendiente desde el 2026-10-12 [DECIDIR]: sobres propios en la tienda.** Oscar lo dejó sin decidir.
+   La tienda tiene 48 lugares fijos y hay dos caminos:
+   - **Reusar un lugar** (por ejemplo juntar dos Basic en uno): solo datos, ya funciona con
+     `scripts/sobres.py`. El sobre nuevo se desbloquea cuando se desbloqueaba el viejo y conserva su
+     dibujo de sobre.
+   - **Agregar el lugar 49:** tocar código. Lo que se sabe y los puntos a revisar están en
+     `NOTAS-REVERSE.md`, "La tienda y los sobres". Tope: 64 sobres.
+
+   Sin probar de la tienda: la máquina de contraseñas en pantalla, el texto de la vendedora de un
+   sobre cambiado (está escrito, no se vio), y los sobres que no están en venta en el estado de
+   prueba (solo lo están el 0, 1, 2 y 3). Sin investigar: de dónde sale el dibujo de cada sobre y
+   qué pide cada sobre para desbloquearse.
 
 ROM de trabajo `build/…(Lote).gba` + `build/lote.bps` (el del 2026-10-10 quedó en
 `build/lote-2026-10-10.bps`). Estados para revisar en `estados/revisar/`.

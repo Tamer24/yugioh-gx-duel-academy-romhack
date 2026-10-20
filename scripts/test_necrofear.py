@@ -78,7 +78,7 @@ def pedido(idc, momento, tipo=4, anulada=0, elegidos=0, objetivo=0):
 
 def funcion(rom, columna):
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    return rom.u32(EFECTOS + EFECTOS_FILA * filas[ID_NECROFEAR] + columna)
+    return rom.u32(rom.efectos_base + EFECTOS_FILA * filas[ID_NECROFEAR] + columna)
 
 
 def llamar(uc, fn, p):

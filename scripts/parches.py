@@ -501,7 +501,7 @@ def efecto_nuevo(rom, esp, id_konami, columna, ruta_fuente):
     assert columna in COLUMNAS_FILA, f"columna desconocida: {columna}"
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
     assert id_konami in filas, f"el ID {id_konami} no tiene fila de efecto"
-    donde = EFECTOS + EFECTOS_FILA * filas[id_konami] + COLUMNAS_FILA[columna]
+    donde = rom.efectos_base + EFECTOS_FILA * filas[id_konami] + COLUMNAS_FILA[columna]
     original = rom.u32(donde)
     assert original != 0, f"la columna {columna} de {id_konami} esta vacia: nada que reemplazar"
     direccion = esp.asm_gnu(open(ruta_fuente, encoding="utf-8").read(), ORIGINAL=original, **MOTOR)

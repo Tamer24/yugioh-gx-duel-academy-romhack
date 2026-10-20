@@ -3,6 +3,7 @@
 Es la entrada del sistema para un pack nuevo: se le da una lista de cartas y contesta, por carta,
 si ya esta en el juego, si esta recortada (tiene fila de efecto pero no se puede conseguir) o si
 no existe en el ROM; y, para las recortadas, que hay en su fila y que hace el motor con su ID.
+Una carta que no existe en el ROM pero tiene sus datos en scripts/cartas_nuevas.csv es "nueva".
 
 Uso (desde la raiz del proyecto):
   python3 scripts/triage.py ROM_ORIGINAL "Nombre o ID" [...]     cartas sueltas
@@ -19,6 +20,8 @@ Diagnostico de una recortada, segun su columna fn_04 (el codigo del efecto):
      Insect Barrier), que el motor resuelve por ID. Si el motor nombra a la carta, puede que su
      efecto este; si nadie la nombra, no hay nada. Ninguna de las 30 restauradas era de este
      grupo: es el unico sin calibrar
+  N  carta nueva (el juego nunca la tuvo), monstruo Normal: no lleva efecto, entra solo con datos.
+     Una nueva con efecto no tiene diagnostico: le falta la fila de efecto y no hay como darsela
 Aparte del codigo del efecto esta COMO SE ACTIVA la carta, que el diagnostico no ve entero:
   - un monstruo con efecto de campo (tiene fn_10) que no esta en las listas del menu se avisa: se
     arregla agregando su ID a efectos/gancho_lista_campo.s y gancho_menu_campo.s;
@@ -39,7 +42,8 @@ RAIZ = funciones.RAIZ
 COLUMNAS = ("fn_04", "fn_0C", "fn_10", "fn_14", "fn_18")
 VACIAS = (bytes.fromhex("00207047"), bytes.fromhex("01207047"))    # movs r0, #0 / #1 ; bx lr
 TEXTOS = {"A": "efecto compartido con cartas en juego", "C": "codigo propio sin probar",
-          "D": "efecto vacio: de cero", "E": "sin funcion de efecto (continuo, por ID en el motor)"}
+          "D": "efecto vacio: de cero", "E": "sin funcion de efecto (continuo, por ID en el motor)",
+          "N": "carta nueva, monstruo Normal: solo datos"}
 MENU_CAMPO = (0x08015C78, 0x08079200)      # las dos listas por ID del menu de un monstruo en el campo
 
 
@@ -59,7 +63,9 @@ class Triage:
         self.restauradas = {int(f["id_konami"]): f for f in leer("huecos.csv")}
         self.tipos = {int(f["id_konami"]): f["tipo"] for f in leer("cartas_recortadas.csv")}
         self.en_juego = {rom.id_de(i): rom.nombre(i) for i in range(1, N_CARTAS + 1)}
-        self.por_nombre = {f["nombre"]: k for k, f in self.filas.items()}
+        self.nuevas = {int(f["id"]): f for f in leer(os.path.join("..", "scripts", "cartas_nuevas.csv"))}
+        self.por_nombre = {f["nombre"]: k for k, f in self.nuevas.items()}
+        self.por_nombre.update({f["nombre"]: k for k, f in self.filas.items()})
         self.por_nombre.update({n: k for k, n in self.en_juego.items()})
         punteros = {int(f[c], 16) & ~1 for f in self.filas.values() for c in COLUMNAS if f[c]}
         funciones.registrar(punteros)
@@ -88,9 +94,27 @@ class Triage:
                  fn_04="", otras_columnas="", motor="", avisos="")
         if cid is None:
             r["estado"] = "no esta en el ROM"
-            r["por_que"] = "sin fila de efecto ni datos: habria que crearla entera (datos, texto, efecto)"
+            r["por_que"] = ("sin fila de efecto ni datos: habria que crearla entera (datos, texto, efecto). Un "
+                            "monstruo Normal entra cargando sus datos en scripts/cartas_nuevas.csv")
             return r
         fila = self.filas.get(cid)
+        if not fila and cid in self.nuevas:         # el juego nunca la tuvo: no hay fila que mirar
+            n = self.nuevas[cid]
+            r.update(carta=n["nombre"], tipo=n["tipo"])
+            if cid in self.restauradas:
+                r["estado"] = "nueva, dada de alta (" + self.restauradas[cid]["desde"] + ")"
+            elif cid in self.en_juego:
+                r["estado"] = "ya esta en el juego"
+            else:
+                r["estado"] = "nueva"
+            if "Normal" in [x.strip() for x in n["tipo"].split("/")]:
+                r["diagnostico"], r["por_que"] = "N", TEXTOS["N"]
+                r["fn_04"] = "sin fila de efecto: no la necesita"
+            else:
+                r["por_que"] = "carta nueva con efecto: no tiene fila de efecto y todavia no hay como darsela"
+            sitios = sorted({funciones.inicio(self.rom.d, d) for d, _ in buscar_id.sitios(self.rom, cid)})
+            r["motor"] = f"{len(sitios)} funciones: " + ", ".join(f"{x:08X}" for x in sitios) if sitios else "ninguna"
+            return r
         r["carta"] = fila["nombre"] if fila else self.en_juego.get(cid, texto)
         r["tipo"] = self.tipos.get(cid, "")
         if cid in self.restauradas:
@@ -167,6 +191,8 @@ def calibrar(t):
                 en_menu.add(int(linea.split()[1]))
     cuenta, lineas, menu = {}, [], [0, 0, 0]
     for cid in t.restauradas:
+        if cid in t.nuevas:                 # sin fila de efecto: no hay nada que calibrar
+            continue
         r = t.carta(str(cid))
         rehecha = cid in reescritas
         cuenta.setdefault(r["diagnostico"], [0, 0])[1 if rehecha else 0] += 1

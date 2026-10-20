@@ -74,7 +74,7 @@ def main():
     rom = Rom(sys.argv[1])
     prefijo = sys.argv[2]
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = lambda cid: rom.u32(EFECTOS + EFECTOS_FILA * filas[cid] + 4) & ~1
+    fn = lambda cid: rom.u32(rom.efectos_base + EFECTOS_FILA * filas[cid] + 4) & ~1
     ok = True
 
     def chequear(nombre, obtenido, esperado):

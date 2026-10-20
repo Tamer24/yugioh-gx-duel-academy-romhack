@@ -762,6 +762,8 @@ Pruebas: `scripts/test_exchange.py` (Unicorn), y el juego con `probar_magicas.py
 
 ## Qué sigue
 
+Esta lista es la del 2026-10-09; el plan vigente está en `PLAN.md`, §4.
+
 1. Probar las 18 candidatas que faltan (`PRUEBAS.md`).
 2. ~~Escribir la posesión de Dark Necrofear~~ Hecha el 2026-10-11; ver
    "Bagworm −500 y la posesión de Dark Necrofear".
@@ -1162,3 +1164,245 @@ pasos, de 3,1 GB a 0,9 GB; la regresión entera, 1,7 GB. Las 49 sesiones dan el 
 - **Arte:** índices de 0 a 63; la paleta puede traer el bit 15 puesto (se ignora). Las cartas del
   juego que no usan el índice 0 tienen ahí `0x83E0`. Un dibujo convertido con el índice 0 sin usar se
   ve bien en el duelo (probado con Reasoning en un ROM aparte). [PROBADO]
+
+## La tienda y los sobres (2026-10-12) [ROM] / [PROBADO jugando]
+
+Punto de partida: `estados/tienda.ss1`, estado de mGBA de Oscar sobre el ROM `(Lote)`, parado en la
+tienda con 3000 DP y los sobres 0 a 3 en venta. Carga igual en el ROM `(Ampliado)`.
+
+**Manejo de la pantalla** (para scripts): arriba y abajo cambian de sobre (esperar unos 55 cuadros
+entre uno y otro), derecha suma uno al pedido, `A` pregunta "Are you sure?" con el cursor en Yes,
+`A` confirma, cada `A` siguiente abre un sobre, y al final queda la lista de cartas. `B` saltea lo
+que falte de la apertura y sale; **el baúl se actualiza recién al salir de la lista**. Con esperas
+10 cuadros más cortas que las de `scripts/probar_sobres.py`, que hace todo eso, se perdieron teclas.
+
+**Datos** (resumen en `PROYECTO.md` §5.5):
+
+- Tabla de sobres `0x097F2844`, 48 × 16 bytes. Literales que la nombran (20): `0xBD7C8, 0xBD8FC,
+  0xBDB18, 0xBDB84, 0xBDBD4, 0xBDBF8, 0xBDC2C, 0xBDD44, 0xBE3A4, 0xD2660, 0xD7550, 0xD7688, 0xD77C8,
+  0xD89AC, 0xD8A44, 0xD8B18, 0xD8CC8, 0xD8D74, 0xD8F0C, 0xD9044`.
+- Textos `0x097F2B44`, 48 × 3 offsets relativos a `0x094EDD78`. Literales (3): `0xBDC50, 0xBDC78,
+  0xBDC90`.
+- Las direcciones son `0x09…` porque el ROM pasa de 16 MB: offset de archivo + `0x08000000`.
+
+**Funciones:**
+
+| Dirección | Qué hace |
+|---|---|
+| `FUN_080BD89C(sobre, salida)` | Arma un sobre: baja en uno lo que hay en venta, tira 0 a 17999, elige la primera carta por rareza y completa con comunes. Guarda la rareza en los 3 bits altos de cada u16 |
+| `FUN_080BD700` | Si una carta ya está en el sobre que se arma (por eso no se repiten) |
+| `FUN_080BD72C` | El sobre 47: cartas de todo el juego; una parte la busca entre las que no se tienen |
+| `FUN_080BDA90` | Reposición y merma de lo que hay en venta |
+| `FUN_080BDC30`, `shop_show_packs` (`0x080BDC58`) | Los tres textos de un sobre |
+| `FUN_080BDC9C` | El porcentaje "Comp." del sobre |
+| `FUN_080BDD4C` | Grupo de un sobre por su número: 0 a 11 → 0, 12 a 21 → 1, 22 a 32 → 2, 33 a 46 → 3, 47 → 4, más → 5 |
+| `FUN_080BE260` | Si el sobre está disponible: salta por grupo y, adentro, por sobre (`FUN_080BDD80`, `FUN_080BDE88`, `FUN_080BE090`, `FUN_080BE144`) |
+| `FUN_080BE2F4` | Disponible y con alguno en venta |
+| `FUN_080BE32C` | Lista de índices de las cartas de un sobre |
+| `FUN_080D2574` | Compra: llama a `FUN_080BD89C` por cada sobre pedido y anota las cartas (el sobre va en 6 bits) |
+| `FUN_080D84D0(actual, sentido)` | Sobre siguiente o anterior entre los ofrecidos |
+| `FUN_080D1AD4(índice, lugar)` | Carga el dibujo chico de una carta al abrir el sobre |
+
+El C de Ghidra de las primeras está en `ghidra/salida/sobres.c` y `sobres2.c`. La zona
+`0x080D7000`–`0x080D9A00` (la pantalla de la tienda) no tiene funciones definidas en el proyecto de
+Ghidra: hay que leerla desensamblada.
+
+**El dibujo chico** [PROBADO]. `FUN_080D1AD4` carga 64 bytes de `0x08F61184 + índice × 64` (32
+colores) y 1024 de `0x08F73DC4 + índice × 1024` (32×32, 4×4 tiles de 8×8, valores 0 a 31, con el
+índice 0 como un color más). Cada tabla tiene 5 literales: `0x8C5E4/0x8C5E8`, `0x91878/0x9187C`,
+`0xAD9A8/0xAD9A4`, `0xC79F0/0xC79F4`, `0xD1B8C/0xD1B94`. Cómo se encontró: las cartas 1201 en
+adelante salían con ruido al abrir un sobre, y el ruido usaba pocos colores, o sea que el dibujo no
+era el grande. `arte.py` lo arma reduciendo el grande a 32×32 y 32 colores (sale parecido al del
+juego, no igual: diferencia media de 18 sobre 255 con Sangan).
+
+**La última carta no sale.** En `0x080BD980` (`blo`) y `0x080BD9D4` (`bhs`) el sorteo pide índice
+menor que la cantidad. En el juego original deja afuera a la 1200. `ampliar.py` los cambia a `bls`
+y `bhi`; el ROM `(Lote)` queda como el original.
+
+**Un sobre que cuelga el juego.** Con menos comunes que cartas por sobre, el bucle que completa el
+sobre no termina (pasó con una lista de 3 para un sobre de 5: los DP se descuentan y la pantalla
+queda en la apertura). `sobres.py` lo rechaza.
+
+**Lo medido para un sobre número 49 (no se intentó).** Tres cosas atan la tienda a 48:
+
+1. *La constante.* Lugares de las zonas `0x080BD600`–`0x080BE500` y `0x080D2000`–`0x080DA000` con un
+   `cmp` o `movs` de `0x2F` o `0x30`, hallados por búsqueda y **sin revisar uno por uno**: `BD8F0`
+   (este es el caso especial del sobre 47, no un tope), `BDB28, BDBC4, BDBE0, BDC06, BDC34, BDC62,
+   BDCB0, BDD72, BE340, D204C, D2114, D2522, D2544, D2548, D2556, D2948, D2A46, D2C62, D2CC6, D2EAC,
+   D2EC6, D2F6C, D2F86, D4284, D4CD0, D4CE4, D5E92, D711E, D75A4, D7D4C, D7D7E, D84E6, D84EA, D851A,
+   D8528, D8560, D85B4, D86DC, D9842, D9A6C, D9A76, D9D54`. En `FUN_080BDD4C` el `0x2F` separa
+   grupos. Todas caben en un byte: cambiar la cantidad sería reescribir constantes, sin ganchos.
+2. *Lo que hay en venta, en la partida.* 4 bytes por sobre desde `0x02004C08`; en `0x02004CC8`
+   empiezan otros datos. El juego solo lee y escribe el primer byte de cada uno (visto en los
+   accesos de `0xBD8D8`, `0xBDAA6`, `0xBDB0E`–`0xBDB22`, `0xBDB9A`–`0xBDBBA`, `0xBE310` y `0xD85A6`;
+   el literal `0x4C08` aparece en 12 lugares: `0xBD908, 0xBDAD4, 0xBDB80, 0xBE320, 0xD7558, 0xD77C4,
+   0xD85C0, 0xD8A40, 0xD8B14, 0xD8D70, 0xD8F08, 0xD9110`; los seis de `0xD7…`–`0xD9…` no se
+   leyeron). [HIP] Si los otros tres bytes están libres, el sobre `k ≥ 48` podría vivir en el
+   segundo byte del sobre `k − 48`: la dirección que calcula el juego menos 191. No haría falta
+   tocar el guardado. En el estado de la tienda esos bytes están en cero.
+3. *La memoria de la tienda.* En `0x0203B546` hay un u16 por sobre (el pedido) y pegada atrás, en
+   `0x0203B5A8`, la máscara de 64 bits de sobres ofrecidos: entra un sobre más en los 2 bytes de
+   relleno, no dos. En `0x0203CD70` hay otro u16 × 48 (el bucle de `0x080D2928` escribe uno por
+   sobre pedido); no se miró qué tiene atrás.
+
+Además, cada sobre nuevo necesita su rama en `FUN_080BE260` (hoy un número mayor que 47 da "no
+disponible") y un dibujo de sobre, que no se buscó.
+
+## La batalla y los Neo-Spacian: qué hay que saber para hacerlos [ROM] (investigación del 2026-10-12)
+
+Se buscó, para cada efecto que falta, qué carta **original** hace algo parecido y dónde la trata el
+motor. Herramientas: `scripts/buscar_id.py`, `scripts/decompilar.py`, `scripts/desensamblar.py`. Nada de
+esto se probó en duelo todavía: todo es lectura del ROM.
+
+### Moldes (cartas originales con efecto parecido)
+
+| Efecto que falta | Molde en el juego | Dónde lo trata el motor |
+|---|---|---|
+| Al atacar **o ser atacado** (Glow Moss, Grand Mole) | Dimensional Warrior (4262), D. D. Warrior Lady (5719) | **`FUN_08068C8C`** (después del cálculo de daño), ramas `0x08068CDE`/`0x08068FA6` y `0x08068D14`/`0x08069012`. Su `fn_04` (`FUN_08039460`) solo muestra el aviso |
+| Efecto del que es atacado **antes** de calcular el daño | Reflect Bounder (4762), Marshmallon (6000), Kiseitai (4976), Sasuke Samurai #4 (6185) | **`FUN_08066B24`**: la máquina de estados de la batalla (ver abajo) |
+| Terminar la Battle Phase | The Unhappy Maiden (4875) | Su `fn_04` (`0x0803CC10`) solo hace `EVENTO(0x64 \| lado << 15, 0, 0)` y devuelve 0 |
+| Ataque directo | Shooting Star Bow - Ceal (5725), Overpowering Eye (6291), Toon Dark Magician Girl (5450) | `FUN_0801F980(lado, ranura)` |
+| ATK que depende de una cuenta | Chaos Necromancer (5827), Gren Maju Da Eiza (5834) | `FUN_08012460`, el calculador de ATK, árbol por ID propio en `0x08012746` |
+| Copiar nombre y efecto de otro monstruo (Dark Panther) | **Ninguno** en el juego | — |
+
+### El registro de la batalla en curso (`0x02020C20`)
+
+| Campo | Qué es |
+|---|---|
+| `+0`, bit 0 | **Ataque directo** (el rival no tiene objetivo). Si está en 1, el estado 0 llama a `FUN_08059478` con `0xFF` como objetivo y salta al estado 4 |
+| `+0` (u32), bits 13–20 | Ranura del **atacante** (`(v << 11) >> 24`) |
+| `+2` (u16), bits 5–12 | Ranura del **defensor** (`(v << 19) >> 24`) |
+| `+0xA` | Fase de la batalla. `6` = terminada (la deja el evento `0x64`) |
+| `+0xB` | **Estado** de la batalla, 0 a 5; salto en `0x08066B54` |
+
+Estados (`FUN_08066B24` despacha por `+0xB`). Los IDs son los literales que se comparan en cada uno:
+
+| Estado | Dirección | Qué se ve ahí |
+|---|---|---|
+| 0 | `0x08066B6C` | Efectos del atacante antes de elegir objetivo: Ninja Grandmaster Sasuke (6111, `0x17DF`), `0x1823` |
+| 1 | `0x08066E1C` | Drillroid (6387, `0x18F3`) y similares: destruir un monstruo en defensa sin calcular |
+| 2 | `0x08066F48` | Efectos del que es atacado boca abajo: Kiseitai (4976), Marshmallon (6000), `0x148E`, `0x1503`, `0x14FD`, `0x1694`, `0x1526` (sin identificar) |
+| 3 | `0x08067248` | **Reflect Bounder (4762, `0x129A`)** en `0x08067298`: si el defensor es él y está en ataque, `DANIO(lado del atacante, ATK del atacante)` |
+| 4 | `0x08067374` | Disc Fighter (5970, `0x1752`), Sasuke Samurai #4 (moneda, `FUN_08067586`) |
+| 5 | `0x08067474` | Cierre: llama a `FUN_08067DAC` |
+
+Cómo se **cancela** una batalla sin calcular daño: `+0xA = 0` y `+0xB = 0`, y volver con 0
+(`0x08067256`; es lo que hacen Kiseitai y los de "damage calculations are canceled").
+
+### Resultados
+
+- **EVENTO `0x64` = terminar la Battle Phase** (`FUN_0801B8E0`: pone `+1 |= 0x10`, `+0xA = 6`,
+  `+0xB = 0` y reescribe la fase en `0x02022250 + 0x5630`). El consumidor de eventos
+  (`FUN_08022124`) tiene la tabla corrida en uno; los códigos `0x62`–`0x66` no eran "vacíos":
+  cada uno tiene su función (`0x0801B610`, `0x0801B650`, `0x0801B8E0`, `0x0801B9A0`, `0x0801B944`).
+- **Ataque directo:** `FUN_0801F980(lado, ranura)` decide si un monstruo puede atacar directo: sin
+  monstruos rivales siempre; con ellos, una lista de IDs que sí (Jinzo #7, Drillago, Amphibious
+  Bugroth MK-3, Raging Flame Sprite…) y la **lista de modificadores** de la ranura: un modificador de
+  tipo 1 cuyo origen es Ceal (5725), o de tipo 4 cuyo origen es Overpowering Eye (6291). Eso resuelve
+  "puede atacar directo este turno" **antes de declarar**; convertir un ataque ya declarado en
+  directo es otra cosa (bit 0 del registro de batalla, **[HIP]**: no se probó).
+- **ATK por cuenta:** el calculador `FUN_08012460` tiene un árbol por ID de la propia carta (el ID
+  sale de `+0x24` de la ranura). Chaos Necromancer (`0x08012934`) pone el ATK base en 0 y suma 300
+  por cada monstruo del cementerio propio (lista en `+0x2924`, tipo `<= 0x14`). Flare Scarab
+  (+400 por Mágica/Trampa del rival) es un caso más de ese árbol: contar las cartas de tipo `0x15`
+  y `0x16` en las zonas 5 a 9 del campo rival (`0x02022250 + 0x5610 + lado * 11`).
+- **Cambiar la identidad de una carta (Dark Panther):** el motor decide todo por el ID que sale de
+  `+0x24` (índice) de la ranura. Ya hay un precedente: en la prueba de Necrofear un
+  Mechanicalchaser "pasa a ser ella en memoria" cambiando ese campo y el motor la trata como ella.
+  Queda por ver el aspecto (dibujo y nombre salen del mismo índice), restaurarlo en la End Phase
+  (gancho que ya existe) y qué pasa con un efecto en cadena. **[HIP]**
+- **Robar y mostrar (Glow Moss):** `ROBAR` y `REVELAR` ya están en el recetario; falta leer el tipo
+  de la carta robada (`+0x30` bits 0–4 de su ranura: `< 0x15` monstruo, `0x15` Mágica, `0x16`
+  Trampa).
+
+### Lo que sigue sin saberse
+
+1. Dónde, en la secuencia, se avisa "ataca" y "es atacado" para un efecto de monstruo con opción
+   ("You can…") antes del cálculo: los casos que hay son todos obligatorios.
+2. Cómo se detiene la batalla en curso con lo que ya se declaró (`+0xA`/`+0xB`) para que sea
+   seguro desde un efecto encolado y no desde dentro del propio estado.
+3. Que el ID de Grand Mole entre a los árboles de los estados 2 y 3 con un gancho (la ventana de
+   8 bytes alineada) sin pisar el literal que hoy compara Reflect Bounder.
+4. Los efectos de las Neo-Spacian sobre cartas que no estén en el árbol de los menús (lista de
+   `gancho_lista_campo.s` y `gancho_menu_campo.s`).
+
+### Resultado de implementarlos [PROBADO 2026-10-12]
+
+- **Fases de la batalla (la máquina de `+0xA`)** [PROBADO con un registro cuadro a cuadro de un
+  ataque de la IA]: 0 declaración (6 subestados), 1 ventana de respuesta (6), 2 **cálculo del daño**
+  (5: el LP baja en el subestado 3 o 4), 3 destrucción, 4 envío al cementerio, 5 efectos "después de
+  la batalla" (`FUN_08069E50`) y 6 terminada. La tabla de funciones por fase está en `0x097DFF00`.
+- **El hook en `0x08067E60` ve un cuadro con `+0xB = 0`** (el primero de la fase 2) antes de que
+  nada se calcule. Para dar la batalla por terminada hay que **salir de la función** (no seguir con la
+  original) después de poner `+0xA = 6` y `+0xB = 0`; si no, el daño igual se calcula (se midió: 900 de
+  daño con Mole ya en la mano).
+- **Evento `0x64`** (`FUN_0801B8E0`) termina la Battle Phase de verdad (la fase del turno), no solo
+  la batalla: con Glow Moss la IA deja de atacar ese turno.
+- **Tipos de carta de la ranura** (`+0x30` bits 0–4): `< 0x15` monstruo, **`0x15` Trampa, `0x16`
+  Mágica** (al revés de lo que decía la tabla de ranuras).
+- **`show_confirmation_prompt` (`FUN_08010BBC`) no es una pregunta**: es un contador de cartas por
+  zonas y condiciones (llama a `FUN_08010A30`, que recorre las zonas del campo). El nombre es de
+  Ghidra y esta mal. Probado: llamarla "para preguntar" devuelve > 0 sin mostrar nada. Las preguntas
+  "Activate the effect of ...?" salen del motor de cadenas (ventanas de respuesta), no de una llamada
+  suelta; por eso Grand Mole se activa sola cuando perdería. Sin resolver: cómo encolar un efecto
+  opcional de monstruo para que el juego pregunte.
+- **Descartar** de la mano: `FUN_08019598(lado, id)` = `A_CEMENTERIO(lado, id, 0xFF)`.
+- **Lista de selección de fusión**: tres pasos (`0x7E` Fusion Deck, `0x7D` aviso, `0x7C` lista de la
+  mano con CHECK), ver `PRUEBAS.md`.
+- **Tabla de fusiones**: `card_type_classifier` hace una bisección por ID de la Fusión sobre filas de
+  16 bytes con tope `movs r4,#0x4F`; 15 literales de la tabla en el código. La zona libre del ROM es
+  **relleno aleatorio**, no ceros: no se puede comprobar que esté vacía, solo que no la use otro.
+
+
+
+## La IA y las Mágicas que apuntan a un jugador (2026-10-18) [PROBADO]
+
+Medido con el emulador sin ventana, desde el estado de Oscar, poniendo la carta en la mano del rival:
+- **La IA nunca juega Hinotama, Ookazi ni Sparks** (las de daño), ni con los LP del jugador en 400
+  (daño letal), ni con la mano rellena de Blue-Eyes ni con su mano normal, en 5 a 8 turnos.
+- Juega en su primer turno Dian Keto, Red Medicine, Goblin's Secret Remedy y Soul of the Pure (las de
+  curar). Pot of Greed la juega a veces, sin un turno fijo.
+- Mystical Refpanel contra esas curaciones: el jugador recibe 1000 / 500 / 600 y el rival nada.
+- Con la mano del rival rellena de Blue-Eyes, el corredor automático no llega a responder con la trampa
+  (en mGBA a mano sí funciona); con la mano normal del rival, sí.
+Para la IA (F9): las cartas de daño directo no tienen uso en la IA o falta la condición que las habilita.
+
+
+## Los equipos del pack 2: Stim-Pack, Tryce, Elma y Baou (2026-10-18)
+
+Medido con el emulador sin ventana sobre el `(Lote)` y con Unicorn (`scripts/motor_uc.py`).
+
+- **`0x020214E0` no es "el jugador del turno"**: su primera palabra cambia varias veces por turno (es la
+  cabecera de la acción en curso). Las funciones del cambio de turno la leen con el bit 15 como "de quién
+  es esta acción". En `FUN_0801D7DC` (fin de turno) es el jugador cuyo turno termina; en `FUN_0801B724`,
+  el que entra a la Battle Phase. El jugador del turno de verdad es el bit 1 de `0x0202787E`.
+- **`FUN_0801B724` corre al entrar a la Battle Phase**, no al empezar el turno (la llama el consumidor de
+  eventos `FUN_08022124`). Pone la bandera `0xE` ("puede volver a atacar") a los monstruos de su árbol:
+  Hayabusa Knight (5137), Mataza the Zapper (5898), Cyber Twin Dragon (6396), `0x174F` (5967, con la
+  condición `FUN_0801F900`) y `0x18B9` (6329). `FUN_080666B8`, después de cada ataque, la consume y da
+  otro ataque; para un equipo mira Twin Swords (5729, `0x1661`) en la lista de equipos del monstruo
+  (`+0x3E` cantidad, `+0x40` entradas). El fin de turno (`FUN_0801D7DC`) borra la `0xE`.
+- **Banderas de ranura**: `FUN_0800E158(id, n)` lee, `FUN_0800E178(id, n)` pone y `FUN_0800E194(id, n)`
+  quita el bit `n` de la palabra `ranura + 0x60`.
+- **Stim-Pack**: el calculador ya resta 200 por cada unidad del byte `+0x3A` del equipo; el motor tiene las
+  acciones de ese contador (`FUN_0801BAF4` fijar, `FUN_0801BB3C` +1, `FUN_0801BB88` −1, `FUN_0801BBD4` a
+  cero) pero nadie las pedía. `efectos/gancho_stim_pack.s` suma 1 al terminar el turno del rival (medido:
+  sube en el cuadro 280 del turno del rival, antes de que el jugador robe en el 340; no al terminar el
+  propio). En la primera versión el gancho estaba en `FUN_0801B724` y no hacía nada sin Battle Phase.
+- **Elma**: el motor no tenía nada de "vuelve a la mano" (su ID, 5724, no aparece en el código). Cuando el
+  monstruo equipado deja el campo, la acción que manda a Elma al cementerio pasa por el procesador de
+  acciones (`0x0801706C`) con zona de origen 5: ahí se encola su efecto (ver `ACCIONES.md`, Equipar).
+- **Baou (resuelta el 2026-10-19)**: tampoco tiene nada en el motor (5727 no aparece). Lo que no sirvió:
+  marcar anulada (`p[2] |= 8`) toda entrada que pasa por `FUN_080303D8` o por `FUN_0806629C`, y buscar el ID
+  de Mystic Tomato (4930, `0x1342`) en los árboles de `FUN_08068C8C`. **Dónde se resuelven de verdad los
+  efectos encadenados**: un espía sobre la fn_04 de Mystic Tomato mostró que la llaman 4 veces (una por
+  estado) desde `0x080245D6` (`bl call_function_bx_r2`, `0x080F23D8`), con `p = 0x02020004`. Ahí el
+  resolvedor toma el eslabón de turno: la entrada es `r8 + 24 x índice` y la fn sale de `r6 + 0x7D4`
+  (eslabones 0 y 1, llamada en `0x080245D6`) o de `r6 + 0x7D4 + 24 x índice` (eslabones 2 en adelante,
+  llamada en `0x080245B6`). Toda fn_04 mira el bit 3 de `p[2]` y no hace nada si está: marcar ahí, justo
+  antes de la llamada, anula el efecto. Los ganchos `efectos/gancho_baou_a.s` (`0x080245CC`) y
+  `gancho_baou_b.s` (`0x08024598`) marcan la entrada cuando su carta tiene la bandera 5 (destruida en batalla
+  este turno), es uno de los dos de la última batalla (`0x02020C20`) y el otro tiene una Baou boca arriba
+  equipada (`+0x3C`). Sirve para cualquier "anula los efectos de X" que haya que agregar: el lugar es este.
+- `construir_lote.sh` tapaba los errores de `restaurar.py` (el `grep` del pipe devolvía 0 y quedaba el ROM
+  anterior): corregido.

@@ -77,7 +77,7 @@ def efecto(rom, id_atacante=0x80 | 31, pos=0x10, tipo=0x10, anulada=0, lado=0,
     p = carta(uc, tipo, lado, id_atacante, anulada, elegidos, MONSTRUO)
     cambiar, equipar = [], []
     filas = {f["id"]: k for k, f in enumerate(rom.efectos())}
-    fn = rom.u32(EFECTOS + EFECTOS_FILA * filas[4657] + 4)
+    fn = rom.u32(rom.efectos_base + EFECTOS_FILA * filas[4657] + 4)
     llamar(uc, fn & ~1, p, {CAMBIAR: cambiar.append, EQUIPAR: lambda r: equipar.append(r[:3])})
     return cambiar, equipar
 

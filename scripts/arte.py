@@ -7,8 +7,13 @@ Formato en el ROM (da_lib.ARTE y da_lib.PALETAS, una entrada por indice de carta
 En las cartas del juego que no usan el indice 0, la paleta trae ahi 0x83E0 (verde marcador):
 el conversor hace lo mismo y reparte la imagen en los indices 1 a 63.
 
+Cada carta tiene ademas un dibujo chico (da_lib.MINI_ARTE y da_lib.MINI_PALETAS), el que se ve al
+abrir un sobre: 32x32 en 16 tiles de 8x8 (1024 bytes) y 32 colores (64 bytes), todos utiles.
+escribir() lo saca del dibujo grande: no hace falta otro PNG.
+
 Uso (desde la raiz del proyecto):
   python3 scripts/arte.py extraer ROM CARTA salida.png [--escala 4]
+  python3 scripts/arte.py mini ROM CARTA salida.png [--escala 4]      el dibujo chico
   python3 scripts/arte.py vista entrada.png salida.png [--escala 4]   como quedaria en el juego
 CARTA es el nombre exacto o el indice (1..1200).
 
@@ -21,32 +26,34 @@ import sys
 
 from PIL import Image
 
-from da_lib import ARTE, N_CARTAS, PALETAS, Rom
+from da_lib import Rom
 
 LADO, TILE, COLORES = 80, 8, 64
 BYTES_ARTE, BYTES_PALETA = LADO * LADO, COLORES * 2
 MARCADOR = 0x83E0             # lo que traen en el indice 0 las cartas del juego que no lo usan
+MINI_LADO, MINI_COLORES = 32, 32
+BYTES_MINI, BYTES_MINI_PALETA = MINI_LADO * MINI_LADO, MINI_COLORES * 2
 
 
 class ErrorArte(Exception):
     pass
 
 
-def decodificar(paleta, tiles):
-    """Bytes del ROM -> imagen RGB de 80x80."""
-    if len(paleta) != BYTES_PALETA or len(tiles) != BYTES_ARTE:
-        raise ErrorArte("la paleta tiene que medir 128 bytes y el arte 6400")
+def decodificar(paleta, tiles, lado=LADO, n_colores=COLORES):
+    """Bytes del ROM -> imagen RGB de 80x80 (o de 32x32 con lado y n_colores del dibujo chico)."""
+    if len(paleta) != n_colores * 2 or len(tiles) != lado * lado:
+        raise ErrorArte(f"la paleta tiene que medir {n_colores * 2} bytes y el arte {lado * lado}")
     colores = []
-    for c in struct.unpack(f"<{COLORES}H", paleta):
+    for c in struct.unpack(f"<{n_colores}H", paleta):
         colores.append(tuple(((c >> d) & 0x1F) * 255 // 31 for d in (0, 5, 10)))
-    img = Image.new("RGB", (LADO, LADO))
+    img = Image.new("RGB", (lado, lado))
     px = img.load()
-    por_fila = LADO // TILE
+    por_fila = lado // TILE
     for t in range(por_fila * por_fila):
         x0, y0 = (t % por_fila) * TILE, (t // por_fila) * TILE
         for k in range(TILE * TILE):
             v = tiles[t * TILE * TILE + k]
-            if v >= COLORES:
+            if v >= n_colores:
                 raise ErrorArte(f"indice de color fuera de la paleta: {v}")
             px[x0 + k % TILE, y0 + k // TILE] = colores[v]
     return img
@@ -54,8 +61,46 @@ def decodificar(paleta, tiles):
 
 def leer(rom, indice):
     """Imagen de la carta 'indice' del ROM."""
-    return decodificar(bytes(rom.d[PALETAS + BYTES_PALETA * indice:PALETAS + BYTES_PALETA * (indice + 1)]),
-                       bytes(rom.d[ARTE + BYTES_ARTE * indice:ARTE + BYTES_ARTE * (indice + 1)]))
+    return decodificar(bytes(rom.d[rom.PALETAS + BYTES_PALETA * indice:rom.PALETAS + BYTES_PALETA * (indice + 1)]),
+                       bytes(rom.d[rom.arte_dir(indice):rom.arte_dir(indice) + BYTES_ARTE]))
+
+
+def leer_mini(rom, indice):
+    """Dibujo chico (32x32) de la carta 'indice' del ROM."""
+    return decodificar(bytes(rom.d[rom.MINI_PALETAS + BYTES_MINI_PALETA * indice:rom.MINI_PALETAS + BYTES_MINI_PALETA * (indice + 1)]),
+                       bytes(rom.d[rom.MINI_ARTE + BYTES_MINI * indice:rom.MINI_ARTE + BYTES_MINI * (indice + 1)]),
+                       MINI_LADO, MINI_COLORES)
+
+
+def _a_bytes(q, lado, n_colores, primero):
+    """Imagen ya reducida a una paleta -> (colores BGR555, tiles); 'primero' es el indice del primer color."""
+    pal = q.getpalette()[:3 * n_colores]
+    pal += [0] * (3 * n_colores - len(pal))
+    colores = []
+    for k in range(n_colores):
+        r, g, b = ((pal[3 * k + c] * 31 + 127) // 255 for c in range(3))
+        colores.append(r | (g << 5) | (b << 10))
+    px = q.load()
+    tiles = bytearray(lado * lado)
+    por_fila = lado // TILE
+    for t in range(por_fila * por_fila):
+        x0, y0 = (t % por_fila) * TILE, (t // por_fila) * TILE
+        for k in range(TILE * TILE):
+            tiles[t * TILE * TILE + k] = px[x0 + k % TILE, y0 + k // TILE] + primero
+    return colores, bytes(tiles)
+
+
+def _a_consola(img):
+    """A 5 bits por canal antes de elegir colores: es la precision que tiene la consola."""
+    return img.point(lambda v: (v * 31 + 127) // 255 * 255 // 31)
+
+
+def convertir_mini(grande):
+    """Dibujo de 80x80 (PIL.Image) -> (paleta de 64 bytes, dibujo chico de 1024 bytes)."""
+    img = _a_consola(grande.convert("RGB").resize((MINI_LADO, MINI_LADO), Image.LANCZOS))
+    q = img.quantize(colors=MINI_COLORES, method=Image.MEDIANCUT, dither=Image.NONE)
+    colores, tiles = _a_bytes(q, MINI_LADO, MINI_COLORES, 0)
+    return struct.pack(f"<{MINI_COLORES}H", *colores), tiles
 
 
 def convertir(imagen):
@@ -74,41 +119,31 @@ def convertir(imagen):
         # devuelve el original; el resto, con Lanczos
         exacto = img.size[0] % LADO == 0
         img = img.resize((LADO, LADO), Image.BOX if exacto else Image.LANCZOS)
-    # a 5 bits por canal antes de elegir colores: es la precision que tiene la consola
-    img = img.point(lambda v: (v * 31 + 127) // 255 * 255 // 31)
-    q = img.quantize(colors=COLORES - 1, method=Image.MEDIANCUT, dither=Image.NONE)
-    pal = q.getpalette()[:3 * (COLORES - 1)]
-    pal += [0] * (3 * (COLORES - 1) - len(pal))
-    paleta = [MARCADOR]
-    for k in range(COLORES - 1):
-        r, g, b = ((pal[3 * k + c] * 31 + 127) // 255 for c in range(3))
-        paleta.append(r | (g << 5) | (b << 10))
-    px = q.load()
-    tiles = bytearray(BYTES_ARTE)
-    por_fila = LADO // TILE
-    for t in range(por_fila * por_fila):
-        x0, y0 = (t % por_fila) * TILE, (t // por_fila) * TILE
-        for k in range(TILE * TILE):
-            tiles[t * TILE * TILE + k] = px[x0 + k % TILE, y0 + k // TILE] + 1
-    return struct.pack(f"<{COLORES}H", *paleta), bytes(tiles)
+    q = _a_consola(img).quantize(colors=COLORES - 1, method=Image.MEDIANCUT, dither=Image.NONE)
+    colores, tiles = _a_bytes(q, LADO, COLORES - 1, 1)
+    return struct.pack(f"<{COLORES}H", MARCADOR, *colores), tiles
 
 
 def escribir(rom, indice, imagen):
-    """Pone 'imagen' como dibujo de la carta 'indice' del ROM (da_lib.Rom, se modifica)."""
-    if not 1 <= indice <= N_CARTAS:
+    """Pone 'imagen' como dibujo de la carta 'indice' del ROM (da_lib.Rom, se modifica): el grande
+    y, sacado de el, el chico."""
+    if not 1 <= indice <= rom.CAPACIDAD:
         raise ErrorArte(f"indice de carta fuera de rango: {indice}")
     paleta, tiles = convertir(imagen)
-    rom.d[PALETAS + BYTES_PALETA * indice:PALETAS + BYTES_PALETA * (indice + 1)] = paleta
-    rom.d[ARTE + BYTES_ARTE * indice:ARTE + BYTES_ARTE * (indice + 1)] = tiles
+    rom.d[rom.PALETAS + BYTES_PALETA * indice:rom.PALETAS + BYTES_PALETA * (indice + 1)] = paleta
+    rom.d[rom.arte_dir(indice):rom.arte_dir(indice) + BYTES_ARTE] = tiles
+    paleta, tiles = convertir_mini(decodificar(paleta, tiles))
+    rom.d[rom.MINI_PALETAS + BYTES_MINI_PALETA * indice:rom.MINI_PALETAS + BYTES_MINI_PALETA * (indice + 1)] = paleta
+    rom.d[rom.MINI_ARTE + BYTES_MINI * indice:rom.MINI_ARTE + BYTES_MINI * (indice + 1)] = tiles
 
 
 def _indice(rom, carta):
     if carta.isdigit():
         i = int(carta)
-        if not 1 <= i <= N_CARTAS:
+        if not 1 <= i <= rom.n:
             raise ErrorArte(f"indice de carta fuera de rango: {carta}")
         return i
-    for i in range(1, N_CARTAS + 1):
+    for i in range(1, rom.n + 1):
         if rom.nombre(i) == carta:
             return i
     raise ErrorArte(f"la carta {carta!r} no existe en el ROM")
@@ -120,15 +155,15 @@ def main(argv):
         k = argv.index("--escala")
         escala = int(argv[k + 1])
         argv = argv[:k] + argv[k + 2:]
-    if len(argv) == 4 and argv[0] == "extraer":
+    if len(argv) == 4 and argv[0] in ("extraer", "mini"):
         rom = Rom(argv[1])
-        img = leer(rom, _indice(rom, argv[2]))
+        img = (leer if argv[0] == "extraer" else leer_mini)(rom, _indice(rom, argv[2]))
     elif len(argv) == 3 and argv[0] == "vista":
         img = decodificar(*convertir(argv[1]))
     else:
         raise SystemExit(__doc__)
     if escala > 1:
-        img = img.resize((LADO * escala, LADO * escala), Image.NEAREST)
+        img = img.resize((img.size[0] * escala, img.size[1] * escala), Image.NEAREST)
     img.save(argv[-1])
     print(f"{argv[-1]}: {img.size[0]}x{img.size[1]}")
 

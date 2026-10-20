@@ -18,8 +18,12 @@ Despues de aplicar: sh scripts/construir_lote.sh ROM_ORIGINAL arma el ROM de tra
 nuevas (3 copias de cada una en el baul de una partida nueva). De ahi en mas cada carta sigue el
 metodo de PLAN.md: probarla, escribirle lo que falte con ACCIONES.md y registrar el veredicto.
 
-Solo acepta cartas recortadas (con fila de efecto en el ROM y fuera del juego). Los huecos seguros
-son pocos: si no alcanzan, 'preparar' lo dice y no arma el borrador.
+Acepta cartas recortadas (con fila de efecto en el ROM y fuera del juego) y cartas nuevas, que el
+juego nunca tuvo, si son monstruos Normales: los datos de una nueva (ID de Konami, tipo, ATK...)
+se cargan antes, a mano, en scripts/cartas_nuevas.csv, con las mismas columnas que
+nombres_konami.csv. Una nueva con efecto todavia no entra: no tiene fila en la tabla de efectos.
+El dibujo es la clave opcional "arte" de la carta en el borrador ("arte": "arte/x.png").
+Los huecos seguros son pocos: si no alcanzan, 'preparar' lo dice y no arma el borrador.
 """
 import csv
 import datetime
@@ -46,9 +50,11 @@ def error(texto):
 
 
 def datos_konami():
-    ruta = os.path.join(RAIZ, "scripts", "nombres_konami.csv")
-    with open(ruta, newline="", encoding="utf-8") as f:
-        return {int(x["id"]): x for x in csv.DictReader(f)}
+    salida = {}
+    for nombre in ("nombres_konami.csv", "cartas_nuevas.csv"):      # recortadas y nuevas
+        with open(os.path.join(RAIZ, "scripts", nombre), newline="", encoding="utf-8") as f:
+            salida.update({int(x["id"]): x for x in csv.DictReader(f)})
+    return salida
 
 
 def clase_de(tipo):
@@ -60,7 +66,7 @@ def clase_de(tipo):
         return "", "", f"tipo desconocido: {tipo!r}"
     if "Fusion" in partes:
         return partes[0], "Fusion", "monstruo de Fusion: sus materiales no tienen receta todavia"
-    return partes[0], "Effect", ""
+    return partes[0], "Normal" if "Normal" in partes else "Effect", ""
 
 
 def preparar(rom, pack, pedidas):
@@ -71,7 +77,10 @@ def preparar(rom, pack, pedidas):
     cartas, rechazadas, vistos = [], [], set()
     for texto in pedidas:
         r = t.carta(texto)
-        if r["estado"] != "recortada":
+        if r["estado"] == "nueva" and not r["diagnostico"]:
+            rechazadas.append(f"{texto}: {r['por_que']}")
+            continue
+        if r["estado"] not in ("recortada", "nueva"):
             rechazadas.append(f"{texto}: {r['estado'] or 'no la reconozco'}")
             continue
         if r["id_konami"] in vistos:
@@ -211,7 +220,8 @@ def aplicar(rom, pack, simular):
     # 3. registro de pruebas: una fila por carta, sin veredicto
     por_carta = {x["carta"]["nombre"]: x["triage"] for x in borrador["cartas"]}
     for c in cartas:
-        clase = {"Effect": "Monstruo de efecto", "Fusion": "Monstruo de Fusion"}.get(c["clase"], c["clase"])
+        clase = {"Effect": "Monstruo de efecto", "Fusion": "Monstruo de Fusion",
+                 "Normal": "Monstruo Normal"}.get(c["clase"], c["clase"])
         fila = dict.fromkeys(registro.COLUMNAS, "")
         fila.update(carta=c["nombre"], indice=str(c["hueco"]), id_konami=str(c["id_konami"]), clase=clase,
                     usa_piezas_nuevas="no", aparcada="no", ev_ojo="pendiente")
@@ -226,7 +236,7 @@ def aplicar(rom, pack, simular):
     print('  sh scripts/construir_lote.sh "ROM original.gba"        arma el ROM de trabajo con las cartas nuevas')
     print('  python3 scripts/registro.py tabla "build/...(Lote).gba"  regenera la tabla de PRUEBAS.md')
     print("  y para cada carta, el metodo de PLAN.md (probar, completar con ACCIONES.md, registrar). Orden sugerido:")
-    for grupo in "ACED":
+    for grupo in "NACED":
         del_grupo = [n for n, g in por_carta.items() if g["diagnostico"] == grupo]
         if del_grupo:
             print(f"    {grupo} ({triage.TEXTOS[grupo]}): {', '.join(del_grupo)}")
