@@ -11,7 +11,7 @@ Marcas de confianza que se usan en todo el documento:
 - **[HIP]** hipótesis razonable, sin comprobar.
 - **[DECIDIR]** decisión de producto que todavía no se tomó.
 
-> **Plan vigente y estado de las cartas: ver `PLAN.md`.** Este documento es el mapa del ROM y el backlog original.
+> **Para retomar: `CLAUDE.md`** (estado al 2026-10-20: v0.3 con 43 cartas). **Plan vigente y estado de las cartas: ver `PLAN.md`.** Este documento es el mapa del ROM y el backlog original.
 
 ## 1. Cómo usar este documento con Spec Kit
 

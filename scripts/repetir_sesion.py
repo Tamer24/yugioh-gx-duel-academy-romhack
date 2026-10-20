@@ -6,6 +6,10 @@ la misma que quedo en su registro.txt, el ROM nuevo se comporta igual en ese due
 
 Uso (desde la raiz del proyecto):
   python3 scripts/repetir_sesion.py ROM SESION [SESION ...]
+  python3 scripts/repetir_sesion.py ROM $(cat scripts/sesiones_regresion.txt)   # las 30 de siempre
+
+Si el estado de partida de una sesion ya no esta donde dice su registro.txt, se busca con el mismo
+nombre en estados/regresion/.
 
 Por cada sesion imprime IGUAL o DISTINTA (con el primer paso que difiere). No escribe nada.
 Salida 0 si todas son iguales.
@@ -42,6 +46,10 @@ def repetir(ruta_rom, sesion):
     entradas = leer_registro(sesion)
     for n, tipo, origen, ordenes, esperado in entradas:
         if tipo == "estado":
+            if not os.path.exists(origen):
+                # los estados de partida de las sesiones de regresion viven ahora en estados/regresion/
+                otro = os.path.join("estados", "regresion", os.path.basename(origen))
+                origen = otro if os.path.exists(otro) else origen
             if not os.path.exists(origen):
                 return False, f"paso {n}: no existe el estado de partida {origen}"
             datos = open(origen, "rb").read()

@@ -1,6 +1,6 @@
 # Duel Academy romhack: plan de trabajo
 
-Estado al **2026-10-12**. Complementa a `PROYECTO.md` (mapa del ROM y backlog),
+Estado al **2026-10-20** (la entrada más nueva está en la sección de versiones: v0.3 con 43 cartas, Baou incluida; resumen para retomar en `CLAUDE.md`). Complementa a `PROYECTO.md` (mapa del ROM y backlog),
 `NOTAS-REVERSE.md` (detalle técnico), `PRUEBAS.md` (cómo probar y resultados) y `ACCIONES.md` (el
 recetario: cómo se implementa cada acción de una carta).
 
